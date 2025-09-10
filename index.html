@@ -1,25 +1,61 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+    <!-- Declara que o documento usa HTML5 -->
+
+<html lang="pt-br">
+    <!-- Início do documento HTML, indicando que o idioma principal é português do Brasil -->
+
 <head>
-    <meta charset="UTF-8">
-    <title>Colégio Júlio Szymanski</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 50px;
-        }
-        header {
-            background-color: #003366;
-            color: white;
-            padding: 20px;
-        }
-    </style>
+    <meta charset="UTF-8"> 
+        <!-- Define a codificação de caracteres como UTF-8, permitindo usar acentos e caracteres especiais -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Faz a página ser responsiva, ajustando o layout para telas menores (celulares/tablets) -->
+    <title>Portal Szymanski</title>
+        <!-- Define o título que aparece na aba do navegador -->
+    <link rel="stylesheet" href="style.css">
+        <!-- Importa o arquivo externo de estilos CSS para aplicar no HTML -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+         <!-- Importa a fonte do Google Fonts -->
 </head>
+    
 <body>
+<!-- Início do corpo da página, onde fica todo o conteúdo visível para o usuário -->
+    
+    <!-- Cabeçalho -->
     <header>
-        <h1>Portal do Colégio Júlio Szymanski</h1>
+        <img src="Rock-Band-Logo-PNG-File.png" alt="Logo do Rockband" class="logo">
+          <!-- Exibe a imagem do logotipo, com texto alternativo (alt) caso a imagem não carregue.
+             A classe "logo" permite personalizar o estilo no CSS -->
+        <h1>Bem-vindo</h1>
+          <!-- Título principal do site -->
     </header>
-    <p>Bem-vindo ao portal oficial do nosso colégio!</p>
+
+    <!-- Navegação -->
+    <nav>
+         <!-- Links de navegação do site que levam a diferentes seções da página -->
+        <a href="index.html">Início</a>
+        <a href="noticias.html">cursos</a>
+        <a href="bandas.html">horarios</a>
+        <a href="teorias.html">feira de profissões</a>
+        <a href="shows.html">corpo docente</a>
+        <a href="info.html">Info</a>
+    </nav>
+
+    <!-- Conteúdo principal -->
+    <section id="sobre">
+        <!-- Seção identificada como "sobre", pode ser acessada por meio de um link com href="#sobre" -->
+        <h2>Olá</h2>
+          <!-- Subtítulo da seção -->
+        <p>história colegio!</p>
+           <!-- Parágrafo de texto explicando o objetivo do site -->
+    </section>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>&copy; 2025 Portal Szymanski</p>
+         <!-- Texto do rodapé, com símbolo de copyright -->
+    </footer>
 </body>
+    <!-- Fim do corpo da página -->
+
 </html>
+<!-- Fim do documento HTML -->
