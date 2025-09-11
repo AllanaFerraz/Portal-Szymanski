@@ -1,110 +1,136 @@
-/* ==========================
-   Estilo geral do corpo
-   ========================== */
-
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 /* Corpo */
 body {
-    font-family:'Anton', sans-serif; 
-        /* Define a fonte principal como 'Actor'; 'sans-serif' é fallback */
-    margin: 0;
-        /* Remove a margem padrão do navegador */
-    padding: 0;
-        /* Remove o padding padrão do documento */
-    background-color: #fff;  
-        /* fundo branco */
-    color: #111;             
-        /* texto preto */
+    font-family: 'Bebas Neue', sans-serif;
+    background-color: #fff;
+    color: #111;
+    padding-bottom: 60px; /* espaço para rodapé fixo */
 }
 
-/* ==========================
-   Cabeçalho
-   ========================== */
-
-/* Cabeçalho */
+/* Header e Carrossel */
 header {
-    background-color: #add8e6;  
-        /* Cor de fundo  */
-    color: #fff;             
-        /* Cor do texto em branco */
+    position: relative;
+    width: 100%;
+    height: 400px; /* altura do carrossel */
+    overflow: hidden;
+}
+
+/* Slides do Carrossel */
+.carousel {
+    display: flex;
+    width: calc(100% * 6); /* 6 imagens duplicadas */
+    animation: slide 20s linear infinite;
+}
+
+.carousel img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Overlay: logo + título */
+.carousel-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     text-align: center;
-         /* Centraliza o conteúdo textual */
-    padding: 20px;
-        /* Espaçamento interno */
+    z-index: 10;
+    pointer-events: none;
 }
-header .logo {
-    width: 300px;
-         /* Define largura da logo */
+
+.carousel-overlay img {
+    width: 300px; /* aumenta ou diminui a logo aqui */
+    max-width: 90%;
+    height: auto;
     display: block;
-        /* Transforma a imagem em bloco (permite centralizar) */
     margin: 0 auto 10px;
-        /* Centraliza horizontalmente e adiciona espaço abaixo */
 }
 
-/* Centralizar o subtítulo da seção "sobre" */
-#sobre h2 {
-    text-align: center; /* centraliza horizontalmente */
-    margin-bottom: 15px; /* opcional, espaço abaixo do título */
-}
-#sobre p {
-    text-align: center; /* centraliza o texto do parágrafo */
+.carousel-overlay h1 {
+    color: #fff;
+    font-size: 36px;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+    margin: 0;
 }
 
-
-/* ==========================
-   Navegação
-   ========================== */
+/* Animação carrossel */
+@keyframes slide {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
 
 /* Navegação */
 nav {
-    background-color: #000;  
-        /* Fundo preto */
+    background-color: #000;
     text-align: center;
-        /* Centraliza os links */
+    padding: 10px 0;
 }
+
 nav a {
     color: #fff;
-        /* Links em branco */
     padding: 14px 20px;
-        /* Espaçamento interno (vertical e horizontal) */
     text-decoration: none;
-         /* Remove sublinhado padrão */
     display: inline-block;
-        /* Faz os links se comportarem como blocos em linha */
+    font-size: 1.3em; /* aumenta a letra do nav */
 }
+
 nav a:hover {
-    background-color: #555;  
-        /* Muda para cinza médio quando o mouse passa por cima */
+    background-color: #555;
 }
 
-/* ==========================
-   Seção principal
-   ========================== */
-
-/* Seção principal */
-section {
-    padding: 20px;
-         /* Espaçamento interno da seção */
+/* Seção principal: #sobre */
+#sobre {
+    max-width: 900px;       /* largura máxima do texto */
+    margin: 0 auto;         /* centraliza horizontalmente */
+    padding: 40px 40px 80px 40px;  /* topo 40px (reduzido), laterais 40px, bottom 80px */
+    line-height: 1.8;       /* espaçamento entre linhas */
+    text-align: center;     
 }
 
-/* ==========================
-   Rodapé
-   ========================== */
+#sobre h2 {
+    font-size: 3em;         /* título grande */
+    margin-top: 0;           /* remove margem extra acima do título */
+    margin-bottom: 30px;
+}
+
+#sobre p {
+    font-size: 1.15em;      /* texto normal menor que lista */
+    margin-bottom: 25px;
+}
+
+#sobre ul {
+    list-style-type: none;  /* remove marcador padrão */
+    padding: 0;
+    margin-bottom: 30px;
+}
+
+#sobre ul li {
+    margin-bottom: 20px;    /* espaço entre itens da lista */
+    font-size: 1.25em;      /* mantém tamanho da lista */
+}
+
+#sobre ul li strong {
+    display: block;
+    font-size: 1.4em;       /* título dos itens da lista */
+    margin-bottom: 5px;
+}
 
 /* Rodapé */
 footer {
-    background-color: #111;  
-        /* Fundo quase preto */
+    background-color: #111;
     color: #fff;
-        /* Texto branco */
     text-align: center;
-         /* Centraliza o conteúdo */
     padding: 10px;
-         /* Espaçamento interno */
     position: fixed;
-        /* Mantém o rodapé fixo na parte inferior da tela */
     width: 100%;
-        /* O rodapé ocupa toda a largura */
     bottom: 0;
-        /* Posiciona colado no fim da janela */
+    z-index: 20;
 }
