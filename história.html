@@ -1,113 +1,278 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>História do Colégio Professor Júlio Szymanski</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>História - Colégio Professor Júlio Szymanski</title>
+    <style>
+        /* Estilos gerais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* Cabeçalho e navegação */
+        header {
+            background: linear-gradient(to right, #1a2a6c, #b21f1f, #fdbb2d);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        nav {
+            background-color: #222;
+            display: flex;
+            justify-content: center;
+            padding: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            margin: 0 0.2rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        nav a:hover {
+            background-color: #444;
+        }
+        
+        /* Conteúdo principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        
+        .page-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #1a2a6c;
+            font-size: 2.5rem;
+        }
+        
+        .intro-text {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Seções de história */
+        .history-section {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            padding: 2rem;
+        }
+        
+        .history-title {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #1a2a6c;
+            border-bottom: 2px solid #fdbb2d;
+            padding-bottom: 0.5rem;
+        }
+        
+        .history-content {
+            margin-bottom: 1.5rem;
+        }
+        
+        .history-content p {
+            margin-bottom: 1rem;
+        }
+        
+        .history-image {
+            width: 100%;
+            max-height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin: 1rem 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .image-placeholder {
+            width: 100%;
+            height: 200px;
+            background-color: #eee;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 1rem 0;
+            color: #777;
+            font-style: italic;
+        }
+        
+        /* Rodapé */
+        footer {
+            background-color: #222;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 3rem;
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav a {
+                margin: 0.2rem 0;
+                width: 100%;
+                text-align: center;
+            }
+            
+            .history-section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
-
-  <!-- Barra de navegação -->
-  <header>
+    <header>
+        <h1>Portal Szymanski</h1>
+    </header>
+    
     <nav>
-      <h1>Portal Szymanski</h1>
-      <ul>
-        <li><a href="index.html">Início</a></li>
-        <li><a href="historia.html" class="ativo">História</a></li>
-      </ul>
+        <a href="index.html">Início</a>
+        <a href="noticias.html">Cursos</a>
+        <a href="bandas.html">Historia</a>
+        <a href="teorias.html">Feiras de Profissão</a>
+        <a href="plataformas.html">Plataformas</a>
+        <a href="info.html">Info</a>
     </nav>
-  </header>
-
-  <!-- Conteúdo principal -->
-  <main>
-    <section id="historia">
-      <h2>História do Colégio Professor Júlio Szymanski</h2>
-
-      <article>
-        <h3>1. Origem e Patrono</h3>
-        <p>
-          O colégio é nomeado em homenagem ao Prof. Dr. Júlio Szymanski, um imigrante polonês notável, 
-          com atuação acadêmica e científica no Brasil. A vida dele é bastante celebrada pela escola, 
-          que já realizou exposições e eventos culturais centrados na sua trajetória.
+    
+    <div class="container">
+        <h2 class="page-title">História do Colégio Professor Júlio Szymanski</h2>
+        
+        <p class="intro-text">
+            Conheça a trajetória do nosso colégio, desde sua fundação até os dias atuais, 
+            e a importância do nosso patrono, Professor Júlio Szymanski.
         </p>
-        <p>
-          Em 2017, nas comemorações dos 61 anos, houve palestra, exposição 
-          <em>“Juliusz Szymanski — um polonês entre dois continentes”</em> e encenação da chegada 
-          dos imigrantes poloneses ao Brasil.
-        </p>
-        <img src="img/foto-antiga.jpg" alt="Foto antiga do colégio" class="foto-historia">
-      </article>
-
-      <article>
-        <h3>2. Fundação e Evolução</h3>
-        <p>
-          O colégio já completou mais de 60 anos de existência — em 2017 comemorou seus 61 anos de fundação. 
-          O prédio foi construído na década de 1960, como resposta ao aumento da demanda por ensino na região.
-        </p>
-        <p>
-          Em 2013, passou por uma grande reforma com investimento de aproximadamente R$ 770 mil, 
-          revitalizando a estrutura física e garantindo melhores condições de aprendizado. 
-          Hoje, atende cerca de 2.000 alunos do ensino fundamental, médio e técnico.
-        </p>
-        <img src="img/reforma.jpg" alt="Colégio após reforma" class="foto-historia">
-      </article>
-
-      <article>
-        <h3>3. Estrutura e Oferta Educacional</h3>
-        <p>
-          O Colégio oferece ensino fundamental, ensino médio e cursos técnicos integrados. 
-          É uma das maiores unidades da região em termos de estrutura e número de estudantes. 
-          Também se adaptou ao ensino híbrido, garantindo qualidade mesmo em períodos de mudança.
-        </p>
-        <img src="img/patio.jpg" alt="Pátio do colégio" class="foto-historia">
-      </article>
-
-      <article>
-        <h3>4. Papel na Comunidade</h3>
-        <p>
-          A escola tem forte vínculo com a comunidade polonesa e com a memória cultural dos imigrantes. 
-          Suas celebrações envolvem apresentações, exposições e participação do Consulado da Polônia. 
-          É um polo educacional de referência em Araucária e arredores.
-        </p>
-        <img src="img/frente.jpg" alt="Fachada do colégio" class="foto-historia">
-      </article>
-
-      <article>
-        <h3>5. Quem foi Júlio Szymanski?</h3>
-        <p>
-          O patrono, Julian Juliusz Szymański (1870-1958), foi médico oftalmologista, professor na 
-          Universidade Federal do Paraná (UFPR) entre 1912 e 1920, autor de um dos primeiros 
-          livros de oftalmologia em português e político de destaque na Polônia, onde foi 
-          Presidente do Senado. 
-        </p>
-        <p>
-          Sua trajetória simboliza a ponte cultural e científica entre Polônia e Brasil. 
-          Por isso, é sempre lembrado nas comemorações do colégio.
-        </p>
-      </article>
-
-      <article>
-        <h3>6. Fundação e Reformas</h3>
-        <p>
-          Localizado em Araucária, na Rua São Vicente de Paulo, 76, o colégio tem 
-          estrutura considerada uma das maiores da região metropolitana. 
-          Em 2013-2014, passou por reforma completa com melhorias de acessibilidade, 
-          laboratórios, quadra de esportes, pátio, cobertura e pintura.
-        </p>
-        <p>
-          A reforma foi fruto da mobilização da comunidade escolar e tornou o ambiente 
-          mais confortável e motivador.
-        </p>
-        <img src="img/atual.jpg" alt="Colégio após pintura azul" class="foto-historia">
-      </article>
-    </section>
-  </main>
-
-  <!-- Rodapé -->
-  <footer>
-    <p>&copy; 2025 Portal Szymanski. Todos os direitos reservados.</p>
-  </footer>
-
+        
+        <div class="history-section">
+            <h3 class="history-title">1. Origem e Patrono</h3>
+            <div class="history-content">
+                <p>
+                    O colégio é nomeado em homenagem ao Prof. Dr. Júlio Szymanski, um imigrante polonês notável, 
+                    com atuação acadêmica e científica no Brasil. A vida dele é bastante celebrada pela escola, 
+                    que já realizou exposições e eventos culturais centrados na sua trajetória.
+                </p>
+                <p>
+                    Em 2017, nas comemorações dos 61 anos, houve palestra, exposição 
+                    <em>"Juliusz Szymanski — um polonês entre dois continentes"</em> e encenação da chegada 
+                    dos imigrantes poloneses ao Brasil.
+                </p>
+                <div class="image-placeholder">
+                    Imagem: Foto antiga do colégio
+                </div>
+            </div>
+        </div>
+        
+        <div class="history-section">
+            <h3 class="history-title">2. Fundação e Evolução</h3>
+            <div class="history-content">
+                <p>
+                    O colégio já completou mais de 60 anos de existência — em 2017 comemorou seus 61 anos de fundação. 
+                    O prédio foi construído na década de 1960, como resposta ao aumento da demanda por ensino na região.
+                </p>
+                <p>
+                    Em 2013, passou por uma grande reforma com investimento de aproximadamente R$ 770 mil, 
+                    revitalizando a estrutura física e garantindo melhores condições de aprendizado. 
+                    Hoje, atende cerca de 2.000 alunos do ensino fundamental, médio e técnico.
+                </p>
+                <div class="image-placeholder">
+                    Imagem: Colégio após reforma
+                </div>
+            </div>
+        </div>
+        
+        <div class="history-section">
+            <h3 class="history-title">3. Estrutura e Oferta Educacional</h3>
+            <div class="history-content">
+                <p>
+                    O Colégio oferece ensino fundamental, ensino médio e cursos técnicos integrados. 
+                    É uma das maiores unidades da região em termos de estrutura e número de estudantes. 
+                    Também se adaptou ao ensino híbrido, garantindo qualidade mesmo em períodos de mudança.
+                </p>
+                <div class="image-placeholder">
+                    Imagem: Pátio do colégio
+                </div>
+            </div>
+        </div>
+        
+        <div class="history-section">
+            <h3 class="history-title">4. Papel na Comunidade</h3>
+            <div class="history-content">
+                <p>
+                    A escola tem forte vínculo com a comunidade polonesa e com a memória cultural dos imigrantes. 
+                    Suas celebrações envolvem apresentações, exposições e participação do Consulado da Polônia. 
+                    É um polo educacional de referência em Araucária e arredores.
+                </p>
+                <div class="image-placeholder">
+                    Imagem: Fachada do colégio
+                </div>
+            </div>
+        </div>
+        
+        <div class="history-section">
+            <h3 class="history-title">5. Quem foi Júlio Szymanski?</h3>
+            <div class="history-content">
+                <p>
+                    O patrono, Julian Juliusz Szymański (1870-1958), foi médico oftalmologista, professor na 
+                    Universidade Federal do Paraná (UFPR) entre 1912 e 1920, autor de um dos primeiros 
+                    livros de oftalmologia em português e político de destaque na Polônia, onde foi 
+                    Presidente do Senado. 
+                </p>
+                <p>
+                    Sua trajetória simboliza a ponte cultural e científica entre Polônia e Brasil. 
+                    Por isso, é sempre lembrado nas comemorações do colégio.
+                </p>
+            </div>
+        </div>
+        
+        <div class="history-section">
+            <h3 class="history-title">6. Fundação e Reformas</h3>
+            <div class="history-content">
+                <p>
+                    Localizado em Araucária, na Rua São Vicente de Paulo, 76, o colégio tem 
+                    estrutura considerada uma das maiores da região metropolitana. 
+                    Em 2013-2014, passou por reforma completa com melhorias de acessibilidade, 
+                    laboratórios, quadra de esportes, pátio, cobertura e pintura.
+                </p>
+                <p>
+                    A reforma foi fruto da mobilização da comunidade escolar e tornou o ambiente 
+                    mais confortável e motivador.
+                </p>
+                <div class="image-placeholder">
+                    Imagem: Colégio após pintura azul
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>&copy; 2025 Colégio Szymanski - Todos os direitos reservados</p>
+    </footer>
 </body>
 </html>
