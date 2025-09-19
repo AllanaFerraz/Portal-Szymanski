@@ -25,13 +25,15 @@
             width: 100%;
             height: 400px;
             overflow: hidden;
+            background: url('images.png') center/contain no-repeat, linear-gradient(to right, #1a2a6c, #b21f1f);
+            background-blend-mode: overlay;
         }
         
         .carousel {
             display: flex;
             width: 600%;
             height: 100%;
-            animation: carousel-animation 30s infinite;
+            animation: carousel-animation 60s linear infinite;
         }
         
         .carousel img {
@@ -42,11 +44,11 @@
         
         @keyframes carousel-animation {
             0% { transform: translateX(0); }
-            16.66% { transform: translateX(0); }
-            33.32% { transform: translateX(-16.66%); }
-            49.98% { transform: translateX(-33.32%); }
-            66.64% { transform: translateX(-49.98%); }
-            83.3% { transform: translateX(-66.64%); }
+            16.66% { transform: translateX(-16.66%); }
+            33.32% { transform: translateX(-33.32%); }
+            49.98% { transform: translateX(-49.98%); }
+            66.64% { transform: translateX(-66.64%); }
+            83.3% { transform: translateX(-83.3%); }
             100% { transform: translateX(-83.3%); }
         }
         
@@ -60,20 +62,22 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.4);
             color: white;
             text-align: center;
         }
         
-        .carousel-overlay img {
-            width: 150px;
-            margin-bottom: 20px;
-        }
-        
         .carousel-overlay h1 {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 3rem;
+            font-size: 3.5rem;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            margin-bottom: 1rem;
+        }
+        
+        .carousel-overlay p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
         }
         
         /* Navegação */
@@ -83,6 +87,7 @@
             justify-content: center;
             padding: 0.8rem;
             flex-wrap: wrap;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
         
         nav a {
@@ -162,60 +167,6 @@
             border-left: 4px solid #b21f1f;
         }
         
-        /* Destaques */
-        .destaques {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-        
-        .destaque-card {
-            background-color: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
-        }
-        
-        .destaque-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .destaque-img {
-            height: 180px;
-            background-color: #ddd;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #777;
-            font-style: italic;
-        }
-        
-        .destaque-content {
-            padding: 1.5rem;
-        }
-        
-        .destaque-content h3 {
-            color: #1a2a6c;
-            margin-bottom: 1rem;
-        }
-        
-        .destaque-link {
-            display: inline-block;
-            background-color: #1a2a6c;
-            color: white;
-            padding: 0.7rem 1.5rem;
-            text-decoration: none;
-            border-radius: 4px;
-            margin-top: 1rem;
-            transition: background-color 0.3s;
-        }
-        
-        .destaque-link:hover {
-            background-color: #2a3a9c;
-        }
-        
         /* Rodapé */
         footer {
             background-color: #222;
@@ -235,6 +186,11 @@
                 font-size: 2.2rem;
             }
             
+            .carousel-overlay p {
+                font-size: 1rem;
+                padding: 0 1rem;
+            }
+            
             nav {
                 flex-direction: column;
                 align-items: center;
@@ -244,10 +200,6 @@
                 margin: 0.3rem 0;
                 width: 100%;
                 text-align: center;
-            }
-            
-            .destaques {
-                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -265,8 +217,8 @@
             </div>
 
             <div class="carousel-overlay">
-                <img src="images.png" alt="logo szymanski">
                 <h1>Bem-vindo ao Portal Szymanski</h1>
+                <p>Educação de qualidade para construir um futuro melhor</p>
             </div>
         </div>
     </header>
@@ -307,37 +259,6 @@
                 <p><strong>Sobre o patrono:</strong> Professor Júlio Szymanski foi um educador e imigrante polonês que dedicou sua vida ao ensino e à ciência. Sua trajetória inspira nossa missão educacional até os dias atuais, valorizando o conhecimento, a cultura e a formação integral dos estudantes.</p>
             </div>
         </section>
-        
-        <h2 class="page-title">Destaques</h2>
-        
-        <div class="destaques">
-            <div class="destaque-card">
-                <div class="destaque-img">Imagem dos Cursos</div>
-                <div class="destaque-content">
-                    <h3>Cursos Oferecidos</h3>
-                    <p>Conheça todos os cursos técnicos e de formação oferecidos pelo colégio, incluindo Administração, Desenvolvimento de Sistemas e Formação de Docentes.</p>
-                    <a href="cursos.html" class="destaque-link">Ver Cursos</a>
-                </div>
-            </div>
-            
-            <div class="destaque-card">
-                <div class="destaque-img">Imagem da História</div>
-                <div class="destaque-content">
-                    <h3>Nossa História</h3>
-                    <p>Descubra a trajetória do Colégio Professor Júlio Szymanski desde sua fundação e conheça a importância do nosso patrono.</p>
-                    <a href="história.html" class="destaque-link">Conhecer História</a>
-                </div>
-            </div>
-            
-            <div class="destaque-card">
-                <div class="destaque-img">Imagem das Plataformas</div>
-                <div class="destaque-content">
-                    <h3>Plataformas Educacionais</h3>
-                    <p>Acesse todas as plataformas de ensino utilizadas pelo colégio, como Redação Paraná, Matific, Google Classroom e muitas outras.</p>
-                    <a href="plataformas.html" class="destaque-link">Acessar Plataformas</a>
-                </div>
-            </div>
-        </div>
     </div>
     
     <footer>
