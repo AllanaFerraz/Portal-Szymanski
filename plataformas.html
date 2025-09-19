@@ -1,1 +1,279 @@
-
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plataformas Educacionais - SZYMANSKI</title>
+    <style>
+        /* Estilos gerais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* Cabeçalho e navegação */
+        header {
+            background: linear-gradient(to right, #1a2a6c, #b21f1f, #fdbb2d);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        nav {
+            background-color: #222;
+            display: flex;
+            justify-content: center;
+            padding: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            margin: 0 0.2rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        nav a:hover {
+            background-color: #444;
+        }
+        
+        /* Conteúdo principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        
+        .page-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #1a2a6c;
+            font-size: 2.5rem;
+        }
+        
+        .intro-text {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Grid de plataformas */
+        .platforms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .platform-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .platform-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        
+        .platform-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .platform-title {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            color: #1a2a6c;
+        }
+        
+        .platform-description {
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+        
+        .platform-link {
+            display: inline-block;
+            background-color: #1a2a6c;
+            color: white;
+            padding: 0.7rem 1.5rem;
+            text-decoration: none;
+            border-radius: 4px;
+            text-align: center;
+            transition: background-color 0.3s;
+            margin-top: auto;
+        }
+        
+        .platform-link:hover {
+            background-color: #2a3a9c;
+        }
+        
+        /* Rodapé */
+        footer {
+            background-color: #222;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 3rem;
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .platforms-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            nav {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav a {
+                margin: 0.2rem 0;
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Portal Szymanski</h1>
+    </header>
+    
+    <nav>
+        <a href="index.html">Início</a>
+        <a href="noticias.html">Cursos</a>
+        <a href="bandas.html">Historia</a>
+        <a href="teorias.html">Feiras de Profissão</a>
+        <a href="plataformas.html">Plataformas</a>
+        <a href="info.html">Info</a>
+    </nav>
+    
+    <div class="container">
+        <h2 class="page-title">Plataformas Educacionais</h2>
+        
+        <p class="intro-text">
+            Aqui você encontrará as principais plataformas educacionais utilizadas em nossa escola. 
+            Cada uma oferece recursos diferentes para complementar seus estudos e expandir seu conhecimento.
+        </p>
+        
+        <div class="platforms-grid">
+            <!-- Plataforma 1 -->
+            <div class="platform-card">
+                <div class="platform-content">
+                    <h3 class="platform-title">Redação Paraná</h3>
+                    <p class="platform-description">Plataforma dedicada ao aprimoramento da escrita e técnicas de redação, com correções detalhadas e exercícios práticos.</p>
+                    <a href="https://redacao.pr.gov.br/" target="_blank" class="platform-link">Acessar Plataforma</a>
+                </div>
+            </div>
+            
+            <!-- Plataforma 2 -->
+            <div class="platform-card">
+                <div class="platform-content">
+                    <h3 class="platform-title">Robótica Paraná</h3>
+                    <p class="platform-description">Aprenda os fundamentos da robótica, programação e automação através de projetos práticos e desafios estimulantes.</p>
+                    <a href="https://aluno.escoladigital.pr.gov.br/robotica" target="_blank" class="platform-link">Acessar Plataforma</a>
+                </div>
+            </div>
+            
+            <!-- Plataforma 3 -->
+            <div class="platform-card">
+                <div class="platform-content">
+                    <h3 class="platform-title">Matific</h3>
+                    <p class="platform-description">Plataforma de matemática com jogos e atividades interativas que tornam o aprendizado divertido e eficaz.</p>
+                    <a href="https://www.matific.com/bra/pt-br/home/" target="_blank" class="platform-link">Acessar Plataforma</a>
+                </div>
+            </div>
+            
+            <!-- Plataforma 4 -->
+            <div class="platform-card">
+                <div class="platform-content">
+                    <h3 class="platform-title">Inglês Paraná</h3>
+                    <p class="platform-description">Curso de inglês completo com diferentes níveis de aprendizado, do básico ao avançado, com foco em conversação.</p>
+                    <a href="https://professor.escoladigital.pr.gov.br/ingles-parana-high" target="_blank" class="platform-link">Acessar Plataforma</a>
+                </div>
+            </div>
+            
+            <!-- Plataforma 5 -->
+            <div class="platform-card">
+                <div class="platform-content">
+                    <h3 class="platform-title">Leia Paraná</h3>
+                    <p class="platform-description">Biblioteca digital com milhares de livros, revistas e artigos para incentivar a leitura e pesquisa.</p>
+                    <a href="https://leiaparana.odilo.us/" target="_blank" class="platform-link">Acessar Plataforma</a>
+                </div>
+            </div>
+            
+            <!-- Plataforma 6 -->
+            <div class="platform-card">
+                <div class="platform-content">
+                    <h3 class="platform-title">Desafio Paraná</h3>
+                    <p class="platform-description">Competições educacionais que testam conhecimentos em diversas áreas e promovem o aprendizado através de desafios.</p>
+                    <a href="https://professor.escoladigital.pr.gov.br/plataformas_educacionais" target="_blank" class="platform-link">Acessar Plataforma</a>
+                </div>
+            </div>
+            
+            <!-- Plataforma 7 -->
+            <div class="platform-card">
+                <div class="platform-content">
+                    <h3 class="platform-title">Programa EduTech</h3>
+                    <p class="platform-description">Iniciativa de tecnologia educacional com cursos de programação, desenvolvimento web e robótica para estudantes.</p>
+                    <a href="https://www.educacao.pr.gov.br/programacao" target="_blank" class="platform-link">Acessar Plataforma</a>
+                </div>
+            </div>
+            
+            <!-- Plataforma 8 -->
+            <div class="platform-card">
+                <div class="platform-content">
+                    <h3 class="platform-title">Google Classroom</h3>
+                    <p class="platform-description">Ambiente virtual de aprendizagem onde professores podem criar salas de aula, distribuir tarefas e comunicar-se com alunos.</p>
+                    <a href="https://sites.google.com/view/classrooms-workspace/login" target="_blank" class="platform-link">Acessar Plataforma</a>
+                </div>
+            </div>
+            
+            <!-- Plataforma 9 -->
+            <div class="platform-card">
+                <div class="platform-content">
+                    <h3 class="platform-title">Alura</h3>
+                    <p class="platform-description">Plataforma de cursos de tecnologia com mais de 1.400 cursos em programação, design, data science e muito mais.</p>
+                    <a href="https://www.alura.com.br/?srsltid=AfmBOoosm0MvqdPKvef6exCcAjnLBJddVMKVKbCosXeLNbWwMAw7VwcB" target="_blank" class="platform-link">Acessar Plataforma</a>
+                </div>
+            </div>
+            
+            <!-- Plataforma 10 -->
+            <div class="platform-card">
+                <div class="platform-content">
+                    <h3 class="platform-title">Khan Academy</h3>
+                    <p class="platform-description">Plataforma gratuita com exercícios, vídeos educativos e painel de aprendizado personalizado em diversas matérias.</p>
+                    <a href="https://pt.khanacademy.org/" target="_blank" class="platform-link">Acessar Plataforma</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>&copy; 2025 Colégio Szymanski - Todos os direitos reservados</p>
+    </footer>
+</body>
+</html>
