@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    <link rel="stylesheet" href="style.css">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portal Szymanski</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <style>
         /* Estilos gerais */
         * {
@@ -21,37 +20,18 @@
             line-height: 1.6;
         }
         
-        /* Cabeçalho com carrossel */
+        /* Cabeçalho com carrossel modificado */
         .carousel-container {
             position: relative;
             width: 100%;
             height: 400px;
             overflow: hidden;
-            background: url('images.png') center/contain no-repeat, linear-gradient(to right, #1a2a6c, #b21f1f);
+            background: url('images.png') center/cover no-repeat, linear-gradient(to right, #1a2a6c, #b21f1f);
             background-blend-mode: overlay;
         }
         
         .carousel {
-            display: flex;
-            width: 600%;
-            height: 100%;
-            animation: carousel-animation 60s linear infinite;
-        }
-        
-        .carousel img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        @keyframes carousel-animation {
-            0% { transform: translateX(0); }
-            16.66% { transform: translateX(-16.66%); }
-            33.32% { transform: translateX(-33.32%); }
-            49.98% { transform: translateX(-49.98%); }
-            66.64% { transform: translateX(-66.64%); }
-            83.3% { transform: translateX(-83.3%); }
-            100% { transform: translateX(-83.3%); }
+            display: none; /* Escondendo o carrossel de imagens */
         }
         
         .carousel-overlay {
@@ -209,13 +189,9 @@
 <body>
     <header>
         <div class="carousel-container">
+            <!-- Carrossel de imagens removido -->
             <div class="carousel">
-                 Colégio Estadual Professor Júlio Szymanski
-                 Paraná Melhor Educação do Brasil
-                 Desde 1956
-                 Colégio Estadual Professor Júlio Szymanski
-                 Paraná Melhor Educação do Brasil
-                 Desde 1956
+                <!-- As imagens foram removidas conforme solicitado -->
             </div>
 
             <div class="carousel-overlay">
@@ -268,4 +244,3 @@
     </footer>
 </body>
 </html>
-
