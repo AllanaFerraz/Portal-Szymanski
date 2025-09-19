@@ -3,74 +3,345 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SZYMANSKI</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <title>Portal Szymanski</title>
+    <style>
+        /* Estilos gerais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* Cabeçalho com carrossel */
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+        }
+        
+        .carousel {
+            display: flex;
+            width: 600%;
+            height: 100%;
+            animation: carousel-animation 30s infinite;
+        }
+        
+        .carousel img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        @keyframes carousel-animation {
+            0% { transform: translateX(0); }
+            16.66% { transform: translateX(0); }
+            33.32% { transform: translateX(-16.66%); }
+            49.98% { transform: translateX(-33.32%); }
+            66.64% { transform: translateX(-49.98%); }
+            83.3% { transform: translateX(-66.64%); }
+            100% { transform: translateX(-83.3%); }
+        }
+        
+        .carousel-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            text-align: center;
+        }
+        
+        .carousel-overlay img {
+            width: 150px;
+            margin-bottom: 20px;
+        }
+        
+        .carousel-overlay h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+        
+        /* Navegação */
+        nav {
+            background: linear-gradient(to right, #1a2a6c, #b21f1f);
+            display: flex;
+            justify-content: center;
+            padding: 0.8rem;
+            flex-wrap: wrap;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.7rem 1.2rem;
+            margin: 0 0.3rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            font-weight: 500;
+        }
+        
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Conteúdo principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        
+        .page-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #1a2a6c;
+            font-size: 2.5rem;
+            font-family: 'Bebas Neue', sans-serif;
+        }
+        
+        .intro-text {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Seção de boas-vindas */
+        #sobre {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+        
+        #sobre h2 {
+            color: #1a2a6c;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.2rem;
+        }
+        
+        #sobre p {
+            margin-bottom: 1.2rem;
+            text-align: justify;
+        }
+        
+        #sobre ul {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+        }
+        
+        #sobre li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .fundador {
+            background-color: #f9f9f9;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+            border-left: 4px solid #b21f1f;
+        }
+        
+        /* Destaques */
+        .destaques {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .destaque-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .destaque-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .destaque-img {
+            height: 180px;
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #777;
+            font-style: italic;
+        }
+        
+        .destaque-content {
+            padding: 1.5rem;
+        }
+        
+        .destaque-content h3 {
+            color: #1a2a6c;
+            margin-bottom: 1rem;
+        }
+        
+        .destaque-link {
+            display: inline-block;
+            background-color: #1a2a6c;
+            color: white;
+            padding: 0.7rem 1.5rem;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-top: 1rem;
+            transition: background-color 0.3s;
+        }
+        
+        .destaque-link:hover {
+            background-color: #2a3a9c;
+        }
+        
+        /* Rodapé */
+        footer {
+            background-color: #222;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 3rem;
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .carousel-container {
+                height: 300px;
+            }
+            
+            .carousel-overlay h1 {
+                font-size: 2.2rem;
+            }
+            
+            nav {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav a {
+                margin: 0.3rem 0;
+                width: 100%;
+                text-align: center;
+            }
+            
+            .destaques {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
+    <header>
+        <div class="carousel-container">
+            <div class="carousel">
+                <img src="04ef201221bdc04b4aa841350ac92fc0.jpg" alt="Colégio Estadual Professor Júlio Szymanski">
+                <img src="7660bde9840fcbf82f4dc91aae86c9ba.jpg" alt="Paraná Melhor Educação do Brasil">
+                <img src="89a625a663b59dfd2dbafaa75b98320a.jpg" alt="Desde 1956">
+                <img src="04ef201221bdc04b4aa841350ac92fc0.jpg" alt="Colégio Estadual Professor Júlio Szymanski">
+                <img src="7660bde9840fcbf82f4dc91aae86c9ba.jpg" alt="Paraná Melhor Educação do Brasil">
+                <img src="89a625a663b59dfd2dbafaa75b98320a.jpg" alt="Desde 1956">
+            </div>
 
-<header>
-    <div class="carousel-container">
-        <div class="carousel">
-            <img src="04ef201221bdc04b4aa841350ac92fc0.jpg" alt="Colégio Estadual Professor Júlio Szymanski">
-            <img src="7660bde9840fcbf82f4dc91aae86c9ba.jpg" alt="Paraná Melhor Educação do Brasil">
-            <img src="89a625a663b59dfd2dbafaa75b98320a.jpg" alt="Desde 1956">
-            <img src="04ef201221bdc04b4aa841350ac92fc0.jpg" alt="Colégio Estadual Professor Júlio Szymanski">
-            <img src="7660bde9840fcbf82f4dc91aae86c9ba.jpg" alt="Paraná Melhor Educação do Brasil">
-            <img src="89a625a663b59dfd2dbafaa75b98320a.jpg" alt="Desde 1956">
+            <div class="carousel-overlay">
+                <img src="images.png" alt="logo szymanski">
+                <h1>Bem-vindo ao Portal Szymanski</h1>
+            </div>
         </div>
-
-        <div class="carousel-overlay">
-            <img src="images.png" alt="logo szymanski">
-            <h1>Bem-vindo</h1>
+    </header>
+    
+    <nav>
+        <a href="index.html">Início</a>
+        <a href="cursos.html">Cursos</a>
+        <a href="história.html">Historia</a>
+        <a href="feira.html">Feiras de Profissão</a>
+        <a href="plataformas.html">Plataformas</a>
+        <a href="info.html">Info</a>
+    </nav>
+    
+    <div class="container">
+        <section id="sobre">
+            <h2>Bem-vindo ao Portal Szymanski!</h2>
+            <p>
+                O Portal Szymanski é a sua fonte definitiva para tudo relacionado ao nosso colégio. 
+                Criado por alunos em busca de melhorias, o site foi desenvolvido para fornecer informações 
+                essenciais sobre cursos, feiras de profissão, plataformas educacionais e muito mais, 
+                oferecendo uma experiência completa e interativa para estudantes, pais e professores.
+            </p>
+            <p>
+                Aqui, você pode:
+            </p>
+            <ul>
+                <li><strong>Encontrar informações gerais:</strong> Notícias, eventos e novidades sobre o colégio.</li>
+                <li><strong>Acompanhar nossos cursos e feira de profissões:</strong> Fique por dentro das opções de formação e eventos career.</li>
+                <li><strong>Acessar plataformas educacionais:</strong> Links úteis para todas as ferramentas de estudo.</li>
+                <li><strong>Conhecer nossa história:</strong> A trajetória do colégio e do professor Júlio Szymanski.</li>
+            </ul>
+            <p>
+                Nosso objetivo é criar um espaço dinâmico e intuitivo, onde cada visitante possa 
+                encontrar as informações que precisa de forma rápida e organizada. Explore, descubra 
+                e faça parte da comunidade Szymanski!
+            </p>
+            <div class="fundador">
+                <p><strong>Sobre o patrono:</strong> Professor Júlio Szymanski foi um educador e imigrante polonês que dedicou sua vida ao ensino e à ciência. Sua trajetória inspira nossa missão educacional até os dias atuais, valorizando o conhecimento, a cultura e a formação integral dos estudantes.</p>
+            </div>
+        </section>
+        
+        <h2 class="page-title">Destaques</h2>
+        
+        <div class="destaques">
+            <div class="destaque-card">
+                <div class="destaque-img">Imagem dos Cursos</div>
+                <div class="destaque-content">
+                    <h3>Cursos Oferecidos</h3>
+                    <p>Conheça todos os cursos técnicos e de formação oferecidos pelo colégio, incluindo Administração, Desenvolvimento de Sistemas e Formação de Docentes.</p>
+                    <a href="cursos.html" class="destaque-link">Ver Cursos</a>
+                </div>
+            </div>
+            
+            <div class="destaque-card">
+                <div class="destaque-img">Imagem da História</div>
+                <div class="destaque-content">
+                    <h3>Nossa História</h3>
+                    <p>Descubra a trajetória do Colégio Professor Júlio Szymanski desde sua fundação e conheça a importância do nosso patrono.</p>
+                    <a href="história.html" class="destaque-link">Conhecer História</a>
+                </div>
+            </div>
+            
+            <div class="destaque-card">
+                <div class="destaque-img">Imagem das Plataformas</div>
+                <div class="destaque-content">
+                    <h3>Plataformas Educacionais</h3>
+                    <p>Acesse todas as plataformas de ensino utilizadas pelo colégio, como Redação Paraná, Matific, Google Classroom e muitas outras.</p>
+                    <a href="plataformas.html" class="destaque-link">Acessar Plataformas</a>
+                </div>
+            </div>
         </div>
     </div>
-</header>
-
-<nav>
-    <a href="index.html">Início</a>
-    <a href="cursos.html">Cursos</a>
-    <a href="história.html">Historia</a>
-    <a href="feira.html">Feiras de Profissão</a>
-    <a href="plataformas.html">Plataformas</a>
-    <a href="info.html">Info</a>
-</nav>
-
-<section id="sobre">
-    <h2>Bem-vindo ao Portal Szymanski!</h2>
-    <p>
-        O Portal Szymanski é a sua fonte definitiva para tudo relacionado ao nosso colégio. Criado por alunos em busca de melhorias, o site foi desenvolvido para informassões essenciais, cursos, feiras, entre outros, oferecendo uma experiência completa e interativa. Aqui, você pode:
-    </p>
-    <ul>
-        <li><strong> buscar informções gerais:</strong> Notícias, lançamentos e curiosidades sobre bandas e artistas.</li>
-        <li><strong>Acompanhar nossos cursos e feira de profissões:</strong> Fique por dentro das agendas, datas de turnês e apresentações ao vivo.</li>
-    </ul>
-    <p>
-        Nosso objetivo é criar um espaço dinâmico e intuitivo, onde cada visitante possa descobrir, se inspirar e se conectar com o mundo da música de forma única. Explore, interaja e viva a experiência RockBand!
-    </p>
-    <div class="fundador">
-        <p><strong>Sobre o fundador:</strong> Nosso fundador é guitarrista e apaixonado por música desde cedo. Sua experiência no mundo musical guia cada conteúdo e funcionalidade do RockBand, garantindo que o site seja feito por quem entende e ama o que faz.</p>
-        <!-- Você pode adicionar uma imagem aqui -->
-        <!-- <img src="guitarrista.jpg" alt="Fundador guitarrista"> -->
-    </div>
-</section>
-
-
-<footer>
-    <p>&copy; 2025 Szymanski</p>
-</footer>
-
+    
+    <footer>
+        <p>&copy; 2025 Colégio Estadual Professor Júlio Szymanski - Todos os direitos reservados</p>
+    </footer>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
