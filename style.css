@@ -1,1 +1,197 @@
-background: url('images.png') center/contain no-repeat, linear-gradient(to right, #1a2a6c, #b21f1f);
+/* Estilos gerais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Cabeçalho com carrossel */
+.carousel-container {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    background: url('images.png') center/contain no-repeat, linear-gradient(to right, #1a2a6c, #b21f1f);
+    background-blend-mode: overlay;
+}
+
+.carousel {
+    display: flex;
+    width: 600%;
+    height: 100%;
+    animation: carousel-animation 60s linear infinite;
+}
+
+.carousel img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+@keyframes carousel-animation {
+    0% { transform: translateX(0); }
+    16.66% { transform: translateX(-16.66%); }
+    33.32% { transform: translateX(-33.32%); }
+    49.98% { transform: translateX(-49.98%); }
+    66.64% { transform: translateX(-66.64%); }
+    83.3% { transform: translateX(-83.3%); }
+    100% { transform: translateX(-83.3%); }
+}
+
+.carousel-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.4);
+    color: white;
+    text-align: center;
+}
+
+.carousel-overlay h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    margin-bottom: 1rem;
+}
+
+.carousel-overlay p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+/* Navegação */
+nav {
+    background: linear-gradient(to right, #1a2a6c, #b21f1f);
+    display: flex;
+    justify-content: center;
+    padding: 0.8rem;
+    flex-wrap: wrap;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 0.7rem 1.2rem;
+    margin: 0 0.3rem;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    font-weight: 500;
+}
+
+nav a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Conteúdo principal */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+.page-title {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #1a2a6c;
+    font-size: 2.5rem;
+    font-family: 'Bebas Neue', sans-serif;
+}
+
+.intro-text {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Seção de boas-vindas */
+#sobre {
+    background-color: white;
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+#sobre h2 {
+    color: #1a2a6c;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.2rem;
+}
+
+#sobre p {
+    margin-bottom: 1.2rem;
+    text-align: justify;
+}
+
+#sobre ul {
+    margin: 1.5rem 0;
+    padding-left: 2rem;
+}
+
+#sobre li {
+    margin-bottom: 0.8rem;
+}
+
+.fundador {
+    background-color: #f9f9f9;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-top: 2rem;
+    border-left: 4px solid #b21f1f;
+}
+
+/* Rodapé */
+footer {
+    background-color: #222;
+    color: white;
+    text-align: center;
+    padding: 1.5rem;
+    margin-top: 3rem;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .carousel-container {
+        height: 300px;
+    }
+    
+    .carousel-overlay h1 {
+        font-size: 2.2rem;
+    }
+    
+    .carousel-overlay p {
+        font-size: 1rem;
+        padding: 0 1rem;
+    }
+    
+    nav {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    nav a {
+        margin: 0.3rem 0;
+        width: 100%;
+        text-align: center;
+    }
+}
