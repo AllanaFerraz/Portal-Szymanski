@@ -1,1 +1,352 @@
-
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursos - Colégio Szymanski</title>
+    <style>
+        /* Estilos gerais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* Cabeçalho e navegação */
+        header {
+            background: linear-gradient(to right, #1a2a6c, #b21f1f, #fdbb2d);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        nav {
+            background-color: #222;
+            display: flex;
+            justify-content: center;
+            padding: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            margin: 0 0.2rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        nav a:hover {
+            background-color: #444;
+        }
+        
+        /* Conteúdo principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        
+        .page-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #1a2a6c;
+            font-size: 2.5rem;
+        }
+        
+        .intro-text {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Grid de cursos */
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .course-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        
+        .course-icon {
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #1a2a6c, #2a3a9c);
+            color: white;
+            font-size: 3rem;
+        }
+        
+        .course-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .course-title {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            color: #1a2a6c;
+        }
+        
+        .course-description {
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+        
+        .course-details {
+            background-color: #f9f9f9;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+        }
+        
+        .course-details p {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .course-details i {
+            margin-right: 0.5rem;
+            color: #1a2a6c;
+        }
+        
+        .course-link {
+            display: inline-block;
+            background-color: #1a2a6c;
+            color: white;
+            padding: 0.7rem 1.5rem;
+            text-decoration: none;
+            border-radius: 4px;
+            text-align: center;
+            transition: background-color 0.3s;
+            margin-top: auto;
+        }
+        
+        .course-link:hover {
+            background-color: #2a3a9c;
+        }
+        
+        /* Seção de destaque */
+        .highlight {
+            background: linear-gradient(to right, #1a2a6c, #b21f1f);
+            color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 3rem 0;
+            text-align: center;
+        }
+        
+        .highlight h2 {
+            margin-bottom: 1rem;
+        }
+        
+        .highlight p {
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .highlight-btn {
+            display: inline-block;
+            background-color: white;
+            color: #1a2a6c;
+            padding: 0.8rem 2rem;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: transform 0.3s;
+        }
+        
+        .highlight-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Rodapé */
+        footer {
+            background-color: #222;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 3rem;
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            nav {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav a {
+                margin: 0.2rem 0;
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Portal Szymanski</h1>
+    </header>
+    
+    <nav>
+        <a href="index.html">Início</a>
+        <a href="cursos.html">Cursos</a>
+        <a href="hisórias.html">Historia</a>
+        <a href="feira.html">Feiras de Profissão</a>
+        <a href="plataformas.html">Plataformas</a>
+        <a href="info.html">Info</a>
+    </nav>
+    
+    <div class="container">
+        <h2 class="page-title">Cursos Oferecidos</h2>
+        
+        <p class="intro-text">
+            O Colégio Szymanski oferece uma variedade de cursos técnicos e de formação para preparar 
+            os estudantes para o mercado de trabalho e para o ensino superior.
+        </p>
+        
+        <div class="courses-grid">
+            <!-- Curso 1 -->
+            <div class="course-card">
+                <div class="course-icon">📊</div>
+                <div class="course-content">
+                    <h3 class="course-title">Administração</h3>
+                    <p class="course-description">
+                        Curso técnico em Administração que prepara os estudantes para atuarem em 
+                        diversos departamentos de empresas, com foco em gestão, finanças e recursos humanos.
+                    </p>
+                    <div class="course-details">
+                        <p><i>📅</i> Duração: 3 semestres</p>
+                        <p><i>🕒</i> Carga horária: 1200 horas</p>
+                        <p><i>🎯</i> Modalidade: Presencial</p>
+                    </div>
+                    <a href="#" class="course-link">Saiba mais</a>
+                </div>
+            </div>
+            
+            <!-- Curso 2 -->
+            <div class="course-card">
+                <div class="course-icon">💻</div>
+                <div class="course-content">
+                    <h3 class="course-title">Desenvolvimento de Sistemas</h3>
+                    <p class="course-description">
+                        Curso técnico em Desenvolvimento de Sistemas que ensina programação, 
+                        banco de dados, desenvolvimento web e mobile, preparando para uma das áreas 
+                        mais promissoras do mercado.
+                    </p>
+                    <div class="course-details">
+                        <p><i>📅</i> Duração: 3 semestres</p>
+                        <p><i>🕒</i> Carga horária: 1200 horas</p>
+                        <p><i>🎯</i> Modalidade: Presencial</p>
+                    </div>
+                    <a href="https://szymanski-desenvolvimento-sistemas.github.io/" target="_blank" class="course-link">Acessar Site do Curso</a>
+                </div>
+            </div>
+            
+            <!-- Curso 3 -->
+            <div class="course-card">
+                <div class="course-icon">📚</div>
+                <div class="course-content">
+                    <h3 class="course-title">Formação de Docentes</h3>
+                    <p class="course-description">
+                        Curso de formação de professores para atuar na educação infantil e anos iniciais 
+                        do ensino fundamental, com base teórica e prática pedagógica.
+                    </p>
+                    <div class="course-details">
+                        <p><i>📅</i> Duração: 4 semestres</p>
+                        <p><i>🕒</i> Carga horária: 1600 horas</p>
+                        <p><i>🎯</i> Modalidade: Presencial</p>
+                    </div>
+                    <a href="#" class="course-link">Saiba mais</a>
+                </div>
+            </div>
+            
+            <!-- Curso 4 -->
+            <div class="course-card">
+                <div class="course-icon">🔧</div>
+                <div class="course-content">
+                    <h3 class="course-title">Subsequente</h3>
+                    <p class="course-description">
+                        Cursos técnicos subsequentes ao ensino médio, oferecendo formação profissional 
+                        para quem já concluiu a educação básica e busca qualificação para o mercado de trabalho.
+                    </p>
+                    <div class="course-details">
+                        <p><i>📅</i> Duração: 4 semestres</p>
+                        <p><i>🕒</i> Carga horária: 1200 horas</p>
+                        <p><i>🎯</i> Modalidade: Presencial/Noturno</p>
+                    </div>
+                    <a href="#" class="course-link">Saiba mais</a>
+                </div>
+            </div>
+            
+            <!-- Curso 5 -->
+            <div class="course-card">
+                <div class="course-icon">🌍</div>
+                <div class="course-content">
+                    <h3 class="course-title">PEFOL</h3>
+                    <p class="course-description">
+                        Programa de Ensino de Português para Falantes de Outras Línguas. Curso destinado 
+                        a imigrantes e estrangeiros que desejam aperfeiçoar o português para estudos, 
+                        trabalho ou integração social.
+                    </p>
+                    <div class="course-details">
+                        <p><i>📅</i> Duração: 2 semestres</p>
+                        <p><i>🕒</i> Carga horária: 400 horas</p>
+                        <p><i>🎯</i> Modalidade: Presencial</p>
+                    </div>
+                    <a href="#" class="course-link">Saiba mais</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="highlight">
+            <h2>Interessado em algum curso?</h2>
+            <p>
+                Entre em contato conosco para mais informações sobre matrículas, requisitos 
+                e processos seletivos. Nossa equipe está pronta para esclarecer todas as suas dúvidas.
+            </p>
+            <a href="info.html" class="highlight-btn">Entre em Contato</a>
+        </div>
+    </div>
+    
+    <footer>
+        <p>&copy; 2025 Colégio Szymanski - Todos os direitos reservados</p>
+    </footer>
+</body>
+</html>
