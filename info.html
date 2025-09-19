@@ -1,1 +1,300 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informações - Colégio Szymanski</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos gerais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* Cabeçalho com carrossel modificado */
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+            background: url('images.png') center/cover no-repeat, linear-gradient(to right, #1a2a6c, #b21f1f);
+            background-blend-mode: overlay;
+        }
+        
+        .carousel {
+            display: none;
+        }
+        
+        .carousel-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.4);
+            color: white;
+            text-align: center;
+        }
+        
+        .carousel-overlay h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            margin-bottom: 1rem;
+        }
+        
+        .carousel-overlay p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+        }
+        
+        /* Navegação */
+        nav {
+            background: linear-gradient(to right, #1a2a6c, #b21f1f);
+            display: flex;
+            justify-content: center;
+            padding: 0.8rem;
+            flex-wrap: wrap;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.7rem 1.2rem;
+            margin: 0 0.3rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            font-weight: 500;
+        }
+        
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Conteúdo principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        
+        .page-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #1a2a6c;
+            font-size: 2.5rem;
+            font-family: 'Bebas Neue', sans-serif;
+        }
+        
+        /* Seções de informação */
+        .info-section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .info-title {
+            color: #1a2a6c;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.2rem;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .info-card {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s;
+            border-left: 4px solid #b21f1f;
+        }
+        
+        .info-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .info-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .info-card h3 {
+            color: #1a2a6c;
+            margin-bottom: 1rem;
+        }
+        
+        .info-card p {
+            margin-bottom: 1.5rem;
+            color: #555;
+        }
+        
+        .info-link {
+            display: inline-block;
+            background-color: #1a2a6c;
+            color: white;
+            padding: 0.7rem 1.5rem;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        .info-link:hover {
+            background-color: #2a3a9c;
+        }
+        
+        /* Mapa */
+        .map-container {
+            margin-top: 2rem;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 300px;
+            border: none;
+        }
+        
+        /* Rodapé */
+        footer {
+            background-color: #222;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 3rem;
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .carousel-container {
+                height: 300px;
+            }
+            
+            .carousel-overlay h1 {
+                font-size: 2.2rem;
+            }
+            
+            .carousel-overlay p {
+                font-size: 1rem;
+                padding: 0 1rem;
+            }
+            
+            nav {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav a {
+                margin: 0.3rem 0;
+                width: 100%;
+                text-align: center;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="carousel-container">
+            <div class="carousel"></div>
 
+            <div class="carousel-overlay">
+                <h1>Portal Szymanski</h1>
+                <p>Entre em contato conosco</p>
+            </div>
+        </div>
+    </header>
+    
+    <nav>
+        <a href="index.html">Início</a>
+        <a href="cursos.html">Cursos</a>
+        <a href="história.html">Historia</a>
+        <a href="feira.html">Feiras de Profissão</a>
+        <a href="plataformas.html">Plataformas</a>
+        <a href="info.html">Info</a>
+    </nav>
+    
+    <div class="container">
+        <h2 class="page-title">Informações e Contato</h2>
+        
+        <div class="info-section">
+            <h3 class="info-title">Localização</h3>
+            <p>Venha nos visitar! Estamos localizados em:</p>
+            
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3599.920056482128!2d-49.4046239244756!3d-25.55997777750093!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dd4890ddfcd70d%3A0x319ff7ef7d4e9c8c!2sCol%C3%A9gio%20Estadual%20Professor%20J%C3%BAlio%20Szymanski!5e0!3m2!1spt-BR!2sbr!4v1718658532978!5m2!1spt-BR!2sbr" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+            
+            <div style="text-align: center; margin-top: 1.5rem;">
+                <a href="https://maps.app.goo.gl/P2QPH524FgP8BNkKA" target="_blank" class="info-link">Abrir no Google Maps</a>
+            </div>
+        </div>
+        
+        <div class="info-grid">
+            <div class="info-card">
+                <div class="info-icon">📞</div>
+                <h3>Contato</h3>
+                <p>Entre em contato conosco via WhatsApp para mais informações</p>
+                <a href="https://api.whatsapp.com/send?phone=%2B554136424089" target="_blank" class="info-link">Abrir WhatsApp</a>
+            </div>
+            
+            <div class="info-card">
+                <div class="info-icon">📱</div>
+                <h3>Facebook</h3>
+                <p>Acompanhe nossas novidades e eventos pelo Facebook</p>
+                <a href="https://www.facebook.com/share/1Xt7qPghFc/" target="_blank" class="info-link">Visitar Facebook</a>
+            </div>
+            
+            <div class="info-card">
+                <div class="info-icon">📷</div>
+                <h3>Instagram</h3>
+                <p>Siga-nos no Instagram para ficar por dentro do dia a dia do colégio</p>
+                <a href="https://www.instagram.com/colegioszymanski?igsh=MWhraDN6cjRuMTFkNA==" target="_blank" class="info-link">Seguir no Instagram</a>
+            </div>
+        </div>
+        
+        <div class="info-section">
+            <h3 class="info-title">Horário de Atendimento</h3>
+            <p>Estamos disponíveis para atendimento durante os seguintes horários:</p>
+            <ul style="list-style-type: none; padding: 1rem 0;">
+                <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;">Segunda a sexta: 7h às 18h</li>
+                <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;">Sábado: 8h às 12h</li>
+                <li style="padding: 0.5rem 0;">Domingo: Fechado</li>
+            </ul>
+        </div>
+    </div>
+    
+    <footer>
+        <p>&copy; 2025 Colégio Estadual Professor Júlio Szymanski - Todos os direitos reservados</p>
+    </footer>
+</body>
+</html>
