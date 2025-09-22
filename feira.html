@@ -1,1 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Szymanski</title>
+    <style>
+        /* Estilos para a navegação */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        /* Estilos da página */
+        main {
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        h2 {
+            color: #444;
+        }
+
+        /* Estilo para as imagens da feira */
+        .imagens-feira {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* 4 colunas */
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .imagens-feira img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Ajustes de layout responsivo */
+        @media (max-width: 1200px) {
+            .imagens-feira {
+                grid-template-columns: repeat(3, 1fr); /* 3 colunas para telas menores */
+            }
+        }
+
+        @media (max-width: 800px) {
+            .imagens-feira {
+                grid-template-columns: repeat(2, 1fr); /* 2 colunas */
+            }
+        }
+
+        @media (max-width: 500px) {
+            .imagens-feira {
+                grid-template-columns: 1fr; /* 1 coluna */
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Bem-vindo ao Portal Szymanski</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li><a href="cursos.html">Cursos</a></li>
+                <li><a href="historia.html">História</a></li>
+                <li><a href="feiras.html">Feiras de Profissão</a></li>
+                <li><a href="plataformas.html">Plataformas</a></li>
+                <li><a href="info.html">Info</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Seção da História -->
+        <section id="historia">
+            <h1>História do Colégio Professor Júlio Szymanski</h1>
+            <p>O Colégio é nomeado em homenagem ao Prof. Dr. Júlio Szymanski, um imigrante polonês notável, com atuação acadêmica e científica no Brasil. A vida dele é bastante celebrada pela escola, que já realizou exposições e eventos culturais centrados na sua trajetória.</p>
+            <p>Em 2017, nas comemorações dos 61 anos, houve palestra, exposição "Juliusz Szymanski — um polonês entre dois continentes" e encenação da chegada dos imigrantes poloneses ao Brasil.</p>
+        </section>
+
+        <!-- Seção de Feira de Profissões -->
+        <section id="feira-profissoes">
+            <h1>Feira de Profissões</h1>
+            <p>Com um grande evento na sexta-feira (29), o Colégio Estadual Professor Júlio Szymanski realizou a sua 4ª Feira de Profissões...</p>
+            
+            <h2>1. O Evento</h2>
+            <p>A Feira de Profissões é uma oportunidade para os alunos apresentarem seus trabalhos...</p>
+            
+            <h2>Imagens do Evento</h2>
+            <p>Confira as imagens da nossa Feira de Profissões, um evento incrível cheio de criatividade e inovação.</p>
+
+            <!-- Seção para as 17 imagens -->
+            <div class="imagens-feira">
+                <img src="imagens/feira1.jpg" alt="Imagem 1 da Feira de Profissões">
+                <img src="imagens/feira2.jpg" alt="Imagem 2 da Feira de Profissões">
+                <img src="imagens/feira3.jpg" alt="Imagem 3 da Feira de Profissões">
+                <img src="imagens/feira4.jpg" alt="Imagem 4 da Feira de Profissões">
+                <img src="imagens/feira5.jpg" alt="Imagem 5 da Feira de Profissões">
+                <img src="imagens/feira6.jpg" alt="Imagem 6 da Feira de Profissões">
+                <img src="imagens/feira7.jpg" alt="Imagem 7 da Feira de Profissões">
+                <img src="imagens/feira8.jpg" alt="Imagem 8 da Feira de Profissões">
+                <img src="imagens/feira9.jpg" alt="Imagem 9 da Feira de Profissões">
+                <img src="imagens/feira10.jpg" alt="Imagem 10 da Feira de Profissões">
+                <img src="imagens/feira11.jpg" alt="Imagem 11 da Feira de Profissões">
+                <img src="imagens/feira12.jpg" alt="Imagem 12 da Feira de Profissões">
+                <img src="imagens/feira13.jpg" alt="Imagem 13 da Feira de Profissões">
+                <img src="imagens/feira14.jpg" alt="Imagem 14 da Feira de Profissões">
+                <img src="imagens/feira15.jpg" alt="Imagem 15 da Feira de Profissões">
+                <img src="imagens/feira16.jpg" alt="Imagem 16 da Feira de Profissões">
+                <img src="imagens/feira17.jpg" alt="Imagem 17 da Feira de Profissões">
+            </div>
+        </section>
+    </main>
+</body>
+</html>
 
