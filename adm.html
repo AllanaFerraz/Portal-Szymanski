@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Curso de Administração</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #f4f8ff;
+      color: #333;
+    }
+
+    header {
+      background: #004080;
+      color: white;
+      text-align: center;
+      padding: 30px 20px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+
+    header p {
+      margin-top: 10px;
+      font-size: 1.1rem;
+    }
+
+    main {
+      padding: 20px;
+      text-align: center;
+    }
+
+    /* Carrossel */
+    .carousel {
+      position: relative;
+      max-width: 800px;
+      margin: 30px auto;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .carousel img {
+      width: 100%;
+      display: none;
+    }
+
+    .carousel img.active {
+      display: block;
+    }
+
+    /* Botões de navegação */
+    .prev, .next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0,64,128,0.7);
+      color: white;
+      border: none;
+      padding: 12px;
+      cursor: pointer;
+      border-radius: 50%;
+      font-size: 20px;
+    }
+
+    .prev:hover, .next:hover {
+      background-color: #004080;
+    }
+
+    .prev {
+      left: 15px;
+    }
+
+    .next {
+      right: 15px;
+    }
+
+    footer {
+      background: #004080;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Curso de Administração</h1>
+    <p>Gestão estratégica para líderes do futuro</p>
+  </header>
+
+  <main>
+    <h2>Sobre o curso</h2>
+    <p>O curso de Administração prepara profissionais para gerir pessoas, recursos e empresas com visão estratégica, 
+    liderança e inovação. Desenvolva habilidades para atuar em diversos setores e conquistar sucesso no mercado.</p>
+
+    <!-- Carrossel -->
+    <div class="carousel">
+      <img src="https://picsum.photos/id/1011/800/400" class="active" alt="Administração 1">
+      <img src="https://picsum.photos/id/1015/800/400" alt="Administração 2">
+      <img src="https://picsum.photos/id/1016/800/400" alt="Administração 3">
+
+      <button class="prev" onclick="mudarSlide(-1)">&#10094;</button>
+      <button class="next" onclick="mudarSlide(1)">&#10095;</button>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 - Escola de Formação Profissional</p>
+  </footer>
+
+  <script>
+    let slideIndex = 0;
+    const slides = document.querySelectorAll(".carousel img");
+
+    function mostrarSlide(n) {
+      slides.forEach((slide, i) => {
+        slide.classList.remove("active");
+        if (i === n) slide.classList.add("active");
+      });
+    }
+
+    function mudarSlide(n) {
+      slideIndex += n;
+      if (slideIndex < 0) slideIndex = slides.length - 1;
+      if (slideIndex >= slides.length) slideIndex = 0;
+      mostrarSlide(slideIndex);
+    }
+  </script>
+</body>
+</html>
