@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feira de Profissões - Colégio Professor Júlio Szymanski</title>
+    <title>Feira de Profissões - Colégio Szymanski</title>
     <style>
         /* Estilos gerais */
         * {
@@ -72,8 +72,8 @@
             margin-right: auto;
         }
         
-        /* Seções da Feira */
-        .feira-section {
+        /* Seções de conteúdo */
+        .content-section {
             background-color: white;
             border-radius: 8px;
             overflow: hidden;
@@ -82,7 +82,7 @@
             padding: 2rem;
         }
         
-        .feira-title {
+        .section-title {
             font-size: 1.8rem;
             margin-bottom: 1rem;
             color: #1a2a6c;
@@ -90,27 +90,76 @@
             padding-bottom: 0.5rem;
         }
         
-        .feira-content {
+        .section-content {
             margin-bottom: 1.5rem;
         }
         
-        .feira-content p {
+        .section-content p {
             margin-bottom: 1rem;
+            text-align: justify;
         }
         
-        .feira-image {
+        .highlight-box {
+            background: linear-gradient(135deg, #1a2a6c, #2a3a9c);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            border-left: 5px solid #fdbb2d;
+        }
+        
+        /* Sistema de Imagens */
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .image-card {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .image-card:hover {
+            transform: scale(1.02);
+        }
+        
+        .gallery-image {
             width: 100%;
-            max-height: 300px;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .image-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        
+        .featured-image {
+            width: 100%;
+            max-height: 400px;
             object-fit: cover;
             border-radius: 8px;
             margin: 1rem 0;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
         
         .image-placeholder {
             width: 100%;
             height: 200px;
-            background-color: #eee;
+            background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
             border-radius: 8px;
             display: flex;
             justify-content: center;
@@ -118,6 +167,106 @@
             margin: 1rem 0;
             color: #777;
             font-style: italic;
+            border: 2px dashed #ccc;
+        }
+        
+        /* Grid de projetos */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .project-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        
+        .project-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        
+        .project-content {
+            padding: 1.5rem;
+        }
+        
+        .project-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #1a2a6c;
+        }
+        
+        .project-description {
+            margin-bottom: 1rem;
+        }
+        
+        /* Lista de participantes */
+        .participants-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .participant-item {
+            background-color: #f9f9f9;
+            padding: 1rem;
+            border-radius: 6px;
+            border-left: 4px solid #1a2a6c;
+            display: flex;
+            align-items: center;
+        }
+        
+        .participant-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #1a2a6c, #fdbb2d);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            color: white;
+            font-weight: bold;
+        }
+        
+        /* Galeria de eventos */
+        .events-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .event-item {
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+        }
+        
+        .event-date {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f);
+            color: white;
+            padding: 0.8rem 1.2rem;
+            border-radius: 8px;
+            min-width: 120px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .event-content {
+            flex: 1;
         }
         
         /* Rodapé */
@@ -142,8 +291,28 @@
                 text-align: center;
             }
             
-            .feira-section {
+            .content-section {
                 padding: 1.5rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .participants-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .image-gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .event-item {
+                flex-direction: column;
+            }
+            
+            .event-date {
+                align-self: flex-start;
             }
         }
     </style>
@@ -156,76 +325,199 @@
     <nav>
         <a href="index.html">Início</a>
         <a href="cursos.html">Cursos</a>
-        <a href="historia.html">História</a>
+        <a href="história.html">Historia</a>
         <a href="feira.html">Feiras de Profissão</a>
         <a href="plataformas.html">Plataformas</a>
         <a href="info.html">Info</a>
     </nav>
     
     <div class="container">
-        <h2 class="page-title">Feira de Profissões</h2>
+        <h2 class="page-title">4ª Feira de Profissões</h2>
         
         <p class="intro-text">
-            Conheça a nossa Feira de Profissões, um evento incrível que oferece aos alunos a oportunidade de 
-            explorar diversas carreiras e se aproximar do mundo profissional.
+            Um grande evento que conectou estudantes ao mercado de trabalho, apresentando projetos inovadores 
+            e fortalecendo a ponte entre educação e futuro profissional.
         </p>
         
-        <div class="feira-section">
-            <h3 class="feira-title">1. O Evento</h3>
-            <div class="feira-content">
+        <!-- Imagem Principal -->
+        <img src="https://via.placeholder.com/1200x400/1a2a6c/ffffff?text=Feira+de+Profissões+Szymanski+2024" 
+             alt="Feira de Profissões 2024 - Colégio Szymanski" 
+             class="featured-image">
+        
+        <div class="content-section">
+            <h3 class="section-title">Sobre o Evento</h3>
+            <div class="section-content">
                 <p>
-                    A Feira de Profissões é uma oportunidade para os alunos do Colégio Professor Júlio Szymanski 
-                    apresentarem seus trabalhos e se conectarem com profissionais de diversas áreas. 
-                    O evento envolve palestras, exposições e interações com empresas e instituições de ensino.
+                    Com um grande evento na sexta-feira (29), o Colégio Estadual Professor Júlio Szymanski 
+                    realizou a sua 4ª Feira de Profissões, que é também a última edição da Feira de Profissões 
+                    Itinerante de Araucária.
                 </p>
-                <div class="image-placeholder">
-                    Imagem: Foto do evento
+                
+                <div class="highlight-box">
+                    <strong>A Feira de Profissões é uma oportunidade para os alunos apresentarem seus trabalhos 
+                    e representa uma ponte entre o presente e o futuro profissional.</strong>
+                </div>
+                
+                <!-- Galeria de Imagens -->
+                <div class="image-gallery">
+                    <div class="image-card">
+                        <img src="https://via.placeholder.com/400x250/2a3a9c/ffffff?text=Visita+do+Prefeito" 
+                             alt="Visita do Prefeito à Feira" class="gallery-image">
+                        <div class="image-caption">Prefeito Gustavo Botogoski visitando os stands</div>
+                    </div>
+                    <div class="image-card">
+                        <img src="https://via.placeholder.com/400x250/b21f1f/ffffff?text=Estudantes+Apresentando" 
+                             alt="Estudantes apresentando projetos" class="gallery-image">
+                        <div class="image-caption">Estudantes explicando seus projetos aos visitantes</div>
+                    </div>
+                    <div class="image-card">
+                        <img src="https://via.placeholder.com/400x250/fdbb2d/333333?text=Projetos+Inovadores" 
+                             alt="Projetos inovadores" class="gallery-image">
+                        <div class="image-caption">Projetos tecnológicos desenvolvidos pelos alunos</div>
+                    </div>
                 </div>
             </div>
         </div>
         
-        <div class="feira-section">
-            <h3 class="feira-title">2. Participantes e Palestrantes</h3>
-            <div class="feira-content">
+        <div class="content-section">
+            <h3 class="section-title">Projetos em Destaque</h3>
+            <div class="section-content">
                 <p>
-                    Durante a feira, diversos palestrantes de diferentes áreas compartilham suas experiências com os 
-                    alunos. As empresas participantes também fornecem informações sobre as oportunidades no mercado 
-                    de trabalho e as competências necessárias para seguir em cada carreira.
+                    Para a feira, os estudantes se dedicaram a apresentar os melhores trabalhos aos colegas e visitantes.
                 </p>
-                <div class="image-placeholder">
-                    Imagem: Participantes e palestrantes
+                
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <img src="https://via.placeholder.com/400x180/1a2a6c/ffffff?text=Aranha+Robótica" 
+                             alt="Aranha Robótica" class="project-image">
+                        <div class="project-content">
+                            <h4 class="project-title">Aranha Robótica</h4>
+                            <p class="project-description">
+                                Desenvolvida por mais de 20 estudantes, a aranha realiza diversos tipos de movimento, 
+                                incluindo "dança".
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <img src="https://via.placeholder.com/400x180/b21f1f/ffffff?text=Estúdio+Podcast" 
+                             alt="Estúdio de Podcast" class="project-image">
+                        <div class="project-content">
+                            <h4 class="project-title">Podcast Especial</h4>
+                            <p class="project-description">
+                                Desenvolvido pela turma de Desenvolvimento de Sistemas, contou com a participação 
+                                do prefeito Gustavo Botogoski.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <img src="https://via.placeholder.com/400x180/fdbb2d/333333?text=Site+Araucária" 
+                             alt="Site sobre Araucária" class="project-image">
+                        <div class="project-content">
+                            <h4 class="project-title">Site sobre Araucária</h4>
+                            <p class="project-description">
+                                Plataforma digital desenvolvida pelos estudantes para promover a cidade.
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
         
-        <div class="feira-section">
-            <h3 class="feira-title">3. Projetos dos Alunos</h3>
-            <div class="feira-content">
-                <p>
-                    Os alunos do Colégio Júlio Szymanski apresentam seus projetos de acordo com os cursos em que estão 
-                    matriculados, como administração, informática, e mais. Esses projetos são elaborados ao longo do ano 
-                    e ganham destaque durante a feira.
-                </p>
-                <div class="image-placeholder">
-                    Imagem: Projetos apresentados pelos alunos
+        <div class="content-section">
+            <h3 class="section-title">Linha do Tempo do Evento</h3>
+            <div class="events-timeline">
+                <div class="event-item">
+                    <div class="event-date">8:00h</div>
+                    <div class="event-content">
+                        <h4>Credenciamento e Abertura</h4>
+                        <p>Cerimônia de abertura com autoridades e direção do colégio</p>
+                    </div>
+                </div>
+                <div class="event-item">
+                    <div class="event-date">9:30h</div>
+                    <div class="event-content">
+                        <h4>Visita aos Stands</h4>
+                        <p>Prefeito e autoridades visitam os projetos dos estudantes</p>
+                    </div>
+                </div>
+                <div class="event-item">
+                    <div class="event-date">11:00h</div>
+                    <div class="event-content">
+                        <h4>Apresentações Especiais</h4>
+                        <p>Demonstração dos projetos mais inovadores</p>
+                    </div>
+                </div>
+                <div class="event-item">
+                    <div class="event-date">14:00h</div>
+                    <div class="event-content">
+                        <h4>Votação Popular</h4>
+                        <p>Visitantes escolhem o melhor projeto através do sistema de votação</p>
+                    </div>
                 </div>
             </div>
         </div>
         
-        <div class="feira-section">
-            <h3 class="feira-title">4. A Importância para os Alunos</h3>
-            <div class="feira-content">
-                <p>
-                    A Feira de Profissões oferece aos alunos uma visão mais clara do futuro profissional e as opções de 
-                    carreira que podem seguir. É uma excelente oportunidade para interagir com profissionais e empresas, 
-                    ampliando suas perspectivas.
-                </p>
-                <div class="image-placeholder">
-                    Imagem: Alunos interagindo com profissionais
+        <div class="content-section">
+            <h3 class="section-title">Galeria de Fotos</h3>
+            <div class="image-gallery">
+                <div class="image-card">
+                    <img src="https://via.placeholder.com/400x250/1a2a6c/ffffff?text=Cerimônia+Abertura" 
+                         alt="Cerimônia de Abertura" class="gallery-image">
+                    <div class="image-caption">Momento da cerimônia de abertura</div>
+                </div>
+                <div class="image-card">
+                    <img src="https://via.placeholder.com/400x250/b21f1f/ffffff?text=Stands+Coloridos" 
+                         alt="Stands da Feira" class="gallery-image">
+                    <div class="image-caption">Stands organizados pelos estudantes</div>
+                </div>
+                <div class="image-card">
+                    <img src="https://via.placeholder.com/400x250/fdbb2d/333333?text=Interação+Visitantes" 
+                         alt="Interação com Visitantes" class="gallery-image">
+                    <div class="image-caption">Estudantes interagindo com o público</div>
+                </div>
+                <div class="image-card">
+                    <img src="https://via.placeholder.com/400x250/2a3a9c/ffffff?text=Projetos+Tecnológicos" 
+                         alt="Projetos Tecnológicos" class="gallery-image">
+                    <div class="image-caption">Demonstração de projetos de tecnologia</div>
                 </div>
             </div>
         </div>
         
+        <div class="content-section">
+            <h3 class="section-title">Autoridades Presentes</h3>
+            <div class="participants-list">
+                <div class="participant-item">
+                    <div class="participant-icon">JK</div>
+                    <div>
+                        <strong>Jucelino Katuragi de Melo</strong><br>
+                        Presidente do Avançaraucária
+                    </div>
+                </div>
+                <div class="participant-item">
+                    <div class="participant-icon">AQ</div>
+                    <div>
+                        <strong>Adriana Reichele Quint</strong><br>
+                        Coordenadora da Câmara Técnica
+                    </div>
+                </div>
+                <div class="participant-item">
+                    <div class="participant-icon">FP</div>
+                    <div>
+                        <strong>Fábio Pedroso</strong><br>
+                        Vereador
+                    </div>
+                </div>
+                <div class="participant-item">
+                    <div class="participant-icon">FC</div>
+                    <div>
+                        <strong>Fabiana Baumel Canofer</strong><br>
+                        Diretora auxiliar
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     
     <footer>
