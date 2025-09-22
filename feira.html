@@ -3,143 +3,233 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal Szymanski</title>
+    <title>Feira de Profissões - Colégio Professor Júlio Szymanski</title>
     <style>
-        /* Estilos para a navegação */
-        body {
-            font-family: Arial, sans-serif;
+        /* Estilos gerais */
+        * {
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* Cabeçalho e navegação */
         header {
-            background-color: #333;
+            background: linear-gradient(to right, #1a2a6c, #b21f1f, #fdbb2d);
             color: white;
-            padding: 10px 0;
+            padding: 1rem;
             text-align: center;
+            position: relative;
         }
-
-        nav ul {
-            list-style: none;
-            padding: 0;
+        
+        nav {
+            background-color: #222;
+            display: flex;
+            justify-content: center;
+            padding: 0.5rem;
+            flex-wrap: wrap;
         }
-
-        nav ul li {
-            display: inline;
-            margin: 0 15px;
-        }
-
-        nav ul li a {
+        
+        nav a {
             color: white;
             text-decoration: none;
-            font-size: 18px;
+            padding: 0.5rem 1rem;
+            margin: 0 0.2rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
         }
-
-        /* Estilos da página */
-        main {
-            padding: 20px;
+        
+        nav a:hover {
+            background-color: #444;
         }
-
-        h1 {
-            color: #333;
+        
+        /* Conteúdo principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
         }
-
-        h2 {
-            color: #444;
+        
+        .page-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #1a2a6c;
+            font-size: 2.5rem;
         }
-
-        /* Estilo para as imagens da feira */
-        .imagens-feira {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr); /* 4 colunas */
-            gap: 15px;
-            margin-top: 20px;
+        
+        .intro-text {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
-
-        .imagens-feira img {
-            width: 100%;
-            height: auto;
+        
+        /* Seções da Feira */
+        .feira-section {
+            background-color: white;
             border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            padding: 2rem;
         }
-
-        /* Ajustes de layout responsivo */
-        @media (max-width: 1200px) {
-            .imagens-feira {
-                grid-template-columns: repeat(3, 1fr); /* 3 colunas para telas menores */
+        
+        .feira-title {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #1a2a6c;
+            border-bottom: 2px solid #fdbb2d;
+            padding-bottom: 0.5rem;
+        }
+        
+        .feira-content {
+            margin-bottom: 1.5rem;
+        }
+        
+        .feira-content p {
+            margin-bottom: 1rem;
+        }
+        
+        .feira-image {
+            width: 100%;
+            max-height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin: 1rem 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .image-placeholder {
+            width: 100%;
+            height: 200px;
+            background-color: #eee;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 1rem 0;
+            color: #777;
+            font-style: italic;
+        }
+        
+        /* Rodapé */
+        footer {
+            background-color: #222;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 3rem;
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                align-items: center;
             }
-        }
-
-        @media (max-width: 800px) {
-            .imagens-feira {
-                grid-template-columns: repeat(2, 1fr); /* 2 colunas */
+            
+            nav a {
+                margin: 0.2rem 0;
+                width: 100%;
+                text-align: center;
             }
-        }
-
-        @media (max-width: 500px) {
-            .imagens-feira {
-                grid-template-columns: 1fr; /* 1 coluna */
+            
+            .feira-section {
+                padding: 1.5rem;
             }
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>Bem-vindo ao Portal Szymanski</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Início</a></li>
-                <li><a href="cursos.html">Cursos</a></li>
-                <li><a href="historia.html">História</a></li>
-                <li><a href="feiras.html">Feiras de Profissão</a></li>
-                <li><a href="plataformas.html">Plataformas</a></li>
-                <li><a href="info.html">Info</a></li>
-            </ul>
-        </nav>
+        <h1>Portal Szymanski</h1>
     </header>
-
-    <main>
-        <!-- Seção da História -->
-        <section id="historia">
-            <h1>História do Colégio Professor Júlio Szymanski</h1>
-            <p>O Colégio é nomeado em homenagem ao Prof. Dr. Júlio Szymanski, um imigrante polonês notável, com atuação acadêmica e científica no Brasil. A vida dele é bastante celebrada pela escola, que já realizou exposições e eventos culturais centrados na sua trajetória.</p>
-            <p>Em 2017, nas comemorações dos 61 anos, houve palestra, exposição "Juliusz Szymanski — um polonês entre dois continentes" e encenação da chegada dos imigrantes poloneses ao Brasil.</p>
-        </section>
-
-        <!-- Seção de Feira de Profissões -->
-        <section id="feira-profissoes">
-            <h1>Feira de Profissões</h1>
-            <p>Com um grande evento na sexta-feira (29), o Colégio Estadual Professor Júlio Szymanski realizou a sua 4ª Feira de Profissões...</p>
-            
-            <h2>1. O Evento</h2>
-            <p>A Feira de Profissões é uma oportunidade para os alunos apresentarem seus trabalhos...</p>
-            
-            <h2>Imagens do Evento</h2>
-            <p>Confira as imagens da nossa Feira de Profissões, um evento incrível cheio de criatividade e inovação.</p>
-
-            <!-- Seção para as 17 imagens -->
-            <div class="imagens-feira">
-                <img src="imagens/feira1.jpg" alt="Imagem 1 da Feira de Profissões">
-                <img src="imagens/feira2.jpg" alt="Imagem 2 da Feira de Profissões">
-                <img src="imagens/feira3.jpg" alt="Imagem 3 da Feira de Profissões">
-                <img src="imagens/feira4.jpg" alt="Imagem 4 da Feira de Profissões">
-                <img src="imagens/feira5.jpg" alt="Imagem 5 da Feira de Profissões">
-                <img src="imagens/feira6.jpg" alt="Imagem 6 da Feira de Profissões">
-                <img src="imagens/feira7.jpg" alt="Imagem 7 da Feira de Profissões">
-                <img src="imagens/feira8.jpg" alt="Imagem 8 da Feira de Profissões">
-                <img src="imagens/feira9.jpg" alt="Imagem 9 da Feira de Profissões">
-                <img src="imagens/feira10.jpg" alt="Imagem 10 da Feira de Profissões">
-                <img src="imagens/feira11.jpg" alt="Imagem 11 da Feira de Profissões">
-                <img src="imagens/feira12.jpg" alt="Imagem 12 da Feira de Profissões">
-                <img src="imagens/feira13.jpg" alt="Imagem 13 da Feira de Profissões">
-                <img src="imagens/feira14.jpg" alt="Imagem 14 da Feira de Profissões">
-                <img src="imagens/feira15.jpg" alt="Imagem 15 da Feira de Profissões">
-                <img src="imagens/feira16.jpg" alt="Imagem 16 da Feira de Profissões">
-                <img src="imagens/feira17.jpg" alt="Imagem 17 da Feira de Profissões">
+    
+    <nav>
+        <a href="index.html">Início</a>
+        <a href="cursos.html">Cursos</a>
+        <a href="historia.html">História</a>
+        <a href="feira.html">Feiras de Profissão</a>
+        <a href="plataformas.html">Plataformas</a>
+        <a href="info.html">Info</a>
+    </nav>
+    
+    <div class="container">
+        <h2 class="page-title">Feira de Profissões</h2>
+        
+        <p class="intro-text">
+            Conheça a nossa Feira de Profissões, um evento incrível que oferece aos alunos a oportunidade de 
+            explorar diversas carreiras e se aproximar do mundo profissional.
+        </p>
+        
+        <div class="feira-section">
+            <h3 class="feira-title">1. O Evento</h3>
+            <div class="feira-content">
+                <p>
+                    A Feira de Profissões é uma oportunidade para os alunos do Colégio Professor Júlio Szymanski 
+                    apresentarem seus trabalhos e se conectarem com profissionais de diversas áreas. 
+                    O evento envolve palestras, exposições e interações com empresas e instituições de ensino.
+                </p>
+                <div class="image-placeholder">
+                    Imagem: Foto do evento
+                </div>
             </div>
-        </section>
-    </main>
+        </div>
+        
+        <div class="feira-section">
+            <h3 class="feira-title">2. Participantes e Palestrantes</h3>
+            <div class="feira-content">
+                <p>
+                    Durante a feira, diversos palestrantes de diferentes áreas compartilham suas experiências com os 
+                    alunos. As empresas participantes também fornecem informações sobre as oportunidades no mercado 
+                    de trabalho e as competências necessárias para seguir em cada carreira.
+                </p>
+                <div class="image-placeholder">
+                    Imagem: Participantes e palestrantes
+                </div>
+            </div>
+        </div>
+        
+        <div class="feira-section">
+            <h3 class="feira-title">3. Projetos dos Alunos</h3>
+            <div class="feira-content">
+                <p>
+                    Os alunos do Colégio Júlio Szymanski apresentam seus projetos de acordo com os cursos em que estão 
+                    matriculados, como administração, informática, e mais. Esses projetos são elaborados ao longo do ano 
+                    e ganham destaque durante a feira.
+                </p>
+                <div class="image-placeholder">
+                    Imagem: Projetos apresentados pelos alunos
+                </div>
+            </div>
+        </div>
+        
+        <div class="feira-section">
+            <h3 class="feira-title">4. A Importância para os Alunos</h3>
+            <div class="feira-content">
+                <p>
+                    A Feira de Profissões oferece aos alunos uma visão mais clara do futuro profissional e as opções de 
+                    carreira que podem seguir. É uma excelente oportunidade para interagir com profissionais e empresas, 
+                    ampliando suas perspectivas.
+                </p>
+                <div class="image-placeholder">
+                    Imagem: Alunos interagindo com profissionais
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+    <footer>
+        <p>&copy; 2025 Colégio Szymanski - Todos os direitos reservados</p>
+    </footer>
 </body>
 </html>
-
