@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Curso de Formação de Docentes</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #fffaf2; /* fundo amarelo pastel claro */
+      color: #333;
+    }
+
+    header {
+      background: #9370DB; /* lilás */
+      color: #fffacd; /* amarelo pastel */
+      text-align: center;
+      padding: 30px 20px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+
+    header p {
+      margin-top: 10px;
+      font-size: 1.1rem;
+    }
+
+    main {
+      padding: 20px;
+      text-align: center;
+    }
+
+    /* Carrossel */
+    .carousel {
+      position: relative;
+      max-width: 800px;
+      margin: 30px auto;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .carousel img {
+      width: 100%;
+      display: none;
+    }
+
+    .carousel img.active {
+      display: block;
+    }
+
+    /* Botões de navegação */
+    .prev, .next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(147,112,219,0.8); /* lilás transparente */
+      color: white;
+      border: none;
+      padding: 12px;
+      cursor: pointer;
+      border-radius: 50%;
+      font-size: 20px;
+    }
+
+    .prev:hover, .next:hover {
+      background-color: #9370DB;
+    }
+
+    .prev {
+      left: 15px;
+    }
+
+    .next {
+      right: 15px;
+    }
+
+    footer {
+      background: #9370DB;
+      color: #fffacd;
+      text-align: center;
+      padding: 15px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Curso de Formação de Docentes</h1>
+    <p>Preparando educadores para transformar vidas</p>
+  </header>
+
+  <main>
+    <h2>Sobre o curso</h2>
+    <p>O curso de Formação de Docentes capacita profissionais para atuarem na educação infantil e nos anos iniciais do ensino fundamental, 
+    desenvolvendo competências pedagógicas e práticas que estimulam o aprendizado e a inclusão.</p>
+
+    <!-- Carrossel -->
+    <div class="carousel">
+      <img src="https://picsum.photos/id/237/800/400" class="active" alt="Docentes 1">
+      <img src="https://picsum.photos/id/301/800/400" alt="Docentes 2">
+      <img src="https://picsum.photos/id/431/800/400" alt="Docentes 3">
+
+      <button class="prev" onclick="mudarSlide(-1)">&#10094;</button>
+      <button class="next" onclick="mudarSlide(1)">&#10095;</button>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 - Escola de Formação Profissional</p>
+  </footer>
+
+  <script>
+    let slideIndex = 0;
+    const slides = document.querySelectorAll(".carousel img");
+
+    function mostrarSlide(n) {
+      slides.forEach((slide, i) => {
+        slide.classList.remove("active");
+        if (i === n) slide.classList.add("active");
+      });
+    }
+
+    function mudarSlide(n) {
+      slideIndex += n;
+      if (slideIndex < 0) slideIndex = slides.length - 1;
+      if (slideIndex >= slides.length) slideIndex = 0;
+      mostrarSlide(slideIndex);
+    }
+  </script>
+</body>
+</html>
