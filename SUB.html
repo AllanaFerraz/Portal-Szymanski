@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Curso de Administração - Pós Ensino Médio</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #f4f6fa;
+      color: #222;
+    }
+
+    header {
+      background: #001F54; /* navy blue */
+      color: white;
+      text-align: center;
+      padding: 30px 20px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+
+    header p {
+      margin-top: 10px;
+      font-size: 1.1rem;
+    }
+
+    main {
+      padding: 20px;
+      text-align: center;
+    }
+
+    /* Carrossel */
+    .carousel {
+      position: relative;
+      max-width: 800px;
+      margin: 30px auto;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .carousel img {
+      width: 100%;
+      display: none;
+    }
+
+    .carousel img.active {
+      display: block;
+    }
+
+    /* Botões de navegação */
+    .prev, .next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0,31,84,0.7); /* navy transparente */
+      color: white;
+      border: none;
+      padding: 12px;
+      cursor: pointer;
+      border-radius: 50%;
+      font-size: 20px;
+    }
+
+    .prev:hover, .next:hover {
+      background-color: #001F54;
+    }
+
+    .prev {
+      left: 15px;
+    }
+
+    .next {
+      right: 15px;
+    }
+
+    footer {
+      background: #001F54;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Curso de Administração</h1>
+    <p>Voltado para quem concluiu o Ensino Médio</p>
+  </header>
+
+  <main>
+    <h2>Sobre o curso</h2>
+    <p>Este curso de Administração é destinado a jovens e adultos que concluíram o Ensino Médio e desejam iniciar sua formação 
+    profissional. O aluno desenvolverá competências em gestão, liderança e empreendedorismo, preparando-se para o mercado de trabalho 
+    e para futuros estudos acadêmicos.</p>
+
+    <!-- Carrossel -->
+    <div class="carousel">
+      <img src="https://picsum.photos/id/1035/800/400" class="active" alt="Administração Ensino Médio 1">
+      <img src="https://picsum.photos/id/1037/800/400" alt="Administração Ensino Médio 2">
+      <img src="https://picsum.photos/id/1041/800/400" alt="Administração Ensino Médio 3">
+
+      <button class="prev" onclick="mudarSlide(-1)">&#10094;</button>
+      <button class="next" onclick="mudarSlide(1)">&#10095;</button>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 - Escola de Formação Profissional</p>
+  </footer>
+
+  <script>
+    let slideIndex = 0;
+    const slides = document.querySelectorAll(".carousel img");
+
+    function mostrarSlide(n) {
+      slides.forEach((slide, i) => {
+        slide.classList.remove("active");
+        if (i === n) slide.classList.add("active");
+      });
+    }
+
+    function mudarSlide(n) {
+      slideIndex += n;
+      if (slideIndex < 0) slideIndex = slides.length - 1;
+      if (slideIndex >= slides.length) slideIndex = 0;
+      mostrarSlide(slideIndex);
+    }
+  </script>
+</body>
+</html>
