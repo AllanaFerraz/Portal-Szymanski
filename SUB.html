@@ -1,24 +1,88 @@
 <!DOCTYPE html> 
 <html lang="pt-BR"> 
+  
   <head> 
-    <meta charset="UTF-8"> 
+  <meta charset="UTF-8"> 
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-  <title>Curso de Administração - Pós Ensino Médio</title>
+  <title>Subsequente</title>
   
   <style> 
-    body { font-family: Arial, sans-serif; margin: 0; background-color: #f4f6fa; color: #222; }
-    header { background: #001F54; 
-            /* navy blue */ color: white; text-align: center; padding: 30px 20px; } 
-    header h1 { margin: 0; font-size: 2rem; } header p { margin-top: 10px; font-size: 1.1rem; } 
-    main { padding: 20px; text-align: center; } 
-    /* Carrossel */ .carousel { position: relative; max-width: 800px; margin: 30px auto; overflow: hidden; border-radius: 12px; box-shadow: 0px 4px 8px rgba(0,0,0,0.2); }
-    .carousel img { width: 100%; display: none; }
-    .carousel img.active { display: block; } /* Botões de navegação */
-    .prev, .next { position: absolute; top: 50%; transform: translateY(-50%); background-color: rgba(0,31,84,0.7);
-                  /* navy transparente */ color: white; border: none; padding: 12px; cursor: pointer; border-radius: 50%; font-size: 20px; }
-    .prev:hover, .next:hover { background-color: #001F54; }
-    .prev { left: 15px; } .next { right: 15px; }
-    footer { background: #001F54; color: white; text-align: center; padding: 15px; margin-top: 40px; }
+    body { 
+      font-family: Arial, sans-serif; 
+      margin: 0; 
+      background-color: #f4f6fa; 
+      color: #222; 
+    }
+    header { 
+      background: #001F54; /* navy blue */ 
+      color: white; 
+      text-align: center; 
+      padding: 30px 20px; 
+    } 
+    header h1 {
+      margin: 0; 
+      font-size: 2rem; 
+    }
+    header p { 
+      margin-top: 10px; 
+      font-size: 1.1rem; 
+    } 
+    main { 
+      padding: 20px; 
+      text-align: center; 
+    } 
+    /* Carrossel */ 
+    .carousel {
+      position: relative;
+      max-width: 800px; 
+      margin: 30px auto; overflow: hidden; 
+      border-radius: 12px; 
+      box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+    }
+    .carousel img {
+      width: 100%; 
+      display: none; 
+    }
+    .carousel img.active { 
+      display: block; 
+    } 
+    /* Botões de navegação */
+    .prev, .next { 
+      position: absolute; 
+      top: 50%; 
+      transform: translateY(-50%); 
+      background-color: rgba(0,31,84,0.7);/* navy transparente */ 
+      color: white; 
+      border: none; 
+      padding: 12px; 
+      cursor: pointer;
+      border-radius: 50%; 
+      font-size: 20px;
+    }
+    .prev:hover, .next:hover { 
+      background-color: #001F54;
+    }
+    .prev { 
+      left: 15px; 
+    } .next { 
+      right: 15px;
+    }
+    footer { 
+      background: #001F54;
+      color: white; 
+      text-align: center; 
+      padding: 15px; 
+      margin-top: 40px;
+    }
+    .diferenciais ul {
+  list-style-position: outside;
+  padding-left: 1.4em;  /* espaço para o marcador */
+    }
+
+.diferenciais li {
+  text-indent: -0.6em;  /* puxa a primeira linha para a esquerda */
+  margin-bottom: 0.5em; /* espaço entre os itens */
+}
   </style>  
 </head>
   
@@ -45,16 +109,16 @@
         <button class="prev" onclick="mudarSlide(-1)">&#10094;</button> <button class="next" onclick="mudarSlide(1)">&#10095;
         </button>
      <!-- Conteúdo adicional -->
-  <section class="diferenciais" style="max-width: 800px; margin: 0 auto 40px; padding: 0 20px;">
-    <h3>Diferenciais do Curso</h3>
-    <ul style="list-style: disc inside; font-size: 1.05rem; color: #444; line-height: 1.5;">
-      <li>Formação técnica rápida e focada no mercado de trabalho;</li>
-      <li>Aulas práticas que simulam situações reais de gestão;</li>
-      <li>Desenvolvimento de habilidades em liderança, finanças e empreendedorismo;</li>
-      <li>Professores com experiência no mercado e suporte contínuo;</li>
-      <li>Infraestrutura moderna e uso de ferramentas atualizadas.</li>
-    </ul>
-  </section>
+ <section class="diferenciais" style="max-width: 800px; margin: 0 auto 40px; padding: 0 20px;">
+  <h3>Diferenciais do Curso</h3>
+  <ul style="list-style: disc outside; padding-left: 1.4em; font-size: 1.05rem; color: #444; line-height: 1.5;">
+    <li style="text-indent: -0.6em; margin-bottom: 0.5em;">Formação técnica rápida e focada no mercado de trabalho;</li>
+    <li style="text-indent: -0.6em; margin-bottom: 0.5em;">Aulas práticas que simulam situações reais de gestão;</li>
+    <li style="text-indent: -0.6em; margin-bottom: 0.5em;">Desenvolvimento de habilidades em liderança, finanças e empreendedorismo;</li>
+    <li style="text-indent: -0.6em; margin-bottom: 0.5em;">Professores com experiência no mercado e suporte contínuo;</li>
+    <li style="text-indent: -0.6em;">Infraestrutura moderna e uso de ferramentas atualizadas.</li>
+  </ul>
+</section>
 </main>
     
     <footer> 
