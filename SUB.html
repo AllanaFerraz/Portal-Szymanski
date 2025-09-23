@@ -1,156 +1,45 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Curso de Administração para quem concluiu o Ensino Médio, com foco em gestão, liderança e empreendedorismo.">
+<!DOCTYPE html> 
+<html lang="pt-BR"> <head> <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
   <title>Curso de Administração - Pós Ensino Médio</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background-color: #f4f6fa;
-      color: #222;
-    }
-
-    header {
-      background: #001F54; /* navy blue */
-      color: white;
-      text-align: center;
-      padding: 30px 20px;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 2rem;
-    }
-
-    header p {
-      margin-top: 10px;
-      font-size: 1.1rem;
-    }
-
-    /* Carrossel */
-    .carousel {
-      position: relative;
-      max-width: 90%; /* Ajustado para responsividade */
-      margin: 30px auto;
-      overflow: hidden;
-      border-radius: 12px;
-      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
-    }
-
-    .carousel img {
-      width: 100%;
-      display: block;
-      opacity: 0;
-      transition: opacity 0.5s ease-in-out;
-    }
-
-    .carousel img.active {
-      opacity: 1;
-    }
-
-    /* Botões de navegação */
-    .prev, .next {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background-color: rgba(0,31,84,0.7); /* navy transparente */
-      color: white;
-      border: none;
-      padding: 12px;
-      cursor: pointer;
-      border-radius: 50%;
-      font-size: 20px;
-    }
-
-    .prev:hover, .next:hover {
-      background-color: #001F54;
-    }
-
-    .prev {
-      left: 15px;
-    }
-
-    .next {
-      right: 15px;
-    }
-
-    footer {
-      background: #001F54;
-      color: white;
-      text-align: center;
-      padding: 15px;
-      margin-top: 40px;
-    }
-
-    /* Responsividade */
-    @media (max-width: 600px) {
-      header h1 {
-        font-size: 1.5rem;
-      }
-
-      header p {
-        font-size: 1rem;
-      }
-
-      header img {
-        width: 80px;
-        height: 80px;
-      }
-    }
+  <style> 
+    body { font-family: Arial, sans-serif; margin: 0; background-color: #f4f6fa; color: #222; }
+    header { background: #001F54; 
+            /* navy blue */ color: white; text-align: center; padding: 30px 20px; } 
+    header h1 { margin: 0; font-size: 2rem; } header p { margin-top: 10px; font-size: 1.1rem; } 
+    main { padding: 20px; text-align: center; } 
+    /* Carrossel */ .carousel { position: relative; max-width: 800px; margin: 30px auto; overflow: hidden; border-radius: 12px; box-shadow: 0px 4px 8px rgba(0,0,0,0.2); }
+    .carousel img { width: 100%; display: none; }
+    .carousel img.active { display: block; } /* Botões de navegação */
+    .prev, .next { position: absolute; top: 50%; transform: translateY(-50%); background-color: rgba(0,31,84,0.7);
+                  /* navy transparente */ color: white; border: none; padding: 12px; cursor: pointer; border-radius: 50%; font-size: 20px; }
+    .prev:hover, .next:hover { background-color: #001F54; }
+    .prev { left: 15px; } .next { right: 15px; }
+    footer { background: #001F54; color: white; text-align: center; padding: 15px; margin-top: 40px; }
   </style>
 </head>
-<body>
-  <header>
-    <img src="administracao.png" alt="Imagem relacionada ao curso de Administração" width="120" height="120">
-    <h1>Administração</h1>
-    <p>Voltado para quem concluiu o Ensino Médio</p>
-  </header>
-
-  <main>
-    <h2>Sobre o curso</h2>
-    <p>Este curso de Administração é destinado a jovens e adultos que concluíram o Ensino Médio e desejam iniciar sua formação 
-    profissional. O aluno desenvolverá competências em gestão, liderança e empreendedorismo, preparando-se para o mercado de trabalho 
-    e para futuros estudos acadêmicos.</p>
-
-    <!-- Carrossel -->
-    <div class="carousel">
-      <img src="https://picsum.photos/id/1035/800/400" class="active" alt="Imagem 1 do curso de Administração">
-      <img src="https://picsum.photos/id/1037/800/400" alt="Imagem 2 do curso de Administração">
-      <img src="https://picsum.photos/id/1041/800/400" alt="Imagem 3 do curso de Administração">
-
-      <button class="prev" aria-label="Slide anterior">&#10094;</button>
-      <button class="next" aria-label="Próximo slide">&#10095;</button>
-    </div>
-  </main>
-
-  <footer>
-    <p>&copy; 2025 - Szymanski</p>
-  </footer>
-
-  <script>
-    let slideIndex = 0;
-    const slides = document.querySelectorAll(".carousel img");
-
-    function mostrarSlide(n) {
-      slides.forEach((slide, i) => {
-        slide.classList.remove("active");
-        if (i === n) slide.classList.add("active");
-      });
-    }
-
-    function mudarSlide(n) {
-      slideIndex += n;
-      if (slideIndex < 0) slideIndex = slides.length - 1;
-      if (slideIndex >= slides.length) slideIndex = 0;
-      mostrarSlide(slideIndex);
-    }
-
-    // Event listeners para os botões
-    document.querySelector('.prev').addEventListener('click', () => mudarSlide(-1));
-    document.querySelector('.next').addEventListener('click', () => mudarSlide(1));
-  </script>
-</body>
+  <body>
+    <header style="text-align: center;"> 
+      <img src="administracao.png" alt="administracao.png" width="120" height="120"> 
+      <h1>Administração</h1> <p>Voltado para quem concluiu o Ensino Médio</p> 
+    </header> <main> <h2>Sobre o curso</h2> 
+      <p>Este curso de Administração é destinado a jovens e adultos que concluíram o Ensino Médio e desejam iniciar sua formação profissional.</p> 
+      <!-- Carrossel --> <div class="carousel">
+        <img src="https://picsum.photos/id/1035/800/400" class="active" alt="Administração Ensino Médio 1">
+        <img src="https://picsum.photos/id/1037/800/400" alt="Administração Ensino Médio 2">
+        <img src="https://picsum.photos/id/1041/800/400" alt="Administração Ensino Médio 3"> 
+        <button class="prev" onclick="mudarSlide(-1)">&#10094;</button> <button class="next" onclick="mudarSlide(1)">&#10095;
+        </button>
+      </div> 
+    </main> 
+    <footer> 
+      <p>&copy; 2025 - Szymanski</p> 
+    </footer> 
+    <script> let slideIndex = 0; const slides = document.querySelectorAll(".carousel img"); 
+      function mostrarSlide(n) { slides.forEach((slide, i) => { slide.classList.remove("active"); 
+                                                               if (i === n) slide.classList.add("active"); }); }
+      function mudarSlide(n) { slideIndex += n; if (slideIndex < 0) slideIndex = slides.length - 1; 
+                              if (slideIndex >= slides.length) slideIndex = 0; mostrarSlide(slideIndex); }
+    </script>
+</body> 
 </html>
