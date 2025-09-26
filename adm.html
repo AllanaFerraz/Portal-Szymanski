@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+  
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Curso de Administração</title>
+  <title>Administração</title>
+   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+  
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
       background-color: #f4f8ff;
       color: #333;
     }
 
-    
     header {
       background: #004080;
       color: white;
@@ -34,7 +37,6 @@
       padding: 20px;
       text-align: center;
     }
-
    /* Carrossel */
 .carousel {
   position: relative;
@@ -56,7 +58,6 @@
 .carousel img.active {
   display: block;
 }
-
     /* Botões de navegação */
     .prev, .next {
       position: absolute;
@@ -90,8 +91,22 @@
       padding: 15px;
       margin-top: 40px;
     }
+    .diferenciais ul {
+  list-style: disc outside;
+  padding-left: 1em;    /* reduzido de 1.4em para 1em */
+  font-size: 1.05rem;
+  color: #444;
+  line-height: 1.5;
+}
+
+.diferenciais li {
+  text-indent: -0.4em;  /* reduzido de -0.6em para -0.4em */
+  margin-bottom: 0.5em;
+}
+
   </style>
 </head>
+  
 <body>
   <header style="text-align: center;">
     <img src="administracao.png" alt="Logo do Curso" width="120" height="120">
@@ -100,10 +115,23 @@
   </header>
 
   <main>
+    <section class="sobre-curso" style="max-width: 800px; margin: 0 auto; padding: 20px;">
+    <div style="
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      padding: 25px 30px;
+      color: #333;
+    ">
     <h2>Sobre o curso</h2>
+      <p style="font-size: 1.1rem; line-height: 1.6;">
     <p>O curso de Administração forma profissionais capazes de planejar, organizar e gerenciar recursos humanos, financeiros e materiais em empresas públicas e privadas. Durante a formação, o estudante desenvolve competências em liderança, tomada de decisão, empreendedorismo e gestão estratégica.
 Com uma visão ampla dos processos organizacionais, o administrador pode atuar em diversas áreas, como finanças, marketing, recursos humanos, logística e gestão de projetos. É uma carreira versátil, com grande demanda no mercado de trabalho e fundamental para o desenvolvimento sustentável das organizações.
     </p>
+      </div>
+  </section>
+</main>
 
     <!-- Carrossel -->
     <div class="carousel">
@@ -114,30 +142,28 @@ Com uma visão ampla dos processos organizacionais, o administrador pode atuar e
        <img src="imagem_palestra.jpg" alt="Administração 5">
       <button class="prev" onclick="mudarSlide(-1)">&#10094;</button>
       <button class="next" onclick="mudarSlide(1)">&#10095;</button>
-    </div>
-  </main>
+    <!-- Conteúdo adicional -->
+<section class="diferenciais" style="max-width: 800px; margin: 0 auto 40px; padding: 0 20px;">
+  <h3>Diferenciais do Curso</h3>
+  <ul style="list-style: disc outside; padding-left: 1em; font-size: 1.05rem; color: #444; line-height: 1.5;">
+    <li style="text-indent: -0.4em; margin-bottom: 0.5em;">Formação técnica rápida e focada no mercado de trabalho;</li>
+    <li style="text-indent: -0.4em; margin-bottom: 0.5em;">Aulas práticas que simulam situações reais de gestão;</li>
+    <li style="text-indent: -0.4em; margin-bottom: 0.5em;">Desenvolvimento de habilidades em liderança, finanças e empreendedorismo;</li>
+    <li style="text-indent: -0.4em; margin-bottom: 0.5em;">Professores com experiência no mercado e suporte contínuo;</li>
+    <li style="text-indent: -0.4em;">Infraestrutura moderna e uso de ferramentas atualizadas.</li>
+  </ul>
+</section>
+</main>
 
   <footer>
-    <p>&copy; 2025 - Szymanski</p>
+    <p>&copy; 2025 - Szymanski</p> 
   </footer>
 
-  <script>
-    let slideIndex = 0;
-    const slides = document.querySelectorAll(".carousel img");
-
-    function mostrarSlide(n) {
-      slides.forEach((slide, i) => {
-        slide.classList.remove("active");
-        if (i === n) slide.classList.add("active");
-      });
-    }
-
-    function mudarSlide(n) {
-      slideIndex += n;
-      if (slideIndex < 0) slideIndex = slides.length - 1;
-      if (slideIndex >= slides.length) slideIndex = 0;
-      mostrarSlide(slideIndex);
-    }
-  </script>
+<script> let slideIndex = 0; const slides = document.querySelectorAll(".carousel img"); 
+      function mostrarSlide(n) { slides.forEach((slide, i) => { slide.classList.remove("active"); 
+                                                               if (i === n) slide.classList.add("active"); }); }
+      function mudarSlide(n) { slideIndex += n; if (slideIndex < 0) slideIndex = slides.length - 1; 
+                              if (slideIndex >= slides.length) slideIndex = 0; mostrarSlide(slideIndex); }
+    </script>
 </body>
 </html>
