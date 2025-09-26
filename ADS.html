@@ -146,23 +146,11 @@
     <p>&copy; 2025 - Szymanski</p>
   </footer>
 
-  <script>
-    let slideIndex = 0;
-    const slides = document.querySelectorAll(".carousel img");
-
-    function mostrarSlide(n) {
-      slides.forEach((slide, i) => {
-        slide.classList.remove("active");
-        if (i === n) slide.classList.add("active");
-      });
-    }
-
-    function mudarSlide(n) {
-      slideIndex += n;
-      if (slideIndex < 0) slideIndex = slides.length - 1;
-      if (slideIndex >= slides.length) slideIndex = 0;
-      mostrarSlide(slideIndex);
-    }
-  </script>
+  <script> let slideIndex = 0; const slides = document.querySelectorAll(".carousel img"); 
+      function mostrarSlide(n) { slides.forEach((slide, i) => { slide.classList.remove("active"); 
+                                                               if (i === n) slide.classList.add("active"); }); }
+      function mudarSlide(n) { slideIndex += n; if (slideIndex < 0) slideIndex = slides.length - 1; 
+                              if (slideIndex >= slides.length) slideIndex = 0; mostrarSlide(slideIndex); }
+    </script>
 </body>
 </html>
