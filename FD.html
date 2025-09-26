@@ -140,7 +140,6 @@
       <img src="https://picsum.photos/id/237/800/400" class="active" alt="Docentes 1">
       <img src="https://picsum.photos/id/301/800/400" alt="Docentes 2">
       <img src="https://picsum.photos/id/431/800/400" alt="Docentes 3">
-
       <button class="prev" onclick="mudarSlide(-1)">&#10094;</button>
       <button class="next" onclick="mudarSlide(1)">&#10095;</button>
       <!-- Conteúdo adicional -->
@@ -159,6 +158,8 @@
    <footer> 
       <p>&copy; 2025 - Szymanski</p> 
     </footer> 
+
+      
  <script> let slideIndex = 0; const slides = document.querySelectorAll(".carousel img"); 
       function mostrarSlide(n) { slides.forEach((slide, i) => { slide.classList.remove("active"); 
                                                                if (i === n) slide.classList.add("active"); }); }
