@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Szymanski - Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+    <script src="js/database.js"></script>
+    <script src="js/auth.js"></script>
+    
+    <script>
+        // Verificar se está logado
+        const usuario = verificarAutenticacao();
+        if (!usuario) {
+            // Redirecionamento automático acontece na função verificarAutenticacao()
+        }
+    </script>
+
+    <header>
+        <div class="header-container">
+            <div class="logo-container">
+                <img src="images/logo.png" 
+                     alt="Colégio Estadual Professor Júlio Szymanski" class="portal-logo">
+                <p class="header-slogan">Educação de qualidade para construir um futuro melhor</p>
+            </div>
+            
+            <div class="user-info">
+                Olá, <span id="userName"></span> (<span id="userType"></span>)
+                <a href="#" onclick="logoutUsuario()">Sair</a>
+            </div>
+        </div>
+    </header>
+    
+    <nav>
+        <a href="home.html">Início</a>
+        <a href="cursos.html">Cursos</a>
+        <a href="historia.html">História</a>
+        <a href="feira.html">Feiras de Profissão</a>
+        <a href="plataformas.html">Plataformas</a>
+        <a href="info.html">Info</a>
+    </nav>
+    
+    <div class="container">
+        <section id="sobre">
+            <h2 id="welcomeTitle">Bem-vindo ao Portal Szymanski!</h2>
+            
+            <div id="conteudoEspecifico">
+                <!-- Conteúdo será carregado por JavaScript -->
+            </div>
+            
+            <!-- Resto do conteúdo do seu portal -->
+            <div class="highlights">
+                <div class="highlight-card">
+                    <div class="highlight-icon">📚</div>
+                    <h3>Cursos</h3>
+                    <p>Conheça todas as opções de formação oferecidas pelo colégio</p>
+                </div>
+                
+                <!-- ... outros highlights ... -->
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <p>&copy; 2025 Colégio Estadual Professor Júlio Szymanski - Todos os direitos reservados</p>
+    </footer>
+
+    <script>
+        // Carregar informações do usuário
+        document.addEventListener('DOMContentLoaded', function() {
+            const usuario = getUsuarioLogado();
+            
+            if (usuario) {
+                document.getElementById('userName').textContent = usuario.nome;
+                document.getElementById('userType').textContent = usuario.tipo;
+                
+                // Conteúdo específico por tipo de usuário
+                const conteudoEspecifico = document.getElementById('conteudoEspecifico');
+                const welcomeTitle = document.getElementById('welcomeTitle');
+                
+                switch(usuario.tipo) {
+                    case 'aluno':
+                        welcomeTitle.textContent = '👨‍🎓 Área do Aluno';
+                        conteudoEspecifico.innerHTML = `
+                            <p>Bem-vindo, ${usuario.nome}!</p>
+                            <p>Aqui você encontrará todas as informações importantes para o seu aprendizado.</p>
+                            <div class="aluno-features">
+                                <h3>Recursos disponíveis:</h3>
+                                <ul>
+                                    <li>📖 Materiais de estudo</li>
+                                    <li>📅 Calendário escolar</li>
+                                    <li>📊 Notas e faltas</li>
+                                    <li>💬 Comunicação com professores</li>
+                                </ul>
+                            </div>
+                        `;
+                        break;
+                        
+                    case 'responsavel':
+                        welcomeTitle.textContent = '👨‍👩‍👧‍👦 Área do Responsável';
+                        conteudoEspecifico.innerHTML = `
+                            <p>Bem-vindo(a), ${usuario.nome}!</p>
+                            <p>Acompanhe o desempenho e as atividades do seu aluno.</p>
+                        `;
+                        break;
+                        
+                    default:
+                        welcomeTitle.textContent = 'Bem-vindo ao Portal Szymanski!';
+                        conteudoEspecifico.innerHTML = `
+                            <p>Olá, ${usuario.nome}! Explore nosso portal e descubra tudo o que oferecemos.</p>
+                        `;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
