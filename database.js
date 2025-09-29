@@ -15,6 +15,7 @@ function initDatabase() {
                 data_criacao: new Date().toISOString()
             }
         ];
+        
         localStorage.setItem('portal_usuarios', JSON.stringify(usuarios));
     }
     
