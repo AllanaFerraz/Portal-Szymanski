@@ -309,18 +309,21 @@
             margin-bottom: 20px;
             text-align: center;
             font-weight: 500;
+            display: none;
         }
 
         .message.error {
             background-color: rgba(231, 76, 60, 0.1);
             color: var(--error-color);
             border: 1px solid rgba(231, 76, 60, 0.3);
+            display: block;
         }
 
         .message.success {
             background-color: rgba(46, 204, 113, 0.1);
             color: var(--success-color);
             border: 1px solid rgba(46, 204, 113, 0.3);
+            display: block;
         }
 
         /* Form Sections */
@@ -661,6 +664,7 @@
                 };
                 
                 localStorage.setItem(this.dbName, JSON.stringify(defaultData));
+                console.log('Banco de dados criado com sucesso!');
             }
 
             getDatabase() {
@@ -677,7 +681,7 @@
                 
                 // Verificar se o email já existe
                 if (this.findUserByEmail(user.email)) {
-                    return { success: false, message: 'Email já cadastrado' };
+                    return { success: false, message: 'Email já cadastrado!' };
                 }
                 
                 const newUser = {
@@ -693,12 +697,17 @@
 
             findUserByEmail(email) {
                 const db = this.getDatabase();
-                return db.users.find(user => user.email === email);
+                return db ? db.users.find(user => user.email === email) : null;
             }
 
             validateUser(email, senha) {
                 const user = this.findUserByEmail(email);
-                return user && user.senha === senha ? user : null;
+                if (user && user.senha === senha) {
+                    console.log('Usuário validado:', user);
+                    return user;
+                }
+                console.log('Falha na validação do usuário');
+                return null;
             }
         }
 
@@ -730,6 +739,9 @@
                 this.registerSection.classList.remove('active');
                 this.welcomeTitle.textContent = 'Bem-vindo de Volta!';
                 this.welcomeText.textContent = 'Entre em sua conta para acessar o portal educacional';
+                // Limpar mensagens
+                document.getElementById('loginMessage').className = 'message';
+                document.getElementById('registerMessage').className = 'message';
             }
 
             showRegister() {
@@ -737,6 +749,9 @@
                 this.registerSection.classList.add('active');
                 this.welcomeTitle.textContent = 'Junte-se a Nós!';
                 this.welcomeText.textContent = 'Crie sua conta para acessar todos os recursos do portal';
+                // Limpar mensagens
+                document.getElementById('loginMessage').className = 'message';
+                document.getElementById('registerMessage').className = 'message';
             }
         }
 
@@ -759,7 +774,9 @@
 
             showBannerIfNeeded() {
                 if (!this.cookieConsent) {
-                    document.getElementById('cookieBanner').style.display = 'block';
+                    setTimeout(() => {
+                        document.getElementById('cookieBanner').style.display = 'block';
+                    }, 1000);
                 }
             }
 
@@ -778,7 +795,7 @@
                 
                 this.setCookieConsent(consent);
                 this.hideBanner();
-                this.showMessage('Preferências de cookies salvas com sucesso!', 'success');
+                alert('Cookies aceitos com sucesso!');
             }
 
             rejectAll() {
@@ -792,16 +809,30 @@
                 
                 this.setCookieConsent(consent);
                 this.hideBanner();
-                this.showMessage('Cookies não essenciais foram rejeitados.', 'success');
+                alert('Cookies não essenciais rejeitados.');
+            }
+        }
+
+        // Sistema de Mensagens
+        class MessageSystem {
+            static showMessage(elementId, message, type) {
+                const element = document.getElementById(elementId);
+                element.textContent = message;
+                element.className = `message ${type}`;
+                console.log(`Mensagem [${type}]: ${message}`);
             }
 
-            showMessage(message, type) {
-                console.log(`${type.toUpperCase()}: ${message}`);
+            static clearMessage(elementId) {
+                const element = document.getElementById(elementId);
+                element.className = 'message';
+                element.textContent = '';
             }
         }
 
         // Inicialização do sistema
         document.addEventListener('DOMContentLoaded', function() {
+            console.log('Sistema iniciando...');
+            
             // Inicializar banco de dados
             const database = new LocalDatabase();
             
@@ -814,40 +845,38 @@
             // Configurar formulário de login
             document.getElementById('loginForm').addEventListener('submit', function(e) {
                 e.preventDefault();
+                console.log('Tentativa de login...');
                 
                 const email = document.getElementById('loginEmail').value;
                 const senha = document.getElementById('loginSenha').value;
                 const tipoRadio = document.querySelector('input[name="tipo_usuario"]:checked');
                 
                 if (!tipoRadio) {
-                    document.getElementById('loginMessage').textContent = 'Selecione um tipo de usuário!';
-                    document.getElementById('loginMessage').className = 'message error';
+                    MessageSystem.showMessage('loginMessage', 'Selecione um tipo de usuário!', 'error');
                     return;
                 }
                 
                 const user = database.validateUser(email, senha);
                 
                 if (user) {
-                    document.getElementById('loginMessage').textContent = 'Login realizado com sucesso!';
-                    document.getElementById('loginMessage').className = 'message success';
+                    MessageSystem.showMessage('loginMessage', 'Login realizado com sucesso!', 'success');
                     
                     // Salvar sessão do usuário
                     sessionStorage.setItem('currentUser', JSON.stringify(user));
                     
-                    // ⭐⭐ AQUI ESTÁ A LINHA IMPORTANTE ⭐⭐
-                    // Redirecionar para dashboard.html após login bem-sucedido
+                    // Redirecionar para dashboard
                     setTimeout(() => {
                         window.location.href = 'dashboard.html';
-                    }, 1000);
+                    }, 1500);
                 } else {
-                    document.getElementById('loginMessage').textContent = 'Email ou senha incorretos!';
-                    document.getElementById('loginMessage').className = 'message error';
+                    MessageSystem.showMessage('loginMessage', 'Email ou senha incorretos!', 'error');
                 }
             });
             
             // Configurar formulário de cadastro
             document.getElementById('registerForm').addEventListener('submit', function(e) {
                 e.preventDefault();
+                console.log('Tentativa de cadastro...');
                 
                 const nome = document.getElementById('registerNome').value;
                 const email = document.getElementById('registerEmail').value;
@@ -857,20 +886,17 @@
                 const tipoRadio = document.querySelector('input[name="tipo_usuario_cadastro"]:checked');
                 
                 if (!tipoRadio) {
-                    document.getElementById('registerMessage').textContent = 'Selecione um tipo de usuário!';
-                    document.getElementById('registerMessage').className = 'message error';
+                    MessageSystem.showMessage('registerMessage', 'Selecione um tipo de usuário!', 'error');
                     return;
                 }
                 
                 if (senha !== confirmarSenha) {
-                    document.getElementById('registerMessage').textContent = 'As senhas não coincidem!';
-                    document.getElementById('registerMessage').className = 'message error';
+                    MessageSystem.showMessage('registerMessage', 'As senhas não coincidem!', 'error');
                     return;
                 }
                 
                 if (senha.length < 6) {
-                    document.getElementById('registerMessage').textContent = 'A senha deve ter pelo menos 6 caracteres!';
-                    document.getElementById('registerMessage').className = 'message error';
+                    MessageSystem.showMessage('registerMessage', 'A senha deve ter pelo menos 6 caracteres!', 'error');
                     return;
                 }
                 
@@ -884,8 +910,7 @@
                 });
                 
                 if (result.success) {
-                    document.getElementById('registerMessage').textContent = 'Conta criada com sucesso!';
-                    document.getElementById('registerMessage').className = 'message success';
+                    MessageSystem.showMessage('registerMessage', 'Conta criada com sucesso! Redirecionando para login...', 'success');
                     
                     // Limpar formulário
                     document.getElementById('registerForm').reset();
@@ -893,10 +918,10 @@
                     // Voltar para login após 2 segundos
                     setTimeout(() => {
                         formNavigator.showLogin();
+                        MessageSystem.showMessage('loginMessage', 'Conta criada! Agora faça login.', 'success');
                     }, 2000);
                 } else {
-                    document.getElementById('registerMessage').textContent = result.message;
-                    document.getElementById('registerMessage').className = 'message error';
+                    MessageSystem.showMessage('registerMessage', result.message, 'error');
                 }
             });
             
@@ -920,6 +945,10 @@
             document.getElementById('cookieRejectBtn').addEventListener('click', function() {
                 cookieManager.rejectAll();
             });
+
+            // Auto-selecionar primeiro tipo de usuário
+            document.querySelector('.user-type-option input').checked = true;
+            document.querySelector('.user-type-option').classList.add('selected');
         });
     </script>
 </body>
