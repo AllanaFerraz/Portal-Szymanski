@@ -326,6 +326,13 @@
             display: block;
         }
 
+        .message.info {
+            background-color: rgba(52, 152, 219, 0.1);
+            color: var(--secondary-color);
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            display: block;
+        }
+
         /* Form Sections */
         .form-section {
             display: none;
@@ -516,6 +523,26 @@
             gap: 10px;
         }
 
+        /* Password Reset Styles */
+        .reset-instructions {
+            background-color: #f8f9fa;
+            border-left: 4px solid var(--secondary-color);
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+
+        .reset-instructions p {
+            margin: 0;
+            color: #555;
+            font-size: 0.9rem;
+        }
+
+        .countdown {
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .main-container {
@@ -666,6 +693,9 @@
                     <a href="#" id="goToRegister">
                         <i class="fas fa-user-plus"></i> Não tem conta? Cadastre-se
                     </a>
+                    <a href="#" id="goToForgotPassword">
+                        <i class="fas fa-key"></i> Esqueci minha senha
+                    </a>
                 </div>
             </div>
 
@@ -725,6 +755,68 @@
                 
                 <div class="links-container">
                     <a href="#" id="goToLogin">
+                        <i class="fas fa-arrow-left"></i> Voltar para Login
+                    </a>
+                </div>
+            </div>
+
+            <!-- Formulário de Esqueci a Senha -->
+            <div id="forgotPasswordSection" class="form-section">
+                <h2 class="form-title">Recuperar Senha</h2>
+                
+                <div id="forgotPasswordMessage" class="message"></div>
+                
+                <div class="reset-instructions">
+                    <p><i class="fas fa-info-circle"></i> Digite seu email abaixo. Enviaremos um link para redefinir sua senha.</p>
+                </div>
+                
+                <form id="forgotPasswordForm">
+                    <div class="form-group">
+                        <label for="forgotEmail">Email cadastrado:</label>
+                        <input type="email" id="forgotEmail" required>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary">Enviar Link de Recuperação</button>
+                </form>
+                
+                <div class="links-container">
+                    <a href="#" id="goToLoginFromForgot">
+                        <i class="fas fa-arrow-left"></i> Voltar para Login
+                    </a>
+                </div>
+            </div>
+
+            <!-- Formulário de Redefinição de Senha -->
+            <div id="resetPasswordSection" class="form-section">
+                <h2 class="form-title">Redefinir Senha</h2>
+                
+                <div id="resetPasswordMessage" class="message"></div>
+                
+                <div class="reset-instructions">
+                    <p><i class="fas fa-info-circle"></i> Digite sua nova senha abaixo. O token é válido por <span class="countdown" id="tokenCountdown">15:00</span> minutos.</p>
+                </div>
+                
+                <form id="resetPasswordForm">
+                    <div class="form-group">
+                        <label for="resetToken">Token de verificação:</label>
+                        <input type="text" id="resetToken" required readonly>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="newPassword">Nova Senha:</label>
+                        <input type="password" id="newPassword" required minlength="6">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirmNewPassword">Confirmar Nova Senha:</label>
+                        <input type="password" id="confirmNewPassword" required>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary">Redefinir Senha</button>
+                </form>
+                
+                <div class="links-container">
+                    <a href="#" id="goToLoginFromReset">
                         <i class="fas fa-arrow-left"></i> Voltar para Login
                     </a>
                 </div>
@@ -833,7 +925,8 @@
                     settings: {
                         theme: 'light',
                         language: 'pt-br'
-                    }
+                    },
+                    passwordResetTokens: []
                 };
                 
                 localStorage.setItem(this.dbName, JSON.stringify(defaultData));
@@ -882,13 +975,93 @@
                 console.log('Falha na validação do usuário');
                 return null;
             }
+
+            updateUserPassword(email, newPassword) {
+                const db = this.getDatabase();
+                const user = this.findUserByEmail(email);
+                
+                if (user) {
+                    user.senha = newPassword;
+                    this.saveDatabase(db);
+                    return { success: true, message: 'Senha atualizada com sucesso!' };
+                }
+                
+                return { success: false, message: 'Usuário não encontrado!' };
+            }
+
+            createPasswordResetToken(email) {
+                const db = this.getDatabase();
+                
+                // Verificar se o usuário existe
+                const user = this.findUserByEmail(email);
+                if (!user) {
+                    return { success: false, message: 'Email não cadastrado!' };
+                }
+                
+                // Gerar token único
+                const token = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+                const expiresAt = new Date(Date.now() + 15 * 60 * 1000); // 15 minutos
+                
+                // Remover tokens antigos para este email
+                db.passwordResetTokens = db.passwordResetTokens.filter(t => t.email !== email);
+                
+                // Adicionar novo token
+                db.passwordResetTokens.push({
+                    email: email,
+                    token: token,
+                    expiresAt: expiresAt.toISOString(),
+                    used: false
+                });
+                
+                this.saveDatabase(db);
+                
+                return { 
+                    success: true, 
+                    token: token,
+                    expiresAt: expiresAt
+                };
+            }
+
+            validatePasswordResetToken(token) {
+                const db = this.getDatabase();
+                const resetToken = db.passwordResetTokens.find(t => t.token === token && !t.used);
+                
+                if (!resetToken) {
+                    return { success: false, message: 'Token inválido ou expirado!' };
+                }
+                
+                const now = new Date();
+                const expiresAt = new Date(resetToken.expiresAt);
+                
+                if (now > expiresAt) {
+                    return { success: false, message: 'Token expirado!' };
+                }
+                
+                return { 
+                    success: true, 
+                    email: resetToken.email,
+                    expiresAt: expiresAt
+                };
+            }
+
+            markTokenAsUsed(token) {
+                const db = this.getDatabase();
+                const resetToken = db.passwordResetTokens.find(t => t.token === token);
+                
+                if (resetToken) {
+                    resetToken.used = true;
+                    this.saveDatabase(db);
+                }
+            }
         }
 
-        // Sistema de Navegação entre Login e Cadastro
+        // Sistema de Navegação entre Formulários
         class FormNavigator {
             constructor() {
                 this.loginSection = document.getElementById('loginSection');
                 this.registerSection = document.getElementById('registerSection');
+                this.forgotPasswordSection = document.getElementById('forgotPasswordSection');
+                this.resetPasswordSection = document.getElementById('resetPasswordSection');
                 this.welcomeTitle = document.getElementById('welcomeTitle');
                 this.welcomeText = document.getElementById('welcomeText');
                 
@@ -905,26 +1078,94 @@
                     e.preventDefault();
                     this.showLogin();
                 });
+
+                document.getElementById('goToForgotPassword').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.showForgotPassword();
+                });
+
+                document.getElementById('goToLoginFromForgot').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.showLogin();
+                });
+
+                document.getElementById('goToLoginFromReset').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.showLogin();
+                });
             }
 
             showLogin() {
+                this.hideAllSections();
                 this.loginSection.classList.add('active');
-                this.registerSection.classList.remove('active');
                 this.welcomeTitle.textContent = 'Bem-vindo de Volta!';
                 this.welcomeText.textContent = 'Entre em sua conta para acessar o portal educacional';
-                // Limpar mensagens
-                document.getElementById('loginMessage').className = 'message';
-                document.getElementById('registerMessage').className = 'message';
+                this.clearAllMessages();
             }
 
             showRegister() {
-                this.loginSection.classList.remove('active');
+                this.hideAllSections();
                 this.registerSection.classList.add('active');
                 this.welcomeTitle.textContent = 'Junte-se a Nós!';
                 this.welcomeText.textContent = 'Crie sua conta para acessar todos os recursos do portal';
-                // Limpar mensagens
+                this.clearAllMessages();
+            }
+
+            showForgotPassword() {
+                this.hideAllSections();
+                this.forgotPasswordSection.classList.add('active');
+                this.welcomeTitle.textContent = 'Recuperar Senha';
+                this.welcomeText.textContent = 'Vamos ajudar você a recuperar o acesso à sua conta';
+                this.clearAllMessages();
+            }
+
+            showResetPassword(token) {
+                this.hideAllSections();
+                this.resetPasswordSection.classList.add('active');
+                this.welcomeTitle.textContent = 'Redefinir Senha';
+                this.welcomeText.textContent = 'Crie uma nova senha para sua conta';
+                
+                // Preencher o token automaticamente
+                document.getElementById('resetToken').value = token;
+                
+                // Iniciar contador regressivo
+                this.startTokenCountdown();
+                
+                this.clearAllMessages();
+            }
+
+            hideAllSections() {
+                this.loginSection.classList.remove('active');
+                this.registerSection.classList.remove('active');
+                this.forgotPasswordSection.classList.remove('active');
+                this.resetPasswordSection.classList.remove('active');
+            }
+
+            clearAllMessages() {
                 document.getElementById('loginMessage').className = 'message';
                 document.getElementById('registerMessage').className = 'message';
+                document.getElementById('forgotPasswordMessage').className = 'message';
+                document.getElementById('resetPasswordMessage').className = 'message';
+            }
+
+            startTokenCountdown() {
+                const countdownElement = document.getElementById('tokenCountdown');
+                let timeLeft = 15 * 60; // 15 minutos em segundos
+                
+                const countdown = setInterval(() => {
+                    const minutes = Math.floor(timeLeft / 60);
+                    const seconds = timeLeft % 60;
+                    
+                    countdownElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                    
+                    if (timeLeft <= 0) {
+                        clearInterval(countdown);
+                        countdownElement.textContent = 'Expirado';
+                        countdownElement.style.color = 'var(--error-color)';
+                    }
+                    
+                    timeLeft--;
+                }, 1000);
             }
         }
 
@@ -1044,6 +1285,21 @@
             }
         }
 
+        // Sistema de Email Simulado
+        class EmailService {
+            static async sendPasswordResetEmail(email, token) {
+                // Simular envio de email (em produção, isso seria uma chamada API)
+                return new Promise((resolve) => {
+                    setTimeout(() => {
+                        console.log(`Email de recuperação enviado para: ${email}`);
+                        console.log(`Token de recuperação: ${token}`);
+                        console.log('Link simulado: https://portal-szymanski.com/reset-password?token=' + token);
+                        resolve(true);
+                    }, 1500);
+                });
+            }
+        }
+
         // Inicialização do sistema
         document.addEventListener('DOMContentLoaded', function() {
             console.log('Sistema iniciando...');
@@ -1056,6 +1312,19 @@
             
             // Inicializar gerenciador de cookies
             const cookieManager = new CookieManager();
+            
+            // Verificar se há token de reset na URL (simulação)
+            const urlParams = new URLSearchParams(window.location.search);
+            const resetToken = urlParams.get('token');
+            if (resetToken) {
+                // Validar token
+                const tokenValidation = database.validatePasswordResetToken(resetToken);
+                if (tokenValidation.success) {
+                    formNavigator.showResetPassword(resetToken);
+                } else {
+                    MessageSystem.showMessage('loginMessage', tokenValidation.message, 'error');
+                }
+            }
             
             // Configurar formulário de login
             document.getElementById('loginForm').addEventListener('submit', function(e) {
@@ -1137,6 +1406,98 @@
                     }, 2000);
                 } else {
                     MessageSystem.showMessage('registerMessage', result.message, 'error');
+                }
+            });
+            
+            // Configurar formulário de esqueci a senha
+            document.getElementById('forgotPasswordForm').addEventListener('submit', async function(e) {
+                e.preventDefault();
+                console.log('Solicitação de recuperação de senha...');
+                
+                const email = document.getElementById('forgotEmail').value;
+                
+                // Gerar token de recuperação
+                const tokenResult = database.createPasswordResetToken(email);
+                
+                if (!tokenResult.success) {
+                    MessageSystem.showMessage('forgotPasswordMessage', tokenResult.message, 'error');
+                    return;
+                }
+                
+                // Mostrar mensagem de processamento
+                MessageSystem.showMessage('forgotPasswordMessage', 'Enviando email de recuperação...', 'info');
+                
+                try {
+                    // Simular envio de email
+                    await EmailService.sendPasswordResetEmail(email, tokenResult.token);
+                    
+                    MessageSystem.showMessage('forgotPasswordMessage', 
+                        `Email enviado com sucesso! Use o token: ${tokenResult.token} (Simulação)`, 
+                        'success');
+                    
+                    // Limpar formulário
+                    document.getElementById('forgotPasswordForm').reset();
+                    
+                    // Mostrar link para teste (em produção isso não existiria)
+                    setTimeout(() => {
+                        const testLink = document.createElement('p');
+                        testLink.innerHTML = `<small>Para teste: <a href="?token=${tokenResult.token}" style="color: var(--secondary-color);">Clique aqui para redefinir senha</a></small>`;
+                        testLink.style.marginTop = '10px';
+                        testLink.style.textAlign = 'center';
+                        document.getElementById('forgotPasswordMessage').appendChild(testLink);
+                    }, 1000);
+                    
+                } catch (error) {
+                    MessageSystem.showMessage('forgotPasswordMessage', 'Erro ao enviar email. Tente novamente.', 'error');
+                }
+            });
+            
+            // Configurar formulário de redefinição de senha
+            document.getElementById('resetPasswordForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                console.log('Tentativa de redefinição de senha...');
+                
+                const token = document.getElementById('resetToken').value;
+                const newPassword = document.getElementById('newPassword').value;
+                const confirmNewPassword = document.getElementById('confirmNewPassword').value;
+                
+                // Validar token
+                const tokenValidation = database.validatePasswordResetToken(token);
+                if (!tokenValidation.success) {
+                    MessageSystem.showMessage('resetPasswordMessage', tokenValidation.message, 'error');
+                    return;
+                }
+                
+                // Validar senhas
+                if (newPassword !== confirmNewPassword) {
+                    MessageSystem.showMessage('resetPasswordMessage', 'As senhas não coincidem!', 'error');
+                    return;
+                }
+                
+                if (newPassword.length < 6) {
+                    MessageSystem.showMessage('resetPasswordMessage', 'A senha deve ter pelo menos 6 caracteres!', 'error');
+                    return;
+                }
+                
+                // Atualizar senha
+                const updateResult = database.updateUserPassword(tokenValidation.email, newPassword);
+                
+                if (updateResult.success) {
+                    // Marcar token como usado
+                    database.markTokenAsUsed(token);
+                    
+                    MessageSystem.showMessage('resetPasswordMessage', 'Senha redefinida com sucesso! Redirecionando para login...', 'success');
+                    
+                    // Limpar formulário
+                    document.getElementById('resetPasswordForm').reset();
+                    
+                    // Voltar para login após 2 segundos
+                    setTimeout(() => {
+                        formNavigator.showLogin();
+                        MessageSystem.showMessage('loginMessage', 'Senha redefinida com sucesso! Faça login com sua nova senha.', 'success');
+                    }, 2000);
+                } else {
+                    MessageSystem.showMessage('resetPasswordMessage', updateResult.message, 'error');
                 }
             });
             
