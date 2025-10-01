@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Informações - Colégio Szymanski</title>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* Estilos gerais */
         * {
@@ -43,6 +44,7 @@
             padding: 0.8rem;
             flex-wrap: wrap;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: relative;
         }
         
         nav a {
@@ -57,6 +59,29 @@
         
         nav a:hover {
             background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Botão Sair */
+        .logout-btn {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .logout-btn:hover {
+            background-color: #c0392b;
         }
         
         /* Conteúdo principal */
@@ -173,6 +198,7 @@
             nav {
                 flex-direction: column;
                 align-items: center;
+                padding-bottom: 4rem;
             }
             
             nav a {
@@ -181,8 +207,23 @@
                 text-align: center;
             }
             
+            .logout-btn {
+                position: static;
+                transform: none;
+                margin-top: 1rem;
+                width: 100%;
+                justify-content: center;
+            }
+            
             .info-grid {
                 grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .logout-btn {
+                padding: 0.8rem;
+                font-size: 0.9rem;
             }
         }
     </style>
@@ -193,12 +234,18 @@
     </header>
     
     <nav>
-        <a href="index.html">Início</a>
+        <a href="dashboard.html">Início</a>
         <a href="cursos.html">Cursos</a>
-        <a href="história.html">Historia</a>
+        <a href="historia.html">História</a>
         <a href="feira.html">Feiras de Profissão</a>
         <a href="plataformas.html">Plataformas</a>
         <a href="info.html">Info</a>
+        
+        <!-- Botão Sair -->
+        <button class="logout-btn" id="logoutBtn">
+            <i class="fas fa-sign-out-alt"></i>
+            Sair da Conta
+        </button>
     </nav>
     
     <div class="container">
@@ -219,21 +266,21 @@
         
         <div class="info-grid">
             <div class="info-card">
-                <div class="info-icon"><ion-icon name="call-outline"></ion-icon></div>
+                <div class="info-icon"><i class="fas fa-phone"></i></div>
                 <h3>Contato</h3>
                 <p>Entre em contato conosco via WhatsApp para mais informações</p>
                 <a href="https://api.whatsapp.com/send?phone=%2B554136424089" target="_blank" class="info-link">Abrir WhatsApp</a>
             </div>
             
             <div class="info-card">
-                <div class="info-icon"><ion-icon name="logo-facebook"></ion-icon></div>
+                <div class="info-icon"><i class="fab fa-facebook"></i></div>
                 <h3>Facebook</h3>
                 <p>Acompanhe nossas novidades e eventos pelo Facebook</p>
                 <a href="https://www.facebook.com/share/1Xt7qPghFc/" target="_blank" class="info-link">Visitar Facebook</a>
             </div>
             
             <div class="info-card">
-                <div class="info-icon"><ion-icon name="logo-instagram"></ion-icon></div>
+                <div class="info-icon"><i class="fab fa-instagram"></i></div>
                 <h3>Instagram</h3>
                 <p>Siga-nos no Instagram para ficar por dentro do dia a dia do colégio</p>
                 <a href="https://www.instagram.com/colegioszymanski?igsh=MWhraDN6cjRuMTFkNA==" target="_blank" class="info-link">Seguir no Instagram</a>
@@ -254,7 +301,27 @@
     <footer>
         <p>&copy; 2025 Colégio Estadual Professor Júlio Szymanski - Todos os direitos reservados</p>
     </footer>
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <script>
+        // Sistema de Logout
+        document.addEventListener('DOMContentLoaded', function() {
+            const logoutBtn = document.getElementById('logoutBtn');
+            
+            logoutBtn.addEventListener('click', function() {
+                // Limpar a sessão do usuário
+                sessionStorage.removeItem('currentUser');
+                
+                // Redirecionar para a página de login
+                window.location.href = 'index.html';
+            });
+            
+            // Verificar se o usuário está logado
+            const currentUser = sessionStorage.getItem('currentUser');
+            if (!currentUser) {
+                // Se não estiver logado, redirecionar para o login
+                window.location.href = 'index.html';
+            }
+        });
+    </script>
 </body>
 </html>
