@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Portal Szymanski</title>
+    <title>Portal Szymanski - Login e Cadastro</title>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -71,18 +71,94 @@
             margin: 0;
         }
 
-        /* Login Container */
-        .login-container {
+        /* Container Principal */
+        .main-container {
+            display: flex;
+            width: 100%;
+            max-width: 900px;
             background-color: white;
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
-            padding: 30px;
-            width: 100%;
-            max-width: 450px;
-            position: relative;
+            overflow: hidden;
+            min-height: 550px;
         }
 
-        .login-container h2 {
+        /* Painel de Boas-vindas */
+        .welcome-panel {
+            flex: 1;
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+            color: white;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-panel::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+        }
+
+        .welcome-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .welcome-panel h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .welcome-panel p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .panel-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        .feature-list {
+            text-align: left;
+            margin-top: 30px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .feature-item i {
+            margin-right: 10px;
+            color: var(--light-color);
+        }
+
+        /* Form Container */
+        .form-container {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .form-title {
             color: var(--primary-color);
             text-align: center;
             margin-bottom: 25px;
@@ -111,6 +187,7 @@
         .user-type-option:hover {
             border-color: var(--secondary-color);
             background-color: #f0f8ff;
+            transform: translateY(-2px);
         }
 
         .user-type-option.selected {
@@ -140,7 +217,7 @@
             color: var(--dark-color);
         }
 
-        .form-group input {
+        .form-group input, .form-group select {
             width: 100%;
             padding: 12px 15px;
             border: 2px solid #e0e0e0;
@@ -149,14 +226,14 @@
             transition: var(--transition);
         }
 
-        .form-group input:focus {
+        .form-group input:focus, .form-group select:focus {
             border-color: var(--secondary-color);
             outline: none;
             box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
         }
 
         /* Button Styles */
-        .btn-login {
+        .btn-primary {
             width: 100%;
             padding: 14px;
             background-color: var(--secondary-color);
@@ -170,20 +247,39 @@
             margin-top: 10px;
         }
 
-        .btn-login:hover {
+        .btn-primary:hover {
             background-color: #2980b9;
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        .btn-login:active {
+        .btn-primary:active {
             transform: translateY(0);
+        }
+
+        .btn-secondary {
+            width: 100%;
+            padding: 12px;
+            background-color: transparent;
+            color: var(--secondary-color);
+            border: 2px solid var(--secondary-color);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 10px;
+        }
+
+        .btn-secondary:hover {
+            background-color: #f0f8ff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         /* Links */
         .links-container {
-            display: flex;
-            justify-content: space-between;
+            text-align: center;
             margin-top: 20px;
             font-size: 0.9rem;
         }
@@ -192,14 +288,18 @@
             color: var(--secondary-color);
             text-decoration: none;
             transition: var(--transition);
-            display: flex;
+            display: inline-flex;
             align-items: center;
             gap: 5px;
+            margin: 0 10px;
+            padding: 8px 15px;
+            border-radius: var(--border-radius);
         }
 
         .links-container a:hover {
             color: var(--primary-color);
-            text-decoration: underline;
+            background-color: #f8f9fa;
+            text-decoration: none;
         }
 
         /* Message Styles */
@@ -221,6 +321,21 @@
             background-color: rgba(46, 204, 113, 0.1);
             color: var(--success-color);
             border: 1px solid rgba(46, 204, 113, 0.3);
+        }
+
+        /* Form Sections */
+        .form-section {
+            display: none;
+        }
+
+        .form-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* Cookie Banner */
@@ -287,155 +402,45 @@
             color: white;
         }
 
-        /* Cookie Settings Modal */
-        .cookie-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 1001;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .modal-content {
-            background-color: white;
-            border-radius: var(--border-radius);
-            padding: 30px;
-            max-width: 600px;
-            width: 100%;
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #e0e0e0;
-        }
-
-        .modal-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--primary-color);
-        }
-
-        .close-modal {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--dark-color);
-        }
-
-        .cookie-option {
-            margin-bottom: 20px;
-            padding: 15px;
-            border: 1px solid #e0e0e0;
-            border-radius: var(--border-radius);
-        }
-
-        .cookie-option-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .cookie-option-title {
-            font-weight: 600;
-            color: var(--primary-color);
-        }
-
-        .toggle-switch {
-            position: relative;
-            display: inline-block;
-            width: 50px;
-            height: 24px;
-        }
-
-        .toggle-switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        .toggle-slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #ccc;
-            transition: .4s;
-            border-radius: 24px;
-        }
-
-        .toggle-slider:before {
-            position: absolute;
-            content: "";
-            height: 16px;
-            width: 16px;
-            left: 4px;
-            bottom: 4px;
-            background-color: white;
-            transition: .4s;
-            border-radius: 50%;
-        }
-
-        input:checked + .toggle-slider {
-            background-color: var(--success-color);
-        }
-
-        input:checked + .toggle-slider:before {
-            transform: translateX(26px);
-        }
-
-        .cookie-option-description {
-            font-size: 0.9rem;
-            color: #666;
-            line-height: 1.5;
-        }
-
-        .modal-actions {
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-            margin-top: 20px;
-        }
-
         /* Responsive Design */
-        @media (max-width: 480px) {
-            .user-type-selector {
-                grid-template-columns: 1fr;
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
             }
             
-            .login-container {
-                padding: 20px;
+            .welcome-panel {
+                padding: 30px 20px;
+            }
+            
+            .form-container {
+                padding: 30px 20px;
+            }
+            
+            .user-type-selector {
+                grid-template-columns: 1fr;
             }
             
             .links-container {
                 flex-direction: column;
                 gap: 10px;
-                align-items: center;
             }
-
-            .cookie-content {
-                flex-direction: column;
-                align-items: flex-start;
+            
+            .links-container a {
+                margin: 5px 0;
             }
+        }
 
-            .cookie-buttons {
-                width: 100%;
-                justify-content: space-between;
+        @media (max-width: 480px) {
+            .welcome-panel h2 {
+                font-size: 1.5rem;
+            }
+            
+            .panel-icon {
+                font-size: 3rem;
+            }
+            
+            .form-title {
+                font-size: 1.5rem;
             }
         }
     </style>
@@ -456,52 +461,146 @@
         </div>
     </header>
 
-    <!-- Formulário de Login -->
-    <div class="login-container">
-        <h2>Login Portal Szymanski</h2>
-        
-        <div id="loginMessage" class="message"></div>
-        
-        <form id="loginForm">
-            <div class="user-type-selector">
-                <label class="user-type-option">
-                    <input type="radio" name="tipo_usuario" value="aluno" required>
-                    <div><i class="fas fa-user-graduate"></i> Aluno</div>
-                </label>
-                <label class="user-type-option">
-                    <input type="radio" name="tipo_usuario" value="responsavel">
-                    <div><i class="fas fa-users"></i> Responsável</div>
-                </label>
-                <label class="user-type-option">
-                    <input type="radio" name="tipo_usuario" value="visitante">
-                    <div><i class="fas fa-user"></i> Visitante</div>
-                </label>
-                <label class="user-type-option">
-                    <input type="radio" name="tipo_usuario" value="outro">
-                    <div><i class="fas fa-tools"></i> Outro</div>
-                </label>
+    <!-- Container Principal -->
+    <div class="main-container">
+        <!-- Painel de Boas-vindas -->
+        <div class="welcome-panel">
+            <div class="welcome-content">
+                <div class="panel-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h2 id="welcomeTitle">Bem-vindo de Volta!</h2>
+                <p id="welcomeText">Entre em sua conta para acessar o portal educacional</p>
+                
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Acesso ao boletim e notas</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Comunicação com professores</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Calendário escolar</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Materiais de estudo</span>
+                    </div>
+                </div>
             </div>
-            
-            <div class="form-group">
-                <label for="loginEmail">Email:</label>
-                <input type="email" id="loginEmail" required>
+        </div>
+
+        <!-- Form Container -->
+        <div class="form-container">
+            <!-- Formulário de Login -->
+            <div id="loginSection" class="form-section active">
+                <h2 class="form-title">Login Portal Szymanski</h2>
+                
+                <div id="loginMessage" class="message"></div>
+                
+                <form id="loginForm">
+                    <div class="user-type-selector">
+                        <label class="user-type-option">
+                            <input type="radio" name="tipo_usuario" value="aluno" required>
+                            <div><i class="fas fa-user-graduate"></i> Aluno</div>
+                        </label>
+                        <label class="user-type-option">
+                            <input type="radio" name="tipo_usuario" value="responsavel">
+                            <div><i class="fas fa-users"></i> Responsável</div>
+                        </label>
+                        <label class="user-type-option">
+                            <input type="radio" name="tipo_usuario" value="visitante">
+                            <div><i class="fas fa-user"></i> Visitante</div>
+                        </label>
+                        <label class="user-type-option">
+                            <input type="radio" name="tipo_usuario" value="outro">
+                            <div><i class="fas fa-tools"></i> Outro</div>
+                        </label>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="loginEmail">Email:</label>
+                        <input type="email" id="loginEmail" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="loginSenha">Senha:</label>
+                        <input type="password" id="loginSenha" required>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary">Entrar</button>
+                </form>
+                
+                <div class="links-container">
+                    <a href="#" id="goToRegister">
+                        <i class="fas fa-user-plus"></i> Não tem conta? Cadastre-se
+                    </a>
+                </div>
             </div>
-            
-            <div class="form-group">
-                <label for="loginSenha">Senha:</label>
-                <input type="password" id="loginSenha" required>
+
+            <!-- Formulário de Cadastro -->
+            <div id="registerSection" class="form-section">
+                <h2 class="form-title">Criar Nova Conta</h2>
+                
+                <div id="registerMessage" class="message"></div>
+                
+                <form id="registerForm">
+                    <div class="user-type-selector">
+                        <label class="user-type-option">
+                            <input type="radio" name="tipo_usuario_cadastro" value="aluno" required>
+                            <div><i class="fas fa-user-graduate"></i> Aluno</div>
+                        </label>
+                        <label class="user-type-option">
+                            <input type="radio" name="tipo_usuario_cadastro" value="responsavel">
+                            <div><i class="fas fa-users"></i> Responsável</div>
+                        </label>
+                        <label class="user-type-option">
+                            <input type="radio" name="tipo_usuario_cadastro" value="visitante">
+                            <div><i class="fas fa-user"></i> Visitante</div>
+                        </label>
+                        <label class="user-type-option">
+                            <input type="radio" name="tipo_usuario_cadastro" value="outro">
+                            <div><i class="fas fa-tools"></i> Outro</div>
+                        </label>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="registerNome">Nome Completo:</label>
+                        <input type="text" id="registerNome" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="registerEmail">Email:</label>
+                        <input type="email" id="registerEmail" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="registerSenha">Senha:</label>
+                        <input type="password" id="registerSenha" required minlength="6">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="registerConfirmarSenha">Confirmar Senha:</label>
+                        <input type="password" id="registerConfirmarSenha" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="registerTelefone">Telefone:</label>
+                        <input type="tel" id="registerTelefone">
+                    </div>
+                    
+                    <button type="submit" class="btn-primary">Criar Conta</button>
+                </form>
+                
+                <div class="links-container">
+                    <a href="#" id="goToLogin">
+                        <i class="fas fa-arrow-left"></i> Voltar para Login
+                    </a>
+                </div>
             </div>
-            
-            <button type="submit" class="btn-login">Entrar</button>
-        </form>
-        
-        <div class="links-container">
-            <a href="cadastro.html">
-                <i class="fas fa-arrow-left"></i> Voltar para Cadastro
-            </a>
-            <a href="cadastro.html">
-                Não tem conta? Cadastre-se <i class="fas fa-user-plus"></i>
-            </a>
         </div>
     </div>
 
@@ -512,78 +611,8 @@
                 <p>Utilizamos cookies para melhorar sua experiência em nosso site. Ao continuar navegando, você concorda com nossa <a href="#" id="cookiePolicyLink">Política de Cookies</a>.</p>
             </div>
             <div class="cookie-buttons">
-                <button class="cookie-btn cookie-settings" id="cookieSettingsBtn">Configurações</button>
-                <button class="cookie-btn cookie-reject" id="cookieRejectBtn">Rejeitar</button>
                 <button class="cookie-btn cookie-accept" id="cookieAcceptBtn">Aceitar Todos</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Cookie Settings Modal -->
-    <div class="cookie-modal" id="cookieModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title">Configurações de Cookies</h2>
-                <button class="close-modal" id="closeModal">&times;</button>
-            </div>
-            
-            <p>Escolha quais tipos de cookies você permite que utilizemos. Você pode alterar essas configurações a qualquer momento.</p>
-            
-            <div class="cookie-option">
-                <div class="cookie-option-header">
-                    <span class="cookie-option-title">Cookies Essenciais</span>
-                    <label class="toggle-switch">
-                        <input type="checkbox" id="essentialCookies" checked disabled>
-                        <span class="toggle-slider"></span>
-                    </label>
-                </div>
-                <p class="cookie-option-description">
-                    Estes cookies são necessários para o funcionamento básico do site e não podem ser desativados. Eles geralmente são definidos apenas em resposta a ações realizadas por você, como fazer login ou preencher formulários.
-                </p>
-            </div>
-            
-            <div class="cookie-option">
-                <div class="cookie-option-header">
-                    <span class="cookie-option-title">Cookies de Desempenho</span>
-                    <label class="toggle-switch">
-                        <input type="checkbox" id="performanceCookies">
-                        <span class="toggle-slider"></span>
-                    </label>
-                </div>
-                <p class="cookie-option-description">
-                    Estes cookies nos permitem contar visitas e fontes de tráfego para que possamos medir e melhorar o desempenho do nosso site. Eles nos ajudam a saber quais páginas são as mais e menos populares e ver como os visitantes navegam pelo site.
-                </p>
-            </div>
-            
-            <div class="cookie-option">
-                <div class="cookie-option-header">
-                    <span class="cookie-option-title">Cookies de Funcionalidade</span>
-                    <label class="toggle-switch">
-                        <input type="checkbox" id="functionalityCookies">
-                        <span class="toggle-slider"></span>
-                    </label>
-                </div>
-                <p class="cookie-option-description">
-                    Estes cookies permitem que o site forneça funcionalidade e personalização aprimoradas. Eles podem ser definidos por nós ou por provedores terceiros cujos serviços adicionamos às nossas páginas.
-                </p>
-            </div>
-            
-            <div class="cookie-option">
-                <div class="cookie-option-header">
-                    <span class="cookie-option-title">Cookies de Marketing</span>
-                    <label class="toggle-switch">
-                        <input type="checkbox" id="marketingCookies">
-                        <span class="toggle-slider"></span>
-                    </label>
-                </div>
-                <p class="cookie-option-description">
-                    Estes cookies podem ser definidos através do nosso site por nossos parceiros de publicidade. Eles podem ser usados por essas empresas para construir um perfil de seus interesses e mostrar anúncios relevantes em outros sites.
-                </p>
-            </div>
-            
-            <div class="modal-actions">
-                <button class="cookie-btn cookie-reject" id="saveCookieSettings">Salvar Preferências</button>
-                <button class="cookie-btn cookie-accept" id="acceptAllCookies">Aceitar Todos</button>
+                <button class="cookie-btn cookie-reject" id="cookieRejectBtn">Rejeitar</button>
             </div>
         </div>
     </div>
@@ -598,7 +627,6 @@
             }
 
             init() {
-                // Verificar se o banco de dados já existe
                 if (!localStorage.getItem(this.dbName)) {
                     this.createDefaultData();
                 }
@@ -613,6 +641,16 @@
                             senha: 'admin123',
                             tipo: 'admin',
                             nome: 'Administrador',
+                            telefone: '',
+                            dataCadastro: new Date().toISOString()
+                        },
+                        {
+                            id: 2,
+                            email: 'aluno@exemplo.com',
+                            senha: 'aluno123',
+                            tipo: 'aluno',
+                            nome: 'João Silva',
+                            telefone: '(11) 99999-9999',
                             dataCadastro: new Date().toISOString()
                         }
                     ],
@@ -636,6 +674,12 @@
 
             addUser(user) {
                 const db = this.getDatabase();
+                
+                // Verificar se o email já existe
+                if (this.findUserByEmail(user.email)) {
+                    return { success: false, message: 'Email já cadastrado' };
+                }
+                
                 const newUser = {
                     id: db.users.length > 0 ? Math.max(...db.users.map(u => u.id)) + 1 : 1,
                     ...user,
@@ -644,7 +688,7 @@
                 
                 db.users.push(newUser);
                 this.saveDatabase(db);
-                return newUser;
+                return { success: true, user: newUser };
             }
 
             findUserByEmail(email) {
@@ -655,6 +699,44 @@
             validateUser(email, senha) {
                 const user = this.findUserByEmail(email);
                 return user && user.senha === senha ? user : null;
+            }
+        }
+
+        // Sistema de Navegação entre Login e Cadastro
+        class FormNavigator {
+            constructor() {
+                this.loginSection = document.getElementById('loginSection');
+                this.registerSection = document.getElementById('registerSection');
+                this.welcomeTitle = document.getElementById('welcomeTitle');
+                this.welcomeText = document.getElementById('welcomeText');
+                
+                this.initEvents();
+            }
+
+            initEvents() {
+                document.getElementById('goToRegister').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.showRegister();
+                });
+
+                document.getElementById('goToLogin').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.showLogin();
+                });
+            }
+
+            showLogin() {
+                this.loginSection.classList.add('active');
+                this.registerSection.classList.remove('active');
+                this.welcomeTitle.textContent = 'Bem-vindo de Volta!';
+                this.welcomeText.textContent = 'Entre em sua conta para acessar o portal educacional';
+            }
+
+            showRegister() {
+                this.loginSection.classList.remove('active');
+                this.registerSection.classList.add('active');
+                this.welcomeTitle.textContent = 'Junte-se a Nós!';
+                this.welcomeText.textContent = 'Crie sua conta para acessar todos os recursos do portal';
             }
         }
 
@@ -685,21 +767,6 @@
                 document.getElementById('cookieBanner').style.display = 'none';
             }
 
-            showModal() {
-                document.getElementById('cookieModal').style.display = 'flex';
-                
-                // Preencher as configurações atuais
-                if (this.cookieConsent) {
-                    document.getElementById('performanceCookies').checked = this.cookieConsent.performance;
-                    document.getElementById('functionalityCookies').checked = this.cookieConsent.functionality;
-                    document.getElementById('marketingCookies').checked = this.cookieConsent.marketing;
-                }
-            }
-
-            hideModal() {
-                document.getElementById('cookieModal').style.display = 'none';
-            }
-
             acceptAll() {
                 const consent = {
                     essential: true,
@@ -711,28 +778,12 @@
                 
                 this.setCookieConsent(consent);
                 this.hideBanner();
-                this.hideModal();
-                this.showMessage('Preferências de cookies salvas com sucesso!', 'success');
-            }
-
-            saveSettings() {
-                const consent = {
-                    essential: true, // Sempre verdadeiro
-                    performance: document.getElementById('performanceCookies').checked,
-                    functionality: document.getElementById('functionalityCookies').checked,
-                    marketing: document.getElementById('marketingCookies').checked,
-                    timestamp: new Date().toISOString()
-                };
-                
-                this.setCookieConsent(consent);
-                this.hideBanner();
-                this.hideModal();
                 this.showMessage('Preferências de cookies salvas com sucesso!', 'success');
             }
 
             rejectAll() {
                 const consent = {
-                    essential: true, // Sempre verdadeiro
+                    essential: true,
                     performance: false,
                     functionality: false,
                     marketing: false,
@@ -745,7 +796,6 @@
             }
 
             showMessage(message, type) {
-                // Implementar se necessário
                 console.log(`${type.toUpperCase()}: ${message}`);
             }
         }
@@ -754,6 +804,9 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Inicializar banco de dados
             const database = new LocalDatabase();
+            
+            // Inicializar navegador de formulários
+            const formNavigator = new FormNavigator();
             
             // Inicializar gerenciador de cookies
             const cookieManager = new CookieManager();
@@ -772,9 +825,6 @@
                     return;
                 }
                 
-                const tipo = tipoRadio.value;
-                
-                // Validar usuário no banco de dados
                 const user = database.validateUser(email, senha);
                 
                 if (user) {
@@ -784,9 +834,10 @@
                     // Salvar sessão do usuário
                     sessionStorage.setItem('currentUser', JSON.stringify(user));
                     
-                    // Redirecionar após um breve delay para mostrar a mensagem de sucesso
+                    // ⭐⭐ AQUI ESTÁ A LINHA IMPORTANTE ⭐⭐
+                    // Redirecionar para dashboard.html após login bem-sucedido
                     setTimeout(() => {
-                        window.location.href = 'home.html';
+                        window.location.href = 'dashboard.html';
                     }, 1000);
                 } else {
                     document.getElementById('loginMessage').textContent = 'Email ou senha incorretos!';
@@ -794,10 +845,66 @@
                 }
             });
             
+            // Configurar formulário de cadastro
+            document.getElementById('registerForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const nome = document.getElementById('registerNome').value;
+                const email = document.getElementById('registerEmail').value;
+                const senha = document.getElementById('registerSenha').value;
+                const confirmarSenha = document.getElementById('registerConfirmarSenha').value;
+                const telefone = document.getElementById('registerTelefone').value;
+                const tipoRadio = document.querySelector('input[name="tipo_usuario_cadastro"]:checked');
+                
+                if (!tipoRadio) {
+                    document.getElementById('registerMessage').textContent = 'Selecione um tipo de usuário!';
+                    document.getElementById('registerMessage').className = 'message error';
+                    return;
+                }
+                
+                if (senha !== confirmarSenha) {
+                    document.getElementById('registerMessage').textContent = 'As senhas não coincidem!';
+                    document.getElementById('registerMessage').className = 'message error';
+                    return;
+                }
+                
+                if (senha.length < 6) {
+                    document.getElementById('registerMessage').textContent = 'A senha deve ter pelo menos 6 caracteres!';
+                    document.getElementById('registerMessage').className = 'message error';
+                    return;
+                }
+                
+                const tipo = tipoRadio.value;
+                const result = database.addUser({
+                    nome,
+                    email,
+                    senha,
+                    tipo,
+                    telefone
+                });
+                
+                if (result.success) {
+                    document.getElementById('registerMessage').textContent = 'Conta criada com sucesso!';
+                    document.getElementById('registerMessage').className = 'message success';
+                    
+                    // Limpar formulário
+                    document.getElementById('registerForm').reset();
+                    
+                    // Voltar para login após 2 segundos
+                    setTimeout(() => {
+                        formNavigator.showLogin();
+                    }, 2000);
+                } else {
+                    document.getElementById('registerMessage').textContent = result.message;
+                    document.getElementById('registerMessage').className = 'message error';
+                }
+            });
+            
             // Seleção visual dos tipos de usuário
             document.querySelectorAll('.user-type-option').forEach(option => {
                 option.addEventListener('click', function() {
-                    document.querySelectorAll('.user-type-option').forEach(opt => {
+                    const parent = this.closest('.user-type-selector');
+                    parent.querySelectorAll('.user-type-option').forEach(opt => {
                         opt.classList.remove('selected');
                     });
                     this.classList.add('selected');
@@ -812,29 +919,6 @@
             
             document.getElementById('cookieRejectBtn').addEventListener('click', function() {
                 cookieManager.rejectAll();
-            });
-            
-            document.getElementById('cookieSettingsBtn').addEventListener('click', function() {
-                cookieManager.showModal();
-            });
-            
-            document.getElementById('closeModal').addEventListener('click', function() {
-                cookieManager.hideModal();
-            });
-            
-            document.getElementById('saveCookieSettings').addEventListener('click', function() {
-                cookieManager.saveSettings();
-            });
-            
-            document.getElementById('acceptAllCookies').addEventListener('click', function() {
-                cookieManager.acceptAll();
-            });
-            
-            // Fechar modal ao clicar fora dele
-            document.getElementById('cookieModal').addEventListener('click', function(e) {
-                if (e.target === this) {
-                    cookieManager.hideModal();
-                }
             });
         });
     </script>
