@@ -5,16 +5,452 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Portal Szymanski</title>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/estilo.css">
-    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --success-color: #2ecc71;
+            --error-color: #e74c3c;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* Header Styles */
+        header {
+            width: 100%;
+            max-width: 800px;
+            margin-bottom: 30px;
+        }
+
+        .header-container {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: var(--box-shadow);
+            text-align: center;
+        }
+
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .portal-logo {
+            max-height: 80px;
+            width: auto;
+        }
+
+        .header-slogan {
+            color: var(--dark-color);
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin: 0;
+        }
+
+        /* Login Container */
+        .login-container {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 30px;
+            width: 100%;
+            max-width: 450px;
+            position: relative;
+        }
+
+        .login-container h2 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        /* User Type Selector */
+        .user-type-selector {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .user-type-option {
+            border: 2px solid #e0e0e0;
+            border-radius: var(--border-radius);
+            padding: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            background-color: #f9f9f9;
+        }
+
+        .user-type-option:hover {
+            border-color: var(--secondary-color);
+            background-color: #f0f8ff;
+        }
+
+        .user-type-option.selected {
+            border-color: var(--secondary-color);
+            background-color: #e6f2ff;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+
+        .user-type-option input {
+            display: none;
+        }
+
+        .user-type-option div {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark-color);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus {
+            border-color: var(--secondary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+
+        /* Button Styles */
+        .btn-login {
+            width: 100%;
+            padding: 14px;
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 10px;
+        }
+
+        .btn-login:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-login:active {
+            transform: translateY(0);
+        }
+
+        /* Links */
+        .links-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+
+        .links-container a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .links-container a:hover {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+
+        /* Message Styles */
+        .message {
+            padding: 12px;
+            border-radius: var(--border-radius);
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .message.error {
+            background-color: rgba(231, 76, 60, 0.1);
+            color: var(--error-color);
+            border: 1px solid rgba(231, 76, 60, 0.3);
+        }
+
+        .message.success {
+            background-color: rgba(46, 204, 113, 0.1);
+            color: var(--success-color);
+            border: 1px solid rgba(46, 204, 113, 0.3);
+        }
+
+        /* Cookie Banner */
+        .cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 20px;
+            display: none;
+            z-index: 1000;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .cookie-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .cookie-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .cookie-text a {
+            color: var(--secondary-color);
+            text-decoration: underline;
+        }
+
+        .cookie-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .cookie-btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .cookie-accept {
+            background-color: var(--success-color);
+            color: white;
+        }
+
+        .cookie-settings {
+            background-color: transparent;
+            color: white;
+            border: 1px solid white;
+        }
+
+        .cookie-reject {
+            background-color: var(--error-color);
+            color: white;
+        }
+
+        /* Cookie Settings Modal */
+        .cookie-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1001;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            max-width: 600px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark-color);
+        }
+
+        .cookie-option {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: var(--border-radius);
+        }
+
+        .cookie-option-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .cookie-option-title {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-slider {
+            background-color: var(--success-color);
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
+
+        .cookie-option-description {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 480px) {
+            .user-type-selector {
+                grid-template-columns: 1fr;
+            }
+            
+            .login-container {
+                padding: 20px;
+            }
+            
+            .links-container {
+                flex-direction: column;
+                gap: 10px;
+                align-items: center;
+            }
+
+            .cookie-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .cookie-buttons {
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Header do portal -->
     <header>
         <div class="header-container">
             <div class="logo-container">
-                <img src="images/logo.png" 
-                     alt="Colégio Estadual Professor Júlio Szymanski" class="portal-logo">
+                <div class="portal-logo">
+                    <i class="fas fa-graduation-cap" style="font-size: 3rem; color: var(--primary-color);"></i>
+                </div>
+                <h1 style="font-family: 'Bebas Neue', sans-serif; color: var(--primary-color); font-size: 1.8rem;">
+                    Colégio Estadual Professor Júlio Szymanski
+                </h1>
                 <p class="header-slogan">Educação de qualidade para construir um futuro melhor</p>
             </div>
         </div>
@@ -30,73 +466,375 @@
             <div class="user-type-selector">
                 <label class="user-type-option">
                     <input type="radio" name="tipo_usuario" value="aluno" required>
-                    <div>👨‍🎓 Aluno</div>
+                    <div><i class="fas fa-user-graduate"></i> Aluno</div>
                 </label>
                 <label class="user-type-option">
                     <input type="radio" name="tipo_usuario" value="responsavel">
-                    <div>👨‍👩‍👧‍👦 Responsável</div>
+                    <div><i class="fas fa-users"></i> Responsável</div>
                 </label>
                 <label class="user-type-option">
                     <input type="radio" name="tipo_usuario" value="visitante">
-                    <div>👤 Visitante</div>
+                    <div><i class="fas fa-user"></i> Visitante</div>
                 </label>
                 <label class="user-type-option">
                     <input type="radio" name="tipo_usuario" value="outro">
-                    <div>🔧 Outro</div>
+                    <div><i class="fas fa-tools"></i> Outro</div>
                 </label>
             </div>
             
             <div class="form-group">
-                <label>Email:</label>
+                <label for="loginEmail">Email:</label>
                 <input type="email" id="loginEmail" required>
             </div>
             
             <div class="form-group">
-                <label>Senha:</label>
+                <label for="loginSenha">Senha:</label>
                 <input type="password" id="loginSenha" required>
             </div>
             
             <button type="submit" class="btn-login">Entrar</button>
         </form>
         
-        <p style="text-align: center; margin-top: 20px;">
-            <a href="cadastro.html">Não tem conta? Cadastre-se</a>
-        </p>
+        <div class="links-container">
+            <a href="cadastro.html">
+                <i class="fas fa-arrow-left"></i> Voltar para Cadastro
+            </a>
+            <a href="cadastro.html">
+                Não tem conta? Cadastre-se <i class="fas fa-user-plus"></i>
+            </a>
+        </div>
     </div>
 
-    <!-- Scripts -->
-    <script src="js/database.js"></script>
-    <script src="js/auth.js"></script>
-    <script src="js/cookies.js"></script>
-    
+    <!-- Cookie Banner -->
+    <div class="cookie-banner" id="cookieBanner">
+        <div class="cookie-content">
+            <div class="cookie-text">
+                <p>Utilizamos cookies para melhorar sua experiência em nosso site. Ao continuar navegando, você concorda com nossa <a href="#" id="cookiePolicyLink">Política de Cookies</a>.</p>
+            </div>
+            <div class="cookie-buttons">
+                <button class="cookie-btn cookie-settings" id="cookieSettingsBtn">Configurações</button>
+                <button class="cookie-btn cookie-reject" id="cookieRejectBtn">Rejeitar</button>
+                <button class="cookie-btn cookie-accept" id="cookieAcceptBtn">Aceitar Todos</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cookie Settings Modal -->
+    <div class="cookie-modal" id="cookieModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Configurações de Cookies</h2>
+                <button class="close-modal" id="closeModal">&times;</button>
+            </div>
+            
+            <p>Escolha quais tipos de cookies você permite que utilizemos. Você pode alterar essas configurações a qualquer momento.</p>
+            
+            <div class="cookie-option">
+                <div class="cookie-option-header">
+                    <span class="cookie-option-title">Cookies Essenciais</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="essentialCookies" checked disabled>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <p class="cookie-option-description">
+                    Estes cookies são necessários para o funcionamento básico do site e não podem ser desativados. Eles geralmente são definidos apenas em resposta a ações realizadas por você, como fazer login ou preencher formulários.
+                </p>
+            </div>
+            
+            <div class="cookie-option">
+                <div class="cookie-option-header">
+                    <span class="cookie-option-title">Cookies de Desempenho</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="performanceCookies">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <p class="cookie-option-description">
+                    Estes cookies nos permitem contar visitas e fontes de tráfego para que possamos medir e melhorar o desempenho do nosso site. Eles nos ajudam a saber quais páginas são as mais e menos populares e ver como os visitantes navegam pelo site.
+                </p>
+            </div>
+            
+            <div class="cookie-option">
+                <div class="cookie-option-header">
+                    <span class="cookie-option-title">Cookies de Funcionalidade</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="functionalityCookies">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <p class="cookie-option-description">
+                    Estes cookies permitem que o site forneça funcionalidade e personalização aprimoradas. Eles podem ser definidos por nós ou por provedores terceiros cujos serviços adicionamos às nossas páginas.
+                </p>
+            </div>
+            
+            <div class="cookie-option">
+                <div class="cookie-option-header">
+                    <span class="cookie-option-title">Cookies de Marketing</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="marketingCookies">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <p class="cookie-option-description">
+                    Estes cookies podem ser definidos através do nosso site por nossos parceiros de publicidade. Eles podem ser usados por essas empresas para construir um perfil de seus interesses e mostrar anúncios relevantes em outros sites.
+                </p>
+            </div>
+            
+            <div class="modal-actions">
+                <button class="cookie-btn cookie-reject" id="saveCookieSettings">Salvar Preferências</button>
+                <button class="cookie-btn cookie-accept" id="acceptAllCookies">Aceitar Todos</button>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // Inicializar banco de dados local
-        initDatabase();
-        
-        // Configurar formulário de login
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const email = document.getElementById('loginEmail').value;
-            const senha = document.getElementById('loginSenha').value;
-            const tipo = document.querySelector('input[name="tipo_usuario"]:checked').value;
-            
-            if (loginUsuario(email, senha, tipo)) {
-                window.location.href = 'home.html';
-            } else {
-                document.getElementById('loginMessage').textContent = 'Email ou senha incorretos!';
-                document.getElementById('loginMessage').className = 'message error';
+        // Sistema de Banco de Dados Local
+        class LocalDatabase {
+            constructor() {
+                this.dbName = 'PortalSzymanskiDB';
+                this.version = 1;
+                this.init();
             }
-        });
-        
-        // Seleção visual dos tipos de usuário
-        document.querySelectorAll('.user-type-option').forEach(option => {
-            option.addEventListener('click', function() {
-                document.querySelectorAll('.user-type-option').forEach(opt => {
-                    opt.classList.remove('selected');
+
+            init() {
+                // Verificar se o banco de dados já existe
+                if (!localStorage.getItem(this.dbName)) {
+                    this.createDefaultData();
+                }
+            }
+
+            createDefaultData() {
+                const defaultData = {
+                    users: [
+                        {
+                            id: 1,
+                            email: 'admin@szymanski.com',
+                            senha: 'admin123',
+                            tipo: 'admin',
+                            nome: 'Administrador',
+                            dataCadastro: new Date().toISOString()
+                        }
+                    ],
+                    settings: {
+                        theme: 'light',
+                        language: 'pt-br'
+                    }
+                };
+                
+                localStorage.setItem(this.dbName, JSON.stringify(defaultData));
+            }
+
+            getDatabase() {
+                const db = localStorage.getItem(this.dbName);
+                return db ? JSON.parse(db) : null;
+            }
+
+            saveDatabase(data) {
+                localStorage.setItem(this.dbName, JSON.stringify(data));
+            }
+
+            addUser(user) {
+                const db = this.getDatabase();
+                const newUser = {
+                    id: db.users.length > 0 ? Math.max(...db.users.map(u => u.id)) + 1 : 1,
+                    ...user,
+                    dataCadastro: new Date().toISOString()
+                };
+                
+                db.users.push(newUser);
+                this.saveDatabase(db);
+                return newUser;
+            }
+
+            findUserByEmail(email) {
+                const db = this.getDatabase();
+                return db.users.find(user => user.email === email);
+            }
+
+            validateUser(email, senha) {
+                const user = this.findUserByEmail(email);
+                return user && user.senha === senha ? user : null;
+            }
+        }
+
+        // Sistema de Gerenciamento de Cookies
+        class CookieManager {
+            constructor() {
+                this.cookieConsent = this.getCookieConsent();
+                this.showBannerIfNeeded();
+            }
+
+            getCookieConsent() {
+                const consent = localStorage.getItem('cookieConsent');
+                return consent ? JSON.parse(consent) : null;
+            }
+
+            setCookieConsent(consent) {
+                localStorage.setItem('cookieConsent', JSON.stringify(consent));
+                this.cookieConsent = consent;
+            }
+
+            showBannerIfNeeded() {
+                if (!this.cookieConsent) {
+                    document.getElementById('cookieBanner').style.display = 'block';
+                }
+            }
+
+            hideBanner() {
+                document.getElementById('cookieBanner').style.display = 'none';
+            }
+
+            showModal() {
+                document.getElementById('cookieModal').style.display = 'flex';
+                
+                // Preencher as configurações atuais
+                if (this.cookieConsent) {
+                    document.getElementById('performanceCookies').checked = this.cookieConsent.performance;
+                    document.getElementById('functionalityCookies').checked = this.cookieConsent.functionality;
+                    document.getElementById('marketingCookies').checked = this.cookieConsent.marketing;
+                }
+            }
+
+            hideModal() {
+                document.getElementById('cookieModal').style.display = 'none';
+            }
+
+            acceptAll() {
+                const consent = {
+                    essential: true,
+                    performance: true,
+                    functionality: true,
+                    marketing: true,
+                    timestamp: new Date().toISOString()
+                };
+                
+                this.setCookieConsent(consent);
+                this.hideBanner();
+                this.hideModal();
+                this.showMessage('Preferências de cookies salvas com sucesso!', 'success');
+            }
+
+            saveSettings() {
+                const consent = {
+                    essential: true, // Sempre verdadeiro
+                    performance: document.getElementById('performanceCookies').checked,
+                    functionality: document.getElementById('functionalityCookies').checked,
+                    marketing: document.getElementById('marketingCookies').checked,
+                    timestamp: new Date().toISOString()
+                };
+                
+                this.setCookieConsent(consent);
+                this.hideBanner();
+                this.hideModal();
+                this.showMessage('Preferências de cookies salvas com sucesso!', 'success');
+            }
+
+            rejectAll() {
+                const consent = {
+                    essential: true, // Sempre verdadeiro
+                    performance: false,
+                    functionality: false,
+                    marketing: false,
+                    timestamp: new Date().toISOString()
+                };
+                
+                this.setCookieConsent(consent);
+                this.hideBanner();
+                this.showMessage('Cookies não essenciais foram rejeitados.', 'success');
+            }
+
+            showMessage(message, type) {
+                // Implementar se necessário
+                console.log(`${type.toUpperCase()}: ${message}`);
+            }
+        }
+
+        // Inicialização do sistema
+        document.addEventListener('DOMContentLoaded', function() {
+            // Inicializar banco de dados
+            const database = new LocalDatabase();
+            
+            // Inicializar gerenciador de cookies
+            const cookieManager = new CookieManager();
+            
+            // Configurar formulário de login
+            document.getElementById('loginForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const email = document.getElementById('loginEmail').value;
+                const senha = document.getElementById('loginSenha').value;
+                const tipoRadio = document.querySelector('input[name="tipo_usuario"]:checked');
+                
+                if (!tipoRadio) {
+                    document.getElementById('loginMessage').textContent = 'Selecione um tipo de usuário!';
+                    document.getElementById('loginMessage').className = 'message error';
+                    return;
+                }
+                
+                const tipo = tipoRadio.value;
+                
+                // Validar usuário no banco de dados
+                const user = database.validateUser(email, senha);
+                
+                if (user) {
+                    document.getElementById('loginMessage').textContent = 'Login realizado com sucesso!';
+                    document.getElementById('loginMessage').className = 'message success';
+                    
+                    // Salvar sessão do usuário
+                    sessionStorage.setItem('currentUser', JSON.stringify(user));
+                    
+                    // Redirecionar após um breve delay para mostrar a mensagem de sucesso
+                    setTimeout(() => {
+                        window.location.href = 'home.html';
+                    }, 1000);
+                } else {
+                    document.getElementById('loginMessage').textContent = 'Email ou senha incorretos!';
+                    document.getElementById('loginMessage').className = 'message error';
+                }
+            });
+            
+            // Seleção visual dos tipos de usuário
+            document.querySelectorAll('.user-type-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    document.querySelectorAll('.user-type-option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    this.classList.add('selected');
+                    this.querySelector('input').checked = true;
                 });
-                this.classList.add('selected');
-                this.querySelector('input').checked = true;
+            });
+            
+            // Configurar eventos dos cookies
+            document.getElementById('cookieAcceptBtn').addEventListener('click', function() {
+                cookieManager.acceptAll();
+            });
+            
+            document.getElementById('cookieRejectBtn').addEventListener('click', function() {
+                cookieManager.rejectAll();
+            });
+            
+            document.getElementById('cookieSettingsBtn').addEventListener('click', function() {
+                cookieManager.showModal();
+            });
+            
+            document.getElementById('closeModal').addEventListener('click', function() {
+                cookieManager.hideModal();
+            });
+            
+            document.getElementById('saveCookieSettings').addEventListener('click', function() {
+                cookieManager.saveSettings();
+            });
+            
+            document.getElementById('acceptAllCookies').addEventListener('click', function() {
+                cookieManager.acceptAll();
+            });
+            
+            // Fechar modal ao clicar fora dele
+            document.getElementById('cookieModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    cookieManager.hideModal();
+                }
             });
         });
     </script>
