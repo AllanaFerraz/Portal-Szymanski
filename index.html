@@ -373,6 +373,7 @@
         .cookie-text a {
             color: var(--secondary-color);
             text-decoration: underline;
+            cursor: pointer;
         }
 
         .cookie-buttons {
@@ -405,6 +406,116 @@
             color: white;
         }
 
+        /* Modal de Política de Cookies */
+        .cookie-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .cookie-modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: var(--border-radius);
+            width: 90%;
+            max-width: 700px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            position: relative;
+            animation: slideUp 0.4s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-header {
+            padding: 20px 25px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .close-modal:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .modal-body {
+            padding: 25px;
+        }
+
+        .policy-section {
+            margin-bottom: 25px;
+        }
+
+        .policy-section h3 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .policy-section p {
+            line-height: 1.6;
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        .policy-section ul {
+            padding-left: 20px;
+            margin-bottom: 10px;
+        }
+
+        .policy-section li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        .modal-footer {
+            padding: 15px 25px;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .main-container {
@@ -431,6 +542,16 @@
             .links-container a {
                 margin: 5px 0;
             }
+            
+            .cookie-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .cookie-buttons {
+                width: 100%;
+                justify-content: center;
+            }
         }
 
         @media (max-width: 480px) {
@@ -444,6 +565,10 @@
             
             .form-title {
                 font-size: 1.5rem;
+            }
+            
+            .modal-content {
+                width: 95%;
             }
         }
     </style>
@@ -620,6 +745,54 @@
         </div>
     </div>
 
+    <!-- Modal de Política de Cookies -->
+    <div class="cookie-modal" id="cookieModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Política de Cookies</h2>
+                <button class="close-modal" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="policy-section">
+                    <h3>O que são cookies?</h3>
+                    <p>Cookies são pequenos arquivos de texto que são armazenados no seu dispositivo quando você visita nosso site. Eles nos ajudam a fornecer uma experiência melhor e mais personalizada para você.</p>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>Como usamos os cookies?</h3>
+                    <p>Utilizamos cookies para:</p>
+                    <ul>
+                        <li>Lembrar suas preferências e configurações</li>
+                        <li>Melhorar a segurança do site</li>
+                        <li>Entender como você usa nosso site</li>
+                        <li>Oferecer conteúdo personalizado</li>
+                        <li>Permitir funcionalidades sociais</li>
+                    </ul>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>Tipos de cookies que utilizamos</h3>
+                    <ul>
+                        <li><strong>Cookies essenciais:</strong> Necessários para o funcionamento básico do site</li>
+                        <li><strong>Cookies de desempenho:</strong> Coletam informações sobre como os visitantes usam o site</li>
+                        <li><strong>Cookies de funcionalidade:</strong> Lembram escolhas que você faz para melhorar sua experiência</li>
+                        <li><strong>Cookies de marketing:</strong> Usados para rastrear visitantes em websites</li>
+                    </ul>
+                </div>
+                
+                <div class="policy-section">
+                    <h3>Controle de cookies</h3>
+                    <p>Você pode controlar e/ou excluir cookies conforme desejar. Você pode excluir todos os cookies que já estão no seu dispositivo e pode configurar a maioria dos navegadores para impedir que sejam colocados.</p>
+                    <p>Ao rejeitar cookies, algumas funcionalidades do site podem não funcionar corretamente.</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="cookie-btn cookie-reject" id="modalRejectBtn">Rejeitar Cookies</button>
+                <button class="cookie-btn cookie-accept" id="modalAcceptBtn">Aceitar Todos</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Sistema de Banco de Dados Local
         class LocalDatabase {
@@ -759,7 +932,9 @@
         class CookieManager {
             constructor() {
                 this.cookieConsent = this.getCookieConsent();
+                this.cookieModal = document.getElementById('cookieModal');
                 this.showBannerIfNeeded();
+                this.initModalEvents();
             }
 
             getCookieConsent() {
@@ -784,6 +959,46 @@
                 document.getElementById('cookieBanner').style.display = 'none';
             }
 
+            showModal() {
+                this.cookieModal.classList.add('active');
+            }
+
+            hideModal() {
+                this.cookieModal.classList.remove('active');
+            }
+
+            initModalEvents() {
+                // Abrir modal quando clicar no link de política
+                document.getElementById('cookiePolicyLink').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.showModal();
+                });
+
+                // Fechar modal com o X
+                document.getElementById('closeModal').addEventListener('click', () => {
+                    this.hideModal();
+                });
+
+                // Fechar modal clicando fora
+                this.cookieModal.addEventListener('click', (e) => {
+                    if (e.target === this.cookieModal) {
+                        this.hideModal();
+                    }
+                });
+
+                // Aceitar cookies pelo modal
+                document.getElementById('modalAcceptBtn').addEventListener('click', () => {
+                    this.acceptAll();
+                    this.hideModal();
+                });
+
+                // Rejeitar cookies pelo modal
+                document.getElementById('modalRejectBtn').addEventListener('click', () => {
+                    this.rejectAll();
+                    this.hideModal();
+                });
+            }
+
             acceptAll() {
                 const consent = {
                     essential: true,
@@ -800,7 +1015,7 @@
 
             rejectAll() {
                 const consent = {
-                    essential: true,
+                    essential: true, // Cookies essenciais não podem ser rejeitados
                     performance: false,
                     functionality: false,
                     marketing: false,
@@ -809,7 +1024,7 @@
                 
                 this.setCookieConsent(consent);
                 this.hideBanner();
-                alert('Cookies não essenciais rejeitados.');
+                alert('Cookies não essenciais rejeitados. Algumas funcionalidades podem não estar disponíveis.');
             }
         }
 
