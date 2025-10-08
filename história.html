@@ -98,26 +98,61 @@
             margin-bottom: 1rem;
         }
         
-        .history-image {
-            width: 100%;
-            max-height: 300px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin: 1rem 0;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        /* Sistema de galeria de imagens */
+        .image-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 1.5rem 0;
+            justify-content: center;
         }
         
-        .image-placeholder {
+        .gallery-item {
+            flex: 1 1 300px;
+            max-width: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        
+        .gallery-image {
             width: 100%;
             height: 200px;
-            background-color: #eee;
-            border-radius: 8px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .image-caption {
+            padding: 10px;
+            background-color: #f9f9f9;
+            text-align: center;
+            font-style: italic;
+            color: #555;
+            border-top: 1px solid #eee;
+        }
+        
+        .placeholder-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #1a2a6c 0%, #b21f1f 50%, #fdbb2d 100%);
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            margin: 1rem 0;
-            color: #777;
-            font-style: italic;
+            color: white;
+            text-align: center;
+            padding: 15px;
+        }
+        
+        .placeholder-image i {
+            font-size: 2rem;
+            margin-bottom: 10px;
         }
         
         /* Rodapé */
@@ -144,6 +179,10 @@
             
             .history-section {
                 padding: 1.5rem;
+            }
+            
+            .gallery-item {
+                flex: 1 1 100%;
             }
         }
     </style>
@@ -183,8 +222,21 @@
                     <em>"Juliusz Szymanski — um polonês entre dois continentes"</em> e encenação da chegada 
                     dos imigrantes poloneses ao Brasil.
                 </p>
-                <div class="image-placeholder">
-                    Imagem: colégio antes reforma
+                <div class="image-gallery">
+                    <div class="gallery-item">
+                        <div class="placeholder-image">
+                            <i>📸</i>
+                            <span>Colégio antes da reforma</span>
+                        </div>
+                        <div class="image-caption">Imagem histórica do colégio antes da reforma</div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="placeholder-image">
+                            <i>📸</i>
+                            <span>Professor Júlio Szymanski</span>
+                        </div>
+                        <div class="image-caption">Patrono do colégio</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -201,8 +253,21 @@
                     revitalizando a estrutura física e garantindo melhores condições de aprendizado. 
                     Hoje, atende cerca de 2.000 alunos do ensino fundamental, médio e técnico.
                 </p>
-                <div class="image-placeholder">
-                    Imagem: Colégio após reforma
+                <div class="image-gallery">
+                    <div class="gallery-item">
+                        <div class="placeholder-image">
+                            <i>🏫</i>
+                            <span>Colégio após reforma</span>
+                        </div>
+                        <div class="image-caption">Colégio após a reforma de 2013</div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="placeholder-image">
+                            <i>👷</i>
+                            <span>Reforma em andamento</span>
+                        </div>
+                        <div class="image-caption">Trabalhos de reforma no colégio</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -215,8 +280,28 @@
                     É uma das maiores unidades da região em termos de estrutura e número de estudantes. 
                     Também se adaptou ao ensino híbrido, garantindo qualidade mesmo em períodos de mudança.
                 </p>
-                <div class="image-placeholder">
-                    Imagem: Pátio do colégio
+                <div class="image-gallery">
+                    <div class="gallery-item">
+                        <div class="placeholder-image">
+                            <i>🏟️</i>
+                            <span>Pátio do colégio</span>
+                        </div>
+                        <div class="image-caption">Pátio principal do colégio</div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="placeholder-image">
+                            <i>🔬</i>
+                            <span>Laboratórios</span>
+                        </div>
+                        <div class="image-caption">Laboratórios de ciências</div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="placeholder-image">
+                            <i>📚</i>
+                            <span>Biblioteca</span>
+                        </div>
+                        <div class="image-caption">Biblioteca escolar</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -229,8 +314,21 @@
                     Suas celebrações envolvem apresentações, exposições e participação do Consulado da Polônia. 
                     É um polo educacional de referência em Araucária e arredores.
                 </p>
-                <div class="image-placeholder">
-                    Imagem: Fachada do colégio
+                <div class="image-gallery">
+                    <div class="gallery-item">
+                        <div class="placeholder-image">
+                            <i>🏛️</i>
+                            <span>Fachada do colégio</span>
+                        </div>
+                        <div class="image-caption">Fachada principal do colégio</div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="placeholder-image">
+                            <i>🎭</i>
+                            <span>Eventos culturais</span>
+                        </div>
+                        <div class="image-caption">Apresentações culturais no colégio</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -248,6 +346,22 @@
                     Sua trajetória simboliza a ponte cultural e científica entre Polônia e Brasil. 
                     Por isso, é sempre lembrado nas comemorações do colégio.
                 </p>
+                <div class="image-gallery">
+                    <div class="gallery-item">
+                        <div class="placeholder-image">
+                            <i>📖</i>
+                            <span>Obras de Szymanski</span>
+                        </div>
+                        <div class="image-caption">Livros publicados por Júlio Szymanski</div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="placeholder-image">
+                            <i>🎓</i>
+                            <span>Carreira acadêmica</span>
+                        </div>
+                        <div class="image-caption">Szymanski na Universidade</div>
+                    </div>
+                </div>
             </div>
         </div>
         
@@ -264,8 +378,28 @@
                     A reforma foi fruto da mobilização da comunidade escolar e tornou o ambiente 
                     mais confortável e motivador.
                 </p>
-                <div class="image-placeholder">
-                    Imagem: Colégio após pintura azul
+                <div class="image-gallery">
+                    <div class="gallery-item">
+                        <div class="placeholder-image">
+                            <i>🎨</i>
+                            <span>Colégio após pintura azul</span>
+                        </div>
+                        <div class="image-caption">Colégio após a nova pintura</div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="placeholder-image">
+                            <i>♿</i>
+                            <span>Acessibilidade</span>
+                        </div>
+                        <div class="image-caption">Melhorias na acessibilidade</div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="placeholder-image">
+                            <i>🏀</i>
+                            <span>Quadra de esportes</span>
+                        </div>
+                        <div class="image-caption">Quadra de esportes reformada</div>
+                    </div>
                 </div>
             </div>
         </div>
