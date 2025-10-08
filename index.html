@@ -611,7 +611,7 @@
                 <h1 style="font-family: 'Bebas Neue', sans-serif; color: var(--primary-color); font-size: 1.8rem;">
                     Colégio Estadual Professor Júlio Szymanski
                 </h1>
-                <p class="header-slogan">Educação de qualidade para construir um futuro melhor</p>
+                <p class="header-slogan">Araucária - Paraná | Educação de qualidade desde 1956</p>
             </div>
         </div>
     </header>
@@ -622,27 +622,27 @@
         <div class="welcome-panel">
             <div class="welcome-content">
                 <div class="panel-icon">
-                    <i class="fas fa-graduation-cap"></i>
+                    <i class="fas fa-school"></i>
                 </div>
-                <h2 id="welcomeTitle">Bem-vindo de Volta!</h2>
-                <p id="welcomeText">Entre em sua conta para acessar o portal educacional</p>
+                <h2 id="welcomeTitle">Portal Escolar</h2>
+                <p id="welcomeText">Acesse o portal do Colégio Professor Júlio Szymanski</p>
                 
                 <div class="feature-list">
                     <div class="feature-item">
-                        <i class="fas fa-check-circle"></i>
-                        <span>Acesso ao boletim e notas</span>
+                        <i class="fas fa-history"></i>
+                        <span>Conheça nossa história e tradição</span>
                     </div>
                     <div class="feature-item">
-                        <i class="fas fa-check-circle"></i>
-                        <span>Comunicação com professores</span>
+                        <i class="fas fa-images"></i>
+                        <span>Galeria de fotos e eventos</span>
                     </div>
                     <div class="feature-item">
-                        <i class="fas fa-check-circle"></i>
-                        <span>Calendário escolar</span>
+                        <i class="fas fa-phone-alt"></i>
+                        <span>Informações de contato</span>
                     </div>
                     <div class="feature-item">
-                        <i class="fas fa-check-circle"></i>
-                        <span>Materiais de estudo</span>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Localização: Araucária - PR</span>
                     </div>
                 </div>
             </div>
@@ -652,7 +652,7 @@
         <div class="form-container">
             <!-- Formulário de Login -->
             <div id="loginSection" class="form-section active">
-                <h2 class="form-title">Login Portal Szymanski</h2>
+                <h2 class="form-title">Acesso ao Portal</h2>
                 
                 <div id="loginMessage" class="message"></div>
                 
@@ -667,18 +667,18 @@
                             <div><i class="fas fa-users"></i> Responsável</div>
                         </label>
                         <label class="user-type-option">
-                            <input type="radio" name="tipo_usuario" value="visitante">
-                            <div><i class="fas fa-user"></i> Visitante</div>
+                            <input type="radio" name="tipo_usuario" value="professor">
+                            <div><i class="fas fa-chalkboard-teacher"></i> Professor</div>
                         </label>
                         <label class="user-type-option">
-                            <input type="radio" name="tipo_usuario" value="outro">
-                            <div><i class="fas fa-tools"></i> Outro</div>
+                            <input type="radio" name="tipo_usuario" value="funcionario">
+                            <div><i class="fas fa-user-tie"></i> Funcionário</div>
                         </label>
                     </div>
                     
                     <div class="form-group">
-                        <label for="loginEmail">Email:</label>
-                        <input type="email" id="loginEmail" required>
+                        <label for="loginEmail">Email ou RA:</label>
+                        <input type="text" id="loginEmail" required>
                     </div>
                     
                     <div class="form-group">
@@ -686,12 +686,12 @@
                         <input type="password" id="loginSenha" required>
                     </div>
                     
-                    <button type="submit" class="btn-primary">Entrar</button>
+                    <button type="submit" class="btn-primary">Entrar no Portal</button>
                 </form>
                 
                 <div class="links-container">
                     <a href="#" id="goToRegister">
-                        <i class="fas fa-user-plus"></i> Não tem conta? Cadastre-se
+                        <i class="fas fa-user-plus"></i> Primeiro acesso? Cadastre-se
                     </a>
                     <a href="#" id="goToForgotPassword">
                         <i class="fas fa-key"></i> Esqueci minha senha
@@ -701,7 +701,7 @@
 
             <!-- Formulário de Cadastro -->
             <div id="registerSection" class="form-section">
-                <h2 class="form-title">Criar Nova Conta</h2>
+                <h2 class="form-title">Primeiro Acesso</h2>
                 
                 <div id="registerMessage" class="message"></div>
                 
@@ -716,12 +716,12 @@
                             <div><i class="fas fa-users"></i> Responsável</div>
                         </label>
                         <label class="user-type-option">
-                            <input type="radio" name="tipo_usuario_cadastro" value="visitante">
-                            <div><i class="fas fa-user"></i> Visitante</div>
+                            <input type="radio" name="tipo_usuario_cadastro" value="professor">
+                            <div><i class="fas fa-chalkboard-teacher"></i> Professor</div>
                         </label>
                         <label class="user-type-option">
-                            <input type="radio" name="tipo_usuario_cadastro" value="outro">
-                            <div><i class="fas fa-tools"></i> Outro</div>
+                            <input type="radio" name="tipo_usuario_cadastro" value="funcionario">
+                            <div><i class="fas fa-user-tie"></i> Funcionário</div>
                         </label>
                     </div>
                     
@@ -733,6 +733,11 @@
                     <div class="form-group">
                         <label for="registerEmail">Email:</label>
                         <input type="email" id="registerEmail" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="registerRA">RA ou Matrícula:</label>
+                        <input type="text" id="registerRA" required>
                     </div>
                     
                     <div class="form-group">
@@ -767,13 +772,13 @@
                 <div id="forgotPasswordMessage" class="message"></div>
                 
                 <div class="reset-instructions">
-                    <p><i class="fas fa-info-circle"></i> Digite seu email abaixo. Enviaremos um link para redefinir sua senha.</p>
+                    <p><i class="fas fa-info-circle"></i> Digite seu email ou RA abaixo. Enviaremos um link para redefinir sua senha.</p>
                 </div>
                 
                 <form id="forgotPasswordForm">
                     <div class="form-group">
-                        <label for="forgotEmail">Email cadastrado:</label>
-                        <input type="email" id="forgotEmail" required>
+                        <label for="forgotEmail">Email ou RA cadastrado:</label>
+                        <input type="text" id="forgotEmail" required>
                     </div>
                     
                     <button type="submit" class="btn-primary">Enviar Link de Recuperação</button>
@@ -906,6 +911,7 @@
                         {
                             id: 1,
                             email: 'admin@szymanski.com',
+                            ra: 'ADMIN001',
                             senha: 'admin123',
                             tipo: 'admin',
                             nome: 'Administrador',
@@ -915,10 +921,11 @@
                         {
                             id: 2,
                             email: 'aluno@exemplo.com',
+                            ra: '2023001',
                             senha: 'aluno123',
                             tipo: 'aluno',
                             nome: 'João Silva',
-                            telefone: '(11) 99999-9999',
+                            telefone: '(41) 99999-9999',
                             dataCadastro: new Date().toISOString()
                         }
                     ],
@@ -950,6 +957,11 @@
                     return { success: false, message: 'Email já cadastrado!' };
                 }
                 
+                // Verificar se o RA já existe
+                if (this.findUserByRA(user.ra)) {
+                    return { success: false, message: 'RA/Matrícula já cadastrado!' };
+                }
+                
                 const newUser = {
                     id: db.users.length > 0 ? Math.max(...db.users.map(u => u.id)) + 1 : 1,
                     ...user,
@@ -966,8 +978,18 @@
                 return db ? db.users.find(user => user.email === email) : null;
             }
 
-            validateUser(email, senha) {
-                const user = this.findUserByEmail(email);
+            findUserByRA(ra) {
+                const db = this.getDatabase();
+                return db ? db.users.find(user => user.ra === ra) : null;
+            }
+
+            validateUser(login, senha) {
+                // Verificar se é email ou RA
+                let user = this.findUserByEmail(login);
+                if (!user) {
+                    user = this.findUserByRA(login);
+                }
+                
                 if (user && user.senha === senha) {
                     console.log('Usuário validado:', user);
                     return user;
@@ -989,13 +1011,17 @@
                 return { success: false, message: 'Usuário não encontrado!' };
             }
 
-            createPasswordResetToken(email) {
+            createPasswordResetToken(login) {
                 const db = this.getDatabase();
                 
-                // Verificar se o usuário existe
-                const user = this.findUserByEmail(email);
+                // Verificar se o usuário existe por email ou RA
+                let user = this.findUserByEmail(login);
                 if (!user) {
-                    return { success: false, message: 'Email não cadastrado!' };
+                    user = this.findUserByRA(login);
+                }
+                
+                if (!user) {
+                    return { success: false, message: 'Email/RA não cadastrado!' };
                 }
                 
                 // Gerar token único
@@ -1003,11 +1029,11 @@
                 const expiresAt = new Date(Date.now() + 15 * 60 * 1000); // 15 minutos
                 
                 // Remover tokens antigos para este email
-                db.passwordResetTokens = db.passwordResetTokens.filter(t => t.email !== email);
+                db.passwordResetTokens = db.passwordResetTokens.filter(t => t.email !== user.email);
                 
                 // Adicionar novo token
                 db.passwordResetTokens.push({
-                    email: email,
+                    email: user.email,
                     token: token,
                     expiresAt: expiresAt.toISOString(),
                     used: false
@@ -1098,16 +1124,16 @@
             showLogin() {
                 this.hideAllSections();
                 this.loginSection.classList.add('active');
-                this.welcomeTitle.textContent = 'Bem-vindo de Volta!';
-                this.welcomeText.textContent = 'Entre em sua conta para acessar o portal educacional';
+                this.welcomeTitle.textContent = 'Portal Escolar';
+                this.welcomeText.textContent = 'Acesse o portal do Colégio Professor Júlio Szymanski';
                 this.clearAllMessages();
             }
 
             showRegister() {
                 this.hideAllSections();
                 this.registerSection.classList.add('active');
-                this.welcomeTitle.textContent = 'Junte-se a Nós!';
-                this.welcomeText.textContent = 'Crie sua conta para acessar todos os recursos do portal';
+                this.welcomeTitle.textContent = 'Primeiro Acesso';
+                this.welcomeText.textContent = 'Cadastre-se para acessar o portal escolar';
                 this.clearAllMessages();
             }
 
@@ -1331,7 +1357,7 @@
                 e.preventDefault();
                 console.log('Tentativa de login...');
                 
-                const email = document.getElementById('loginEmail').value;
+                const login = document.getElementById('loginEmail').value;
                 const senha = document.getElementById('loginSenha').value;
                 const tipoRadio = document.querySelector('input[name="tipo_usuario"]:checked');
                 
@@ -1340,7 +1366,7 @@
                     return;
                 }
                 
-                const user = database.validateUser(email, senha);
+                const user = database.validateUser(login, senha);
                 
                 if (user) {
                     MessageSystem.showMessage('loginMessage', 'Login realizado com sucesso!', 'success');
@@ -1353,7 +1379,7 @@
                         window.location.href = 'dashboard.html';
                     }, 1500);
                 } else {
-                    MessageSystem.showMessage('loginMessage', 'Email ou senha incorretos!', 'error');
+                    MessageSystem.showMessage('loginMessage', 'Email/RA ou senha incorretos!', 'error');
                 }
             });
             
@@ -1364,6 +1390,7 @@
                 
                 const nome = document.getElementById('registerNome').value;
                 const email = document.getElementById('registerEmail').value;
+                const ra = document.getElementById('registerRA').value;
                 const senha = document.getElementById('registerSenha').value;
                 const confirmarSenha = document.getElementById('registerConfirmarSenha').value;
                 const telefone = document.getElementById('registerTelefone').value;
@@ -1388,6 +1415,7 @@
                 const result = database.addUser({
                     nome,
                     email,
+                    ra,
                     senha,
                     tipo,
                     telefone
@@ -1414,10 +1442,10 @@
                 e.preventDefault();
                 console.log('Solicitação de recuperação de senha...');
                 
-                const email = document.getElementById('forgotEmail').value;
+                const login = document.getElementById('forgotEmail').value;
                 
                 // Gerar token de recuperação
-                const tokenResult = database.createPasswordResetToken(email);
+                const tokenResult = database.createPasswordResetToken(login);
                 
                 if (!tokenResult.success) {
                     MessageSystem.showMessage('forgotPasswordMessage', tokenResult.message, 'error');
@@ -1429,7 +1457,7 @@
                 
                 try {
                     // Simular envio de email
-                    await EmailService.sendPasswordResetEmail(email, tokenResult.token);
+                    await EmailService.sendPasswordResetEmail(tokenResult.email, tokenResult.token);
                     
                     MessageSystem.showMessage('forgotPasswordMessage', 
                         `Email enviado com sucesso! Use o token: ${tokenResult.token} (Simulação)`, 
