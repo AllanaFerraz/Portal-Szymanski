@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portal Szymanski</title>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* Estilos gerais */
         * {
@@ -65,9 +66,11 @@
             background: linear-gradient(to right, #1a2a6c, #b21f1f);
             display: flex;
             justify-content: center;
+            align-items: center;
             padding: 0.6rem;
             flex-wrap: wrap;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: relative;
         }
         
         nav a {
@@ -79,10 +82,92 @@
             transition: background-color 0.3s;
             font-weight: 500;
             font-size: 0.95rem;
+            white-space: nowrap;
         }
         
         nav a:hover {
             background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Barra de Pesquisa */
+        .search-container {
+            display: flex;
+            align-items: center;
+            margin-left: 1rem;
+            position: relative;
+        }
+        
+        .search-input {
+            padding: 0.5rem 1rem;
+            padding-right: 2.5rem;
+            border: none;
+            border-radius: 20px;
+            width: 200px;
+            font-size: 0.9rem;
+            outline: none;
+            transition: width 0.3s;
+        }
+        
+        .search-input:focus {
+            width: 250px;
+        }
+        
+        .search-btn {
+            position: absolute;
+            right: 8px;
+            background: none;
+            border: none;
+            color: #1a2a6c;
+            cursor: pointer;
+            padding: 0.2rem;
+        }
+        
+        /* Resultados da Pesquisa */
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            z-index: 1000;
+            display: none;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .search-result-item {
+            padding: 0.8rem 1rem;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .search-result-item:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+        
+        .result-category {
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 0.2rem;
+        }
+        
+        .result-title {
+            font-weight: 600;
+            color: #1a2a6c;
+        }
+        
+        .no-results {
+            padding: 1rem;
+            text-align: center;
+            color: #666;
+            font-style: italic;
         }
         
         /* Conteúdo principal */
@@ -207,12 +292,28 @@
             nav {
                 flex-direction: column;
                 align-items: center;
+                padding-bottom: 1rem;
             }
             
             nav a {
                 margin: 0.2rem 0;
                 width: 100%;
                 text-align: center;
+            }
+            
+            .search-container {
+                margin-left: 0;
+                margin-top: 0.5rem;
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .search-input {
+                width: 100%;
+            }
+            
+            .search-input:focus {
+                width: 100%;
             }
             
             .highlights {
@@ -255,6 +356,15 @@
         <a href="feira.html">Feiras de Profissão</a>
         <a href="plataformas.html">Plataformas</a>
         <a href="info.html">Info</a>
+        
+        <!-- Barra de Pesquisa -->
+        <div class="search-container">
+            <input type="text" class="search-input" placeholder="Pesquisar..." id="searchInput">
+            <button class="search-btn" id="searchBtn">
+                <i class="fas fa-search"></i>
+            </button>
+            <div class="search-results" id="searchResults"></div>
+        </div>
     </nav>
     
     <div class="container">
@@ -308,5 +418,102 @@
     <footer>
         <p>&copy; 2025 Colégio Estadual Professor Júlio Szymanski - Todos os direitos reservados</p>
     </footer>
+
+    <script>
+        // Dados para pesquisa
+        const searchData = [
+            { title: "Cursos Técnicos", category: "Cursos", keywords: ["cursos", "técnico", "formação", "ensino"], link: "cursos.html" },
+            { title: "Ensino Médio", category: "Cursos", keywords: ["ensino médio", "médio", "estudos"], link: "cursos.html" },
+            { title: "História do Colégio", category: "História", keywords: ["história", "fundação", "origem", "júlio szymanski"], link: "historia.html" },
+            { title: "Feira de Profissões", category: "Eventos", keywords: ["feira", "profissões", "carreira", "orientação"], link: "feira.html" },
+            { title: "Google Classroom", category: "Plataformas", keywords: ["classroom", "google", "aulas", "online"], link: "plataformas.html" },
+            { title: "Moodle", category: "Plataformas", keywords: ["moodle", "ensino", "digital"], link: "plataformas.html" },
+            { title: "Contato e Localização", category: "Info", keywords: ["contato", "localização", "endereço", "telefone"], link: "info.html" },
+            { title: "Horário de Atendimento", category: "Info", keywords: ["horário", "atendimento", "funcionamento"], link: "info.html" },
+            { title: "Portal do Aluno", category: "Plataformas", keywords: ["portal", "aluno", "acesso", "login"], link: "plataformas.html" },
+            { title: "Biblioteca Virtual", category: "Recursos", keywords: ["biblioteca", "livros", "pesquisa", "estudo"] },
+            { title: "Calendário Escolar", category: "Info", keywords: ["calendário", "datas", "feriados", "recesso"] },
+            { title: "Material Didático", category: "Cursos", keywords: ["material", "livros", "apostilas", "conteúdo"] }
+        ];
+
+        // Elementos da pesquisa
+        const searchInput = document.getElementById('searchInput');
+        const searchBtn = document.getElementById('searchBtn');
+        const searchResults = document.getElementById('searchResults');
+
+        // Função de pesquisa
+        function performSearch(query) {
+            if (!query.trim()) {
+                searchResults.style.display = 'none';
+                return;
+            }
+
+            const lowerQuery = query.toLowerCase();
+            const results = searchData.filter(item => {
+                return item.keywords.some(keyword => keyword.includes(lowerQuery)) ||
+                       item.title.toLowerCase().includes(lowerQuery) ||
+                       item.category.toLowerCase().includes(lowerQuery);
+            });
+
+            displayResults(results);
+        }
+
+        // Exibir resultados
+        function displayResults(results) {
+            searchResults.innerHTML = '';
+
+            if (results.length === 0) {
+                searchResults.innerHTML = '<div class="no-results">Nenhum resultado encontrado</div>';
+            } else {
+                results.forEach(result => {
+                    const resultItem = document.createElement('div');
+                    resultItem.className = 'search-result-item';
+                    resultItem.innerHTML = `
+                        <div class="result-category">${result.category}</div>
+                        <div class="result-title">${result.title}</div>
+                    `;
+                    
+                    if (result.link) {
+                        resultItem.addEventListener('click', () => {
+                            window.location.href = result.link;
+                        });
+                    }
+                    
+                    searchResults.appendChild(resultItem);
+                });
+            }
+
+            searchResults.style.display = 'block';
+        }
+
+        // Event Listeners
+        searchInput.addEventListener('input', (e) => {
+            performSearch(e.target.value);
+        });
+
+        searchBtn.addEventListener('click', () => {
+            performSearch(searchInput.value);
+        });
+
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                performSearch(searchInput.value);
+            }
+        });
+
+        // Fechar resultados ao clicar fora
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.search-container')) {
+                searchResults.style.display = 'none';
+            }
+        });
+
+        // Focar no input quando resultados são mostrados
+        searchInput.addEventListener('focus', () => {
+            if (searchInput.value.trim()) {
+                performSearch(searchInput.value);
+            }
+        });
+    </script>
 </body>
 </html>
