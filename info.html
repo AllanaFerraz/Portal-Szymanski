@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* Estilos gerais */
         * {
             margin: 0;
             padding: 0;
@@ -20,11 +21,13 @@
             line-height: 1.6;
         }
         
+        /* Cabeçalho modificado - igual ao da página de Plataformas */
         header {
             background: linear-gradient(to right, #1a2a6c, #b21f1f, #fdbb2d);
             color: white;
             padding: 1rem;
             text-align: center;
+            position: relative;
         }
         
         header h1 {
@@ -33,12 +36,14 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
         }
         
+        /* Navegação */
         nav {
             background-color: #222;
             display: flex;
             justify-content: center;
             padding: 0.8rem;
             flex-wrap: wrap;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             position: relative;
         }
         
@@ -56,9 +61,10 @@
             background-color: rgba(255, 255, 255, 0.2);
         }
         
-        .language-btn {
+        /* Botão Usuário */
+        .user-btn {
             position: absolute;
-            right: 120px;
+            left: 15px;
             top: 50%;
             transform: translateY(-50%);
             background-color: #3498db;
@@ -68,47 +74,276 @@
             border-radius: 4px;
             cursor: pointer;
             font-weight: 500;
+            transition: background-color 0.3s;
             display: flex;
             align-items: center;
             gap: 8px;
         }
         
-        .language-dropdown {
+        .user-btn:hover {
+            background-color: #2980b9;
+        }
+        
+        /* Botão Sair */
+        .logout-btn {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .logout-btn:hover {
+            background-color: #c0392b;
+        }
+        
+        /* Dropdown do Usuário */
+        .user-dropdown {
             display: none;
             position: absolute;
-            right: 120px;
+            left: 15px;
             top: 100%;
             background: white;
-            min-width: 150px;
+            min-width: 300px;
             border-radius: 8px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
             z-index: 1000;
             margin-top: 5px;
         }
         
-        .language-dropdown.active {
+        .user-dropdown.active {
             display: block;
         }
         
-        .language-option {
-            padding: 0.8rem 1rem;
-            cursor: pointer;
-            transition: background-color 0.2s;
+        .user-header {
+            background: linear-gradient(to right, #1a2a6c, #b21f1f);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px 8px 0 0;
+            text-align: center;
+        }
+        
+        .user-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid white;
+            margin-bottom: 1rem;
+        }
+        
+        .user-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 0.3rem;
+        }
+        
+        .user-role {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .user-info {
+            padding: 1.5rem;
+        }
+        
+        .info-item {
             display: flex;
-            align-items: center;
+            justify-content: between;
+            margin-bottom: 1rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .info-label {
+            font-weight: 600;
+            color: #555;
+            min-width: 100px;
+        }
+        
+        .info-value {
+            color: #333;
+            flex: 1;
+        }
+        
+        .user-bio {
+            margin-top: 1rem;
+        }
+        
+        .bio-text {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 6px;
+            border-left: 4px solid #3498db;
+            font-style: italic;
+            color: #555;
+        }
+        
+        .user-actions {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid #eee;
+            display: flex;
             gap: 10px;
         }
         
-        .language-option:hover {
-            background-color: #f5f5f5;
+        .edit-btn {
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 4px;
+            cursor: pointer;
+            flex: 1;
+            transition: background-color 0.3s;
         }
         
-        .flag-icon {
-            width: 20px;
-            height: 15px;
-            border-radius: 2px;
+        .edit-btn:hover {
+            background-color: #27ae60;
         }
         
+        /* Modal de Edição */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .modal h3 {
+            color: #1a2a6c;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #555;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            height: 100px;
+            resize: vertical;
+        }
+        
+        .avatar-upload {
+            text-align: center;
+        }
+        
+        .avatar-preview {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 1rem auto;
+            border: 3px solid #1a2a6c;
+        }
+        
+        .file-input {
+            display: none;
+        }
+        
+        .file-label {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .file-label:hover {
+            background-color: #2980b9;
+        }
+        
+        .modal-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .modal-btn {
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        .save-btn {
+            background-color: #2ecc71;
+            color: white;
+        }
+        
+        .save-btn:hover {
+            background-color: #27ae60;
+        }
+        
+        .cancel-btn {
+            background-color: #95a5a6;
+            color: white;
+        }
+        
+        .cancel-btn:hover {
+            background-color: #7f8c8d;
+        }
+        
+        .confirm-btn {
+            background-color: #e74c3c;
+            color: white;
+        }
+        
+        .confirm-btn:hover {
+            background-color: #c0392b;
+        }
+        
+        /* Conteúdo principal */
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -123,6 +358,7 @@
             font-family: 'Bebas Neue', sans-serif;
         }
         
+        /* Seções de informação */
         .info-section {
             background-color: white;
             border-radius: 8px;
@@ -182,8 +418,14 @@
             padding: 0.7rem 1.5rem;
             text-decoration: none;
             border-radius: 4px;
+            transition: background-color 0.3s;
         }
         
+        .info-link:hover {
+            background-color: #2a3a9c;
+        }
+        
+        /* Mapa */
         .map-container {
             margin-top: 2rem;
             border-radius: 8px;
@@ -198,6 +440,7 @@
             border: none;
         }
         
+        /* Endereço */
         .address-info {
             background-color: #f9f9f9;
             border-radius: 8px;
@@ -207,6 +450,17 @@
             border-left: 4px solid #fdbb2d;
         }
         
+        .address-info h4 {
+            color: #1a2a6c;
+            margin-bottom: 1rem;
+        }
+        
+        .address-info p {
+            margin-bottom: 0.5rem;
+            color: #555;
+        }
+        
+        /* Rodapé */
         footer {
             background-color: #222;
             color: white;
@@ -215,7 +469,24 @@
             margin-top: 3rem;
         }
         
+        .footer-link {
+            color: #fdbb2d;
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 0.5rem;
+            display: inline-block;
+        }
+        
+        .footer-link:hover {
+            text-decoration: underline;
+        }
+        
+        /* Responsividade */
         @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.2rem;
+            }
+            
             nav {
                 flex-direction: column;
                 align-items: center;
@@ -228,7 +499,7 @@
                 text-align: center;
             }
             
-            .language-btn {
+            .user-btn, .logout-btn {
                 position: static;
                 transform: none;
                 margin-top: 1rem;
@@ -236,10 +507,10 @@
                 justify-content: center;
             }
             
-            .language-dropdown {
+            .user-dropdown {
                 left: 50%;
                 transform: translateX(-50%);
-                min-width: 200px;
+                min-width: 280px;
             }
             
             .info-grid {
@@ -250,50 +521,86 @@
                 height: 300px;
             }
         }
+        
+        @media (max-width: 480px) {
+            .user-btn, .logout-btn {
+                padding: 0.8rem;
+                font-size: 0.9rem;
+            }
+            
+            .map-container {
+                height: 250px;
+            }
+            
+            .modal-buttons {
+                flex-direction: column;
+            }
+        }
     </style>
 </head>
 <body>
     <header>
-        <h1 id="headerTitle">Portal Szymanski</h1>
+        <h1>Portal Szymanski</h1>
     </header>
     
     <nav>
-        <a href="dashboard.html" id="navInicio">Início</a>
-        <a href="cursos.html" id="navCursos">Cursos</a>
-        <a href="historia.html" id="navHistoria">História</a>
-        <a href="feira.html" id="navFeira">Feiras de Profissão</a>
-        <a href="plataformas.html" id="navPlataformas">Plataformas</a>
-        <a href="info.html" id="navInfo">Info</a>
-        
-        <button class="language-btn" id="languageBtn">
-            <i class="fas fa-globe"></i>
-            <span id="languageBtnText">Português</span>
+        <!-- Botão Usuário -->
+        <button class="user-btn" id="userBtn">
+            <i class="fas fa-user"></i>
+            Meu Perfil
         </button>
         
-        <div class="language-dropdown" id="languageDropdown">
-            <div class="language-option" data-lang="pt">
-                <img src="https://flagcdn.com/w20/br.png" class="flag-icon" alt="Português">
-                Português
+        <a href="dashboard.html">Início</a>
+        <a href="cursos.html">Cursos</a>
+        <a href="historia.html">História</a>
+        <a href="feira.html">Feiras de Profissão</a>
+        <a href="plataformas.html">Plataformas</a>
+        <a href="info.html">Info</a>
+        
+        <!-- Botão Sair -->
+        <button class="logout-btn" id="logoutBtn">
+            <i class="fas fa-sign-out-alt"></i>
+            Sair da Conta
+        </button>
+        
+        <!-- Dropdown do Usuário -->
+        <div class="user-dropdown" id="userDropdown">
+            <div class="user-header">
+                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="Avatar" class="user-avatar" id="userAvatar">
+                <div class="user-name" id="displayUserName">Carregando...</div>
+                <div class="user-role" id="displayUserRole">Carregando...</div>
             </div>
-            <div class="language-option" data-lang="es">
-                <img src="https://flagcdn.com/w20/es.png" class="flag-icon" alt="Español">
-                Español
+            <div class="user-info">
+                <div class="info-item">
+                    <span class="info-label">Email:</span>
+                    <span class="info-value" id="displayUserEmail">Carregando...</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Telefone:</span>
+                    <span class="info-value" id="displayUserPhone">Carregando...</span>
+                </div>
+                <div class="user-bio">
+                    <div class="info-label">Biografia:</div>
+                    <div class="bio-text" id="displayUserBio">Carregando...</div>
+                </div>
             </div>
-            <div class="language-option" data-lang="en">
-                <img src="https://flagcdn.com/w20/us.png" class="flag-icon" alt="English">
-                English
+            <div class="user-actions">
+                <button class="edit-btn" id="editProfileBtn">
+                    <i class="fas fa-edit"></i> Editar Perfil
+                </button>
             </div>
         </div>
     </nav>
     
     <div class="container">
-        <h2 class="page-title" id="pageTitle">Informações e Contato</h2>
+        <h2 class="page-title">Informações e Contato</h2>
         
         <div class="info-section">
-            <h3 class="info-title" id="locationTitle">Localização</h3>
-            <p id="locationText">Venha nos visitar! Estamos localizados em:</p>
+            <h3 class="info-title">Localização</h3>
+            <p>Venha nos visitar! Estamos localizados em:</p>
             
             <div class="map-container">
+                <!-- Mapa centralizado no Colégio Szymanski -->
                 <iframe 
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3599.920056482128!2d-49.4046239244756!3d-25.55997777750093!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dd4890ddfcd70d%3A0x319ff7ef7d4e9c8c!2sCol%C3%A9gio%20Estadual%20Professor%20J%C3%BAlio%20Szymanski!5e0!3m2!1spt-BR!2sbr!4v1718658532978!5m2!1spt-BR!2sbr" 
                     allowfullscreen="" 
@@ -303,16 +610,16 @@
             </div>
             
             <div class="address-info">
-                <h4 id="addressTitle">Endereço Completo</h4>
-                <p><strong id="schoolName">Colégio Estadual Professor Júlio Szymanski</strong></p>
-                <p id="schoolAddress">R. São Vicente de Paulo, 76 - Centro</p>
-                <p id="schoolCity">Araucária - PR, 83701-340</p>
-                <p id="schoolPhone">Telefone: (41) 3642-4089</p>
+                <h4>Endereço Completo</h4>
+                <p><strong>Colégio Estadual Professor Júlio Szymanski</strong></p>
+                <p>R. São Vicente de Paulo, 76 - Centro</p>
+                <p>Araucária - PR, 83701-340</p>
+                <p>Telefone: (41) 3642-4089</p>
             </div>
             
             <div style="text-align: center; margin-top: 1.5rem;">
                 <a href="https://maps.app.goo.gl/P2QPH524FgP8BNkKA" target="_blank" class="info-link">
-                    <i class="fas fa-map-marker-alt"></i> <span id="openMapsText">Abrir no Google Maps</span>
+                    <i class="fas fa-map-marker-alt"></i> Abrir no Google Maps
                 </a>
             </div>
         </div>
@@ -320,216 +627,277 @@
         <div class="info-grid">
             <div class="info-card">
                 <div class="info-icon"><i class="fas fa-phone"></i></div>
-                <h3 id="contactTitle">Contato</h3>
-                <p id="contactText">Entre em contato conosco via WhatsApp para mais informações</p>
-                <a href="https://api.whatsapp.com/send?phone=%2B554136424089" target="_blank" class="info-link">
-                    <span id="whatsappText">Abrir WhatsApp</span>
-                </a>
+                <h3>Contato</h3>
+                <p>Entre em contato conosco via WhatsApp para mais informações</p>
+                <a href="https://api.whatsapp.com/send?phone=%2B554136424089" target="_blank" class="info-link">Abrir WhatsApp</a>
             </div>
             
             <div class="info-card">
                 <div class="info-icon"><i class="fab fa-facebook"></i></div>
-                <h3 id="facebookTitle">Facebook</h3>
-                <p id="facebookText">Acompanhe nossas novidades e eventos pelo Facebook</p>
-                <a href="https://www.facebook.com/share/1Xt7qPghFc/" target="_blank" class="info-link">
-                    <span id="visitFacebookText">Visitar Facebook</span>
-                </a>
+                <h3>Facebook</h3>
+                <p>Acompanhe nossas novidades e eventos pelo Facebook</p>
+                <a href="https://www.facebook.com/share/1Xt7qPghFc/" target="_blank" class="info-link">Visitar Facebook</a>
             </div>
             
             <div class="info-card">
                 <div class="info-icon"><i class="fab fa-instagram"></i></div>
-                <h3 id="instagramTitle">Instagram</h3>
-                <p id="instagramText">Siga-nos no Instagram para ficar por dentro do dia a dia do colégio</p>
-                <a href="https://www.instagram.com/colegioszymanski?igsh=MWhraDN6cjRuMTFkNA==" target="_blank" class="info-link">
-                    <span id="followInstagramText">Seguir no Instagram</span>
-                </a>
+                <h3>Instagram</h3>
+                <p>Siga-nos no Instagram para ficar por dentro do dia a dia do colégio</p>
+                <a href="https://www.instagram.com/colegioszymanski?igsh=MWhraDN6cjRuMTFkNA==" target="_blank" class="info-link">Seguir no Instagram</a>
             </div>
         </div>
         
         <div class="info-section">
-            <h3 class="info-title" id="hoursTitle">Horário de Atendimento</h3>
-            <p id="hoursText">Estamos disponíveis para atendimento durante os seguintes horários:</p>
+            <h3 class="info-title">Horário de Atendimento</h3>
+            <p>Estamos disponíveis para atendimento durante os seguintes horários:</p>
             <ul style="list-style-type: none; padding: 1rem 0;">
-                <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;" id="weekHours">Segunda a sexta: 7h às 18h</li>
-                <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;" id="saturdayHours">Sábado: 8h às 12h</li>
-                <li style="padding: 0.5rem 0;" id="sundayHours">Domingo: Fechado</li>
+                <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;">Segunda a sexta: 7h às 18h</li>
+                <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;">Sábado: 8h às 12h</li>
+                <li style="padding: 0.5rem 0;">Domingo: Fechado</li>
             </ul>
         </div>
     </div>
     
     <footer>
-        <p id="footerText">&copy; 2025 Colégio Estadual Professor Júlio Szymanski - Todos os direitos reservados</p>
+        <p>&copy; 2025 Colégio Estadual Professor Júlio Szymanski - Todos os direitos reservados</p>
         <a href="https://api.whatsapp.com/send?phone=5541997442841&text=Olá! Preciso de ajuda com o portal do Colégio Szymanski." 
            target="_blank" 
-           style="color: #fdbb2d; text-decoration: none; margin-top: 0.5rem; display: inline-block;">
-            <i class="fab fa-whatsapp"></i> <span id="contactDevText">Entre em contato com o desenvolvedor</span>
+           class="footer-link">
+            <i class="fab fa-whatsapp"></i> Entre em contato com o desenvolvedor
         </a>
     </footer>
 
+    <!-- Modal de Edição de Perfil -->
+    <div class="modal" id="editModal">
+        <div class="modal-content">
+            <h3>Editar Perfil</h3>
+            <form id="profileForm">
+                <div class="avatar-upload">
+                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="Preview" class="avatar-preview" id="avatarPreview">
+                    <input type="file" id="avatarInput" class="file-input" accept="image/*">
+                    <label for="avatarInput" class="file-label">
+                        <i class="fas fa-camera"></i> Alterar Foto
+                    </label>
+                </div>
+                
+                <div class="form-group">
+                    <label for="userName">Nome Completo</label>
+                    <input type="text" id="userName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="userEmail">Email</label>
+                    <input type="email" id="userEmail" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="userPhone">Telefone</label>
+                    <input type="tel" id="userPhone">
+                </div>
+                
+                <div class="form-group">
+                    <label for="userRole">Tipo de Usuário</label>
+                    <select id="userRole" disabled>
+                        <option value="aluno">Aluno</option>
+                        <option value="professor">Professor</option>
+                        <option value="responsavel">Responsável</option>
+                    </select>
+                    <small style="color: #666;">* O tipo de usuário não pode ser alterado</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="userBio">Biografia</label>
+                    <textarea id="userBio" placeholder="Conte um pouco sobre você..."></textarea>
+                </div>
+                
+                <div class="modal-buttons">
+                    <button type="button" class="modal-btn cancel-btn" id="cancelEdit">Cancelar</button>
+                    <button type="submit" class="modal-btn save-btn">Salvar Alterações</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de confirmação de logout -->
+    <div class="modal" id="logoutModal">
+        <div class="modal-content">
+            <h3>Confirmar Saída</h3>
+            <p>Tem certeza que deseja sair da sua conta?</p>
+            <div class="modal-buttons">
+                <button class="modal-btn confirm-btn" id="confirmLogout">Sim, Sair</button>
+                <button class="modal-btn cancel-btn" id="cancelLogout">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // Sistema de Idiomas Simples
-        const translations = {
-            pt: {
-                // Navegação
-                navInicio: "Início",
-                navCursos: "Cursos",
-                navHistoria: "História",
-                navFeira: "Feiras de Profissão",
-                navPlataformas: "Plataformas",
-                navInfo: "Info",
-                headerTitle: "Portal Szymanski",
-                languageBtnText: "Português",
-                
-                // Conteúdo
-                pageTitle: "Informações e Contato",
-                locationTitle: "Localização",
-                locationText: "Venha nos visitar! Estamos localizados em:",
-                addressTitle: "Endereço Completo",
-                schoolName: "Colégio Estadual Professor Júlio Szymanski",
-                schoolAddress: "R. São Vicente de Paulo, 76 - Centro",
-                schoolCity: "Araucária - PR, 83701-340",
-                schoolPhone: "Telefone: (41) 3642-4089",
-                openMapsText: "Abrir no Google Maps",
-                contactTitle: "Contato",
-                contactText: "Entre em contato conosco via WhatsApp para mais informações",
-                whatsappText: "Abrir WhatsApp",
-                facebookTitle: "Facebook",
-                facebookText: "Acompanhe nossas novidades e eventos pelo Facebook",
-                visitFacebookText: "Visitar Facebook",
-                instagramTitle: "Instagram",
-                instagramText: "Siga-nos no Instagram para ficar por dentro do dia a dia do colégio",
-                followInstagramText: "Seguir no Instagram",
-                hoursTitle: "Horário de Atendimento",
-                hoursText: "Estamos disponíveis para atendimento durante os seguintes horários:",
-                weekHours: "Segunda a sexta: 7h às 18h",
-                saturdayHours: "Sábado: 8h às 12h",
-                sundayHours: "Domingo: Fechado",
-                footerText: "© 2025 Colégio Estadual Professor Júlio Szymanski - Todos os direitos reservados",
-                contactDevText: "Entre em contato com o desenvolvedor"
-            },
-            
-            es: {
-                // Navegação
-                navInicio: "Inicio",
-                navCursos: "Cursos",
-                navHistoria: "Historia",
-                navFeira: "Ferias de Profesión",
-                navPlataformas: "Plataformas",
-                navInfo: "Información",
-                headerTitle: "Portal Szymanski",
-                languageBtnText: "Español",
-                
-                // Conteúdo
-                pageTitle: "Información y Contacto",
-                locationTitle: "Ubicación",
-                locationText: "¡Ven a visitarnos! Estamos ubicados en:",
-                addressTitle: "Dirección Completa",
-                schoolName: "Colegio Estatal Profesor Júlio Szymanski",
-                schoolAddress: "R. São Vicente de Paulo, 76 - Centro",
-                schoolCity: "Araucária - PR, 83701-340",
-                schoolPhone: "Teléfono: (41) 3642-4089",
-                openMapsText: "Abrir en Google Maps",
-                contactTitle: "Contacto",
-                contactText: "Contáctenos por WhatsApp para más información",
-                whatsappText: "Abrir WhatsApp",
-                facebookTitle: "Facebook",
-                facebookText: "Siga nuestras novedades y eventos en Facebook",
-                visitFacebookText: "Visitar Facebook",
-                instagramTitle: "Instagram",
-                instagramText: "Síganos en Instagram para estar al día con la vida del colegio",
-                followInstagramText: "Seguir en Instagram",
-                hoursTitle: "Horario de Atención",
-                hoursText: "Estamos disponibles para atención durante los siguientes horarios:",
-                weekHours: "Lunes a viernes: 7h a 18h",
-                saturdayHours: "Sábado: 8h a 12h",
-                sundayHours: "Domingo: Cerrado",
-                footerText: "© 2025 Colegio Estatal Profesor Júlio Szymanski - Todos los derechos reservados",
-                contactDevText: "Contactar al desarrollador"
-            },
-            
-            en: {
-                // Navegação
-                navInicio: "Home",
-                navCursos: "Courses",
-                navHistoria: "History",
-                navFeira: "Career Fairs",
-                navPlataformas: "Platforms",
-                navInfo: "Info",
-                headerTitle: "Szymanski Portal",
-                languageBtnText: "English",
-                
-                // Conteúdo
-                pageTitle: "Information and Contact",
-                locationTitle: "Location",
-                locationText: "Come visit us! We are located at:",
-                addressTitle: "Full Address",
-                schoolName: "State School Professor Júlio Szymanski",
-                schoolAddress: "R. São Vicente de Paulo, 76 - Centro",
-                schoolCity: "Araucária - PR, 83701-340",
-                schoolPhone: "Phone: (41) 3642-4089",
-                openMapsText: "Open in Google Maps",
-                contactTitle: "Contact",
-                contactText: "Contact us via WhatsApp for more information",
-                whatsappText: "Open WhatsApp",
-                facebookTitle: "Facebook",
-                facebookText: "Follow our news and events on Facebook",
-                visitFacebookText: "Visit Facebook",
-                instagramTitle: "Instagram",
-                instagramText: "Follow us on Instagram to stay updated with school life",
-                followInstagramText: "Follow on Instagram",
-                hoursTitle: "Business Hours",
-                hoursText: "We are available for assistance during the following hours:",
-                weekHours: "Monday to Friday: 7am to 6pm",
-                saturdayHours: "Saturday: 8am to 12pm",
-                sundayHours: "Sunday: Closed",
-                footerText: "© 2025 State School Professor Júlio Szymanski - All rights reserved",
-                contactDevText: "Contact the developer"
-            }
-        };
-
-        // Aplicar idioma
-        function applyLanguage(lang) {
-            const translation = translations[lang];
-            for (const [key, value] of Object.entries(translation)) {
-                const element = document.getElementById(key);
-                if (element) {
-                    element.textContent = value;
-                }
-            }
-            localStorage.setItem('portalLanguage', lang);
-        }
-
-        // Carregar idioma salvo
-        function loadLanguage() {
-            const savedLanguage = localStorage.getItem('portalLanguage') || 'pt';
-            applyLanguage(savedLanguage);
-        }
-
-        // Inicializar
+        // Sistema de Perfil do Usuário
         document.addEventListener('DOMContentLoaded', function() {
-            loadLanguage();
-            
-            const languageBtn = document.getElementById('languageBtn');
-            const languageDropdown = document.getElementById('languageDropdown');
-            
-            languageBtn.addEventListener('click', function() {
-                languageDropdown.classList.toggle('active');
+            // Elementos do DOM
+            const userBtn = document.getElementById('userBtn');
+            const userDropdown = document.getElementById('userDropdown');
+            const logoutBtn = document.getElementById('logoutBtn');
+            const logoutModal = document.getElementById('logoutModal');
+            const confirmLogout = document.getElementById('confirmLogout');
+            const cancelLogout = document.getElementById('cancelLogout');
+            const editProfileBtn = document.getElementById('editProfileBtn');
+            const editModal = document.getElementById('editModal');
+            const cancelEdit = document.getElementById('cancelEdit');
+            const profileForm = document.getElementById('profileForm');
+            const avatarInput = document.getElementById('avatarInput');
+            const avatarPreview = document.getElementById('avatarPreview');
+
+            // Carregar dados do usuário ao iniciar
+            loadUserData();
+
+            // Abrir/fechar dropdown do usuário
+            userBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                userDropdown.classList.toggle('active');
             });
-            
-            document.querySelectorAll('.language-option').forEach(option => {
-                option.addEventListener('click', function() {
-                    const lang = this.getAttribute('data-lang');
-                    applyLanguage(lang);
-                    languageDropdown.classList.remove('active');
-                    alert('Idioma alterado para todo o portal!');
-                });
+
+            // Fechar dropdown ao clicar fora
+            document.addEventListener('click', function() {
+                userDropdown.classList.remove('active');
             });
-            
-            document.addEventListener('click', function(e) {
-                if (!e.target.closest('.language-btn') && !e.target.closest('.language-dropdown')) {
-                    languageDropdown.classList.remove('active');
+
+            // Prevenir fechamento ao clicar dentro do dropdown
+            userDropdown.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+
+            // Abrir modal de edição
+            editProfileBtn.addEventListener('click', function() {
+                populateEditForm();
+                editModal.style.display = 'flex';
+            });
+
+            // Fechar modal de edição
+            cancelEdit.addEventListener('click', function() {
+                editModal.style.display = 'none';
+            });
+
+            // Upload de avatar (apenas preview, não salva ainda)
+            avatarInput.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        avatarPreview.src = e.target.result;
+                    }
+                    reader.readAsDataURL(file);
                 }
             });
+
+            // Salvar perfil (apenas quando clicar em Salvar)
+            profileForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                saveUserData();
+                editModal.style.display = 'none';
+                loadUserData(); // Atualizar display com novos dados
+            });
+
+            // Sistema de Logout
+            logoutBtn.addEventListener('click', function() {
+                logoutModal.style.display = 'flex';
+            });
+
+            confirmLogout.addEventListener('click', function() {
+                sessionStorage.removeItem('currentUser');
+                window.location.href = 'index.html';
+            });
+
+            cancelLogout.addEventListener('click', function() {
+                logoutModal.style.display = 'none';
+            });
+
+            // Fechar modais ao clicar fora
+            window.addEventListener('click', function(event) {
+                if (event.target === editModal) {
+                    editModal.style.display = 'none';
+                }
+                if (event.target === logoutModal) {
+                    logoutModal.style.display = 'none';
+                }
+            });
+
+            // Funções auxiliares
+            function loadUserData() {
+                // Tentar carregar do sessionStorage
+                const savedUser = sessionStorage.getItem('currentUser');
+                
+                if (savedUser) {
+                    const userData = JSON.parse(savedUser);
+                    updateUserDisplay(userData);
+                } else {
+                    // Se não existir, usar dados padrão (apenas para demonstração)
+                    const defaultUser = {
+                        name: "Novo Usuário",
+                        email: "usuario@email.com",
+                        phone: "(41) 99999-9999",
+                        role: "aluno",
+                        bio: "Bem-vindo ao Portal Szymanski! Edite seu perfil para personalizar suas informações.",
+                        avatar: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                    };
+                    updateUserDisplay(defaultUser);
+                }
+            }
+
+            function updateUserDisplay(userData) {
+                document.getElementById('displayUserName').textContent = userData.name;
+                document.getElementById('displayUserEmail').textContent = userData.email;
+                document.getElementById('displayUserPhone').textContent = userData.phone;
+                document.getElementById('displayUserBio').textContent = userData.bio;
+                document.getElementById('userAvatar').src = userData.avatar;
+                
+                // Atualizar role com texto formatado
+                const roleText = {
+                    'aluno': 'Aluno',
+                    'professor': 'Professor',
+                    'responsavel': 'Responsável'
+                };
+                document.getElementById('displayUserRole').textContent = roleText[userData.role] || userData.role;
+            }
+
+            function populateEditForm() {
+                const savedUser = sessionStorage.getItem('currentUser');
+                if (savedUser) {
+                    const userData = JSON.parse(savedUser);
+                    document.getElementById('userName').value = userData.name;
+                    document.getElementById('userEmail').value = userData.email;
+                    document.getElementById('userPhone').value = userData.phone;
+                    document.getElementById('userRole').value = userData.role;
+                    document.getElementById('userBio').value = userData.bio;
+                    document.getElementById('avatarPreview').src = userData.avatar;
+                }
+            }
+
+            function saveUserData() {
+                // Coletar dados do formulário
+                const userData = {
+                    name: document.getElementById('userName').value,
+                    email: document.getElementById('userEmail').value,
+                    phone: document.getElementById('userPhone').value,
+                    role: document.getElementById('userRole').value,
+                    bio: document.getElementById('userBio').value,
+                    avatar: document.getElementById('avatarPreview').src
+                };
+
+                // Salvar no sessionStorage (aqui você substituiria pelo banco de dados)
+                sessionStorage.setItem('currentUser', JSON.stringify(userData));
+                
+                // Aqui você adicionaria a lógica para salvar no banco de dados
+                console.log('Dados salvos (simulação do banco):', userData);
+                
+                alert('Perfil atualizado com sucesso!');
+            }
+
+            // Verificar se o usuário está logado
+            const currentUser = sessionStorage.getItem('currentUser');
+            if (!currentUser) {
+                // Se não estiver logado, redirecionar para o login
+                window.location.href = 'index.html';
+            }
         });
     </script>
 </body>
