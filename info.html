@@ -61,10 +61,10 @@
             background-color: rgba(255, 255, 255, 0.2);
         }
         
-        /* Botão Usuário */
-        .user-btn {
+        /* Botão Idioma */
+        .language-btn {
             position: absolute;
-            left: 15px;
+            right: 120px;
             top: 50%;
             transform: translateY(-50%);
             background-color: #3498db;
@@ -80,8 +80,31 @@
             gap: 8px;
         }
         
-        .user-btn:hover {
+        .language-btn:hover {
             background-color: #2980b9;
+        }
+        
+        /* Botão Usuário */
+        .user-btn {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .user-btn:hover {
+            background-color: #27ae60;
         }
         
         /* Botão Sair */
@@ -105,6 +128,49 @@
         
         .logout-btn:hover {
             background-color: #c0392b;
+        }
+        
+        /* Dropdown do Idioma */
+        .language-dropdown {
+            display: none;
+            position: absolute;
+            right: 120px;
+            top: 100%;
+            background: white;
+            min-width: 150px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 1000;
+            margin-top: 5px;
+        }
+        
+        .language-dropdown.active {
+            display: block;
+        }
+        
+        .language-option {
+            padding: 0.8rem 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .language-option:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .language-option.active {
+            background-color: #e3f2fd;
+            color: #1a2a6c;
+            font-weight: 600;
+        }
+        
+        .flag-icon {
+            width: 20px;
+            height: 15px;
+            border-radius: 2px;
         }
         
         /* Dropdown do Usuário */
@@ -499,7 +565,7 @@
                 text-align: center;
             }
             
-            .user-btn, .logout-btn {
+            .user-btn, .language-btn, .logout-btn {
                 position: static;
                 transform: none;
                 margin-top: 1rem;
@@ -507,10 +573,14 @@
                 justify-content: center;
             }
             
-            .user-dropdown {
+            .user-dropdown, .language-dropdown {
                 left: 50%;
                 transform: translateX(-50%);
                 min-width: 280px;
+            }
+            
+            .language-dropdown {
+                min-width: 200px;
             }
             
             .info-grid {
@@ -523,7 +593,7 @@
         }
         
         @media (max-width: 480px) {
-            .user-btn, .logout-btn {
+            .user-btn, .language-btn, .logout-btn {
                 padding: 0.8rem;
                 font-size: 0.9rem;
             }
@@ -540,28 +610,50 @@
 </head>
 <body>
     <header>
-        <h1>Portal Szymanski</h1>
+        <h1 id="headerTitle">Portal Szymanski</h1>
     </header>
     
     <nav>
         <!-- Botão Usuário -->
         <button class="user-btn" id="userBtn">
             <i class="fas fa-user"></i>
-            Meu Perfil
+            <span id="userBtnText">Meu Perfil</span>
         </button>
         
-        <a href="dashboard.html">Início</a>
-        <a href="cursos.html">Cursos</a>
-        <a href="historia.html">História</a>
-        <a href="feira.html">Feiras de Profissão</a>
-        <a href="plataformas.html">Plataformas</a>
-        <a href="info.html">Info</a>
+        <a href="dashboard.html" id="navInicio">Início</a>
+        <a href="cursos.html" id="navCursos">Cursos</a>
+        <a href="historia.html" id="navHistoria">História</a>
+        <a href="feira.html" id="navFeira">Feiras de Profissão</a>
+        <a href="plataformas.html" id="navPlataformas">Plataformas</a>
+        <a href="info.html" id="navInfo">Info</a>
+        
+        <!-- Botão Idioma -->
+        <button class="language-btn" id="languageBtn">
+            <i class="fas fa-globe"></i>
+            <span id="languageBtnText">Português</span>
+        </button>
         
         <!-- Botão Sair -->
         <button class="logout-btn" id="logoutBtn">
             <i class="fas fa-sign-out-alt"></i>
-            Sair da Conta
+            <span id="logoutBtnText">Sair da Conta</span>
         </button>
+        
+        <!-- Dropdown do Idioma -->
+        <div class="language-dropdown" id="languageDropdown">
+            <div class="language-option active" data-lang="pt">
+                <img src="https://flagcdn.com/w20/br.png" class="flag-icon" alt="Português">
+                Português
+            </div>
+            <div class="language-option" data-lang="es">
+                <img src="https://flagcdn.com/w20/es.png" class="flag-icon" alt="Español">
+                Español
+            </div>
+            <div class="language-option" data-lang="en">
+                <img src="https://flagcdn.com/w20/us.png" class="flag-icon" alt="English">
+                English
+            </div>
+        </div>
         
         <!-- Dropdown do Usuário -->
         <div class="user-dropdown" id="userDropdown">
@@ -572,35 +664,34 @@
             </div>
             <div class="user-info">
                 <div class="info-item">
-                    <span class="info-label">Email:</span>
+                    <span class="info-label" id="infoEmail">Email:</span>
                     <span class="info-value" id="displayUserEmail">Carregando...</span>
                 </div>
                 <div class="info-item">
-                    <span class="info-label">Telefone:</span>
+                    <span class="info-label" id="infoPhone">Telefone:</span>
                     <span class="info-value" id="displayUserPhone">Carregando...</span>
                 </div>
                 <div class="user-bio">
-                    <div class="info-label">Biografia:</div>
+                    <div class="info-label" id="infoBio">Biografia:</div>
                     <div class="bio-text" id="displayUserBio">Carregando...</div>
                 </div>
             </div>
             <div class="user-actions">
                 <button class="edit-btn" id="editProfileBtn">
-                    <i class="fas fa-edit"></i> Editar Perfil
+                    <i class="fas fa-edit"></i> <span id="editProfileText">Editar Perfil</span>
                 </button>
             </div>
         </div>
     </nav>
     
     <div class="container">
-        <h2 class="page-title">Informações e Contato</h2>
+        <h2 class="page-title" id="pageTitle">Informações e Contato</h2>
         
         <div class="info-section">
-            <h3 class="info-title">Localização</h3>
-            <p>Venha nos visitar! Estamos localizados em:</p>
+            <h3 class="info-title" id="locationTitle">Localização</h3>
+            <p id="locationText">Venha nos visitar! Estamos localizados em:</p>
             
             <div class="map-container">
-                <!-- Mapa centralizado no Colégio Szymanski -->
                 <iframe 
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3599.920056482128!2d-49.4046239244756!3d-25.55997777750093!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dd4890ddfcd70d%3A0x319ff7ef7d4e9c8c!2sCol%C3%A9gio%20Estadual%20Professor%20J%C3%BAlio%20Szymanski!5e0!3m2!1spt-BR!2sbr!4v1718658532978!5m2!1spt-BR!2sbr" 
                     allowfullscreen="" 
@@ -610,16 +701,16 @@
             </div>
             
             <div class="address-info">
-                <h4>Endereço Completo</h4>
-                <p><strong>Colégio Estadual Professor Júlio Szymanski</strong></p>
-                <p>R. São Vicente de Paulo, 76 - Centro</p>
-                <p>Araucária - PR, 83701-340</p>
-                <p>Telefone: (41) 3642-4089</p>
+                <h4 id="addressTitle">Endereço Completo</h4>
+                <p><strong id="schoolName">Colégio Estadual Professor Júlio Szymanski</strong></p>
+                <p id="schoolAddress">R. São Vicente de Paulo, 76 - Centro</p>
+                <p id="schoolCity">Araucária - PR, 83701-340</p>
+                <p id="schoolPhone">Telefone: (41) 3642-4089</p>
             </div>
             
             <div style="text-align: center; margin-top: 1.5rem;">
                 <a href="https://maps.app.goo.gl/P2QPH524FgP8BNkKA" target="_blank" class="info-link">
-                    <i class="fas fa-map-marker-alt"></i> Abrir no Google Maps
+                    <i class="fas fa-map-marker-alt"></i> <span id="openMapsText">Abrir no Google Maps</span>
                 </a>
             </div>
         </div>
@@ -627,92 +718,102 @@
         <div class="info-grid">
             <div class="info-card">
                 <div class="info-icon"><i class="fas fa-phone"></i></div>
-                <h3>Contato</h3>
-                <p>Entre em contato conosco via WhatsApp para mais informações</p>
-                <a href="https://api.whatsapp.com/send?phone=%2B554136424089" target="_blank" class="info-link">Abrir WhatsApp</a>
+                <h3 id="contactTitle">Contato</h3>
+                <p id="contactText">Entre em contato conosco via WhatsApp para mais informações</p>
+                <a href="https://api.whatsapp.com/send?phone=%2B554136424089" target="_blank" class="info-link">
+                    <span id="whatsappText">Abrir WhatsApp</span>
+                </a>
             </div>
             
             <div class="info-card">
                 <div class="info-icon"><i class="fab fa-facebook"></i></div>
-                <h3>Facebook</h3>
-                <p>Acompanhe nossas novidades e eventos pelo Facebook</p>
-                <a href="https://www.facebook.com/share/1Xt7qPghFc/" target="_blank" class="info-link">Visitar Facebook</a>
+                <h3 id="facebookTitle">Facebook</h3>
+                <p id="facebookText">Acompanhe nossas novidades e eventos pelo Facebook</p>
+                <a href="https://www.facebook.com/share/1Xt7qPghFc/" target="_blank" class="info-link">
+                    <span id="visitFacebookText">Visitar Facebook</span>
+                </a>
             </div>
             
             <div class="info-card">
                 <div class="info-icon"><i class="fab fa-instagram"></i></div>
-                <h3>Instagram</h3>
-                <p>Siga-nos no Instagram para ficar por dentro do dia a dia do colégio</p>
-                <a href="https://www.instagram.com/colegioszymanski?igsh=MWhraDN6cjRuMTFkNA==" target="_blank" class="info-link">Seguir no Instagram</a>
+                <h3 id="instagramTitle">Instagram</h3>
+                <p id="instagramText">Siga-nos no Instagram para ficar por dentro do dia a dia do colégio</p>
+                <a href="https://www.instagram.com/colegioszymanski?igsh=MWhraDN6cjRuMTFkNA==" target="_blank" class="info-link">
+                    <span id="followInstagramText">Seguir no Instagram</span>
+                </a>
             </div>
         </div>
         
         <div class="info-section">
-            <h3 class="info-title">Horário de Atendimento</h3>
-            <p>Estamos disponíveis para atendimento durante os seguintes horários:</p>
+            <h3 class="info-title" id="hoursTitle">Horário de Atendimento</h3>
+            <p id="hoursText">Estamos disponíveis para atendimento durante os seguintes horários:</p>
             <ul style="list-style-type: none; padding: 1rem 0;">
-                <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;">Segunda a sexta: 7h às 18h</li>
-                <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;">Sábado: 8h às 12h</li>
-                <li style="padding: 0.5rem 0;">Domingo: Fechado</li>
+                <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;" id="weekHours">Segunda a sexta: 7h às 18h</li>
+                <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;" id="saturdayHours">Sábado: 8h às 12h</li>
+                <li style="padding: 0.5rem 0;" id="sundayHours">Domingo: Fechado</li>
             </ul>
         </div>
     </div>
     
     <footer>
-        <p>&copy; 2025 Colégio Estadual Professor Júlio Szymanski - Todos os direitos reservados</p>
+        <p id="footerText">&copy; 2025 Colégio Estadual Professor Júlio Szymanski - Todos os direitos reservados</p>
         <a href="https://api.whatsapp.com/send?phone=5541997442841&text=Olá! Preciso de ajuda com o portal do Colégio Szymanski." 
            target="_blank" 
            class="footer-link">
-            <i class="fab fa-whatsapp"></i> Entre em contato com o desenvolvedor
+            <i class="fab fa-whatsapp"></i> <span id="contactDevText">Entre em contato com o desenvolvedor</span>
         </a>
     </footer>
 
     <!-- Modal de Edição de Perfil -->
     <div class="modal" id="editModal">
         <div class="modal-content">
-            <h3>Editar Perfil</h3>
+            <h3 id="editProfileTitle">Editar Perfil</h3>
             <form id="profileForm">
                 <div class="avatar-upload">
                     <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="Preview" class="avatar-preview" id="avatarPreview">
                     <input type="file" id="avatarInput" class="file-input" accept="image/*">
                     <label for="avatarInput" class="file-label">
-                        <i class="fas fa-camera"></i> Alterar Foto
+                        <i class="fas fa-camera"></i> <span id="changePhotoText">Alterar Foto</span>
                     </label>
                 </div>
                 
                 <div class="form-group">
-                    <label for="userName">Nome Completo</label>
+                    <label for="userName" id="nameLabel">Nome Completo</label>
                     <input type="text" id="userName" required>
                 </div>
                 
                 <div class="form-group">
-                    <label for="userEmail">Email</label>
+                    <label for="userEmail" id="emailLabel">Email</label>
                     <input type="email" id="userEmail" required>
                 </div>
                 
                 <div class="form-group">
-                    <label for="userPhone">Telefone</label>
+                    <label for="userPhone" id="phoneLabel">Telefone</label>
                     <input type="tel" id="userPhone">
                 </div>
                 
                 <div class="form-group">
-                    <label for="userRole">Tipo de Usuário</label>
+                    <label for="userRole" id="roleLabel">Tipo de Usuário</label>
                     <select id="userRole" disabled>
-                        <option value="aluno">Aluno</option>
-                        <option value="professor">Professor</option>
-                        <option value="responsavel">Responsável</option>
+                        <option value="aluno" id="optionStudent">Aluno</option>
+                        <option value="professor" id="optionTeacher">Professor</option>
+                        <option value="responsavel" id="optionParent">Responsável</option>
                     </select>
-                    <small style="color: #666;">* O tipo de usuário não pode ser alterado</small>
+                    <small style="color: #666;" id="roleNote">* O tipo de usuário não pode ser alterado</small>
                 </div>
                 
                 <div class="form-group">
-                    <label for="userBio">Biografia</label>
+                    <label for="userBio" id="bioLabel">Biografia</label>
                     <textarea id="userBio" placeholder="Conte um pouco sobre você..."></textarea>
                 </div>
                 
                 <div class="modal-buttons">
-                    <button type="button" class="modal-btn cancel-btn" id="cancelEdit">Cancelar</button>
-                    <button type="submit" class="modal-btn save-btn">Salvar Alterações</button>
+                    <button type="button" class="modal-btn cancel-btn" id="cancelEdit">
+                        <span id="cancelText">Cancelar</span>
+                    </button>
+                    <button type="submit" class="modal-btn save-btn">
+                        <span id="saveText">Salvar Alterações</span>
+                    </button>
                 </div>
             </form>
         </div>
@@ -721,21 +822,264 @@
     <!-- Modal de confirmação de logout -->
     <div class="modal" id="logoutModal">
         <div class="modal-content">
-            <h3>Confirmar Saída</h3>
-            <p>Tem certeza que deseja sair da sua conta?</p>
+            <h3 id="logoutTitle">Confirmar Saída</h3>
+            <p id="logoutText">Tem certeza que deseja sair da sua conta?</p>
             <div class="modal-buttons">
-                <button class="modal-btn confirm-btn" id="confirmLogout">Sim, Sair</button>
-                <button class="modal-btn cancel-btn" id="cancelLogout">Cancelar</button>
+                <button class="modal-btn confirm-btn" id="confirmLogout">
+                    <span id="yesLogoutText">Sim, Sair</span>
+                </button>
+                <button class="modal-btn cancel-btn" id="cancelLogout">
+                    <span id="cancelLogoutText">Cancelar</span>
+                </button>
             </div>
         </div>
     </div>
 
     <script>
-        // Sistema de Perfil do Usuário
+        // Sistema de Idiomas
+        const translations = {
+            pt: {
+                // Navegação
+                navInicio: "Início",
+                navCursos: "Cursos",
+                navHistoria: "História",
+                navFeira: "Feiras de Profissão",
+                navPlataformas: "Plataformas",
+                navInfo: "Info",
+                
+                // Botões
+                userBtnText: "Meu Perfil",
+                languageBtnText: "Português",
+                logoutBtnText: "Sair da Conta",
+                editProfileText: "Editar Perfil",
+                
+                // Títulos
+                headerTitle: "Portal Szymanski",
+                pageTitle: "Informações e Contato",
+                locationTitle: "Localização",
+                contactTitle: "Contato",
+                facebookTitle: "Facebook",
+                instagramTitle: "Instagram",
+                hoursTitle: "Horário de Atendimento",
+                addressTitle: "Endereço Completo",
+                
+                // Textos
+                locationText: "Venha nos visitar! Estamos localizados em:",
+                contactText: "Entre em contato conosco via WhatsApp para mais informações",
+                facebookText: "Acompanhe nossas novidades e eventos pelo Facebook",
+                instagramText: "Siga-nos no Instagram para ficar por dentro do dia a dia do colégio",
+                hoursText: "Estamos disponíveis para atendimento durante os seguintes horários:",
+                openMapsText: "Abrir no Google Maps",
+                whatsappText: "Abrir WhatsApp",
+                visitFacebookText: "Visitar Facebook",
+                followInstagramText: "Seguir no Instagram",
+                
+                // Horários
+                weekHours: "Segunda a sexta: 7h às 18h",
+                saturdayHours: "Sábado: 8h às 12h",
+                sundayHours: "Domingo: Fechado",
+                
+                // Informações da escola
+                schoolName: "Colégio Estadual Professor Júlio Szymanski",
+                schoolAddress: "R. São Vicente de Paulo, 76 - Centro",
+                schoolCity: "Araucária - PR, 83701-340",
+                schoolPhone: "Telefone: (41) 3642-4089",
+                
+                // Perfil do usuário
+                infoEmail: "Email:",
+                infoPhone: "Telefone:",
+                infoBio: "Biografia:",
+                
+                // Modal de edição
+                editProfileTitle: "Editar Perfil",
+                changePhotoText: "Alterar Foto",
+                nameLabel: "Nome Completo",
+                emailLabel: "Email",
+                phoneLabel: "Telefone",
+                roleLabel: "Tipo de Usuário",
+                bioLabel: "Biografia",
+                optionStudent: "Aluno",
+                optionTeacher: "Professor",
+                optionParent: "Responsável",
+                roleNote: "* O tipo de usuário não pode ser alterado",
+                cancelText: "Cancelar",
+                saveText: "Salvar Alterações",
+                
+                // Modal de logout
+                logoutTitle: "Confirmar Saída",
+                logoutText: "Tem certeza que deseja sair da sua conta?",
+                yesLogoutText: "Sim, Sair",
+                cancelLogoutText: "Cancelar",
+                
+                // Rodapé
+                footerText: "© 2025 Colégio Estadual Professor Júlio Szymanski - Todos os direitos reservados",
+                contactDevText: "Entre em contato com o desenvolvedor"
+            },
+            
+            es: {
+                // Navegação
+                navInicio: "Inicio",
+                navCursos: "Cursos",
+                navHistoria: "Historia",
+                navFeira: "Ferias de Profesión",
+                navPlataformas: "Plataformas",
+                navInfo: "Información",
+                
+                // Botões
+                userBtnText: "Mi Perfil",
+                languageBtnText: "Español",
+                logoutBtnText: "Cerrar Sesión",
+                editProfileText: "Editar Perfil",
+                
+                // Títulos
+                headerTitle: "Portal Szymanski",
+                pageTitle: "Información y Contacto",
+                locationTitle: "Ubicación",
+                contactTitle: "Contacto",
+                facebookTitle: "Facebook",
+                instagramTitle: "Instagram",
+                hoursTitle: "Horario de Atención",
+                addressTitle: "Dirección Completa",
+                
+                // Textos
+                locationText: "¡Ven a visitarnos! Estamos ubicados en:",
+                contactText: "Contáctenos por WhatsApp para más información",
+                facebookText: "Siga nuestras novedades y eventos en Facebook",
+                instagramText: "Síganos en Instagram para estar al día con la vida del colegio",
+                hoursText: "Estamos disponibles para atención durante los siguientes horarios:",
+                openMapsText: "Abrir en Google Maps",
+                whatsappText: "Abrir WhatsApp",
+                visitFacebookText: "Visitar Facebook",
+                followInstagramText: "Seguir en Instagram",
+                
+                // Horários
+                weekHours: "Lunes a viernes: 7h a 18h",
+                saturdayHours: "Sábado: 8h a 12h",
+                sundayHours: "Domingo: Cerrado",
+                
+                // Informações da escola
+                schoolName: "Colegio Estatal Profesor Júlio Szymanski",
+                schoolAddress: "R. São Vicente de Paulo, 76 - Centro",
+                schoolCity: "Araucária - PR, 83701-340",
+                schoolPhone: "Teléfono: (41) 3642-4089",
+                
+                // Perfil do usuário
+                infoEmail: "Email:",
+                infoPhone: "Teléfono:",
+                infoBio: "Biografía:",
+                
+                // Modal de edição
+                editProfileTitle: "Editar Perfil",
+                changePhotoText: "Cambiar Foto",
+                nameLabel: "Nombre Completo",
+                emailLabel: "Email",
+                phoneLabel: "Teléfono",
+                roleLabel: "Tipo de Usuario",
+                bioLabel: "Biografía",
+                optionStudent: "Estudiante",
+                optionTeacher: "Profesor",
+                optionParent: "Responsable",
+                roleNote: "* El tipo de usuario no puede ser cambiado",
+                cancelText: "Cancelar",
+                saveText: "Guardar Cambios",
+                
+                // Modal de logout
+                logoutTitle: "Confirmar Salida",
+                logoutText: "¿Está seguro de que desea salir de su cuenta?",
+                yesLogoutText: "Sí, Salir",
+                cancelLogoutText: "Cancelar",
+                
+                // Rodapé
+                footerText: "© 2025 Colegio Estatal Profesor Júlio Szymanski - Todos los derechos reservados",
+                contactDevText: "Contactar al desarrollador"
+            },
+            
+            en: {
+                // Navegação
+                navInicio: "Home",
+                navCursos: "Courses",
+                navHistoria: "History",
+                navFeira: "Career Fairs",
+                navPlataformas: "Platforms",
+                navInfo: "Info",
+                
+                // Botões
+                userBtnText: "My Profile",
+                languageBtnText: "English",
+                logoutBtnText: "Logout",
+                editProfileText: "Edit Profile",
+                
+                // Títulos
+                headerTitle: "Szymanski Portal",
+                pageTitle: "Information and Contact",
+                locationTitle: "Location",
+                contactTitle: "Contact",
+                facebookTitle: "Facebook",
+                instagramTitle: "Instagram",
+                hoursTitle: "Business Hours",
+                addressTitle: "Full Address",
+                
+                // Textos
+                locationText: "Come visit us! We are located at:",
+                contactText: "Contact us via WhatsApp for more information",
+                facebookText: "Follow our news and events on Facebook",
+                instagramText: "Follow us on Instagram to stay updated with school life",
+                hoursText: "We are available for assistance during the following hours:",
+                openMapsText: "Open in Google Maps",
+                whatsappText: "Open WhatsApp",
+                visitFacebookText: "Visit Facebook",
+                followInstagramText: "Follow on Instagram",
+                
+                // Horários
+                weekHours: "Monday to Friday: 7am to 6pm",
+                saturdayHours: "Saturday: 8am to 12pm",
+                sundayHours: "Sunday: Closed",
+                
+                // Informações da escola
+                schoolName: "State School Professor Júlio Szymanski",
+                schoolAddress: "R. São Vicente de Paulo, 76 - Centro",
+                schoolCity: "Araucária - PR, 83701-340",
+                schoolPhone: "Phone: (41) 3642-4089",
+                
+                // Perfil do usuário
+                infoEmail: "Email:",
+                infoPhone: "Phone:",
+                infoBio: "Biography:",
+                
+                // Modal de edição
+                editProfileTitle: "Edit Profile",
+                changePhotoText: "Change Photo",
+                nameLabel: "Full Name",
+                emailLabel: "Email",
+                phoneLabel: "Phone",
+                roleLabel: "User Type",
+                bioLabel: "Biography",
+                optionStudent: "Student",
+                optionTeacher: "Teacher",
+                optionParent: "Parent",
+                roleNote: "* User type cannot be changed",
+                cancelText: "Cancel",
+                saveText: "Save Changes",
+                
+                // Modal de logout
+                logoutTitle: "Confirm Logout",
+                logoutText: "Are you sure you want to log out of your account?",
+                yesLogoutText: "Yes, Logout",
+                cancelLogoutText: "Cancel",
+                
+                // Rodapé
+                footerText: "© 2025 State School Professor Júlio Szymanski - All rights reserved",
+                contactDevText: "Contact the developer"
+            }
+        };
+
+        // Sistema de Perfil do Usuário e Idiomas
         document.addEventListener('DOMContentLoaded', function() {
             // Elementos do DOM
             const userBtn = document.getElementById('userBtn');
             const userDropdown = document.getElementById('userDropdown');
+            const languageBtn = document.getElementById('languageBtn');
+            const languageDropdown = document.getElementById('languageDropdown');
             const logoutBtn = document.getElementById('logoutBtn');
             const logoutModal = document.getElementById('logoutModal');
             const confirmLogout = document.getElementById('confirmLogout');
@@ -747,6 +1091,10 @@
             const avatarInput = document.getElementById('avatarInput');
             const avatarPreview = document.getElementById('avatarPreview');
 
+            // Carregar idioma salvo ou usar português como padrão
+            let currentLanguage = localStorage.getItem('language') || 'pt';
+            applyLanguage(currentLanguage);
+
             // Carregar dados do usuário ao iniciar
             loadUserData();
 
@@ -754,16 +1102,47 @@
             userBtn.addEventListener('click', function(e) {
                 e.stopPropagation();
                 userDropdown.classList.toggle('active');
+                languageDropdown.classList.remove('active');
             });
 
-            // Fechar dropdown ao clicar fora
-            document.addEventListener('click', function() {
+            // Abrir/fechar dropdown do idioma
+            languageBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                languageDropdown.classList.toggle('active');
                 userDropdown.classList.remove('active');
             });
 
-            // Prevenir fechamento ao clicar dentro do dropdown
+            // Fechar dropdowns ao clicar fora
+            document.addEventListener('click', function() {
+                userDropdown.classList.remove('active');
+                languageDropdown.classList.remove('active');
+            });
+
+            // Prevenir fechamento ao clicar dentro dos dropdowns
             userDropdown.addEventListener('click', function(e) {
                 e.stopPropagation();
+            });
+
+            languageDropdown.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+
+            // Trocar idioma
+            document.querySelectorAll('.language-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const lang = this.getAttribute('data-lang');
+                    currentLanguage = lang;
+                    localStorage.setItem('language', lang);
+                    applyLanguage(lang);
+                    
+                    // Atualizar estado ativo
+                    document.querySelectorAll('.language-option').forEach(opt => {
+                        opt.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                    
+                    languageDropdown.classList.remove('active');
+                });
             });
 
             // Abrir modal de edição
@@ -777,7 +1156,7 @@
                 editModal.style.display = 'none';
             });
 
-            // Upload de avatar (apenas preview, não salva ainda)
+            // Upload de avatar
             avatarInput.addEventListener('change', function(e) {
                 const file = e.target.files[0];
                 if (file) {
@@ -789,12 +1168,12 @@
                 }
             });
 
-            // Salvar perfil (apenas quando clicar em Salvar)
+            // Salvar perfil
             profileForm.addEventListener('submit', function(e) {
                 e.preventDefault();
                 saveUserData();
                 editModal.style.display = 'none';
-                loadUserData(); // Atualizar display com novos dados
+                loadUserData();
             });
 
             // Sistema de Logout
@@ -804,6 +1183,7 @@
 
             confirmLogout.addEventListener('click', function() {
                 sessionStorage.removeItem('currentUser');
+                localStorage.removeItem('language');
                 window.location.href = 'index.html';
             });
 
@@ -821,16 +1201,31 @@
                 }
             });
 
-            // Funções auxiliares
+            // Função para aplicar idioma
+            function applyLanguage(lang) {
+                const translation = translations[lang];
+                for (const [key, value] of Object.entries(translation)) {
+                    const element = document.getElementById(key);
+                    if (element) {
+                        element.textContent = value;
+                    }
+                }
+                
+                // Atualizar placeholder do textarea
+                const bioTextarea = document.getElementById('userBio');
+                if (bioTextarea) {
+                    bioTextarea.placeholder = translation.bioLabel || "Conte um pouco sobre você...";
+                }
+            }
+
+            // Funções auxiliares do perfil
             function loadUserData() {
-                // Tentar carregar do sessionStorage
                 const savedUser = sessionStorage.getItem('currentUser');
                 
                 if (savedUser) {
                     const userData = JSON.parse(savedUser);
                     updateUserDisplay(userData);
                 } else {
-                    // Se não existir, usar dados padrão (apenas para demonstração)
                     const defaultUser = {
                         name: "Novo Usuário",
                         email: "usuario@email.com",
@@ -850,11 +1245,10 @@
                 document.getElementById('displayUserBio').textContent = userData.bio;
                 document.getElementById('userAvatar').src = userData.avatar;
                 
-                // Atualizar role com texto formatado
                 const roleText = {
-                    'aluno': 'Aluno',
-                    'professor': 'Professor',
-                    'responsavel': 'Responsável'
+                    'aluno': translations[currentLanguage].optionStudent || 'Aluno',
+                    'professor': translations[currentLanguage].optionTeacher || 'Professor',
+                    'responsavel': translations[currentLanguage].optionParent || 'Responsável'
                 };
                 document.getElementById('displayUserRole').textContent = roleText[userData.role] || userData.role;
             }
@@ -873,7 +1267,6 @@
             }
 
             function saveUserData() {
-                // Coletar dados do formulário
                 const userData = {
                     name: document.getElementById('userName').value,
                     email: document.getElementById('userEmail').value,
@@ -883,19 +1276,13 @@
                     avatar: document.getElementById('avatarPreview').src
                 };
 
-                // Salvar no sessionStorage (aqui você substituiria pelo banco de dados)
                 sessionStorage.setItem('currentUser', JSON.stringify(userData));
-                
-                // Aqui você adicionaria a lógica para salvar no banco de dados
-                console.log('Dados salvos (simulação do banco):', userData);
-                
-                alert('Perfil atualizado com sucesso!');
+                alert(translations[currentLanguage].saveText + '!');
             }
 
             // Verificar se o usuário está logado
             const currentUser = sessionStorage.getItem('currentUser');
             if (!currentUser) {
-                // Se não estiver logado, redirecionar para o login
                 window.location.href = 'index.html';
             }
         });
