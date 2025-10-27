@@ -1,45 +1,536 @@
-<script>
-// Aplicar idioma automaticamente em todas as páginas
-document.addEventListener('DOMContentLoaded', function() {
-    const savedLanguage = localStorage.getItem('portalLanguage') || 'pt';
-    const translation = {
-        pt: {
-            navInicio: "Início",
-            navCursos: "Cursos", 
-            navHistoria: "História",
-            navFeira: "Feiras de Profissão",
-            navPlataformas: "Plataformas",
-            navInfo: "Info",
-            headerTitle: "Portal Szymanski"
-        },
-        es: {
-            navInicio: "Inicio",
-            navCursos: "Cursos",
-            navHistoria: "Historia", 
-            navFeira: "Ferias de Profesión",
-            navPlataformas: "Plataformas",
-            navInfo: "Información",
-            headerTitle: "Portal Szymanski"
-        },
-        en: {
-            navInicio: "Home",
-            navCursos: "Courses",
-            navHistoria: "History",
-            navFeira: "Career Fairs", 
-            navPlataformas: "Platforms",
-            navInfo: "Info",
-            headerTitle: "Szymanski Portal"
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informações - Colégio Szymanski</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-    };
-    
-    const texts = translation[savedLanguage];
-    if (texts) {
-        for (const [key, value] of Object.entries(texts)) {
-            const element = document.getElementById(key);
-            if (element) {
-                element.textContent = value;
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(to right, #1a2a6c, #b21f1f, #fdbb2d);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+        
+        nav {
+            background-color: #222;
+            display: flex;
+            justify-content: center;
+            padding: 0.8rem;
+            flex-wrap: wrap;
+            position: relative;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.7rem 1.2rem;
+            margin: 0 0.3rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            font-weight: 500;
+        }
+        
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .language-btn {
+            position: absolute;
+            right: 120px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .language-dropdown {
+            display: none;
+            position: absolute;
+            right: 120px;
+            top: 100%;
+            background: white;
+            min-width: 150px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 1000;
+            margin-top: 5px;
+        }
+        
+        .language-dropdown.active {
+            display: block;
+        }
+        
+        .language-option {
+            padding: 0.8rem 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .language-option:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .flag-icon {
+            width: 20px;
+            height: 15px;
+            border-radius: 2px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        
+        .page-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #1a2a6c;
+            font-size: 2.5rem;
+            font-family: 'Bebas Neue', sans-serif;
+        }
+        
+        .info-section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .info-title {
+            color: #1a2a6c;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.2rem;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .info-card {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s;
+            border-left: 4px solid #b21f1f;
+        }
+        
+        .info-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .info-icon {
+            color: #1a2a6c;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .info-card h3 {
+            color: #1a2a6c;
+            margin-bottom: 1rem;
+        }
+        
+        .info-card p {
+            margin-bottom: 1.5rem;
+            color: #555;
+        }
+        
+        .info-link {
+            display: inline-block;
+            background-color: #1a2a6c;
+            color: white;
+            padding: 0.7rem 1.5rem;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        
+        .map-container {
+            margin-top: 2rem;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            height: 400px;
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .address-info {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            text-align: center;
+            border-left: 4px solid #fdbb2d;
+        }
+        
+        footer {
+            background-color: #222;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 3rem;
+        }
+        
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                align-items: center;
+                padding-bottom: 4rem;
+            }
+            
+            nav a {
+                margin: 0.3rem 0;
+                width: 100%;
+                text-align: center;
+            }
+            
+            .language-btn {
+                position: static;
+                transform: none;
+                margin-top: 1rem;
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .language-dropdown {
+                left: 50%;
+                transform: translateX(-50%);
+                min-width: 200px;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .map-container {
+                height: 300px;
             }
         }
-    }
-});
-</script>
+    </style>
+</head>
+<body>
+    <header>
+        <h1 id="headerTitle">Portal Szymanski</h1>
+    </header>
+    
+    <nav>
+        <a href="dashboard.html" id="navInicio">Início</a>
+        <a href="cursos.html" id="navCursos">Cursos</a>
+        <a href="historia.html" id="navHistoria">História</a>
+        <a href="feira.html" id="navFeira">Feiras de Profissão</a>
+        <a href="plataformas.html" id="navPlataformas">Plataformas</a>
+        <a href="info.html" id="navInfo">Info</a>
+        
+        <button class="language-btn" id="languageBtn">
+            <i class="fas fa-globe"></i>
+            <span id="languageBtnText">Português</span>
+        </button>
+        
+        <div class="language-dropdown" id="languageDropdown">
+            <div class="language-option" data-lang="pt">
+                <img src="https://flagcdn.com/w20/br.png" class="flag-icon" alt="Português">
+                Português
+            </div>
+            <div class="language-option" data-lang="es">
+                <img src="https://flagcdn.com/w20/es.png" class="flag-icon" alt="Español">
+                Español
+            </div>
+            <div class="language-option" data-lang="en">
+                <img src="https://flagcdn.com/w20/us.png" class="flag-icon" alt="English">
+                English
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <h2 class="page-title" id="pageTitle">Informações e Contato</h2>
+        
+        <div class="info-section">
+            <h3 class="info-title" id="locationTitle">Localização</h3>
+            <p id="locationText">Venha nos visitar! Estamos localizados em:</p>
+            
+            <div class="map-container">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3599.920056482128!2d-49.4046239244756!3d-25.55997777750093!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dd4890ddfcd70d%3A0x319ff7ef7d4e9c8c!2sCol%C3%A9gio%20Estadual%20Professor%20J%C3%BAlio%20Szymanski!5e0!3m2!1spt-BR!2sbr!4v1718658532978!5m2!1spt-BR!2sbr" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+            
+            <div class="address-info">
+                <h4 id="addressTitle">Endereço Completo</h4>
+                <p><strong id="schoolName">Colégio Estadual Professor Júlio Szymanski</strong></p>
+                <p id="schoolAddress">R. São Vicente de Paulo, 76 - Centro</p>
+                <p id="schoolCity">Araucária - PR, 83701-340</p>
+                <p id="schoolPhone">Telefone: (41) 3642-4089</p>
+            </div>
+            
+            <div style="text-align: center; margin-top: 1.5rem;">
+                <a href="https://maps.app.goo.gl/P2QPH524FgP8BNkKA" target="_blank" class="info-link">
+                    <i class="fas fa-map-marker-alt"></i> <span id="openMapsText">Abrir no Google Maps</span>
+                </a>
+            </div>
+        </div>
+        
+        <div class="info-grid">
+            <div class="info-card">
+                <div class="info-icon"><i class="fas fa-phone"></i></div>
+                <h3 id="contactTitle">Contato</h3>
+                <p id="contactText">Entre em contato conosco via WhatsApp para mais informações</p>
+                <a href="https://api.whatsapp.com/send?phone=%2B554136424089" target="_blank" class="info-link">
+                    <span id="whatsappText">Abrir WhatsApp</span>
+                </a>
+            </div>
+            
+            <div class="info-card">
+                <div class="info-icon"><i class="fab fa-facebook"></i></div>
+                <h3 id="facebookTitle">Facebook</h3>
+                <p id="facebookText">Acompanhe nossas novidades e eventos pelo Facebook</p>
+                <a href="https://www.facebook.com/share/1Xt7qPghFc/" target="_blank" class="info-link">
+                    <span id="visitFacebookText">Visitar Facebook</span>
+                </a>
+            </div>
+            
+            <div class="info-card">
+                <div class="info-icon"><i class="fab fa-instagram"></i></div>
+                <h3 id="instagramTitle">Instagram</h3>
+                <p id="instagramText">Siga-nos no Instagram para ficar por dentro do dia a dia do colégio</p>
+                <a href="https://www.instagram.com/colegioszymanski?igsh=MWhraDN6cjRuMTFkNA==" target="_blank" class="info-link">
+                    <span id="followInstagramText">Seguir no Instagram</span>
+                </a>
+            </div>
+        </div>
+        
+        <div class="info-section">
+            <h3 class="info-title" id="hoursTitle">Horário de Atendimento</h3>
+            <p id="hoursText">Estamos disponíveis para atendimento durante os seguintes horários:</p>
+            <ul style="list-style-type: none; padding: 1rem 0;">
+                <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;" id="weekHours">Segunda a sexta: 7h às 18h</li>
+                <li style="padding: 0.5rem 0; border-bottom: 1px solid #eee;" id="saturdayHours">Sábado: 8h às 12h</li>
+                <li style="padding: 0.5rem 0;" id="sundayHours">Domingo: Fechado</li>
+            </ul>
+        </div>
+    </div>
+    
+    <footer>
+        <p id="footerText">&copy; 2025 Colégio Estadual Professor Júlio Szymanski - Todos os direitos reservados</p>
+        <a href="https://api.whatsapp.com/send?phone=5541997442841&text=Olá! Preciso de ajuda com o portal do Colégio Szymanski." 
+           target="_blank" 
+           style="color: #fdbb2d; text-decoration: none; margin-top: 0.5rem; display: inline-block;">
+            <i class="fab fa-whatsapp"></i> <span id="contactDevText">Entre em contato com o desenvolvedor</span>
+        </a>
+    </footer>
+
+    <script>
+        // Sistema de Idiomas Simples
+        const translations = {
+            pt: {
+                // Navegação
+                navInicio: "Início",
+                navCursos: "Cursos",
+                navHistoria: "História",
+                navFeira: "Feiras de Profissão",
+                navPlataformas: "Plataformas",
+                navInfo: "Info",
+                headerTitle: "Portal Szymanski",
+                languageBtnText: "Português",
+                
+                // Conteúdo
+                pageTitle: "Informações e Contato",
+                locationTitle: "Localização",
+                locationText: "Venha nos visitar! Estamos localizados em:",
+                addressTitle: "Endereço Completo",
+                schoolName: "Colégio Estadual Professor Júlio Szymanski",
+                schoolAddress: "R. São Vicente de Paulo, 76 - Centro",
+                schoolCity: "Araucária - PR, 83701-340",
+                schoolPhone: "Telefone: (41) 3642-4089",
+                openMapsText: "Abrir no Google Maps",
+                contactTitle: "Contato",
+                contactText: "Entre em contato conosco via WhatsApp para mais informações",
+                whatsappText: "Abrir WhatsApp",
+                facebookTitle: "Facebook",
+                facebookText: "Acompanhe nossas novidades e eventos pelo Facebook",
+                visitFacebookText: "Visitar Facebook",
+                instagramTitle: "Instagram",
+                instagramText: "Siga-nos no Instagram para ficar por dentro do dia a dia do colégio",
+                followInstagramText: "Seguir no Instagram",
+                hoursTitle: "Horário de Atendimento",
+                hoursText: "Estamos disponíveis para atendimento durante os seguintes horários:",
+                weekHours: "Segunda a sexta: 7h às 18h",
+                saturdayHours: "Sábado: 8h às 12h",
+                sundayHours: "Domingo: Fechado",
+                footerText: "© 2025 Colégio Estadual Professor Júlio Szymanski - Todos os direitos reservados",
+                contactDevText: "Entre em contato com o desenvolvedor"
+            },
+            
+            es: {
+                // Navegação
+                navInicio: "Inicio",
+                navCursos: "Cursos",
+                navHistoria: "Historia",
+                navFeira: "Ferias de Profesión",
+                navPlataformas: "Plataformas",
+                navInfo: "Información",
+                headerTitle: "Portal Szymanski",
+                languageBtnText: "Español",
+                
+                // Conteúdo
+                pageTitle: "Información y Contacto",
+                locationTitle: "Ubicación",
+                locationText: "¡Ven a visitarnos! Estamos ubicados en:",
+                addressTitle: "Dirección Completa",
+                schoolName: "Colegio Estatal Profesor Júlio Szymanski",
+                schoolAddress: "R. São Vicente de Paulo, 76 - Centro",
+                schoolCity: "Araucária - PR, 83701-340",
+                schoolPhone: "Teléfono: (41) 3642-4089",
+                openMapsText: "Abrir en Google Maps",
+                contactTitle: "Contacto",
+                contactText: "Contáctenos por WhatsApp para más información",
+                whatsappText: "Abrir WhatsApp",
+                facebookTitle: "Facebook",
+                facebookText: "Siga nuestras novedades y eventos en Facebook",
+                visitFacebookText: "Visitar Facebook",
+                instagramTitle: "Instagram",
+                instagramText: "Síganos en Instagram para estar al día con la vida del colegio",
+                followInstagramText: "Seguir en Instagram",
+                hoursTitle: "Horario de Atención",
+                hoursText: "Estamos disponibles para atención durante los siguientes horarios:",
+                weekHours: "Lunes a viernes: 7h a 18h",
+                saturdayHours: "Sábado: 8h a 12h",
+                sundayHours: "Domingo: Cerrado",
+                footerText: "© 2025 Colegio Estatal Profesor Júlio Szymanski - Todos los derechos reservados",
+                contactDevText: "Contactar al desarrollador"
+            },
+            
+            en: {
+                // Navegação
+                navInicio: "Home",
+                navCursos: "Courses",
+                navHistoria: "History",
+                navFeira: "Career Fairs",
+                navPlataformas: "Platforms",
+                navInfo: "Info",
+                headerTitle: "Szymanski Portal",
+                languageBtnText: "English",
+                
+                // Conteúdo
+                pageTitle: "Information and Contact",
+                locationTitle: "Location",
+                locationText: "Come visit us! We are located at:",
+                addressTitle: "Full Address",
+                schoolName: "State School Professor Júlio Szymanski",
+                schoolAddress: "R. São Vicente de Paulo, 76 - Centro",
+                schoolCity: "Araucária - PR, 83701-340",
+                schoolPhone: "Phone: (41) 3642-4089",
+                openMapsText: "Open in Google Maps",
+                contactTitle: "Contact",
+                contactText: "Contact us via WhatsApp for more information",
+                whatsappText: "Open WhatsApp",
+                facebookTitle: "Facebook",
+                facebookText: "Follow our news and events on Facebook",
+                visitFacebookText: "Visit Facebook",
+                instagramTitle: "Instagram",
+                instagramText: "Follow us on Instagram to stay updated with school life",
+                followInstagramText: "Follow on Instagram",
+                hoursTitle: "Business Hours",
+                hoursText: "We are available for assistance during the following hours:",
+                weekHours: "Monday to Friday: 7am to 6pm",
+                saturdayHours: "Saturday: 8am to 12pm",
+                sundayHours: "Sunday: Closed",
+                footerText: "© 2025 State School Professor Júlio Szymanski - All rights reserved",
+                contactDevText: "Contact the developer"
+            }
+        };
+
+        // Aplicar idioma
+        function applyLanguage(lang) {
+            const translation = translations[lang];
+            for (const [key, value] of Object.entries(translation)) {
+                const element = document.getElementById(key);
+                if (element) {
+                    element.textContent = value;
+                }
+            }
+            localStorage.setItem('portalLanguage', lang);
+        }
+
+        // Carregar idioma salvo
+        function loadLanguage() {
+            const savedLanguage = localStorage.getItem('portalLanguage') || 'pt';
+            applyLanguage(savedLanguage);
+        }
+
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', function() {
+            loadLanguage();
+            
+            const languageBtn = document.getElementById('languageBtn');
+            const languageDropdown = document.getElementById('languageDropdown');
+            
+            languageBtn.addEventListener('click', function() {
+                languageDropdown.classList.toggle('active');
+            });
+            
+            document.querySelectorAll('.language-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const lang = this.getAttribute('data-lang');
+                    applyLanguage(lang);
+                    languageDropdown.classList.remove('active');
+                    alert('Idioma alterado para todo o portal!');
+                });
+            });
+            
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.language-btn') && !e.target.closest('.language-dropdown')) {
+                    languageDropdown.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
