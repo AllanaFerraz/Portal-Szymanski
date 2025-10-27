@@ -24,7 +24,7 @@
         .header-container {
             position: relative;
             width: 100%;
-            height: 180px; /* Altura reduzida */
+            height: 180px;
             overflow: hidden;
             background: linear-gradient(to right, #1a2a6c, #b21f1f);
             display: flex;
@@ -44,19 +44,19 @@
         }
         
         .portal-logo {
-            max-width: 80%;
-            max-height: 80px; /* Altura reduzida da imagem */
+            max-width: 120px;
+            max-height: 120px;
             object-fit: contain;
             margin-bottom: 0.5rem;
-            border-radius: 4px;
+            border-radius: 8px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
         }
         
         .header-slogan {
-            font-size: 1.1rem;
+            font-size: 1.3rem;
             color: white;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
-            margin-top: 0.3rem;
+            margin-top: 0.5rem;
             font-weight: 500;
         }
         
@@ -83,47 +83,6 @@
         
         nav a:hover {
             background-color: rgba(255, 255, 255, 0.2);
-        }
-        
-        /* Hero Section com Imagem */
-        .hero-section {
-            width: 100%;
-            max-height: 500px;
-            overflow: hidden;
-            position: relative;
-            margin-bottom: 2rem;
-        }
-        
-        .hero-image {
-            width: 100%;
-            height: auto;
-            max-height: 400px;
-            object-fit: cover;
-            display: block;
-        }
-        
-        .hero-text {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(26, 42, 108, 0.8);
-            color: white;
-            padding: 1.5rem;
-            text-align: center;
-        }
-        
-        .hero-text h2 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-            color: #fdbb2d;
-        }
-        
-        .hero-text p {
-            font-size: 1.2rem;
-            max-width: 800px;
-            margin: 0 auto;
         }
         
         /* Conteúdo principal */
@@ -237,11 +196,12 @@
             }
             
             .portal-logo {
-                max-height: 70px;
+                max-width: 100px;
+                max-height: 100px;
             }
             
             .header-slogan {
-                font-size: 1rem;
+                font-size: 1.1rem;
             }
             
             nav {
@@ -255,14 +215,6 @@
                 text-align: center;
             }
             
-            .hero-text h2 {
-                font-size: 2rem;
-            }
-            
-            .hero-text p {
-                font-size: 1rem;
-            }
-            
             .highlights {
                 grid-template-columns: 1fr;
             }
@@ -274,19 +226,12 @@
             }
             
             .portal-logo {
-                max-height: 60px;
+                max-width: 80px;
+                max-height: 80px;
             }
             
             .header-slogan {
-                font-size: 0.9rem;
-            }
-            
-            .hero-text {
-                padding: 1rem;
-            }
-            
-            .hero-text h2 {
-                font-size: 1.8rem;
+                font-size: 1rem;
             }
         }
     </style>
@@ -295,8 +240,8 @@
     <header>
         <div class="header-container">
             <div class="logo-container">
-                <!-- Substitua pela URL real da sua imagem -->
-                <img src="https://via.placeholder.com/600x200/1a2a6c/ffffff?text=COLÉGIO+ESTADUAL+PROFESSOR+JÚLIO+SZYMANKSI" 
+                <!-- IMAGEM COMO LOGO PEQUENO -->
+                <img src="WhatsApp Image 2025-10-27 at 14.42.38.jpeg" 
                      alt="Colégio Estadual Professor Júlio Szymanski" class="portal-logo">
                 <p class="header-slogan">Educação de qualidade para construir um futuro melhor</p>
             </div>
@@ -311,16 +256,6 @@
         <a href="plataformas.html">Plataformas</a>
         <a href="info.html">Info</a>
     </nav>
-    
-    <!-- Hero Section com Imagem -->
-    <div class="hero-section">
-        <!-- IMAGEM ADICIONADA AQUI -->
-        <img src="WhatsApp Image 2025-10-27 at 14.42.38.jpeg" alt="Colégio Szymanski" class="hero-image">
-        <div class="hero-text">
-            <h2>Educação de qualidade para construir um futuro melhor</h2>
-            <p>Formando cidadãos preparados para os desafios do amanhã</p>
-        </div>
-    </div>
     
     <div class="container">
         <section id="sobre">
