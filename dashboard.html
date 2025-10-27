@@ -85,6 +85,47 @@
             background-color: rgba(255, 255, 255, 0.2);
         }
         
+        /* Hero Section com Imagem */
+        .hero-section {
+            width: 100%;
+            max-height: 500px;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 2rem;
+        }
+        
+        .hero-image {
+            width: 100%;
+            height: auto;
+            max-height: 400px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .hero-text {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(26, 42, 108, 0.8);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .hero-text h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: #fdbb2d;
+        }
+        
+        .hero-text p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
         /* Conteúdo principal */
         .container {
             max-width: 1200px;
@@ -214,6 +255,14 @@
                 text-align: center;
             }
             
+            .hero-text h2 {
+                font-size: 2rem;
+            }
+            
+            .hero-text p {
+                font-size: 1rem;
+            }
+            
             .highlights {
                 grid-template-columns: 1fr;
             }
@@ -230,6 +279,14 @@
             
             .header-slogan {
                 font-size: 0.9rem;
+            }
+            
+            .hero-text {
+                padding: 1rem;
+            }
+            
+            .hero-text h2 {
+                font-size: 1.8rem;
             }
         }
     </style>
@@ -249,11 +306,21 @@
     <nav>
         <a href="dashboard.html">Início</a>
         <a href="cursos.html">Cursos</a>
-        <a href="história.html">História</a>
+        <a href="historia.html">História</a>
         <a href="feira.html">Feiras de Profissão</a>
         <a href="plataformas.html">Plataformas</a>
         <a href="info.html">Info</a>
     </nav>
+    
+    <!-- Hero Section com Imagem -->
+    <div class="hero-section">
+        <!-- IMAGEM ADICIONADA AQUI -->
+        <img src="WhatsApp Image 2025-10-27 at 14.42.38.jpeg" alt="Colégio Szymanski" class="hero-image">
+        <div class="hero-text">
+            <h2>Educação de qualidade para construir um futuro melhor</h2>
+            <p>Formando cidadãos preparados para os desafios do amanhã</p>
+        </div>
+    </div>
     
     <div class="container">
         <section id="sobre">
