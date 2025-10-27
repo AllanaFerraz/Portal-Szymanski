@@ -32,42 +32,7 @@
       padding: 20px; 
       text-align: center; 
     } 
-    /* Carrossel */ 
-    .carousel {
-      position: relative;
-      max-width: 800px; 
-      margin: 30px auto; overflow: hidden; 
-      border-radius: 12px; 
-      box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
-    }
-    .carousel img {
-      width: 100%; 
-      display: none; 
-    }
-    .carousel img.active { 
-      display: block; 
-    } 
-    /* Botões de navegação */
-    .prev, .next { 
-      position: absolute; 
-      top: 50%; 
-      transform: translateY(-50%); 
-      background-color: rgba(0,31,84,0.7);/* navy transparente */ 
-      color: white; 
-      border: none; 
-      padding: 12px; 
-      cursor: pointer;
-      border-radius: 50%; 
-      font-size: 20px;
-    }
-    .prev:hover, .next:hover { 
-      background-color: #001F54;
-    }
-    .prev { 
-      left: 15px; 
-    } .next { 
-      right: 15px;
-    }
+    
     footer { 
       background: #001F54;
       color: white; 
@@ -127,6 +92,45 @@
       background-color: #444;
     }
 
+    /* Seção sobre o curso */
+    .sobre-curso {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .sobre-curso div {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      padding: 25px 30px;
+      color: #333;
+    }
+
+    .sobre-curso h2 {
+      color: #001F54;
+      margin-bottom: 15px;
+    }
+
+    .sobre-curso p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      text-align: left;
+    }
+
+    /* Seção diferenciais */
+    .diferenciais {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .diferenciais h3 {
+      color: #001F54;
+      margin-bottom: 15px;
+    }
+
   </style>  
 </head>
   
@@ -151,40 +155,25 @@
       <!-- Botão Voltar aos Cursos -->
       <a href="cursos.html" class="back-button">← Voltar aos Cursos</a>
       
-      <section class="sobre-curso" style="max-width: 800px; margin: 0 auto; padding: 20px;">
-        <div style="
-          background-color: #fff;
-          border: 1px solid #ddd;
-          border-radius: 8px;
-          box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-          padding: 25px 30px;
-          color: #333;
-        ">
+      <section class="sobre-curso">
+        <div>
           <h2>Sobre o Curso</h2>
-          <p style="font-size: 1.1rem; line-height: 1.6;">
+          <p>
             O <strong>Curso Subsequente</strong> é uma excelente oportunidade para quem concluiu o Ensino Médio e deseja se aprofundar nas áreas de gestão e administração de empresas de forma rápida e objetiva.
             Este curso visa preparar os alunos para o mercado de trabalho com uma formação técnica de qualidade, focando em práticas de gestão, organização e liderança.
           </p>
         </div>
       </section>
 
-      <div class="carousel">
-        <img src="https://picsum.photos/id/1035/800/400" class="active" alt="Administração Ensino Médio 1">
-        <img src="https://picsum.photos/id/1037/800/400" alt="Administração Ensino Médio 2">
-        <img src="https://picsum.photos/id/1041/800/400" alt="Administração Ensino Médio 3"> 
-        <button class="prev" onclick="mudarSlide(-1)">&#10094;</button> 
-        <button class="next" onclick="mudarSlide(1)">&#10095;</button>
-      </div>
-
-      <!-- Conteúdo adicional -->
-      <section class="diferenciais" style="max-width: 800px; margin: 0 auto 40px; padding: 0 20px;">
+      <!-- Seção diferenciais -->
+      <section class="diferenciais">
         <h3>Diferenciais do Curso</h3>
-        <ul style="list-style: disc outside; padding-left: 1em; font-size: 1.05rem; color: #444; line-height: 1.5;">
-          <li style="text-indent: -0.4em; margin-bottom: 0.5em;">Formação técnica rápida e focada no mercado de trabalho;</li>
-          <li style="text-indent: -0.4em; margin-bottom: 0.5em;">Aulas práticas que simulam situações reais de gestão;</li>
-          <li style="text-indent: -0.4em; margin-bottom: 0.5em;">Desenvolvimento de habilidades em liderança, finanças e empreendedorismo;</li>
-          <li style="text-indent: -0.4em; margin-bottom: 0.5em;">Professores com experiência no mercado e suporte contínuo;</li>
-          <li style="text-indent: -0.4em;">Infraestrutura moderna e uso de ferramentas atualizadas.</li>
+        <ul>
+          <li>Formação técnica rápida e focada no mercado de trabalho;</li>
+          <li>Aulas práticas que simulam situações reais de gestão;</li>
+          <li>Desenvolvimento de habilidades em liderança, finanças e empreendedorismo;</li>
+          <li>Professores com experiência no mercado e suporte contínuo;</li>
+          <li>Infraestrutura moderna e uso de ferramentas atualizadas.</li>
         </ul>
       </section>
     </main>
@@ -192,24 +181,5 @@
     <footer> 
       <p>&copy; 2025 - Szymanski</p> 
     </footer> 
-    
-    <script> 
-      let slideIndex = 0; 
-      const slides = document.querySelectorAll(".carousel img"); 
-      
-      function mostrarSlide(n) { 
-        slides.forEach((slide, i) => { 
-          slide.classList.remove("active"); 
-          if (i === n) slide.classList.add("active"); 
-        }); 
-      }
-      
-      function mudarSlide(n) { 
-        slideIndex += n; 
-        if (slideIndex < 0) slideIndex = slides.length - 1; 
-        if (slideIndex >= slides.length) slideIndex = 0; 
-        mostrarSlide(slideIndex); 
-      }
-    </script>
   </body> 
 </html>
