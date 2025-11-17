@@ -7,6 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* [TODO O CSS PERMANECE IGUAL - NÃO PRECISA MUDAR] */
         /* Estilos gerais */
         * {
             margin: 0;
@@ -1024,7 +1025,7 @@
         unlockHistoria.addEventListener('click', openLoginModal);
         unlockInfo.addEventListener('click', openLoginModal);
         
-        // Processar formulário de login
+        // Processar formulário de login - MUDANÇA AQUI!
         loginForm.addEventListener('submit', (e) => {
             e.preventDefault();
             
@@ -1045,6 +1046,9 @@
                 loginMessage.textContent = 'Login realizado com sucesso! Redirecionando...';
                 loginMessage.className = 'message success';
                 loginMessage.style.display = 'block';
+                
+                // LINHA ADICIONADA: SALVAR QUE O USUÁRIO ESTÁ LOGADO
+                localStorage.setItem('userLoggedIn', 'true');
                 
                 // Redirecionar para dashboard após 1.5 segundos
                 setTimeout(() => {
