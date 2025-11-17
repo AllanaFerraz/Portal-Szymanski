@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Informações - Colégio Szymanski</title>
+    <title>Informações - Portal Szymanski</title>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -21,27 +21,81 @@
             line-height: 1.6;
         }
         
-        /* Cabeçalho modificado - igual ao da página de Plataformas */
-        header {
-            background: linear-gradient(to right, #1a2a6c, #b21f1f, #fdbb2d);
-            color: white;
-            padding: 1rem;
-            text-align: center;
+        /* Cabeçalho compacto - IGUAL AO DASHBOARD */
+        .header-container {
             position: relative;
+            width: 100%;
+            height: 180px;
+            overflow: hidden;
+            background: linear-gradient(to right, #1a2a6c, #b21f1f);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0.5rem;
         }
         
-        header h1 {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 3rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 100%;
         }
         
-        /* Navegação */
+        .portal-logo {
+            max-width: 120px;
+            max-height: 120px;
+            object-fit: contain;
+            margin-bottom: 0.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .header-slogan {
+            font-size: 1.3rem;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+            margin-top: 0.5rem;
+            font-weight: 500;
+        }
+
+        /* Botão Logout - IGUAL AO DASHBOARD */
+        .logout-btn-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        
+        .logout-btn {
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #1a2a6c;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .logout-btn:hover {
+            background-color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Navegação - IGUAL AO DASHBOARD */
         nav {
-            background-color: #222;
+            background: linear-gradient(to right, #1a2a6c, #b21f1f);
             display: flex;
             justify-content: center;
-            padding: 0.8rem;
+            align-items: center;
+            padding: 0.6rem;
             flex-wrap: wrap;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             position: relative;
@@ -50,297 +104,98 @@
         nav a {
             color: white;
             text-decoration: none;
-            padding: 0.7rem 1.2rem;
-            margin: 0 0.3rem;
+            padding: 0.5rem 1rem;
+            margin: 0 0.2rem;
             border-radius: 4px;
             transition: background-color 0.3s;
             font-weight: 500;
+            font-size: 0.95rem;
+            white-space: nowrap;
         }
         
         nav a:hover {
             background-color: rgba(255, 255, 255, 0.2);
         }
         
-        /* Botão Usuário */
-        .user-btn {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: #3498db;
-            color: white;
-            border: none;
-            padding: 0.6rem 1.2rem;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: background-color 0.3s;
+        /* Barra de Pesquisa - IGUAL AO DASHBOARD */
+        .search-container {
             display: flex;
             align-items: center;
-            gap: 8px;
+            margin-left: 1rem;
+            position: relative;
         }
         
-        .user-btn:hover {
-            background-color: #2980b9;
-        }
-        
-        /* Botão Sair */
-        .logout-btn {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: #e74c3c;
-            color: white;
+        .search-input {
+            padding: 0.5rem 1rem;
+            padding-right: 2.5rem;
             border: none;
-            padding: 0.6rem 1.2rem;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: background-color 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .logout-btn:hover {
-            background-color: #c0392b;
-        }
-        
-        /* Dropdown do Usuário */
-        .user-dropdown {
-            display: none;
-            position: absolute;
-            left: 15px;
-            top: 100%;
-            background: white;
-            min-width: 300px;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            z-index: 1000;
-            margin-top: 5px;
-        }
-        
-        .user-dropdown.active {
-            display: block;
-        }
-        
-        .user-header {
-            background: linear-gradient(to right, #1a2a6c, #b21f1f);
-            color: white;
-            padding: 1.5rem;
-            border-radius: 8px 8px 0 0;
-            text-align: center;
-        }
-        
-        .user-avatar {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid white;
-            margin-bottom: 1rem;
-        }
-        
-        .user-name {
-            font-size: 1.3rem;
-            font-weight: bold;
-            margin-bottom: 0.3rem;
-        }
-        
-        .user-role {
+            border-radius: 20px;
+            width: 200px;
             font-size: 0.9rem;
-            opacity: 0.9;
+            outline: none;
+            transition: width 0.3s;
         }
         
-        .user-info {
-            padding: 1.5rem;
+        .search-input:focus {
+            width: 250px;
         }
         
-        .info-item {
-            display: flex;
-            justify-content: between;
-            margin-bottom: 1rem;
-            padding-bottom: 0.8rem;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .info-label {
-            font-weight: 600;
-            color: #555;
-            min-width: 100px;
-        }
-        
-        .info-value {
-            color: #333;
-            flex: 1;
-        }
-        
-        .user-bio {
-            margin-top: 1rem;
-        }
-        
-        .bio-text {
-            background: #f8f9fa;
-            padding: 1rem;
-            border-radius: 6px;
-            border-left: 4px solid #3498db;
-            font-style: italic;
-            color: #555;
-        }
-        
-        .user-actions {
-            padding: 1rem 1.5rem;
-            border-top: 1px solid #eee;
-            display: flex;
-            gap: 10px;
-        }
-        
-        .edit-btn {
-            background-color: #2ecc71;
-            color: white;
+        .search-btn {
+            position: absolute;
+            right: 8px;
+            background: none;
             border: none;
-            padding: 0.6rem 1.2rem;
-            border-radius: 4px;
+            color: #1a2a6c;
             cursor: pointer;
-            flex: 1;
-            transition: background-color 0.3s;
+            padding: 0.2rem;
         }
         
-        .edit-btn:hover {
-            background-color: #27ae60;
-        }
-        
-        /* Modal de Edição */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
+        /* Resultados da Pesquisa - IGUAL AO DASHBOARD */
+        .search-results {
+            position: absolute;
+            top: 100%;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
+            right: 0;
+            background: white;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .modal-content {
-            background-color: white;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            max-width: 500px;
-            width: 90%;
-            max-height: 90vh;
+            display: none;
+            max-height: 300px;
             overflow-y: auto;
         }
         
-        .modal h3 {
-            color: #1a2a6c;
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
-            text-align: center;
+        .search-result-item {
+            padding: 0.8rem 1rem;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: background-color 0.2s;
         }
         
-        .form-group {
-            margin-bottom: 1.2rem;
+        .search-result-item:hover {
+            background-color: #f5f5f5;
         }
         
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+        
+        .result-category {
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 0.2rem;
+        }
+        
+        .result-title {
             font-weight: 600;
-            color: #555;
+            color: #1a2a6c;
         }
         
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 1rem;
-        }
-        
-        .form-group textarea {
-            height: 100px;
-            resize: vertical;
-        }
-        
-        .avatar-upload {
+        .no-results {
+            padding: 1rem;
             text-align: center;
-        }
-        
-        .avatar-preview {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin: 1rem auto;
-            border: 3px solid #1a2a6c;
-        }
-        
-        .file-input {
-            display: none;
-        }
-        
-        .file-label {
-            display: inline-block;
-            background-color: #3498db;
-            color: white;
-            padding: 0.6rem 1.2rem;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        
-        .file-label:hover {
-            background-color: #2980b9;
-        }
-        
-        .modal-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-        
-        .modal-btn {
-            padding: 0.7rem 1.5rem;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: background-color 0.3s;
-        }
-        
-        .save-btn {
-            background-color: #2ecc71;
-            color: white;
-        }
-        
-        .save-btn:hover {
-            background-color: #27ae60;
-        }
-        
-        .cancel-btn {
-            background-color: #95a5a6;
-            color: white;
-        }
-        
-        .cancel-btn:hover {
-            background-color: #7f8c8d;
-        }
-        
-        .confirm-btn {
-            background-color: #e74c3c;
-            color: white;
-        }
-        
-        .confirm-btn:hover {
-            background-color: #c0392b;
+            color: #666;
+            font-style: italic;
         }
         
         /* Conteúdo principal */
@@ -483,34 +338,54 @@
         
         /* Responsividade */
         @media (max-width: 768px) {
-            header h1 {
-                font-size: 2.2rem;
+            .header-container {
+                height: 150px;
+            }
+            
+            .portal-logo {
+                max-width: 100px;
+                max-height: 100px;
+            }
+            
+            .header-slogan {
+                font-size: 1.1rem;
+            }
+            
+            .logout-btn-container {
+                top: 15px;
+                right: 15px;
+            }
+            
+            .logout-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
             }
             
             nav {
                 flex-direction: column;
                 align-items: center;
-                padding-bottom: 4rem;
+                padding-bottom: 1rem;
             }
             
             nav a {
-                margin: 0.3rem 0;
+                margin: 0.2rem 0;
                 width: 100%;
                 text-align: center;
             }
             
-            .user-btn, .logout-btn {
-                position: static;
-                transform: none;
-                margin-top: 1rem;
+            .search-container {
+                margin-left: 0;
+                margin-top: 0.5rem;
                 width: 100%;
-                justify-content: center;
+                max-width: 300px;
             }
             
-            .user-dropdown {
-                left: 50%;
-                transform: translateX(-50%);
-                min-width: 280px;
+            .search-input {
+                width: 100%;
+            }
+            
+            .search-input:focus {
+                width: 100%;
             }
             
             .info-grid {
@@ -521,35 +396,59 @@
                 height: 300px;
             }
         }
-        
+
         @media (max-width: 480px) {
-            .user-btn, .logout-btn {
-                padding: 0.8rem;
-                font-size: 0.9rem;
+            .header-container {
+                height: 130px;
+            }
+            
+            .portal-logo {
+                max-width: 80px;
+                max-height: 80px;
+            }
+            
+            .header-slogan {
+                font-size: 1rem;
+            }
+            
+            .logout-btn-container {
+                top: 10px;
+                right: 10px;
+            }
+            
+            .logout-btn {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
             }
             
             .map-container {
                 height: 250px;
             }
-            
-            .modal-buttons {
-                flex-direction: column;
-            }
         }
     </style>
 </head>
 <body>
+    <!-- Cabeçalho IGUAL ao dashboard.html -->
     <header>
-        <h1>Portal Szymanski</h1>
+        <div class="header-container">
+            <div class="logo-container">
+                <img src="WhatsApp Image 2025-10-27 at 14.42.38.jpeg" 
+                     alt="Colégio Estadual Professor Júlio Szymanski" class="portal-logo">
+                <p class="header-slogan">Educação de qualidade para construir um futuro melhor</p>
+            </div>
+            
+            <!-- Botão de Logout IGUAL ao dashboard.html -->
+            <div class="logout-btn-container">
+                <button class="logout-btn" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Sair
+                </button>
+            </div>
+        </div>
     </header>
     
+    <!-- Navegação IGUAL ao dashboard.html -->
     <nav>
-        <!-- Botão Usuário -->
-        <button class="user-btn" id="userBtn">
-            <i class="fas fa-user"></i>
-            Meu Perfil
-        </button>
-        
         <a href="dashboard.html">Início</a>
         <a href="cursos.html">Cursos</a>
         <a href="historia.html">História</a>
@@ -557,38 +456,13 @@
         <a href="plataformas.html">Plataformas</a>
         <a href="info.html">Info</a>
         
-        <!-- Botão Sair -->
-        <button class="logout-btn" id="logoutBtn">
-            <i class="fas fa-sign-out-alt"></i>
-            Sair da Conta
-        </button>
-        
-        <!-- Dropdown do Usuário -->
-        <div class="user-dropdown" id="userDropdown">
-            <div class="user-header">
-                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="Avatar" class="user-avatar" id="userAvatar">
-                <div class="user-name" id="displayUserName">Carregando...</div>
-                <div class="user-role" id="displayUserRole">Carregando...</div>
-            </div>
-            <div class="user-info">
-                <div class="info-item">
-                    <span class="info-label">Email:</span>
-                    <span class="info-value" id="displayUserEmail">Carregando...</span>
-                </div>
-                <div class="info-item">
-                    <span class="info-label">Telefone:</span>
-                    <span class="info-value" id="displayUserPhone">Carregando...</span>
-                </div>
-                <div class="user-bio">
-                    <div class="info-label">Biografia:</div>
-                    <div class="bio-text" id="displayUserBio">Carregando...</div>
-                </div>
-            </div>
-            <div class="user-actions">
-                <button class="edit-btn" id="editProfileBtn">
-                    <i class="fas fa-edit"></i> Editar Perfil
-                </button>
-            </div>
+        <!-- Barra de Pesquisa IGUAL ao dashboard.html -->
+        <div class="search-container">
+            <input type="text" class="search-input" placeholder="Pesquisar..." id="searchInput">
+            <button class="search-btn" id="searchBtn">
+                <i class="fas fa-search"></i>
+            </button>
+            <div class="search-results" id="searchResults"></div>
         </div>
     </nav>
     
@@ -600,7 +474,6 @@
             <p>Venha nos visitar! Estamos localizados em:</p>
             
             <div class="map-container">
-                <!-- Mapa centralizado no Colégio Szymanski -->
                 <iframe 
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3599.920056482128!2d-49.4046239244756!3d-25.55997777750093!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94dd4890ddfcd70d%3A0x319ff7ef7d4e9c8c!2sCol%C3%A9gio%20Estadual%20Professor%20J%C3%BAlio%20Szymanski!5e0!3m2!1spt-BR!2sbr!4v1718658532978!5m2!1spt-BR!2sbr" 
                     allowfullscreen="" 
@@ -667,237 +540,114 @@
         </a>
     </footer>
 
-    <!-- Modal de Edição de Perfil -->
-    <div class="modal" id="editModal">
-        <div class="modal-content">
-            <h3>Editar Perfil</h3>
-            <form id="profileForm">
-                <div class="avatar-upload">
-                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="Preview" class="avatar-preview" id="avatarPreview">
-                    <input type="file" id="avatarInput" class="file-input" accept="image/*">
-                    <label for="avatarInput" class="file-label">
-                        <i class="fas fa-camera"></i> Alterar Foto
-                    </label>
-                </div>
-                
-                <div class="form-group">
-                    <label for="userName">Nome Completo</label>
-                    <input type="text" id="userName" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="userEmail">Email</label>
-                    <input type="email" id="userEmail" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="userPhone">Telefone</label>
-                    <input type="tel" id="userPhone">
-                </div>
-                
-                <div class="form-group">
-                    <label for="userRole">Tipo de Usuário</label>
-                    <select id="userRole" disabled>
-                        <option value="aluno">Aluno</option>
-                        <option value="professor">Professor</option>
-                        <option value="responsavel">Responsável</option>
-                    </select>
-                    <small style="color: #666;">* O tipo de usuário não pode ser alterado</small>
-                </div>
-                
-                <div class="form-group">
-                    <label for="userBio">Biografia</label>
-                    <textarea id="userBio" placeholder="Conte um pouco sobre você..."></textarea>
-                </div>
-                
-                <div class="modal-buttons">
-                    <button type="button" class="modal-btn cancel-btn" id="cancelEdit">Cancelar</button>
-                    <button type="submit" class="modal-btn save-btn">Salvar Alterações</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Modal de confirmação de logout -->
-    <div class="modal" id="logoutModal">
-        <div class="modal-content">
-            <h3>Confirmar Saída</h3>
-            <p>Tem certeza que deseja sair da sua conta?</p>
-            <div class="modal-buttons">
-                <button class="modal-btn confirm-btn" id="confirmLogout">Sim, Sair</button>
-                <button class="modal-btn cancel-btn" id="cancelLogout">Cancelar</button>
-            </div>
-        </div>
-    </div>
-
     <script>
-        // Sistema de Perfil do Usuário
+        // Sistema de Logout - IGUAL ao dashboard.html
         document.addEventListener('DOMContentLoaded', function() {
-            // Elementos do DOM
-            const userBtn = document.getElementById('userBtn');
-            const userDropdown = document.getElementById('userDropdown');
             const logoutBtn = document.getElementById('logoutBtn');
-            const logoutModal = document.getElementById('logoutModal');
-            const confirmLogout = document.getElementById('confirmLogout');
-            const cancelLogout = document.getElementById('cancelLogout');
-            const editProfileBtn = document.getElementById('editProfileBtn');
-            const editModal = document.getElementById('editModal');
-            const cancelEdit = document.getElementById('cancelEdit');
-            const profileForm = document.getElementById('profileForm');
-            const avatarInput = document.getElementById('avatarInput');
-            const avatarPreview = document.getElementById('avatarPreview');
 
-            // Carregar dados do usuário ao iniciar
-            loadUserData();
-
-            // Abrir/fechar dropdown do usuário
-            userBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                userDropdown.classList.toggle('active');
-            });
-
-            // Fechar dropdown ao clicar fora
-            document.addEventListener('click', function() {
-                userDropdown.classList.remove('active');
-            });
-
-            // Prevenir fechamento ao clicar dentro do dropdown
-            userDropdown.addEventListener('click', function(e) {
-                e.stopPropagation();
-            });
-
-            // Abrir modal de edição
-            editProfileBtn.addEventListener('click', function() {
-                populateEditForm();
-                editModal.style.display = 'flex';
-            });
-
-            // Fechar modal de edição
-            cancelEdit.addEventListener('click', function() {
-                editModal.style.display = 'none';
-            });
-
-            // Upload de avatar (apenas preview, não salva ainda)
-            avatarInput.addEventListener('change', function(e) {
-                const file = e.target.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        avatarPreview.src = e.target.result;
-                    }
-                    reader.readAsDataURL(file);
+            // Função de logout
+            logoutBtn.addEventListener('click', () => {
+                if (confirm('Deseja realmente sair do portal?')) {
+                    // Limpar sessão
+                    sessionStorage.removeItem('currentUser');
+                    // Redirecionar para index.html
+                    window.location.href = 'index.html';
                 }
             });
 
-            // Salvar perfil (apenas quando clicar em Salvar)
-            profileForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                saveUserData();
-                editModal.style.display = 'none';
-                loadUserData(); // Atualizar display com novos dados
-            });
+            // Sistema de Pesquisa - IGUAL ao dashboard.html
+            const searchData = [
+                { title: "Cursos Técnicos", category: "Cursos", keywords: ["cursos", "técnico", "formação", "ensino"], link: "cursos.html" },
+                { title: "Ensino Médio", category: "Cursos", keywords: ["ensino médio", "médio", "estudos"], link: "cursos.html" },
+                { title: "História do Colégio", category: "História", keywords: ["história", "fundação", "origem", "júlio szymanski"], link: "historia.html" },
+                { title: "Feira de Profissões", category: "Eventos", keywords: ["feira", "profissões", "carreira", "orientação"], link: "feira.html" },
+                { title: "Google Classroom", category: "Plataformas", keywords: ["classroom", "google", "aulas", "online"], link: "plataformas.html" },
+                { title: "Moodle", category: "Plataformas", keywords: ["moodle", "ensino", "digital"], link: "plataformas.html" },
+                { title: "Contato e Localização", category: "Info", keywords: ["contato", "localização", "endereço", "telefone"], link: "info.html" },
+                { title: "Horário de Atendimento", category: "Info", keywords: ["horário", "atendimento", "funcionamento"], link: "info.html" },
+                { title: "Portal do Aluno", category: "Plataformas", keywords: ["portal", "aluno", "acesso", "login"], link: "plataformas.html" },
+                { title: "Biblioteca Virtual", category: "Recursos", keywords: ["biblioteca", "livros", "pesquisa", "estudo"] },
+                { title: "Calendário Escolar", category: "Info", keywords: ["calendário", "datas", "feriados", "recesso"] },
+                { title: "Material Didático", category: "Cursos", keywords: ["material", "livros", "apostilas", "conteúdo"] }
+            ];
 
-            // Sistema de Logout
-            logoutBtn.addEventListener('click', function() {
-                logoutModal.style.display = 'flex';
-            });
+            const searchInput = document.getElementById('searchInput');
+            const searchBtn = document.getElementById('searchBtn');
+            const searchResults = document.getElementById('searchResults');
 
-            confirmLogout.addEventListener('click', function() {
-                sessionStorage.removeItem('currentUser');
-                window.location.href = 'index.html';
-            });
-
-            cancelLogout.addEventListener('click', function() {
-                logoutModal.style.display = 'none';
-            });
-
-            // Fechar modais ao clicar fora
-            window.addEventListener('click', function(event) {
-                if (event.target === editModal) {
-                    editModal.style.display = 'none';
+            // Função de pesquisa
+            function performSearch(query) {
+                if (!query.trim()) {
+                    searchResults.style.display = 'none';
+                    return;
                 }
-                if (event.target === logoutModal) {
-                    logoutModal.style.display = 'none';
-                }
-            });
 
-            // Funções auxiliares
-            function loadUserData() {
-                // Tentar carregar do sessionStorage
-                const savedUser = sessionStorage.getItem('currentUser');
-                
-                if (savedUser) {
-                    const userData = JSON.parse(savedUser);
-                    updateUserDisplay(userData);
+                const lowerQuery = query.toLowerCase();
+                const results = searchData.filter(item => {
+                    return item.keywords.some(keyword => keyword.includes(lowerQuery)) ||
+                           item.title.toLowerCase().includes(lowerQuery) ||
+                           item.category.toLowerCase().includes(lowerQuery);
+                });
+
+                displayResults(results);
+            }
+
+            // Exibir resultados
+            function displayResults(results) {
+                searchResults.innerHTML = '';
+
+                if (results.length === 0) {
+                    searchResults.innerHTML = '<div class="no-results">Nenhum resultado encontrado</div>';
                 } else {
-                    // Se não existir, usar dados padrão (apenas para demonstração)
-                    const defaultUser = {
-                        name: "Novo Usuário",
-                        email: "usuario@email.com",
-                        phone: "(41) 99999-9999",
-                        role: "aluno",
-                        bio: "Bem-vindo ao Portal Szymanski! Edite seu perfil para personalizar suas informações.",
-                        avatar: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
-                    };
-                    updateUserDisplay(defaultUser);
+                    results.forEach(result => {
+                        const resultItem = document.createElement('div');
+                        resultItem.className = 'search-result-item';
+                        resultItem.innerHTML = `
+                            <div class="result-category">${result.category}</div>
+                            <div class="result-title">${result.title}</div>
+                        `;
+                        
+                        if (result.link) {
+                            resultItem.addEventListener('click', () => {
+                                window.location.href = result.link;
+                            });
+                        }
+                        
+                        searchResults.appendChild(resultItem);
+                    });
                 }
+
+                searchResults.style.display = 'block';
             }
 
-            function updateUserDisplay(userData) {
-                document.getElementById('displayUserName').textContent = userData.name;
-                document.getElementById('displayUserEmail').textContent = userData.email;
-                document.getElementById('displayUserPhone').textContent = userData.phone;
-                document.getElementById('displayUserBio').textContent = userData.bio;
-                document.getElementById('userAvatar').src = userData.avatar;
-                
-                // Atualizar role com texto formatado
-                const roleText = {
-                    'aluno': 'Aluno',
-                    'professor': 'Professor',
-                    'responsavel': 'Responsável'
-                };
-                document.getElementById('displayUserRole').textContent = roleText[userData.role] || userData.role;
-            }
+            // Event Listeners da pesquisa
+            searchInput.addEventListener('input', (e) => {
+                performSearch(e.target.value);
+            });
 
-            function populateEditForm() {
-                const savedUser = sessionStorage.getItem('currentUser');
-                if (savedUser) {
-                    const userData = JSON.parse(savedUser);
-                    document.getElementById('userName').value = userData.name;
-                    document.getElementById('userEmail').value = userData.email;
-                    document.getElementById('userPhone').value = userData.phone;
-                    document.getElementById('userRole').value = userData.role;
-                    document.getElementById('userBio').value = userData.bio;
-                    document.getElementById('avatarPreview').src = userData.avatar;
+            searchBtn.addEventListener('click', () => {
+                performSearch(searchInput.value);
+            });
+
+            searchInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    performSearch(searchInput.value);
                 }
-            }
+            });
 
-            function saveUserData() {
-                // Coletar dados do formulário
-                const userData = {
-                    name: document.getElementById('userName').value,
-                    email: document.getElementById('userEmail').value,
-                    phone: document.getElementById('userPhone').value,
-                    role: document.getElementById('userRole').value,
-                    bio: document.getElementById('userBio').value,
-                    avatar: document.getElementById('avatarPreview').src
-                };
+            // Fechar resultados ao clicar fora
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.search-container')) {
+                    searchResults.style.display = 'none';
+                }
+            });
 
-                // Salvar no sessionStorage (aqui você substituiria pelo banco de dados)
-                sessionStorage.setItem('currentUser', JSON.stringify(userData));
-                
-                // Aqui você adicionaria a lógica para salvar no banco de dados
-                console.log('Dados salvos (simulação do banco):', userData);
-                
-                alert('Perfil atualizado com sucesso!');
-            }
-
-            // Verificar se o usuário está logado
-            const currentUser = sessionStorage.getItem('currentUser');
-            if (!currentUser) {
-                // Se não estiver logado, redirecionar para o login
-                window.location.href = 'index.html';
-            }
+            // Focar no input quando resultados são mostrados
+            searchInput.addEventListener('focus', () => {
+                if (searchInput.value.trim()) {
+                    performSearch(searchInput.value);
+                }
+            });
         });
     </script>
 </body>
