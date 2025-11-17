@@ -7,6 +7,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/estilo.css">
     <link rel="stylesheet" href="css/login.css">
+    <style>
+        .video-container {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .video-player {
+            width: 100%;
+            max-width: 500px;
+            height: 280px;
+            border-radius: 8px;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -21,6 +34,14 @@
 
     <div class="login-container">
         <h2>Cadastro Portal Szymanski</h2>
+        
+        <!-- VÍDEO ADICIONADO AQUI -->
+        <div class="video-container">
+            <video class="video-player" controls>
+                <source src="9FSH7C691R6D5TVL.mp4" type="video/mp4">
+                Seu navegador não suporta o elemento de vídeo.
+            </video>
+        </div>
         
         <div id="cadastroMessage" class="message"></div>
         
