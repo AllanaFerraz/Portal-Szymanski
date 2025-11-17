@@ -120,6 +120,7 @@
         /* Links bloqueados */
         .locked-feature {
             position: relative;
+            cursor: pointer;
         }
 
         .locked-feature::after {
@@ -242,6 +243,64 @@
             color: #666;
             font-style: italic;
             margin-top: 0.5rem;
+        }
+
+        /* Seções bloqueadas */
+        .locked-section {
+            position: relative;
+        }
+
+        .locked-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(2px);
+            border-radius: 8px;
+            z-index: 1;
+        }
+
+        .locked-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(26, 42, 108, 0.9);
+            color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            z-index: 2;
+            width: 80%;
+            max-width: 400px;
+        }
+
+        .locked-overlay h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .locked-overlay p {
+            margin-bottom: 1.5rem;
+        }
+
+        .unlock-btn {
+            background: white;
+            color: #1a2a6c;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .unlock-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         
         /* Modal de Login */
@@ -574,6 +633,11 @@
             .cookie-btn {
                 width: 100%;
             }
+
+            .locked-overlay {
+                width: 90%;
+                padding: 1.5rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -625,10 +689,10 @@
     <nav>
         <a href="index.html">Início</a>
         <a href="#cursos" class="locked-feature">Cursos</a>
-        <a href="historia.html">História</a>
+        <a href="#historia" class="locked-feature">História</a>
         <a href="#feira" class="locked-feature">Feiras de Profissão</a>
         <a href="#plataformas" class="locked-feature">Plataformas</a>
-        <a href="info.html">Info</a>
+        <a href="#info" class="locked-feature">Info</a>
     </nav>
     
     <div class="container">
@@ -663,10 +727,11 @@
                     <p class="access-note">Identifique-se para acessar</p>
                 </div>
                 
-                <div class="highlight-card">
+                <div class="highlight-card locked" data-feature="info">
                     <div class="highlight-icon">🏫</div>
                     <h3>Informações</h3>
                     <p>Encontre contatos, localização e horários de atendimento</p>
+                    <p class="access-note">Identifique-se para acessar</p>
                 </div>
             </div>
             
@@ -676,8 +741,38 @@
                 <strong>Identifique-se para acessar todos os recursos do portal!</strong>
             </p>
             
-            <div class="fundador">
+            <!-- Seção História Bloqueada -->
+            <div class="fundador locked-section" id="historiaSection">
+                <div class="locked-overlay">
+                    <h3>🔒 Conteúdo Bloqueado</h3>
+                    <p>Esta seção está disponível apenas para usuários identificados</p>
+                    <button class="unlock-btn" id="unlockHistoria">Identificar-se para Acessar</button>
+                </div>
                 <p><strong>Sobre o patrono:</strong> Professor Júlio Szymanski foi um educador e imigrante polonês que dedicou sua vida ao ensino e à ciência. Sua trajetória inspira nossa missão educacional até os dias atuais, valorizando o conhecimento, a cultura e a formação integral dos estudantes.</p>
+            </div>
+        </section>
+
+        <!-- Seção Info Bloqueada -->
+        <section id="info" class="portal-section locked-section">
+            <div class="locked-overlay">
+                <h3>🔒 Informações Bloqueadas</h3>
+                <p>As informações de contato e localização estão disponíveis apenas para usuários identificados</p>
+                <button class="unlock-btn" id="unlockInfo">Identificar-se para Acessar</button>
+            </div>
+            <h2>Informações do Colégio</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                <div>
+                    <h4 style="color: #1a2a6c; margin-bottom: 10px;">Endereço</h4>
+                    <p>Rua Exemplo, 123 - Centro<br>Araucária - PR</p>
+                </div>
+                <div>
+                    <h4 style="color: #1a2a6c; margin-bottom: 10px;">Telefone</h4>
+                    <p>(41) 1234-5678</p>
+                </div>
+                <div>
+                    <h4 style="color: #1a2a6c; margin-bottom: 10px;">Email</h4>
+                    <p>contato@szymanski.pr.gov.br</p>
+                </div>
             </div>
         </section>
     </div>
@@ -855,6 +950,10 @@
         const cookieModal = document.getElementById('cookieModal');
         const closeCookieModal = document.getElementById('closeCookieModal');
 
+        // Botões de desbloqueio
+        const unlockHistoria = document.getElementById('unlockHistoria');
+        const unlockInfo = document.getElementById('unlockInfo');
+
         // Verificar se já aceitou cookies
         function checkCookieConsent() {
             return localStorage.getItem('cookieConsent');
@@ -871,10 +970,12 @@
         }
 
         // Abrir modal de login
-        loginBtn.addEventListener('click', () => {
+        function openLoginModal() {
             loginModal.style.display = 'flex';
             initCookies();
-        });
+        }
+
+        loginBtn.addEventListener('click', openLoginModal);
         
         // Fechar modal de login
         closeModal.addEventListener('click', () => {
@@ -907,8 +1008,7 @@
         // Cards bloqueados - abrem modal
         document.querySelectorAll('.highlight-card.locked').forEach(card => {
             card.addEventListener('click', () => {
-                loginModal.style.display = 'flex';
-                initCookies();
+                openLoginModal();
             });
         });
         
@@ -916,10 +1016,13 @@
         document.querySelectorAll('.locked-feature').forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
-                loginModal.style.display = 'flex';
-                initCookies();
+                openLoginModal();
             });
         });
+
+        // Botões de desbloqueio
+        unlockHistoria.addEventListener('click', openLoginModal);
+        unlockInfo.addEventListener('click', openLoginModal);
         
         // Processar formulário de login
         loginForm.addEventListener('submit', (e) => {
@@ -1022,8 +1125,7 @@
                 loginMessage.textContent = 'Cadastro realizado com sucesso! Faça login para continuar.';
                 loginMessage.className = 'message success';
                 loginMessage.style.display = 'block';
-                loginModal.style.display = 'flex';
-                initCookies();
+                openLoginModal();
             }
         });
     </script>
