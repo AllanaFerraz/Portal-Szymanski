@@ -60,34 +60,6 @@
             margin-top: 0.5rem;
             font-weight: 500;
         }
-
-        /* Botão Logout */
-        .logout-btn-container {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-        }
-        
-        .logout-btn {
-            background-color: rgba(255, 255, 255, 0.9);
-            color: #1a2a6c;
-            border: none;
-            padding: 0.6rem 1.2rem;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .logout-btn:hover {
-            background-color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        }
         
         /* Navegação */
         nav {
@@ -317,16 +289,6 @@
                 font-size: 1.1rem;
             }
             
-            .logout-btn-container {
-                top: 15px;
-                right: 15px;
-            }
-            
-            .logout-btn {
-                padding: 0.5rem 1rem;
-                font-size: 0.9rem;
-            }
-            
             nav {
                 flex-direction: column;
                 align-items: center;
@@ -372,16 +334,6 @@
             .header-slogan {
                 font-size: 1rem;
             }
-            
-            .logout-btn-container {
-                top: 10px;
-                right: 10px;
-            }
-            
-            .logout-btn {
-                padding: 0.4rem 0.8rem;
-                font-size: 0.8rem;
-            }
         }
     </style>
 </head>
@@ -393,14 +345,6 @@
                 <img src="WhatsApp Image 2025-10-27 at 14.42.38.jpeg" 
                      alt="Colégio Estadual Professor Júlio Szymanski" class="portal-logo">
                 <p class="header-slogan">Educação de qualidade para construir um futuro melhor</p>
-            </div>
-            
-            <!-- Botão de Logout no canto direito -->
-            <div class="logout-btn-container">
-                <button class="logout-btn" id="logoutBtn">
-                    <i class="fas fa-sign-out-alt"></i>
-                    Sair
-                </button>
             </div>
         </div>
     </header>
@@ -496,19 +440,6 @@
         const searchInput = document.getElementById('searchInput');
         const searchBtn = document.getElementById('searchBtn');
         const searchResults = document.getElementById('searchResults');
-
-        // Botão de logout
-        const logoutBtn = document.getElementById('logoutBtn');
-
-        // Função de logout
-        logoutBtn.addEventListener('click', () => {
-            if (confirm('Deseja realmente sair do portal?')) {
-                // Limpar sessão (se estiver usando)
-                sessionStorage.removeItem('currentUser');
-                // Redirecionar para index.html
-                window.location.href = 'index.html';
-            }
-        });
 
         // Função de pesquisa
         function performSearch(query) {
