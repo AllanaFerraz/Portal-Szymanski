@@ -3,334 +3,359 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal Szymanski - Login e Cadastro</title>
+    <title>Portal Szymanski</title>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #3498db;
-            --accent-color: #e74c3c;
-            --light-color: #ecf0f1;
-            --dark-color: #2c3e50;
-            --success-color: #2ecc71;
-            --error-color: #e74c3c;
-            --border-radius: 8px;
-            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s ease;
-        }
-
+        /* Estilos gerais */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
+        
         body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            min-height: 100vh;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* Cabeçalho compacto */
+        .header-container {
+            position: relative;
+            width: 100%;
+            height: 180px;
+            overflow: hidden;
+            background: linear-gradient(to right, #1a2a6c, #b21f1f);
             display: flex;
             flex-direction: column;
-            align-items: center;
             justify-content: center;
-            padding: 20px;
+            align-items: center;
+            padding: 0.5rem;
         }
-
-        /* Header Styles */
-        header {
-            width: 100%;
-            max-width: 800px;
-            margin-bottom: 30px;
-        }
-
-        .header-container {
-            background-color: white;
-            border-radius: var(--border-radius);
-            padding: 20px;
-            box-shadow: var(--box-shadow);
-            text-align: center;
-        }
-
+        
         .logo-container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 15px;
-        }
-
-        .portal-logo {
-            max-height: 80px;
-            width: auto;
-        }
-
-        .header-slogan {
-            color: var(--dark-color);
-            font-size: 1.1rem;
-            font-weight: 500;
-            margin: 0;
-        }
-
-        /* Container Principal */
-        .main-container {
-            display: flex;
+            justify-content: center;
+            text-align: center;
             width: 100%;
-            max-width: 900px;
-            background-color: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            overflow: hidden;
-            min-height: 550px;
         }
-
-        /* Painel de Boas-vindas */
-        .welcome-panel {
-            flex: 1;
-            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+        
+        .portal-logo {
+            max-width: 120px;
+            max-height: 120px;
+            object-fit: contain;
+            margin-bottom: 0.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .header-slogan {
+            font-size: 1.3rem;
             color: white;
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .welcome-panel::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
-        }
-
-        .welcome-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .welcome-panel h2 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            font-weight: 600;
-        }
-
-        .welcome-panel p {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-bottom: 30px;
-            opacity: 0.9;
-        }
-
-        .panel-icon {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            opacity: 0.9;
-        }
-
-        .feature-list {
-            text-align: left;
-            margin-top: 30px;
-        }
-
-        .feature-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-            font-size: 0.95rem;
-        }
-
-        .feature-item i {
-            margin-right: 10px;
-            color: var(--light-color);
-        }
-
-        /* Form Container */
-        .form-container {
-            flex: 1;
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .form-title {
-            color: var(--primary-color);
-            text-align: center;
-            margin-bottom: 25px;
-            font-size: 1.8rem;
-            font-weight: 600;
-        }
-
-        /* User Type Selector */
-        .user-type-selector {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 25px;
-        }
-
-        .user-type-option {
-            border: 2px solid #e0e0e0;
-            border-radius: var(--border-radius);
-            padding: 12px;
-            text-align: center;
-            cursor: pointer;
-            transition: var(--transition);
-            background-color: #f9f9f9;
-        }
-
-        .user-type-option:hover {
-            border-color: var(--secondary-color);
-            background-color: #f0f8ff;
-            transform: translateY(-2px);
-        }
-
-        .user-type-option.selected {
-            border-color: var(--secondary-color);
-            background-color: #e6f2ff;
-            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
-        }
-
-        .user-type-option input {
-            display: none;
-        }
-
-        .user-type-option div {
-            font-size: 0.9rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+            margin-top: 0.5rem;
             font-weight: 500;
         }
 
-        /* Form Styles */
-        .form-group {
-            margin-bottom: 20px;
+        /* Botão Identificar-se */
+        .login-btn-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        
+        .login-btn {
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #1a2a6c;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .login-btn:hover {
+            background-color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Navegação */
+        nav {
+            background: linear-gradient(to right, #1a2a6c, #b21f1f);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0.6rem;
+            flex-wrap: wrap;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            margin: 0 0.2rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            font-weight: 500;
+            font-size: 0.95rem;
+            white-space: nowrap;
+        }
+        
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
         }
 
+        /* Links bloqueados */
+        .locked-feature {
+            position: relative;
+        }
+
+        .locked-feature::after {
+            content: '🔒';
+            margin-left: 5px;
+            font-size: 0.8rem;
+        }
+        
+        /* Conteúdo principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        
+        .page-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #1a2a6c;
+            font-size: 2.5rem;
+            font-family: 'Bebas Neue', sans-serif;
+        }
+        
+        .intro-text {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Seção de boas-vindas */
+        #sobre {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+        
+        #sobre h2 {
+            color: #1a2a6c;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.2rem;
+        }
+        
+        #sobre p {
+            margin-bottom: 1.2rem;
+            text-align: justify;
+        }
+        
+        #sobre ul {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+        }
+        
+        #sobre li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .fundador {
+            background-color: #f9f9f9;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+            border-left: 4px solid #b21f1f;
+        }
+        
+        /* Destaques rápidos */
+        .highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .highlight-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .highlight-card.locked {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .highlight-card.locked::before {
+            content: '🔒';
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .highlight-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .highlight-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #1a2a6c;
+        }
+        
+        .highlight-card h3 {
+            color: #1a2a6c;
+            margin-bottom: 1rem;
+        }
+
+        .access-note {
+            font-size: 0.8rem;
+            color: #666;
+            font-style: italic;
+            margin-top: 0.5rem;
+        }
+        
+        /* Modal de Login */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 450px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+        
+        .modal h2 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #1a2a6c;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+        
         .form-group label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 0.5rem;
             font-weight: 500;
-            color: var(--dark-color);
+            color: #333;
         }
-
-        .form-group input, .form-group select {
+        
+        .form-group input {
             width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #e0e0e0;
-            border-radius: var(--border-radius);
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
             font-size: 1rem;
-            transition: var(--transition);
         }
-
-        .form-group input:focus, .form-group select:focus {
-            border-color: var(--secondary-color);
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
-        }
-
-        /* Button Styles */
-        .btn-primary {
+        
+        .btn-login {
             width: 100%;
-            padding: 14px;
-            background-color: var(--secondary-color);
+            padding: 0.8rem;
+            background: linear-gradient(to right, #1a2a6c, #b21f1f);
             color: white;
             border: none;
-            border-radius: var(--border-radius);
+            border-radius: 4px;
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: var(--transition);
-            margin-top: 10px;
+            transition: opacity 0.3s;
         }
-
-        .btn-primary:hover {
-            background-color: #2980b9;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        
+        .btn-login:hover {
+            opacity: 0.9;
         }
-
-        .btn-primary:active {
-            transform: translateY(0);
-        }
-
-        .btn-secondary {
-            width: 100%;
-            padding: 12px;
-            background-color: transparent;
-            color: var(--secondary-color);
-            border: 2px solid var(--secondary-color);
-            border-radius: var(--border-radius);
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            margin-top: 10px;
-        }
-
-        .btn-secondary:hover {
-            background-color: #f0f8ff;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Links */
-        .links-container {
+        
+        .register-link {
             text-align: center;
-            margin-top: 20px;
-            font-size: 0.9rem;
+            margin-top: 1rem;
         }
-
-        .links-container a {
-            color: var(--secondary-color);
+        
+        .register-link a {
+            color: #1a2a6c;
             text-decoration: none;
-            transition: var(--transition);
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            margin: 0 10px;
-            padding: 8px 15px;
-            border-radius: var(--border-radius);
-        }
-
-        .links-container a:hover {
-            color: var(--primary-color);
-            background-color: #f8f9fa;
-            text-decoration: none;
-        }
-
-        /* Message Styles */
-        .message {
-            padding: 12px;
-            border-radius: var(--border-radius);
-            margin-bottom: 20px;
-            text-align: center;
             font-weight: 500;
+        }
+        
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+        
+        .message {
+            padding: 0.8rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            text-align: center;
             display: none;
         }
-
-        .message.error {
-            background-color: rgba(231, 76, 60, 0.1);
-            color: var(--error-color);
-            border: 1px solid rgba(231, 76, 60, 0.3);
-            display: block;
-        }
-
+        
         .message.success {
-            background-color: rgba(46, 204, 113, 0.1);
-            color: var(--success-color);
-            border: 1px solid rgba(46, 204, 113, 0.3);
-            display: block;
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
         }
-
-        .message.info {
-            background-color: rgba(52, 152, 219, 0.1);
-            color: var(--secondary-color);
-            border: 1px solid rgba(52, 152, 219, 0.3);
-            display: block;
+        
+        .message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
         }
 
         /* Form Sections */
@@ -340,77 +365,72 @@
 
         .form-section.active {
             display: block;
-            animation: fadeIn 0.5s ease;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Cookie Banner */
+        /* Banner de Cookies */
         .cookie-banner {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background-color: var(--primary-color);
-            color: white;
-            padding: 15px 20px;
-            display: none;
-            z-index: 1000;
-            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            background: #f8f9fa;
+            border: 2px solid #1a2a6c;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            text-align: center;
         }
 
-        .cookie-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
+        .cookie-banner h3 {
+            color: #1a2a6c;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
         }
 
-        .cookie-text {
-            flex: 1;
-            min-width: 300px;
-        }
-
-        .cookie-text a {
-            color: var(--secondary-color);
-            text-decoration: underline;
-            cursor: pointer;
+        .cookie-banner p {
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            line-height: 1.5;
         }
 
         .cookie-buttons {
             display: flex;
             gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
         }
 
         .cookie-btn {
-            padding: 8px 15px;
+            padding: 0.6rem 1.2rem;
             border: none;
-            border-radius: var(--border-radius);
+            border-radius: 4px;
             cursor: pointer;
             font-weight: 500;
-            transition: var(--transition);
+            transition: all 0.3s ease;
         }
 
         .cookie-accept {
-            background-color: var(--success-color);
+            background: linear-gradient(to right, #1a2a6c, #b21f1f);
             color: white;
         }
 
-        .cookie-settings {
-            background-color: transparent;
-            color: white;
-            border: 1px solid white;
+        .cookie-accept:hover {
+            opacity: 0.9;
         }
 
         .cookie-reject {
-            background-color: var(--error-color);
+            background-color: #6c757d;
             color: white;
+        }
+
+        .cookie-reject:hover {
+            background-color: #5a6268;
+        }
+
+        .cookie-info {
+            background-color: transparent;
+            color: #1a2a6c;
+            border: 1px solid #1a2a6c;
+        }
+
+        .cookie-info:hover {
+            background-color: #f0f0f0;
         }
 
         /* Modal de Política de Cookies */
@@ -425,306 +445,293 @@
             z-index: 2000;
             align-items: center;
             justify-content: center;
-            animation: fadeIn 0.3s ease;
         }
 
         .cookie-modal.active {
             display: flex;
         }
 
-        .modal-content {
+        .cookie-modal-content {
             background-color: white;
-            border-radius: var(--border-radius);
+            border-radius: 10px;
             width: 90%;
-            max-width: 700px;
+            max-width: 600px;
             max-height: 80vh;
             overflow-y: auto;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
             position: relative;
-            animation: slideUp 0.4s ease;
         }
 
-        @keyframes slideUp {
-            from { transform: translateY(30px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        .modal-header {
-            padding: 20px 25px;
+        .cookie-modal-header {
+            padding: 1.5rem;
             border-bottom: 1px solid #eee;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: var(--primary-color);
+            background: linear-gradient(to right, #1a2a6c, #b21f1f);
             color: white;
-            border-radius: var(--border-radius) var(--border-radius) 0 0;
+            border-radius: 10px 10px 0 0;
         }
 
-        .modal-title {
+        .cookie-modal-title {
             font-size: 1.5rem;
             font-weight: 600;
             margin: 0;
+            font-family: 'Bebas Neue', sans-serif;
         }
 
-        .close-modal {
+        .close-cookie-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
             background: none;
             border: none;
             color: white;
             font-size: 1.5rem;
             cursor: pointer;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition);
         }
 
-        .close-modal:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-        }
-
-        .modal-body {
-            padding: 25px;
+        .cookie-modal-body {
+            padding: 2rem;
         }
 
         .policy-section {
-            margin-bottom: 25px;
+            margin-bottom: 2rem;
         }
 
         .policy-section h3 {
-            color: var(--primary-color);
-            margin-bottom: 10px;
+            color: #1a2a6c;
+            margin-bottom: 1rem;
             font-size: 1.2rem;
         }
 
         .policy-section p {
+            margin-bottom: 1rem;
             line-height: 1.6;
-            margin-bottom: 10px;
-            color: #555;
         }
 
         .policy-section ul {
-            padding-left: 20px;
-            margin-bottom: 10px;
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         .policy-section li {
-            margin-bottom: 8px;
+            margin-bottom: 0.5rem;
             line-height: 1.5;
         }
-
-        .modal-footer {
-            padding: 15px 25px;
-            border-top: 1px solid #eee;
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
+        
+        /* Rodapé */
+        footer {
+            background-color: #222;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 3rem;
         }
-
-        /* Password Reset Styles */
-        .reset-instructions {
-            background-color: #f8f9fa;
-            border-left: 4px solid var(--secondary-color);
-            padding: 15px;
-            margin-bottom: 20px;
-            border-radius: 0 var(--border-radius) var(--border-radius) 0;
-        }
-
-        .reset-instructions p {
-            margin: 0;
-            color: #555;
-            font-size: 0.9rem;
-        }
-
-        .countdown {
-            font-weight: bold;
-            color: var(--secondary-color);
-        }
-
-        /* Responsive Design */
+        
+        /* Responsividade */
         @media (max-width: 768px) {
-            .main-container {
+            .header-container {
+                height: 150px;
+            }
+            
+            .portal-logo {
+                max-width: 100px;
+                max-height: 100px;
+            }
+            
+            .header-slogan {
+                font-size: 1.1rem;
+            }
+            
+            .login-btn-container {
+                top: 15px;
+                right: 15px;
+            }
+            
+            .login-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            nav {
                 flex-direction: column;
+                align-items: center;
+                padding-bottom: 1rem;
             }
             
-            .welcome-panel {
-                padding: 30px 20px;
-            }
-            
-            .form-container {
-                padding: 30px 20px;
-            }
-            
-            .user-type-selector {
-                grid-template-columns: 1fr;
-            }
-            
-            .links-container {
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            .links-container a {
-                margin: 5px 0;
-            }
-            
-            .cookie-content {
-                flex-direction: column;
+            nav a {
+                margin: 0.2rem 0;
+                width: 100%;
                 text-align: center;
             }
             
+            .highlights {
+                grid-template-columns: 1fr;
+            }
+
             .cookie-buttons {
+                flex-direction: column;
+            }
+
+            .cookie-btn {
                 width: 100%;
-                justify-content: center;
             }
         }
 
         @media (max-width: 480px) {
-            .welcome-panel h2 {
-                font-size: 1.5rem;
+            .header-container {
+                height: 130px;
             }
             
-            .panel-icon {
-                font-size: 3rem;
+            .portal-logo {
+                max-width: 80px;
+                max-height: 80px;
             }
             
-            .form-title {
-                font-size: 1.5rem;
+            .header-slogan {
+                font-size: 1rem;
             }
             
-            .modal-content {
-                width: 95%;
+            .login-btn-container {
+                top: 10px;
+                right: 10px;
+            }
+            
+            .login-btn {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header do portal -->
     <header>
         <div class="header-container">
             <div class="logo-container">
-                <div class="portal-logo">
-                    <i class="fas fa-graduation-cap" style="font-size: 3rem; color: var(--primary-color);"></i>
-                </div>
-                <h1 style="font-family: 'Bebas Neue', sans-serif; color: var(--primary-color); font-size: 1.8rem;">
-                    Colégio Estadual Professor Júlio Szymanski
-                </h1>
-                <p class="header-slogan">Araucária - Paraná | Educação de qualidade desde 1956</p>
+                <!-- IMAGEM COMO LOGO PEQUENO -->
+                <img src="WhatsApp Image 2025-10-27 at 14.42.38.jpeg" 
+                     alt="Colégio Estadual Professor Júlio Szymanski" class="portal-logo">
+                <p class="header-slogan">Educação de qualidade para construir um futuro melhor</p>
+            </div>
+            
+            <!-- Botão de Identificar-se no canto direito -->
+            <div class="login-btn-container">
+                <button class="login-btn" id="loginBtn">
+                    <i class="fas fa-user"></i>
+                    Identificar-se
+                </button>
             </div>
         </div>
     </header>
-
-    <!-- Container Principal -->
-    <div class="main-container">
-        <!-- Painel de Boas-vindas -->
-        <div class="welcome-panel">
-            <div class="welcome-content">
-                <div class="panel-icon">
-                    <i class="fas fa-school"></i>
+    
+    <nav>
+        <a href="index.html">Início</a>
+        <a href="#cursos" class="locked-feature">Cursos</a>
+        <a href="historia.html">História</a>
+        <a href="#feira" class="locked-feature">Feiras de Profissão</a>
+        <a href="#plataformas" class="locked-feature">Plataformas</a>
+        <a href="info.html">Info</a>
+    </nav>
+    
+    <div class="container">
+        <section id="sobre">
+            <h2>Bem-vindo ao Portal Szymanski!</h2>
+            <p>
+                O Portal Szymanski é a sua fonte definitiva para tudo relacionado ao nosso colégio. 
+                Criado por alunos em busca de melhorias, o site foi desenvolvido para fornecer informações 
+                essenciais sobre cursos, feiras de profissão, plataformas educacionais e muito mais, 
+                oferecendo uma experiência completa e interativa para estudantes, pais e professores.
+            </p>
+            
+            <div class="highlights">
+                <div class="highlight-card locked" data-feature="cursos">
+                    <div class="highlight-icon">📚</div>
+                    <h3>Cursos</h3>
+                    <p>Conheça todas as opções de formação oferecidas pelo colégio</p>
+                    <p class="access-note">Identifique-se para acessar</p>
                 </div>
-                <h2 id="welcomeTitle">Portal Escolar</h2>
-                <p id="welcomeText">Acesse o portal do Colégio Professor Júlio Szymanski</p>
                 
-                <div class="feature-list">
-                    <div class="feature-item">
-                        <i class="fas fa-history"></i>
-                        <span>Conheça nossa história e tradição</span>
-                    </div>
-                    <div class="feature-item">
-                        <i class="fas fa-images"></i>
-                        <span>Galeria de fotos e eventos</span>
-                    </div>
-                    <div class="feature-item">
-                        <i class="fas fa-phone-alt"></i>
-                        <span>Informações de contato</span>
-                    </div>
-                    <div class="feature-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>Localização: Araucária - PR</span>
-                    </div>
+                <div class="highlight-card locked" data-feature="feira">
+                    <div class="highlight-icon">🎓</div>
+                    <h3>Feira de Profissões</h3>
+                    <p>Descubra oportunidades e caminhos para seu futuro profissional</p>
+                    <p class="access-note">Identifique-se para acessar</p>
+                </div>
+                
+                <div class="highlight-card locked" data-feature="plataformas">
+                    <div class="highlight-icon">💻</div>
+                    <h3>Plataformas</h3>
+                    <p>Acesse todas as ferramentas educacionais em um só lugar</p>
+                    <p class="access-note">Identifique-se para acessar</p>
+                </div>
+                
+                <div class="highlight-card">
+                    <div class="highlight-icon">🏫</div>
+                    <h3>Informações</h3>
+                    <p>Encontre contatos, localização e horários de atendimento</p>
                 </div>
             </div>
-        </div>
+            
+            <p>
+                Nosso objetivo é criar um espaço dinâmico e intuitivo, onde cada visitante possa 
+                encontrar as informações que precisa de forma rápida e organizada. 
+                <strong>Identifique-se para acessar todos os recursos do portal!</strong>
+            </p>
+            
+            <div class="fundador">
+                <p><strong>Sobre o patrono:</strong> Professor Júlio Szymanski foi um educador e imigrante polonês que dedicou sua vida ao ensino e à ciência. Sua trajetória inspira nossa missão educacional até os dias atuais, valorizando o conhecimento, a cultura e a formação integral dos estudantes.</p>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <p>&copy; 2025 Colégio Estadual Professor Júlio Szymanski - Todos os direitos reservados</p>
+    </footer>
 
-        <!-- Form Container -->
-        <div class="form-container">
+    <!-- Modal de Login -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModal">&times;</span>
+            <h2>Identificar-se</h2>
+            
+            <!-- Banner de Cookies -->
+            <div class="cookie-banner" id="cookieBanner">
+                <h3><i class="fas fa-cookie-bite"></i> Uso de Cookies</h3>
+                <p>
+                    Utilizamos cookies para melhorar sua experiência no portal. Eles nos ajudam a 
+                    lembrar suas preferências e fornecer conteúdo personalizado.
+                </p>
+                <div class="cookie-buttons">
+                    <button class="cookie-btn cookie-accept" id="cookieAccept">Aceitar Cookies</button>
+                    <button class="cookie-btn cookie-reject" id="cookieReject">Recusar</button>
+                    <button class="cookie-btn cookie-info" id="cookieInfo">Saber Mais</button>
+                </div>
+            </div>
+            
+            <div id="loginMessage" class="message"></div>
+            
             <!-- Formulário de Login -->
             <div id="loginSection" class="form-section active">
-                <h2 class="form-title">Acesso ao Portal</h2>
-                
-                <div id="loginMessage" class="message"></div>
-                
                 <form id="loginForm">
-                    <div class="user-type-selector">
-                        <label class="user-type-option">
-                            <input type="radio" name="tipo_usuario" value="aluno" required>
-                            <div><i class="fas fa-user-graduate"></i> Aluno</div>
-                        </label>
-                        <label class="user-type-option">
-                            <input type="radio" name="tipo_usuario" value="responsavel">
-                            <div><i class="fas fa-users"></i> Responsável</div>
-                        </label>
-                        <label class="user-type-option">
-                            <input type="radio" name="tipo_usuario" value="professor">
-                            <div><i class="fas fa-chalkboard-teacher"></i> Professor</div>
-                        </label>
-                        <label class="user-type-option">
-                            <input type="radio" name="tipo_usuario" value="funcionario">
-                            <div><i class="fas fa-user-tie"></i> Funcionário</div>
-                        </label>
-                    </div>
-                    
                     <div class="form-group">
                         <label for="loginEmail">Email ou RA:</label>
                         <input type="text" id="loginEmail" required>
                     </div>
                     
                     <div class="form-group">
-                        <label for="loginSenha">Senha:</label>
-                        <input type="password" id="loginSenha" required>
+                        <label for="loginPassword">Senha:</label>
+                        <input type="password" id="loginPassword" required>
                     </div>
                     
-                    <button type="submit" class="btn-primary">Entrar no Portal</button>
+                    <button type="submit" class="btn-login">Entrar</button>
                 </form>
                 
-                <div class="links-container">
-                    <a href="#" id="goToRegister">
-                        <i class="fas fa-user-plus"></i> Primeiro acesso? Cadastre-se
-                    </a>
-                    <a href="#" id="goToForgotPassword">
-                        <i class="fas fa-key"></i> Esqueci minha senha
-                    </a>
+                <div class="register-link">
+                    <p>Não tem uma conta? <a href="#" id="goToRegister">Cadastre-se</a></p>
                 </div>
             </div>
 
             <!-- Formulário de Cadastro -->
             <div id="registerSection" class="form-section">
-                <h2 class="form-title">Primeiro Acesso</h2>
-                
-                <div id="registerMessage" class="message"></div>
-                
                 <form id="registerForm">
-                    <div class="user-type-selector">
-                        <label class="user-type-option">
-                            <input type="radio" name="tipo_usuario_cadastro" value="aluno" required>
-                            <div><i class="fas fa-user-graduate"></i> Aluno</div>
-                        </label>
-                        <label class="user-type-option">
-                            <input type="radio" name="tipo_usuario_cadastro" value="responsavel">
-                            <div><i class="fas fa-users"></i> Responsável</div>
-                        </label>
-                        <label class="user-type-option">
-                            <input type="radio" name="tipo_usuario_cadastro" value="professor">
-                            <div><i class="fas fa-chalkboard-teacher"></i> Professor</div>
-                        </label>
-                        <label class="user-type-option">
-                            <input type="radio" name="tipo_usuario_cadastro" value="funcionario">
-                            <div><i class="fas fa-user-tie"></i> Funcionário</div>
-                        </label>
-                    </div>
-                    
                     <div class="form-group">
                         <label for="registerNome">Nome Completo:</label>
                         <input type="text" id="registerNome" required>
@@ -750,809 +757,274 @@
                         <input type="password" id="registerConfirmarSenha" required>
                     </div>
                     
-                    <div class="form-group">
-                        <label for="registerTelefone">Telefone:</label>
-                        <input type="tel" id="registerTelefone">
-                    </div>
-                    
-                    <button type="submit" class="btn-primary">Criar Conta</button>
+                    <button type="submit" class="btn-login">Cadastrar</button>
                 </form>
                 
-                <div class="links-container">
-                    <a href="#" id="goToLogin">
-                        <i class="fas fa-arrow-left"></i> Voltar para Login
-                    </a>
+                <div class="register-link">
+                    <p>Já tem uma conta? <a href="#" id="goToLogin">Fazer login</a></p>
                 </div>
-            </div>
-
-            <!-- Formulário de Esqueci a Senha -->
-            <div id="forgotPasswordSection" class="form-section">
-                <h2 class="form-title">Recuperar Senha</h2>
-                
-                <div id="forgotPasswordMessage" class="message"></div>
-                
-                <div class="reset-instructions">
-                    <p><i class="fas fa-info-circle"></i> Digite seu email ou RA abaixo. Enviaremos um link para redefinir sua senha.</p>
-                </div>
-                
-                <form id="forgotPasswordForm">
-                    <div class="form-group">
-                        <label for="forgotEmail">Email ou RA cadastrado:</label>
-                        <input type="text" id="forgotEmail" required>
-                    </div>
-                    
-                    <button type="submit" class="btn-primary">Enviar Link de Recuperação</button>
-                </form>
-                
-                <div class="links-container">
-                    <a href="#" id="goToLoginFromForgot">
-                        <i class="fas fa-arrow-left"></i> Voltar para Login
-                    </a>
-                </div>
-            </div>
-
-            <!-- Formulário de Redefinição de Senha -->
-            <div id="resetPasswordSection" class="form-section">
-                <h2 class="form-title">Redefinir Senha</h2>
-                
-                <div id="resetPasswordMessage" class="message"></div>
-                
-                <div class="reset-instructions">
-                    <p><i class="fas fa-info-circle"></i> Digite sua nova senha abaixo. O token é válido por <span class="countdown" id="tokenCountdown">15:00</span> minutos.</p>
-                </div>
-                
-                <form id="resetPasswordForm">
-                    <div class="form-group">
-                        <label for="resetToken">Token de verificação:</label>
-                        <input type="text" id="resetToken" required readonly>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="newPassword">Nova Senha:</label>
-                        <input type="password" id="newPassword" required minlength="6">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="confirmNewPassword">Confirmar Nova Senha:</label>
-                        <input type="password" id="confirmNewPassword" required>
-                    </div>
-                    
-                    <button type="submit" class="btn-primary">Redefinir Senha</button>
-                </form>
-                
-                <div class="links-container">
-                    <a href="#" id="goToLoginFromReset">
-                        <i class="fas fa-arrow-left"></i> Voltar para Login
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Cookie Banner -->
-    <div class="cookie-banner" id="cookieBanner">
-        <div class="cookie-content">
-            <div class="cookie-text">
-                <p>Utilizamos cookies para melhorar sua experiência em nosso site. Ao continuar navegando, você concorda com nossa <a href="#" id="cookiePolicyLink">Política de Cookies</a>.</p>
-            </div>
-            <div class="cookie-buttons">
-                <button class="cookie-btn cookie-accept" id="cookieAcceptBtn">Aceitar Todos</button>
-                <button class="cookie-btn cookie-reject" id="cookieRejectBtn">Rejeitar</button>
             </div>
         </div>
     </div>
 
     <!-- Modal de Política de Cookies -->
     <div class="cookie-modal" id="cookieModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title">Política de Cookies</h2>
-                <button class="close-modal" id="closeModal">&times;</button>
+        <div class="cookie-modal-content">
+            <div class="cookie-modal-header">
+                <h2 class="cookie-modal-title">Política de Cookies</h2>
+                <button class="close-cookie-modal" id="closeCookieModal">&times;</button>
             </div>
-            <div class="modal-body">
+            <div class="cookie-modal-body">
                 <div class="policy-section">
                     <h3>O que são cookies?</h3>
-                    <p>Cookies são pequenos arquivos de texto que são armazenados no seu dispositivo quando você visita nosso site. Eles nos ajudam a fornecer uma experiência melhor e mais personalizada para você.</p>
+                    <p>
+                        Cookies são pequenos arquivos de texto que são armazenados no seu dispositivo 
+                        (computador, tablet ou smartphone) quando você visita nosso site. Eles são 
+                        amplamente utilizados para fazer os sites funcionarem de forma mais eficiente, 
+                        além de fornecer informações aos proprietários do site.
+                    </p>
                 </div>
-                
+
                 <div class="policy-section">
                     <h3>Como usamos os cookies?</h3>
                     <p>Utilizamos cookies para:</p>
                     <ul>
                         <li>Lembrar suas preferências e configurações</li>
-                        <li>Melhorar a segurança do site</li>
-                        <li>Entender como você usa nosso site</li>
-                        <li>Oferecer conteúdo personalizado</li>
-                        <li>Permitir funcionalidades sociais</li>
+                        <li>Melhorar a segurança do portal</li>
+                        <li>Entender como você usa nosso site para melhorar a experiência</li>
+                        <li>Oferecer conteúdo personalizado de acordo com seu perfil</li>
+                        <li>Permitir funcionalidades sociais e de compartilhamento</li>
+                        <li>Analisar o tráfego e o desempenho do portal</li>
                     </ul>
                 </div>
-                
+
                 <div class="policy-section">
                     <h3>Tipos de cookies que utilizamos</h3>
                     <ul>
-                        <li><strong>Cookies essenciais:</strong> Necessários para o funcionamento básico do site</li>
+                        <li><strong>Cookies essenciais:</strong> São necessários para o funcionamento básico do portal e não podem ser desativados</li>
                         <li><strong>Cookies de desempenho:</strong> Coletam informações sobre como os visitantes usam o site</li>
                         <li><strong>Cookies de funcionalidade:</strong> Lembram escolhas que você faz para melhorar sua experiência</li>
-                        <li><strong>Cookies de marketing:</strong> Usados para rastrear visitantes em websites</li>
+                        <li><strong>Cookies de personalização:</strong> Armazenam suas preferências de idioma, tema e layout</li>
                     </ul>
                 </div>
-                
+
                 <div class="policy-section">
                     <h3>Controle de cookies</h3>
-                    <p>Você pode controlar e/ou excluir cookies conforme desejar. Você pode excluir todos os cookies que já estão no seu dispositivo e pode configurar a maioria dos navegadores para impedir que sejam colocados.</p>
-                    <p>Ao rejeitar cookies, algumas funcionalidades do site podem não funcionar corretamente.</p>
+                    <p>
+                        Você pode controlar e/ou excluir cookies conforme desejar. Você pode excluir 
+                        todos os cookies que já estão no seu dispositivo e pode configurar a maioria 
+                        dos navegadores para impedir que sejam colocados.
+                    </p>
+                    <p>
+                        No entanto, se fizer isso, pode ter que ajustar manualmente algumas preferências 
+                        sempre que visitar nosso site e algumas funcionalidades podem não funcionar 
+                        corretamente.
+                    </p>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button class="cookie-btn cookie-reject" id="modalRejectBtn">Rejeitar Cookies</button>
-                <button class="cookie-btn cookie-accept" id="modalAcceptBtn">Aceitar Todos</button>
+
+                <div class="policy-section">
+                    <h3>Alterações nesta política</h3>
+                    <p>
+                        Podemos atualizar esta Política de Cookies periodicamente. Recomendamos que 
+                        você revise esta política regularmente para se manter informado sobre como 
+                        estamos usando os cookies.
+                    </p>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Sistema de Banco de Dados Local
-        class LocalDatabase {
-            constructor() {
-                this.dbName = 'PortalSzymanskiDB';
-                this.version = 1;
-                this.init();
-            }
+        // Elementos do DOM
+        const loginBtn = document.getElementById('loginBtn');
+        const loginModal = document.getElementById('loginModal');
+        const closeModal = document.getElementById('closeModal');
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        const loginMessage = document.getElementById('loginMessage');
+        const goToRegister = document.getElementById('goToRegister');
+        const goToLogin = document.getElementById('goToLogin');
+        const loginSection = document.getElementById('loginSection');
+        const registerSection = document.getElementById('registerSection');
+        
+        // Elementos de Cookies
+        const cookieBanner = document.getElementById('cookieBanner');
+        const cookieAccept = document.getElementById('cookieAccept');
+        const cookieReject = document.getElementById('cookieReject');
+        const cookieInfo = document.getElementById('cookieInfo');
+        const cookieModal = document.getElementById('cookieModal');
+        const closeCookieModal = document.getElementById('closeCookieModal');
 
-            init() {
-                if (!localStorage.getItem(this.dbName)) {
-                    this.createDefaultData();
-                }
-            }
+        // Verificar se já aceitou cookies
+        function checkCookieConsent() {
+            return localStorage.getItem('cookieConsent');
+        }
 
-            createDefaultData() {
-                const defaultData = {
-                    users: [
-                        {
-                            id: 1,
-                            email: 'admin@szymanski.com',
-                            ra: 'ADMIN001',
-                            senha: 'admin123',
-                            tipo: 'admin',
-                            nome: 'Administrador',
-                            telefone: '',
-                            dataCadastro: new Date().toISOString()
-                        },
-                        {
-                            id: 2,
-                            email: 'aluno@exemplo.com',
-                            ra: '2023001',
-                            senha: 'aluno123',
-                            tipo: 'aluno',
-                            nome: 'João Silva',
-                            telefone: '(41) 99999-9999',
-                            dataCadastro: new Date().toISOString()
-                        }
-                    ],
-                    settings: {
-                        theme: 'light',
-                        language: 'pt-br'
-                    },
-                    passwordResetTokens: []
-                };
-                
-                localStorage.setItem(this.dbName, JSON.stringify(defaultData));
-                console.log('Banco de dados criado com sucesso!');
-            }
-
-            getDatabase() {
-                const db = localStorage.getItem(this.dbName);
-                return db ? JSON.parse(db) : null;
-            }
-
-            saveDatabase(data) {
-                localStorage.setItem(this.dbName, JSON.stringify(data));
-            }
-
-            addUser(user) {
-                const db = this.getDatabase();
-                
-                // Verificar se o email já existe
-                if (this.findUserByEmail(user.email)) {
-                    return { success: false, message: 'Email já cadastrado!' };
-                }
-                
-                // Verificar se o RA já existe
-                if (this.findUserByRA(user.ra)) {
-                    return { success: false, message: 'RA/Matrícula já cadastrado!' };
-                }
-                
-                const newUser = {
-                    id: db.users.length > 0 ? Math.max(...db.users.map(u => u.id)) + 1 : 1,
-                    ...user,
-                    dataCadastro: new Date().toISOString()
-                };
-                
-                db.users.push(newUser);
-                this.saveDatabase(db);
-                return { success: true, user: newUser };
-            }
-
-            findUserByEmail(email) {
-                const db = this.getDatabase();
-                return db ? db.users.find(user => user.email === email) : null;
-            }
-
-            findUserByRA(ra) {
-                const db = this.getDatabase();
-                return db ? db.users.find(user => user.ra === ra) : null;
-            }
-
-            validateUser(login, senha) {
-                // Verificar se é email ou RA
-                let user = this.findUserByEmail(login);
-                if (!user) {
-                    user = this.findUserByRA(login);
-                }
-                
-                if (user && user.senha === senha) {
-                    console.log('Usuário validado:', user);
-                    return user;
-                }
-                console.log('Falha na validação do usuário');
-                return null;
-            }
-
-            updateUserPassword(email, newPassword) {
-                const db = this.getDatabase();
-                const user = this.findUserByEmail(email);
-                
-                if (user) {
-                    user.senha = newPassword;
-                    this.saveDatabase(db);
-                    return { success: true, message: 'Senha atualizada com sucesso!' };
-                }
-                
-                return { success: false, message: 'Usuário não encontrado!' };
-            }
-
-            createPasswordResetToken(login) {
-                const db = this.getDatabase();
-                
-                // Verificar se o usuário existe por email ou RA
-                let user = this.findUserByEmail(login);
-                if (!user) {
-                    user = this.findUserByRA(login);
-                }
-                
-                if (!user) {
-                    return { success: false, message: 'Email/RA não cadastrado!' };
-                }
-                
-                // Gerar token único
-                const token = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-                const expiresAt = new Date(Date.now() + 15 * 60 * 1000); // 15 minutos
-                
-                // Remover tokens antigos para este email
-                db.passwordResetTokens = db.passwordResetTokens.filter(t => t.email !== user.email);
-                
-                // Adicionar novo token
-                db.passwordResetTokens.push({
-                    email: user.email,
-                    token: token,
-                    expiresAt: expiresAt.toISOString(),
-                    used: false
-                });
-                
-                this.saveDatabase(db);
-                
-                return { 
-                    success: true, 
-                    token: token,
-                    expiresAt: expiresAt
-                };
-            }
-
-            validatePasswordResetToken(token) {
-                const db = this.getDatabase();
-                const resetToken = db.passwordResetTokens.find(t => t.token === token && !t.used);
-                
-                if (!resetToken) {
-                    return { success: false, message: 'Token inválido ou expirado!' };
-                }
-                
-                const now = new Date();
-                const expiresAt = new Date(resetToken.expiresAt);
-                
-                if (now > expiresAt) {
-                    return { success: false, message: 'Token expirado!' };
-                }
-                
-                return { 
-                    success: true, 
-                    email: resetToken.email,
-                    expiresAt: expiresAt
-                };
-            }
-
-            markTokenAsUsed(token) {
-                const db = this.getDatabase();
-                const resetToken = db.passwordResetTokens.find(t => t.token === token);
-                
-                if (resetToken) {
-                    resetToken.used = true;
-                    this.saveDatabase(db);
-                }
+        // Inicializar cookies
+        function initCookies() {
+            const consent = checkCookieConsent();
+            if (!consent) {
+                cookieBanner.style.display = 'block';
+            } else {
+                cookieBanner.style.display = 'none';
             }
         }
 
-        // Sistema de Navegação entre Formulários
-        class FormNavigator {
-            constructor() {
-                this.loginSection = document.getElementById('loginSection');
-                this.registerSection = document.getElementById('registerSection');
-                this.forgotPasswordSection = document.getElementById('forgotPasswordSection');
-                this.resetPasswordSection = document.getElementById('resetPasswordSection');
-                this.welcomeTitle = document.getElementById('welcomeTitle');
-                this.welcomeText = document.getElementById('welcomeText');
-                
-                this.initEvents();
+        // Abrir modal de login
+        loginBtn.addEventListener('click', () => {
+            loginModal.style.display = 'flex';
+            initCookies();
+        });
+        
+        // Fechar modal de login
+        closeModal.addEventListener('click', () => {
+            loginModal.style.display = 'none';
+        });
+        
+        // Fechar modal ao clicar fora
+        window.addEventListener('click', (e) => {
+            if (e.target === loginModal) {
+                loginModal.style.display = 'none';
             }
-
-            initEvents() {
-                document.getElementById('goToRegister').addEventListener('click', (e) => {
-                    e.preventDefault();
-                    this.showRegister();
-                });
-
-                document.getElementById('goToLogin').addEventListener('click', (e) => {
-                    e.preventDefault();
-                    this.showLogin();
-                });
-
-                document.getElementById('goToForgotPassword').addEventListener('click', (e) => {
-                    e.preventDefault();
-                    this.showForgotPassword();
-                });
-
-                document.getElementById('goToLoginFromForgot').addEventListener('click', (e) => {
-                    e.preventDefault();
-                    this.showLogin();
-                });
-
-                document.getElementById('goToLoginFromReset').addEventListener('click', (e) => {
-                    e.preventDefault();
-                    this.showLogin();
-                });
+            if (e.target === cookieModal) {
+                cookieModal.style.display = 'none';
             }
-
-            showLogin() {
-                this.hideAllSections();
-                this.loginSection.classList.add('active');
-                this.welcomeTitle.textContent = 'Portal Escolar';
-                this.welcomeText.textContent = 'Acesse o portal do Colégio Professor Júlio Szymanski';
-                this.clearAllMessages();
-            }
-
-            showRegister() {
-                this.hideAllSections();
-                this.registerSection.classList.add('active');
-                this.welcomeTitle.textContent = 'Primeiro Acesso';
-                this.welcomeText.textContent = 'Cadastre-se para acessar o portal escolar';
-                this.clearAllMessages();
-            }
-
-            showForgotPassword() {
-                this.hideAllSections();
-                this.forgotPasswordSection.classList.add('active');
-                this.welcomeTitle.textContent = 'Recuperar Senha';
-                this.welcomeText.textContent = 'Vamos ajudar você a recuperar o acesso à sua conta';
-                this.clearAllMessages();
-            }
-
-            showResetPassword(token) {
-                this.hideAllSections();
-                this.resetPasswordSection.classList.add('active');
-                this.welcomeTitle.textContent = 'Redefinir Senha';
-                this.welcomeText.textContent = 'Crie uma nova senha para sua conta';
-                
-                // Preencher o token automaticamente
-                document.getElementById('resetToken').value = token;
-                
-                // Iniciar contador regressivo
-                this.startTokenCountdown();
-                
-                this.clearAllMessages();
-            }
-
-            hideAllSections() {
-                this.loginSection.classList.remove('active');
-                this.registerSection.classList.remove('active');
-                this.forgotPasswordSection.classList.remove('active');
-                this.resetPasswordSection.classList.remove('active');
-            }
-
-            clearAllMessages() {
-                document.getElementById('loginMessage').className = 'message';
-                document.getElementById('registerMessage').className = 'message';
-                document.getElementById('forgotPasswordMessage').className = 'message';
-                document.getElementById('resetPasswordMessage').className = 'message';
-            }
-
-            startTokenCountdown() {
-                const countdownElement = document.getElementById('tokenCountdown');
-                let timeLeft = 15 * 60; // 15 minutos em segundos
-                
-                const countdown = setInterval(() => {
-                    const minutes = Math.floor(timeLeft / 60);
-                    const seconds = timeLeft % 60;
-                    
-                    countdownElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-                    
-                    if (timeLeft <= 0) {
-                        clearInterval(countdown);
-                        countdownElement.textContent = 'Expirado';
-                        countdownElement.style.color = 'var(--error-color)';
-                    }
-                    
-                    timeLeft--;
-                }, 1000);
-            }
-        }
-
-        // Sistema de Gerenciamento de Cookies
-        class CookieManager {
-            constructor() {
-                this.cookieConsent = this.getCookieConsent();
-                this.cookieModal = document.getElementById('cookieModal');
-                this.showBannerIfNeeded();
-                this.initModalEvents();
-            }
-
-            getCookieConsent() {
-                const consent = localStorage.getItem('cookieConsent');
-                return consent ? JSON.parse(consent) : null;
-            }
-
-            setCookieConsent(consent) {
-                localStorage.setItem('cookieConsent', JSON.stringify(consent));
-                this.cookieConsent = consent;
-            }
-
-            showBannerIfNeeded() {
-                if (!this.cookieConsent) {
-                    setTimeout(() => {
-                        document.getElementById('cookieBanner').style.display = 'block';
-                    }, 1000);
-                }
-            }
-
-            hideBanner() {
-                document.getElementById('cookieBanner').style.display = 'none';
-            }
-
-            showModal() {
-                this.cookieModal.classList.add('active');
-            }
-
-            hideModal() {
-                this.cookieModal.classList.remove('active');
-            }
-
-            initModalEvents() {
-                // Abrir modal quando clicar no link de política
-                document.getElementById('cookiePolicyLink').addEventListener('click', (e) => {
-                    e.preventDefault();
-                    this.showModal();
-                });
-
-                // Fechar modal com o X
-                document.getElementById('closeModal').addEventListener('click', () => {
-                    this.hideModal();
-                });
-
-                // Fechar modal clicando fora
-                this.cookieModal.addEventListener('click', (e) => {
-                    if (e.target === this.cookieModal) {
-                        this.hideModal();
-                    }
-                });
-
-                // Aceitar cookies pelo modal
-                document.getElementById('modalAcceptBtn').addEventListener('click', () => {
-                    this.acceptAll();
-                    this.hideModal();
-                });
-
-                // Rejeitar cookies pelo modal
-                document.getElementById('modalRejectBtn').addEventListener('click', () => {
-                    this.rejectAll();
-                    this.hideModal();
-                });
-            }
-
-            acceptAll() {
-                const consent = {
-                    essential: true,
-                    performance: true,
-                    functionality: true,
-                    marketing: true,
-                    timestamp: new Date().toISOString()
-                };
-                
-                this.setCookieConsent(consent);
-                this.hideBanner();
-                alert('Cookies aceitos com sucesso!');
-            }
-
-            rejectAll() {
-                const consent = {
-                    essential: true, // Cookies essenciais não podem ser rejeitados
-                    performance: false,
-                    functionality: false,
-                    marketing: false,
-                    timestamp: new Date().toISOString()
-                };
-                
-                this.setCookieConsent(consent);
-                this.hideBanner();
-                alert('Cookies não essenciais rejeitados. Algumas funcionalidades podem não estar disponíveis.');
-            }
-        }
-
-        // Sistema de Mensagens
-        class MessageSystem {
-            static showMessage(elementId, message, type) {
-                const element = document.getElementById(elementId);
-                element.textContent = message;
-                element.className = `message ${type}`;
-                console.log(`Mensagem [${type}]: ${message}`);
-            }
-
-            static clearMessage(elementId) {
-                const element = document.getElementById(elementId);
-                element.className = 'message';
-                element.textContent = '';
-            }
-        }
-
-        // Sistema de Email Simulado
-        class EmailService {
-            static async sendPasswordResetEmail(email, token) {
-                // Simular envio de email (em produção, isso seria uma chamada API)
-                return new Promise((resolve) => {
-                    setTimeout(() => {
-                        console.log(`Email de recuperação enviado para: ${email}`);
-                        console.log(`Token de recuperação: ${token}`);
-                        console.log('Link simulado: https://portal-szymanski.com/reset-password?token=' + token);
-                        resolve(true);
-                    }, 1500);
-                });
-            }
-        }
-
-        // Inicialização do sistema
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('Sistema iniciando...');
+        });
+        
+        // Navegação entre login e cadastro
+        goToRegister.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginSection.classList.remove('active');
+            registerSection.classList.add('active');
+        });
+        
+        goToLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            registerSection.classList.remove('active');
+            loginSection.classList.add('active');
+        });
+        
+        // Cards bloqueados - abrem modal
+        document.querySelectorAll('.highlight-card.locked').forEach(card => {
+            card.addEventListener('click', () => {
+                loginModal.style.display = 'flex';
+                initCookies();
+            });
+        });
+        
+        // Links bloqueados na navegação
+        document.querySelectorAll('.locked-feature').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                loginModal.style.display = 'flex';
+                initCookies();
+            });
+        });
+        
+        // Processar formulário de login
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
             
-            // Inicializar banco de dados
-            const database = new LocalDatabase();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
             
-            // Inicializar navegador de formulários
-            const formNavigator = new FormNavigator();
+            if (email && password) {
+                // Verificar se aceitou cookies
+                const cookieConsent = checkCookieConsent();
+                if (!cookieConsent) {
+                    loginMessage.textContent = 'Por favor, aceite ou recuse os cookies para continuar.';
+                    loginMessage.className = 'message error';
+                    loginMessage.style.display = 'block';
+                    return;
+                }
+
+                // Simular login bem-sucedido
+                loginMessage.textContent = 'Login realizado com sucesso! Redirecionando...';
+                loginMessage.className = 'message success';
+                loginMessage.style.display = 'block';
+                
+                // Redirecionar para dashboard após 1.5 segundos
+                setTimeout(() => {
+                    window.location.href = 'dashboard.html';
+                }, 1500);
+            } else {
+                loginMessage.textContent = 'Por favor, preencha todos os campos.';
+                loginMessage.className = 'message error';
+                loginMessage.style.display = 'block';
+            }
+        });
+        
+        // Processar formulário de cadastro
+        registerForm.addEventListener('submit', (e) => {
+            e.preventDefault();
             
-            // Inicializar gerenciador de cookies
-            const cookieManager = new CookieManager();
+            const senha = document.getElementById('registerSenha').value;
+            const confirmarSenha = document.getElementById('registerConfirmarSenha').value;
             
-            // Verificar se há token de reset na URL (simulação)
+            // Verificar se aceitou cookies
+            const cookieConsent = checkCookieConsent();
+            if (!cookieConsent) {
+                loginMessage.textContent = 'Por favor, aceite ou recuse os cookies para continuar.';
+                loginMessage.className = 'message error';
+                loginMessage.style.display = 'block';
+                return;
+            }
+
+            if (senha !== confirmarSenha) {
+                loginMessage.textContent = 'As senhas não coincidem!';
+                loginMessage.className = 'message error';
+                loginMessage.style.display = 'block';
+                return;
+            }
+            
+            // Simular cadastro bem-sucedido
+            loginMessage.textContent = 'Cadastro realizado! Faça login para continuar.';
+            loginMessage.className = 'message success';
+            loginMessage.style.display = 'block';
+            
+            // Voltar para login após 2 segundos
+            setTimeout(() => {
+                registerSection.classList.remove('active');
+                loginSection.classList.add('active');
+                registerForm.reset();
+            }, 2000);
+        });
+
+        // Sistema de Cookies
+        cookieAccept.addEventListener('click', () => {
+            localStorage.setItem('cookieConsent', 'accepted');
+            cookieBanner.style.display = 'none';
+            loginMessage.textContent = 'Cookies aceitos! Agora você pode fazer login.';
+            loginMessage.className = 'message success';
+            loginMessage.style.display = 'block';
+        });
+
+        cookieReject.addEventListener('click', () => {
+            localStorage.setItem('cookieConsent', 'rejected');
+            cookieBanner.style.display = 'none';
+            loginMessage.textContent = 'Cookies recusados. Algumas funcionalidades podem não estar disponíveis.';
+            loginMessage.className = 'message info';
+            loginMessage.style.display = 'block';
+        });
+
+        cookieInfo.addEventListener('click', () => {
+            cookieModal.style.display = 'flex';
+        });
+
+        closeCookieModal.addEventListener('click', () => {
+            cookieModal.style.display = 'none';
+        });
+        
+        // Verificar se há parâmetros de cadastro bem-sucedido na URL
+        window.addEventListener('load', () => {
             const urlParams = new URLSearchParams(window.location.search);
-            const resetToken = urlParams.get('token');
-            if (resetToken) {
-                // Validar token
-                const tokenValidation = database.validatePasswordResetToken(resetToken);
-                if (tokenValidation.success) {
-                    formNavigator.showResetPassword(resetToken);
-                } else {
-                    MessageSystem.showMessage('loginMessage', tokenValidation.message, 'error');
-                }
+            if (urlParams.get('cadastro') === 'sucesso') {
+                loginMessage.textContent = 'Cadastro realizado com sucesso! Faça login para continuar.';
+                loginMessage.className = 'message success';
+                loginMessage.style.display = 'block';
+                loginModal.style.display = 'flex';
+                initCookies();
             }
-            
-            // Configurar formulário de login
-            document.getElementById('loginForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                console.log('Tentativa de login...');
-                
-                const login = document.getElementById('loginEmail').value;
-                const senha = document.getElementById('loginSenha').value;
-                const tipoRadio = document.querySelector('input[name="tipo_usuario"]:checked');
-                
-                if (!tipoRadio) {
-                    MessageSystem.showMessage('loginMessage', 'Selecione um tipo de usuário!', 'error');
-                    return;
-                }
-                
-                const user = database.validateUser(login, senha);
-                
-                if (user) {
-                    MessageSystem.showMessage('loginMessage', 'Login realizado com sucesso!', 'success');
-                    
-                    // Salvar sessão do usuário
-                    sessionStorage.setItem('currentUser', JSON.stringify(user));
-                    
-                    // Redirecionar para dashboard
-                    setTimeout(() => {
-                        window.location.href = 'dashboard.html';
-                    }, 1500);
-                } else {
-                    MessageSystem.showMessage('loginMessage', 'Email/RA ou senha incorretos!', 'error');
-                }
-            });
-            
-            // Configurar formulário de cadastro
-            document.getElementById('registerForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                console.log('Tentativa de cadastro...');
-                
-                const nome = document.getElementById('registerNome').value;
-                const email = document.getElementById('registerEmail').value;
-                const ra = document.getElementById('registerRA').value;
-                const senha = document.getElementById('registerSenha').value;
-                const confirmarSenha = document.getElementById('registerConfirmarSenha').value;
-                const telefone = document.getElementById('registerTelefone').value;
-                const tipoRadio = document.querySelector('input[name="tipo_usuario_cadastro"]:checked');
-                
-                if (!tipoRadio) {
-                    MessageSystem.showMessage('registerMessage', 'Selecione um tipo de usuário!', 'error');
-                    return;
-                }
-                
-                if (senha !== confirmarSenha) {
-                    MessageSystem.showMessage('registerMessage', 'As senhas não coincidem!', 'error');
-                    return;
-                }
-                
-                if (senha.length < 6) {
-                    MessageSystem.showMessage('registerMessage', 'A senha deve ter pelo menos 6 caracteres!', 'error');
-                    return;
-                }
-                
-                const tipo = tipoRadio.value;
-                const result = database.addUser({
-                    nome,
-                    email,
-                    ra,
-                    senha,
-                    tipo,
-                    telefone
-                });
-                
-                if (result.success) {
-                    MessageSystem.showMessage('registerMessage', 'Conta criada com sucesso! Redirecionando para login...', 'success');
-                    
-                    // Limpar formulário
-                    document.getElementById('registerForm').reset();
-                    
-                    // Voltar para login após 2 segundos
-                    setTimeout(() => {
-                        formNavigator.showLogin();
-                        MessageSystem.showMessage('loginMessage', 'Conta criada! Agora faça login.', 'success');
-                    }, 2000);
-                } else {
-                    MessageSystem.showMessage('registerMessage', result.message, 'error');
-                }
-            });
-            
-            // Configurar formulário de esqueci a senha
-            document.getElementById('forgotPasswordForm').addEventListener('submit', async function(e) {
-                e.preventDefault();
-                console.log('Solicitação de recuperação de senha...');
-                
-                const login = document.getElementById('forgotEmail').value;
-                
-                // Gerar token de recuperação
-                const tokenResult = database.createPasswordResetToken(login);
-                
-                if (!tokenResult.success) {
-                    MessageSystem.showMessage('forgotPasswordMessage', tokenResult.message, 'error');
-                    return;
-                }
-                
-                // Mostrar mensagem de processamento
-                MessageSystem.showMessage('forgotPasswordMessage', 'Enviando email de recuperação...', 'info');
-                
-                try {
-                    // Simular envio de email
-                    await EmailService.sendPasswordResetEmail(tokenResult.email, tokenResult.token);
-                    
-                    MessageSystem.showMessage('forgotPasswordMessage', 
-                        `Email enviado com sucesso! Use o token: ${tokenResult.token} (Simulação)`, 
-                        'success');
-                    
-                    // Limpar formulário
-                    document.getElementById('forgotPasswordForm').reset();
-                    
-                    // Mostrar link para teste (em produção isso não existiria)
-                    setTimeout(() => {
-                        const testLink = document.createElement('p');
-                        testLink.innerHTML = `<small>Para teste: <a href="?token=${tokenResult.token}" style="color: var(--secondary-color);">Clique aqui para redefinir senha</a></small>`;
-                        testLink.style.marginTop = '10px';
-                        testLink.style.textAlign = 'center';
-                        document.getElementById('forgotPasswordMessage').appendChild(testLink);
-                    }, 1000);
-                    
-                } catch (error) {
-                    MessageSystem.showMessage('forgotPasswordMessage', 'Erro ao enviar email. Tente novamente.', 'error');
-                }
-            });
-            
-            // Configurar formulário de redefinição de senha
-            document.getElementById('resetPasswordForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                console.log('Tentativa de redefinição de senha...');
-                
-                const token = document.getElementById('resetToken').value;
-                const newPassword = document.getElementById('newPassword').value;
-                const confirmNewPassword = document.getElementById('confirmNewPassword').value;
-                
-                // Validar token
-                const tokenValidation = database.validatePasswordResetToken(token);
-                if (!tokenValidation.success) {
-                    MessageSystem.showMessage('resetPasswordMessage', tokenValidation.message, 'error');
-                    return;
-                }
-                
-                // Validar senhas
-                if (newPassword !== confirmNewPassword) {
-                    MessageSystem.showMessage('resetPasswordMessage', 'As senhas não coincidem!', 'error');
-                    return;
-                }
-                
-                if (newPassword.length < 6) {
-                    MessageSystem.showMessage('resetPasswordMessage', 'A senha deve ter pelo menos 6 caracteres!', 'error');
-                    return;
-                }
-                
-                // Atualizar senha
-                const updateResult = database.updateUserPassword(tokenValidation.email, newPassword);
-                
-                if (updateResult.success) {
-                    // Marcar token como usado
-                    database.markTokenAsUsed(token);
-                    
-                    MessageSystem.showMessage('resetPasswordMessage', 'Senha redefinida com sucesso! Redirecionando para login...', 'success');
-                    
-                    // Limpar formulário
-                    document.getElementById('resetPasswordForm').reset();
-                    
-                    // Voltar para login após 2 segundos
-                    setTimeout(() => {
-                        formNavigator.showLogin();
-                        MessageSystem.showMessage('loginMessage', 'Senha redefinida com sucesso! Faça login com sua nova senha.', 'success');
-                    }, 2000);
-                } else {
-                    MessageSystem.showMessage('resetPasswordMessage', updateResult.message, 'error');
-                }
-            });
-            
-            // Seleção visual dos tipos de usuário
-            document.querySelectorAll('.user-type-option').forEach(option => {
-                option.addEventListener('click', function() {
-                    const parent = this.closest('.user-type-selector');
-                    parent.querySelectorAll('.user-type-option').forEach(opt => {
-                        opt.classList.remove('selected');
-                    });
-                    this.classList.add('selected');
-                    this.querySelector('input').checked = true;
-                });
-            });
-            
-            // Configurar eventos dos cookies
-            document.getElementById('cookieAcceptBtn').addEventListener('click', function() {
-                cookieManager.acceptAll();
-            });
-            
-            document.getElementById('cookieRejectBtn').addEventListener('click', function() {
-                cookieManager.rejectAll();
-            });
-
-            // Auto-selecionar primeiro tipo de usuário
-            document.querySelector('.user-type-option input').checked = true;
-            document.querySelector('.user-type-option').classList.add('selected');
         });
     </script>
 </body>
