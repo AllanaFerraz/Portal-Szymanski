@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notícias - Portal Szymanski</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Estilos gerais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* Cabeçalho compacto */
+        .header-container {
+            position: relative;
+            width: 100%;
+            height: 180px;
+            overflow: hidden;
+            background: linear-gradient(to right, #1a2a6c, #b21f1f);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0.5rem;
+        }
+        
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .portal-logo {
+            max-width: 120px;
+            max-height: 120px;
+            object-fit: contain;
+            margin-bottom: 0.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .header-slogan {
+            font-size: 1.3rem;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+            margin-top: 0.5rem;
+            font-weight: 500;
+        }
+        
+        /* Navegação */
+        nav {
+            background: linear-gradient(to right, #1a2a6c, #b21f1f);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0.6rem;
+            flex-wrap: wrap;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            margin: 0 0.2rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            font-weight: 500;
+            font-size: 0.95rem;
+            white-space: nowrap;
+        }
+        
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Barra de Pesquisa */
+        .search-container {
+            display: flex;
+            align-items: center;
+            margin-left: 1rem;
+            position: relative;
+        }
+        
+        .search-input {
+            padding: 0.5rem 1rem;
+            padding-right: 2.5rem;
+            border: none;
+            border-radius: 20px;
+            width: 200px;
+            font-size: 0.9rem;
+            outline: none;
+            transition: width 0.3s;
+        }
+        
+        .search-input:focus {
+            width: 250px;
+        }
+        
+        .search-btn {
+            position: absolute;
+            right: 8px;
+            background: none;
+            border: none;
+            color: #1a2a6c;
+            cursor: pointer;
+            padding: 0.2rem;
+        }
+        
+        /* Resultados da Pesquisa */
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            z-index: 1000;
+            display: none;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .search-result-item {
+            padding: 0.8rem 1rem;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .search-result-item:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+        
+        .result-category {
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 0.2rem;
+        }
+        
+        .result-title {
+            font-weight: 600;
+            color: #1a2a6c;
+        }
+        
+        .no-results {
+            padding: 1rem;
+            text-align: center;
+            color: #666;
+            font-style: italic;
+        }
+        
+        /* Conteúdo principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        
+        .page-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #1a2a6c;
+            font-size: 2.5rem;
+            font-family: 'Bebas Neue', sans-serif;
+        }
+        
+        .intro-text {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Filtros de Notícias */
+        .news-filters {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            background-color: white;
+            border: 2px solid #1a2a6c;
+            color: #1a2a6c;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background-color: #1a2a6c;
+            color: white;
+        }
+        
+        /* Seção de Notícias */
+        .news-section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .news-title {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #1a2a6c;
+            border-bottom: 2px solid #fdbb2d;
+            padding-bottom: 0.5rem;
+        }
+        
+        .news-content {
+            margin-bottom: 1.5rem;
+        }
+        
+        .news-content p {
+            margin-bottom: 1rem;
+        }
+        
+        .news-meta {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .news-category {
+            background-color: #1a2a6c;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .news-category.evento {
+            background-color: #b21f1f;
+        }
+        
+        .news-category.aviso {
+            background-color: #fdbb2d;
+            color: #333;
+        }
+        
+        .news-category.geral {
+            background-color: #2ecc71;
+        }
+        
+        /* Sistema de galeria de imagens */
+        .image-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 1.5rem 0;
+            justify-content: center;
+        }
+        
+        .gallery-item {
+            flex: 1 1 300px;
+            max-width: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            background-color: #f9f9f9;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed #ddd;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        
+        .gallery-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .image-placeholder {
+            color: #999;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .image-placeholder i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        
+        /* Rodapé */
+        footer {
+            background-color: #222;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 3rem;
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .header-container {
+                height: 150px;
+            }
+            
+            .portal-logo {
+                max-width: 100px;
+                max-height: 100px;
+            }
+            
+            .header-slogan {
+                font-size: 1.1rem;
+            }
+            
+            nav {
+                flex-direction: column;
+                align-items: center;
+                padding-bottom: 1rem;
+            }
+            
+            nav a {
+                margin: 0.2rem 0;
+                width: 100%;
+                text-align: center;
+            }
+            
+            .search-container {
+                margin-left: 0;
+                margin-top: 0.5rem;
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .search-input {
+                width: 100%;
+            }
+            
+            .search-input:focus {
+                width: 100%;
+            }
+            
+            .news-section {
+                padding: 1.5rem;
+            }
+            
+            .gallery-item {
+                flex: 1 1 100%;
+            }
+            
+            .news-filters {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .filter-btn {
+                width: 200px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-container {
+                height: 130px;
+            }
+            
+            .portal-logo {
+                max-width: 80px;
+                max-height: 80px;
+            }
+            
+            .header-slogan {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo-container">
+                <!-- IMAGEM COMO LOGO PEQUENO -->
+                <img src="WhatsApp Image 2025-10-27 at 14.42.38.jpeg" 
+                     alt="Colégio Estadual Professor Júlio Szymanski" class="portal-logo">
+                <p class="header-slogan">Educação de qualidade para construir um futuro melhor</p>
+            </div>
+        </div>
+    </header>
+    
+    <nav>
+        <a href="dashboard.html">Início</a>
+        <a href="cursos.html">Cursos</a>
+        <a href="historia.html">História</a>
+        <a href="noticias.html">Notícias</a>
+        <a href="feira.html">Feiras de Profissão</a>
+        <a href="plataformas.html">Plataformas</a>
+        <a href="info.html">Info</a>
+        
+        <!-- Barra de Pesquisa -->
+        <div class="search-container">
+            <input type="text" class="search-input" placeholder="Pesquisar..." id="searchInput">
+            <button class="search-btn" id="searchBtn">
+                <i class="fas fa-search"></i>
+            </button>
+            <div class="search-results" id="searchResults"></div>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <h2 class="page-title">Notícias do Colégio</h2>
+        
+        <p class="intro-text">
+            Fique por dentro de todas as novidades, eventos e avisos importantes do Colégio Professor Júlio Szymanski
+        </p>
+        
+        <!-- Filtros de Notícias -->
+        <div class="news-filters">
+            <button class="filter-btn active" onclick="filterNews('all')">Todas as Notícias</button>
+            <button class="filter-btn" onclick="filterNews('evento')">Eventos</button>
+            <button class="filter-btn" onclick="filterNews('aviso')">Avisos</button>
+            <button class="filter-btn" onclick="filterNews('geral')">Geral</button>
+        </div>
+        
+        <!-- Notícia 1 -->
+        <div class="news-section" data-category="evento">
+            <h3 class="news-title">Feira de Ciências 2023 - Inscrições Abertas</h3>
+            <div class="news-meta">
+                <span><strong>Publicado em:</strong> 15 de Novembro, 2023</span>
+                <span class="news-category evento">Evento</span>
+            </div>
+            <div class="news-content">
+                <p>
+                    Estão abertas as inscrições para a Feira de Ciências 2023 do Colégio Professor Júlio Szymanski! 
+                    Alunos do 6º ano ao Ensino Médio podem participar com projetos inovadores nas áreas de ciências, 
+                    tecnologia, engenharia e matemática.
+                </p>
+                <p>
+                    As inscrições vão até o dia 30 de novembro e devem ser feitas na secretaria do colégio. 
+                    A feira acontecerá no dia 15 de dezembro, das 8h às 17h, no ginásio da escola.
+                </p>
+                
+                <div class="image-gallery">
+                    <div class="gallery-item">
+                        <div class="image-placeholder">
+                            <i class="fas fa-camera"></i>
+                            <span>Imagem da Feira de Ciências</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="image-placeholder">
+                            <i class="fas fa-camera"></i>
+                            <span>Projetos Científicos</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Notícia 2 -->
+        <div class="news-section" data-category="aviso">
+            <h3 class="news-title">Recesso de Final de Ano</h3>
+            <div class="news-meta">
+                <span><strong>Publicado em:</strong> 10 de Novembro, 2023</span>
+                <span class="news-category aviso">Aviso Importante</span>
+            </div>
+            <div class="news-content">
+                <p>
+                    Comunicamos que as aulas serão suspensas para o recesso de final de ano a partir do dia 18 de dezembro de 2023. 
+                    O retorno às atividades letivas está previsto para o dia 5 de fevereiro de 2024.
+                </p>
+                <p>
+                    Durante este período, a secretaria funcionará em horário reduzido, das 8h às 12h, 
+                    exceto nos feriados oficiais. Desejamos a todos os alunos, professores e funcionários 
+                    um excelente recesso e um feliz ano novo!
+                </p>
+                
+                <div class="image-gallery">
+                    <div class="gallery-item">
+                        <div class="image-placeholder">
+                            <i class="fas fa-camera"></i>
+                            <span>Calendário Escolar</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Notícia 3 -->
+        <div class="news-section" data-category="geral">
+            <h3 class="news-title">Novo Laboratório de Informática</h3>
+            <div class="news-meta">
+                <span><strong>Publicado em:</strong> 5 de Novembro, 2023</span>
+                <span class="news-category geral">Geral</span>
+            </div>
+            <div class="news-content">
+                <p>
+                    Temos o prazer de anunciar a modernização completa do nosso laboratório de informática! 
+                    Foram adquiridos 30 novos computadores com configurações de última geração, 
+                    além de projetores interativos e equipamentos de rede atualizados.
+                </p>
+                <p>
+                    O novo laboratório permitirá que nossos alunos tenham acesso às mais modernas 
+                    ferramentas tecnológicas para o aprendizado de programação, design gráfico, 
+                    e outras disciplinas relacionadas à tecnologia.
+                </p>
+                
+                <div class="image-gallery">
+                    <div class="gallery-item">
+                        <div class="image-placeholder">
+                            <i class="fas fa-camera"></i>
+                            <span>Novo Laboratório</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="image-placeholder">
+                            <i class="fas fa-camera"></i>
+                            <span>Equipamentos Novos</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>&copy; 2025 Colégio Estadual Professor Júlio Szymanski - Todos os direitos reservados</p>
+    </footer>
+
+    <script>
+        // Dados para pesquisa
+        const searchData = [
+            { title: "Feira de Ciências 2023", category: "Notícias", keywords: ["feira", "ciências", "projetos", "inscrições"], link: "noticias.html" },
+            { title: "Recesso de Final de Ano", category: "Notícias", keywords: ["recesso", "férias", "final de ano", "aulas"], link: "noticias.html" },
+            { title: "Novo Laboratório", category: "Notícias", keywords: ["laboratório", "informática", "computadores", "tecnologia"], link: "noticias.html" },
+            { title: "Cursos Técnicos", category: "Cursos", keywords: ["cursos", "técnico", "formação", "ensino"], link: "cursos.html" },
+            { title: "História do Colégio", category: "História", keywords: ["história", "fundação", "origem", "júlio szymanski"], link: "historia.html" },
+            { title: "Feira de Profissões", category: "Eventos", keywords: ["feira", "profissões", "carreira", "orientação"], link: "feira.html" },
+            { title: "Google Classroom", category: "Plataformas", keywords: ["classroom", "google", "aulas", "online"], link: "plataformas.html" },
+            { title: "Contato e Localização", category: "Info", keywords: ["contato", "localização", "endereço", "telefone"], link: "info.html" }
+        ];
+
+        // Elementos da pesquisa
+        const searchInput = document.getElementById('searchInput');
+        const searchBtn = document.getElementById('searchBtn');
+        const searchResults = document.getElementById('searchResults');
+
+        // Função de pesquisa
+        function performSearch(query) {
+            if (!query.trim()) {
+                searchResults.style.display = 'none';
+                return;
+            }
+
+            const lowerQuery = query.toLowerCase();
+            const results = searchData.filter(item => {
+                return item.keywords.some(keyword => keyword.includes(lowerQuery)) ||
+                       item.title.toLowerCase().includes(lowerQuery) ||
+                       item.category.toLowerCase().includes(lowerQuery);
+            });
+
+            displayResults(results);
+        }
+
+        // Exibir resultados
+        function displayResults(results) {
+            searchResults.innerHTML = '';
+
+            if (results.length === 0) {
+                searchResults.innerHTML = '<div class="no-results">Nenhum resultado encontrado</div>';
+            } else {
+                results.forEach(result => {
+                    const resultItem = document.createElement('div');
+                    resultItem.className = 'search-result-item';
+                    resultItem.innerHTML = `
+                        <div class="result-category">${result.category}</div>
+                        <div class="result-title">${result.title}</div>
+                    `;
+                    
+                    if (result.link) {
+                        resultItem.addEventListener('click', () => {
+                            window.location.href = result.link;
+                        });
+                    }
+                    
+                    searchResults.appendChild(resultItem);
+                });
+            }
+
+            searchResults.style.display = 'block';
+        }
+
+        // Event Listeners
+        searchInput.addEventListener('input', (e) => {
+            performSearch(e.target.value);
+        });
+
+        searchBtn.addEventListener('click', () => {
+            performSearch(searchInput.value);
+        });
+
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                performSearch(searchInput.value);
+            }
+        });
+
+        // Fechar resultados ao clicar fora
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.search-container')) {
+                searchResults.style.display = 'none';
+            }
+        });
+
+        // Sistema de Filtro de Notícias
+        function filterNews(category) {
+            const newsSections = document.querySelectorAll('.news-section');
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            
+            // Atualizar botões ativos
+            filterBtns.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.toLowerCase().includes(category) || (category === 'all' && btn.textContent === 'Todas as Notícias')) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Filtrar notícias
+            newsSections.forEach(section => {
+                if (category === 'all' || section.getAttribute('data-category') === category) {
+                    section.style.display = 'block';
+                } else {
+                    section.style.display = 'none';
+                }
+            });
+        }
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Sistema de notícias carregado!');
+            
+            // Adicionar funcionalidade de placeholder de imagens
+            const placeholders = document.querySelectorAll('.image-placeholder');
+            placeholders.forEach(placeholder => {
+                placeholder.addEventListener('click', function() {
+                    alert('Espaço reservado para imagem. Você pode adicionar suas próprias imagens posteriormente.');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
