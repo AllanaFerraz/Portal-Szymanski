@@ -236,12 +236,6 @@
             overflow: hidden;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s, box-shadow 0.3s;
-            background-color: #f9f9f9;
-            min-height: 200px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px dashed #ddd;
         }
         
         .gallery-item:hover {
@@ -253,18 +247,6 @@
             width: 100%;
             height: 200px;
             object-fit: cover;
-            display: block;
-        }
-        
-        .image-placeholder {
-            color: #999;
-            text-align: center;
-            padding: 2rem;
-        }
-        
-        .image-placeholder i {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
             display: block;
         }
         
@@ -398,16 +380,10 @@
                 </p>
                 <div class="image-gallery">
                     <div class="gallery-item">
-                        <div class="image-placeholder">
-                            <i class="fas fa-camera"></i>
-                            <span>Colégio antes da reforma</span>
-                        </div>
+                        <img src="imagem_escola.jpg" alt="Colégio antes da reforma" class="gallery-image">
                     </div>
                     <div class="gallery-item">
-                        <div class="image-placeholder">
-                            <i class="fas fa-camera"></i>
-                            <span>Professor Júlio Szymanski</span>
-                        </div>
+                        <img src="imagem_escola_2.jpg" alt="Professor Júlio Szymanski" class="gallery-image">
                     </div>
                 </div>
             </div>
@@ -427,16 +403,10 @@
                 </p>
                 <div class="image-gallery">
                     <div class="gallery-item">
-                        <div class="image-placeholder">
-                            <i class="fas fa-camera"></i>
-                            <span>Colégio após reforma</span>
-                        </div>
+                        <img src="imagem_escola_3.jpg" alt="Colégio após reforma" class="gallery-image">
                     </div>
                     <div class="gallery-item">
-                        <div class="image-placeholder">
-                            <i class="fas fa-camera"></i>
-                            <span>Reforma em andamento</span>
-                        </div>
+                        <img src="imagem_escola_4.jpg" alt="Reforma em andamento" class="gallery-image">
                     </div>
                 </div>
             </div>
@@ -536,16 +506,6 @@
             if (searchInput.value.trim()) {
                 performSearch(searchInput.value);
             }
-        });
-
-        // Adicionar funcionalidade de placeholder de imagens
-        document.addEventListener('DOMContentLoaded', function() {
-            const placeholders = document.querySelectorAll('.image-placeholder');
-            placeholders.forEach(placeholder => {
-                placeholder.addEventListener('click', function() {
-                    alert('Espaço reservado para imagem. Você pode adicionar suas próprias imagens posteriormente.');
-                });
-            });
         });
     </script>
 </body>
