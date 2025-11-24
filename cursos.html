@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cursos - Colégio Szymanski</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* Estilos gerais */
         * {
@@ -19,21 +21,56 @@
             line-height: 1.6;
         }
         
-        /* Cabeçalho e navegação */
-        header {
-            background: linear-gradient(to right, #1a2a6c, #b21f1f, #fdbb2d);
-            color: white;
-            padding: 1rem;
-            text-align: center;
+        /* Cabeçalho compacto */
+        .header-container {
             position: relative;
+            width: 100%;
+            height: 180px;
+            overflow: hidden;
+            background: linear-gradient(to right, #1a2a6c, #b21f1f);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0.5rem;
         }
         
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .portal-logo {
+            max-width: 120px;
+            max-height: 120px;
+            object-fit: contain;
+            margin-bottom: 0.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .header-slogan {
+            font-size: 1.3rem;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+            margin-top: 0.5rem;
+            font-weight: 500;
+        }
+        
+        /* Navegação */
         nav {
-            background-color: #222;
+            background: linear-gradient(to right, #1a2a6c, #b21f1f);
             display: flex;
             justify-content: center;
-            padding: 0.5rem;
+            align-items: center;
+            padding: 0.6rem;
             flex-wrap: wrap;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: relative;
         }
         
         nav a {
@@ -43,10 +80,94 @@
             margin: 0 0.2rem;
             border-radius: 4px;
             transition: background-color 0.3s;
+            font-weight: 500;
+            font-size: 0.95rem;
+            white-space: nowrap;
         }
         
         nav a:hover {
-            background-color: #444;
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Barra de Pesquisa */
+        .search-container {
+            display: flex;
+            align-items: center;
+            margin-left: 1rem;
+            position: relative;
+        }
+        
+        .search-input {
+            padding: 0.5rem 1rem;
+            padding-right: 2.5rem;
+            border: none;
+            border-radius: 20px;
+            width: 200px;
+            font-size: 0.9rem;
+            outline: none;
+            transition: width 0.3s;
+        }
+        
+        .search-input:focus {
+            width: 250px;
+        }
+        
+        .search-btn {
+            position: absolute;
+            right: 8px;
+            background: none;
+            border: none;
+            color: #1a2a6c;
+            cursor: pointer;
+            padding: 0.2rem;
+        }
+        
+        /* Resultados da Pesquisa */
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            z-index: 1000;
+            display: none;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .search-result-item {
+            padding: 0.8rem 1rem;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .search-result-item:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+        
+        .result-category {
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 0.2rem;
+        }
+        
+        .result-title {
+            font-weight: 600;
+            color: #1a2a6c;
+        }
+        
+        .no-results {
+            padding: 1rem;
+            text-align: center;
+            color: #666;
+            font-style: italic;
         }
         
         /* Conteúdo principal */
@@ -61,6 +182,7 @@
             margin-bottom: 2rem;
             color: #1a2a6c;
             font-size: 2.5rem;
+            font-family: 'Bebas Neue', sans-serif;
         }
         
         .intro-text {
@@ -202,13 +324,23 @@
         
         /* Responsividade */
         @media (max-width: 768px) {
-            .courses-grid {
-                grid-template-columns: 1fr;
+            .header-container {
+                height: 150px;
+            }
+            
+            .portal-logo {
+                max-width: 100px;
+                max-height: 100px;
+            }
+            
+            .header-slogan {
+                font-size: 1.1rem;
             }
             
             nav {
                 flex-direction: column;
                 align-items: center;
+                padding-bottom: 1rem;
             }
             
             nav a {
@@ -216,21 +348,72 @@
                 width: 100%;
                 text-align: center;
             }
+            
+            .search-container {
+                margin-left: 0;
+                margin-top: 0.5rem;
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .search-input {
+                width: 100%;
+            }
+            
+            .search-input:focus {
+                width: 100%;
+            }
+            
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-container {
+                height: 130px;
+            }
+            
+            .portal-logo {
+                max-width: 80px;
+                max-height: 80px;
+            }
+            
+            .header-slogan {
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>Portal Szymanski</h1>
+        <div class="header-container">
+            <div class="logo-container">
+                <!-- IMAGEM COMO LOGO PEQUENO -->
+                <img src="WhatsApp Image 2025-10-27 at 14.42.38.jpeg" 
+                     alt="Colégio Estadual Professor Júlio Szymanski" class="portal-logo">
+                <p class="header-slogan">Educação de qualidade para construir um futuro melhor</p>
+            </div>
+        </div>
     </header>
     
     <nav>
         <a href="dashboard.html">Início</a>
         <a href="cursos.html">Cursos</a>
-        <a href="história.html">Historia</a>
+        <a href="historia.html">História</a>
+        <a href="noticias.html">Notícias</a>
         <a href="feira.html">Feiras de Profissão</a>
         <a href="plataformas.html">Plataformas</a>
         <a href="info.html">Info</a>
+        
+        <!-- Barra de Pesquisa -->
+        <div class="search-container">
+            <input type="text" class="search-input" placeholder="Pesquisar..." id="searchInput">
+            <button class="search-btn" id="searchBtn">
+                <i class="fas fa-search"></i>
+            </button>
+            <div class="search-results" id="searchResults"></div>
+        </div>
     </nav>
     
     <div class="container">
@@ -348,5 +531,101 @@
     <footer>
         <p>&copy; 2025 Colégio Szymanski - Todos os direitos reservados</p>
     </footer>
+
+    <script>
+        // Dados para pesquisa
+        const searchData = [
+            { title: "Cursos Técnicos", category: "Cursos", keywords: ["cursos", "técnico", "formação", "ensino"], link: "cursos.html" },
+            { title: "Administração", category: "Cursos", keywords: ["administração", "gestão", "finanças", "rh"], link: "adm.html" },
+            { title: "Desenvolvimento de Sistemas", category: "Cursos", keywords: ["desenvolvimento", "sistemas", "programação", "ads"], link: "ADS.html" },
+            { title: "Formação de Docentes", category: "Cursos", keywords: ["formação", "docentes", "professores", "educação"], link: "FD.html" },
+            { title: "Subsequente", category: "Cursos", keywords: ["subsequente", "técnico", "profissional"], link: "SUB.html" },
+            { title: "PEFOL", category: "Cursos", keywords: ["pefol", "português", "estrangeiros", "imigrantes"], link: "PEFOL.html" },
+            { title: "História do Colégio", category: "História", keywords: ["história", "fundação", "origem", "júlio szymanski"], link: "historia.html" },
+            { title: "Notícias do Colégio", category: "Notícias", keywords: ["notícias", "novidades", "eventos", "avisos"], link: "noticias.html" },
+            { title: "Feira de Profissões", category: "Eventos", keywords: ["feira", "profissões", "carreira", "orientação"], link: "feira.html" },
+            { title: "Google Classroom", category: "Plataformas", keywords: ["classroom", "google", "aulas", "online"], link: "plataformas.html" },
+            { title: "Contato e Localização", category: "Info", keywords: ["contato", "localização", "endereço", "telefone"], link: "info.html" }
+        ];
+
+        // Elementos da pesquisa
+        const searchInput = document.getElementById('searchInput');
+        const searchBtn = document.getElementById('searchBtn');
+        const searchResults = document.getElementById('searchResults');
+
+        // Função de pesquisa
+        function performSearch(query) {
+            if (!query.trim()) {
+                searchResults.style.display = 'none';
+                return;
+            }
+
+            const lowerQuery = query.toLowerCase();
+            const results = searchData.filter(item => {
+                return item.keywords.some(keyword => keyword.includes(lowerQuery)) ||
+                       item.title.toLowerCase().includes(lowerQuery) ||
+                       item.category.toLowerCase().includes(lowerQuery);
+            });
+
+            displayResults(results);
+        }
+
+        // Exibir resultados
+        function displayResults(results) {
+            searchResults.innerHTML = '';
+
+            if (results.length === 0) {
+                searchResults.innerHTML = '<div class="no-results">Nenhum resultado encontrado</div>';
+            } else {
+                results.forEach(result => {
+                    const resultItem = document.createElement('div');
+                    resultItem.className = 'search-result-item';
+                    resultItem.innerHTML = `
+                        <div class="result-category">${result.category}</div>
+                        <div class="result-title">${result.title}</div>
+                    `;
+                    
+                    if (result.link) {
+                        resultItem.addEventListener('click', () => {
+                            window.location.href = result.link;
+                        });
+                    }
+                    
+                    searchResults.appendChild(resultItem);
+                });
+            }
+
+            searchResults.style.display = 'block';
+        }
+
+        // Event Listeners
+        searchInput.addEventListener('input', (e) => {
+            performSearch(e.target.value);
+        });
+
+        searchBtn.addEventListener('click', () => {
+            performSearch(searchInput.value);
+        });
+
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                performSearch(searchInput.value);
+            }
+        });
+
+        // Fechar resultados ao clicar fora
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.search-container')) {
+                searchResults.style.display = 'none';
+            }
+        });
+
+        // Focar no input quando resultados são mostrados
+        searchInput.addEventListener('focus', () => {
+            if (searchInput.value.trim()) {
+                performSearch(searchInput.value);
+            }
+        });
+    </script>
 </body>
 </html>
