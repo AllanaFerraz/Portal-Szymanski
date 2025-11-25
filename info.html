@@ -61,14 +61,16 @@
             font-weight: 500;
         }
 
-        /* Botão Logout - IGUAL AO DASHBOARD */
-        .logout-btn-container {
+        /* Botões do cabeçalho - IGUAL AO DASHBOARD */
+        .header-buttons {
             position: absolute;
             top: 20px;
             right: 20px;
+            display: flex;
+            gap: 10px;
         }
         
-        .logout-btn {
+        .profile-btn, .logout-btn {
             background-color: rgba(255, 255, 255, 0.9);
             color: #1a2a6c;
             border: none;
@@ -83,10 +85,162 @@
             gap: 0.5rem;
         }
         
-        .logout-btn:hover {
+        .profile-btn:hover, .logout-btn:hover {
             background-color: white;
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Modal do Perfil */
+        .profile-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .profile-modal-content {
+            background-color: white;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            animation: modalFadeIn 0.3s;
+        }
+        
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        .profile-modal-header {
+            background: linear-gradient(to right, #1a2a6c, #b21f1f);
+            color: white;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .profile-modal-header h2 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .close-modal:hover {
+            transform: scale(1.2);
+        }
+        
+        .profile-modal-body {
+            padding: 1.5rem;
+        }
+        
+        .profile-picture-section {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .profile-picture {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #1a2a6c;
+            margin-bottom: 1rem;
+        }
+        
+        .change-picture-btn {
+            background-color: #1a2a6c;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .change-picture-btn:hover {
+            background-color: #2a3a9c;
+        }
+        
+        .profile-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-group label {
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #1a2a6c;
+        }
+        
+        .form-group input, .form-group textarea, .form-group select {
+            padding: 0.7rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .profile-modal-footer {
+            padding: 1rem 1.5rem;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+        }
+        
+        .save-btn, .cancel-btn {
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .save-btn {
+            background-color: #1a2a6c;
+            color: white;
+        }
+        
+        .save-btn:hover {
+            background-color: #2a3a9c;
+        }
+        
+        .cancel-btn {
+            background-color: #ddd;
+            color: #333;
+        }
+        
+        .cancel-btn:hover {
+            background-color: #ccc;
         }
         
         /* Navegação - IGUAL AO DASHBOARD */
@@ -351,12 +505,12 @@
                 font-size: 1.1rem;
             }
             
-            .logout-btn-container {
+            .header-buttons {
                 top: 15px;
                 right: 15px;
             }
             
-            .logout-btn {
+            .profile-btn, .logout-btn {
                 padding: 0.5rem 1rem;
                 font-size: 0.9rem;
             }
@@ -395,6 +549,10 @@
             .map-container {
                 height: 300px;
             }
+            
+            .profile-modal-content {
+                width: 95%;
+            }
         }
 
         @media (max-width: 480px) {
@@ -411,12 +569,14 @@
                 font-size: 1rem;
             }
             
-            .logout-btn-container {
+            .header-buttons {
                 top: 10px;
                 right: 10px;
+                flex-direction: column;
+                gap: 5px;
             }
             
-            .logout-btn {
+            .profile-btn, .logout-btn {
                 padding: 0.4rem 0.8rem;
                 font-size: 0.8rem;
             }
@@ -437,8 +597,12 @@
                 <p class="header-slogan">Educação de qualidade para construir um futuro melhor</p>
             </div>
             
-            <!-- Botão de Logout IGUAL ao dashboard.html -->
-            <div class="logout-btn-container">
+            <!-- Botões do cabeçalho IGUAL ao dashboard.html -->
+            <div class="header-buttons">
+                <button class="profile-btn" id="profileBtn">
+                    <i class="fas fa-user"></i>
+                    Perfil
+                </button>
                 <button class="logout-btn" id="logoutBtn">
                     <i class="fas fa-sign-out-alt"></i>
                     Sair
@@ -446,6 +610,54 @@
             </div>
         </div>
     </header>
+    
+    <!-- Modal do Perfil -->
+    <div class="profile-modal" id="profileModal">
+        <div class="profile-modal-content">
+            <div class="profile-modal-header">
+                <h2>Meu Perfil</h2>
+                <button class="close-modal" id="closeModal">&times;</button>
+            </div>
+            <div class="profile-modal-body">
+                <div class="profile-picture-section">
+                    <img src="https://via.placeholder.com/120" alt="Foto do Perfil" class="profile-picture" id="profilePicture">
+                    <br>
+                    <button class="change-picture-btn" id="changePictureBtn">Alterar Foto</button>
+                    <input type="file" id="pictureInput" accept="image/*" style="display: none;">
+                </div>
+                
+                <form class="profile-form" id="profileForm">
+                    <div class="form-group">
+                        <label for="userName">Nome Completo</label>
+                        <input type="text" id="userName" placeholder="Digite seu nome completo">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="userType">Tipo de Usuário</label>
+                        <select id="userType">
+                            <option value="aluno">Aluno</option>
+                            <option value="professor">Professor</option>
+                            <option value="funcionario">Funcionário</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="userEmail">E-mail</label>
+                        <input type="email" id="userEmail" placeholder="Digite seu e-mail">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="userBio">Biografia</label>
+                        <textarea id="userBio" placeholder="Conte um pouco sobre você..."></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="profile-modal-footer">
+                <button class="cancel-btn" id="cancelBtn">Cancelar</button>
+                <button class="save-btn" id="saveBtn">Salvar Alterações</button>
+            </div>
+        </div>
+    </div>
     
     <!-- Navegação IGUAL ao dashboard.html -->
     <nav>
@@ -543,8 +755,89 @@
     </footer>
 
     <script>
-        // Sistema de Logout - IGUAL ao dashboard.html
+        // Sistema de Perfil
         document.addEventListener('DOMContentLoaded', function() {
+            // Elementos do modal de perfil
+            const profileBtn = document.getElementById('profileBtn');
+            const profileModal = document.getElementById('profileModal');
+            const closeModal = document.getElementById('closeModal');
+            const cancelBtn = document.getElementById('cancelBtn');
+            const saveBtn = document.getElementById('saveBtn');
+            const changePictureBtn = document.getElementById('changePictureBtn');
+            const pictureInput = document.getElementById('pictureInput');
+            const profilePicture = document.getElementById('profilePicture');
+            const profileForm = document.getElementById('profileForm');
+            
+            // Dados do usuário (simulando dados do localStorage)
+            let userData = JSON.parse(localStorage.getItem('userData')) || {
+                name: '',
+                type: 'aluno',
+                email: '',
+                bio: '',
+                picture: 'https://via.placeholder.com/120'
+            };
+            
+            // Carregar dados do usuário no formulário
+            function loadUserData() {
+                document.getElementById('userName').value = userData.name;
+                document.getElementById('userType').value = userData.type;
+                document.getElementById('userEmail').value = userData.email;
+                document.getElementById('userBio').value = userData.bio;
+                profilePicture.src = userData.picture;
+            }
+            
+            // Salvar dados do usuário
+            function saveUserData() {
+                userData.name = document.getElementById('userName').value;
+                userData.type = document.getElementById('userType').value;
+                userData.email = document.getElementById('userEmail').value;
+                userData.bio = document.getElementById('userBio').value;
+                
+                localStorage.setItem('userData', JSON.stringify(userData));
+                alert('Perfil atualizado com sucesso!');
+                closeProfileModal();
+            }
+            
+            // Abrir modal de perfil
+            function openProfileModal() {
+                loadUserData();
+                profileModal.style.display = 'flex';
+            }
+            
+            // Fechar modal de perfil
+            function closeProfileModal() {
+                profileModal.style.display = 'none';
+            }
+            
+            // Alterar foto de perfil
+            function changeProfilePicture(event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        profilePicture.src = e.target.result;
+                        userData.picture = e.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
+            
+            // Event Listeners do perfil
+            profileBtn.addEventListener('click', openProfileModal);
+            closeModal.addEventListener('click', closeProfileModal);
+            cancelBtn.addEventListener('click', closeProfileModal);
+            saveBtn.addEventListener('click', saveUserData);
+            changePictureBtn.addEventListener('click', () => pictureInput.click());
+            pictureInput.addEventListener('change', changeProfilePicture);
+            
+            // Fechar modal ao clicar fora
+            profileModal.addEventListener('click', (e) => {
+                if (e.target === profileModal) {
+                    closeProfileModal();
+                }
+            });
+            
+            // Sistema de Logout - IGUAL ao dashboard.html
             const logoutBtn = document.getElementById('logoutBtn');
 
             // Função de logout
