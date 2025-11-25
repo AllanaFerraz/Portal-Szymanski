@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mural de Recados - Portal Szymanski</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Estilos gerais */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* Cabeçalho compacto */
+        .header-container {
+            position: relative;
+            width: 100%;
+            height: 180px;
+            overflow: hidden;
+            background: linear-gradient(to right, #1a2a6c, #b21f1f);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0.5rem;
+        }
+        
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .portal-logo {
+            max-width: 120px;
+            max-height: 120px;
+            object-fit: contain;
+            margin-bottom: 0.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .header-slogan {
+            font-size: 1.3rem;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+            margin-top: 0.5rem;
+            font-weight: 500;
+        }
+
+        /* Botão Logout */
+        .logout-btn-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        
+        .logout-btn {
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #1a2a6c;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .logout-btn:hover {
+            background-color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Navegação */
+        nav {
+            background: linear-gradient(to right, #1a2a6c, #b21f1f);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0.6rem;
+            flex-wrap: wrap;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            margin: 0 0.2rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            font-weight: 500;
+            font-size: 0.95rem;
+            white-space: nowrap;
+        }
+        
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Conteúdo principal */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        
+        .page-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #1a2a6c;
+            font-size: 2.5rem;
+            font-family: 'Bebas Neue', sans-serif;
+        }
+        
+        /* Formulário de recado */
+        .message-form {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #1a2a6c;
+            font-weight: 600;
+        }
+        
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-input:focus, .form-textarea:focus {
+            outline: none;
+            border-color: #1a2a6c;
+        }
+        
+        .form-textarea {
+            height: 120px;
+            resize: vertical;
+        }
+        
+        .form-select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            background-color: white;
+        }
+        
+        .submit-btn {
+            background-color: #1a2a6c;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+        
+        .submit-btn:hover {
+            background-color: #2a3a9c;
+        }
+        
+        /* Lista de recados */
+        .messages-section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .section-title {
+            color: #1a2a6c;
+            margin-bottom: 1.5rem;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            text-align: center;
+        }
+        
+        .message-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .message-card {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 1.5rem;
+            border-left: 4px solid #1a2a6c;
+            position: relative;
+        }
+        
+        .message-card.private {
+            border-left-color: #b21f1f;
+            background-color: #fff5f5;
+        }
+        
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+        
+        .message-user {
+            font-weight: 600;
+            color: #1a2a6c;
+        }
+        
+        .message-meta {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        .message-type {
+            background-color: #1a2a6c;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .message-type.private {
+            background-color: #b21f1f;
+        }
+        
+        .message-time {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .message-content {
+            color: #333;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+        
+        .message-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.5rem;
+        }
+        
+        .delete-btn {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background-color 0.3s;
+        }
+        
+        .delete-btn:hover {
+            background-color: #c82333;
+        }
+        
+        .empty-state {
+            text-align: center;
+            color: #666;
+            padding: 3rem;
+            font-style: italic;
+        }
+        
+        /* Rodapé */
+        footer {
+            background-color: #222;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 3rem;
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .header-container {
+                height: 150px;
+            }
+            
+            .portal-logo {
+                max-width: 100px;
+                max-height: 100px;
+            }
+            
+            .header-slogan {
+                font-size: 1.1rem;
+            }
+            
+            .logout-btn-container {
+                top: 15px;
+                right: 15px;
+            }
+            
+            .logout-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            nav {
+                flex-direction: column;
+                align-items: center;
+                padding-bottom: 1rem;
+            }
+            
+            nav a {
+                margin: 0.2rem 0;
+                width: 100%;
+                text-align: center;
+            }
+            
+            .message-header {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .message-meta {
+                align-self: flex-start;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-container {
+                height: 130px;
+            }
+            
+            .portal-logo {
+                max-width: 80px;
+                max-height: 80px;
+            }
+            
+            .header-slogan {
+                font-size: 1rem;
+            }
+            
+            .logout-btn-container {
+                top: 10px;
+                right: 10px;
+            }
+            
+            .logout-btn {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo-container">
+                <img src="WhatsApp Image 2025-10-27 at 14.42.38.jpeg" 
+                     alt="Colégio Estadual Professor Júlio Szymanski" class="portal-logo">
+                <p class="header-slogan">Educação de qualidade para construir um futuro melhor</p>
+            </div>
+            
+            <div class="logout-btn-container">
+                <button class="logout-btn" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Sair
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <nav>
+        <a href="dashboard.html">Início</a>
+        <a href="cursos.html">Cursos</a>
+        <a href="historia.html">História</a>
+        <a href="noticias.html">Notícias</a>
+        <a href="feira.html">Feiras de Profissão</a>
+        <a href="plataformas.html">Plataformas</a>
+        <a href="mural.html">Mural</a>
+        <a href="info.html">Info</a>
+    </nav>
+    
+    <div class="container">
+        <h2 class="page-title">Mural de Recados</h2>
+        
+        <div class="message-form">
+            <h3 class="section-title">Deixe seu Recado</h3>
+            <form id="messageForm">
+                <div class="form-group">
+                    <label for="userName">Seu Nome:</label>
+                    <input type="text" id="userName" class="form-input" placeholder="Digite seu nome" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="messageType">Tipo de Mensagem:</label>
+                    <select id="messageType" class="form-select" required>
+                        <option value="public">Público (Todos podem ver)</option>
+                        <option value="private">Privado (Apenas administradores)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="messageContent">Sua Mensagem:</label>
+                    <textarea id="messageContent" class="form-textarea" placeholder="Digite sua mensagem..." required></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-paper-plane"></i> Publicar Recado
+                </button>
+            </form>
+        </div>
+        
+        <div class="messages-section">
+            <h3 class="section-title">Recados Recentes</h3>
+            <div class="message-list" id="messageList">
+                <!-- As mensagens serão carregadas aqui via JavaScript -->
+                <div class="empty-state">
+                    <i class="fas fa-comments" style="font-size: 3rem; margin-bottom: 1rem; color: #ddd;"></i>
+                    <p>Nenhum recado ainda. Seja o primeiro a compartilhar!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>&copy; 2025 Colégio Estadual Professor Júlio Szymanski - Todos os direitos reservados</p>
+    </footer>
+
+    <script>
+        // Sistema de Mural
+        document.addEventListener('DOMContentLoaded', function() {
+            const messageForm = document.getElementById('messageForm');
+            const messageList = document.getElementById('messageList');
+            const logoutBtn = document.getElementById('logoutBtn');
+
+            // Carregar mensagens do localStorage
+            function loadMessages() {
+                const messages = JSON.parse(localStorage.getItem('muralMessages')) || [];
+                displayMessages(messages);
+            }
+
+            // Exibir mensagens
+            function displayMessages(messages) {
+                if (messages.length === 0) {
+                    messageList.innerHTML = `
+                        <div class="empty-state">
+                            <i class="fas fa-comments" style="font-size: 3rem; margin-bottom: 1rem; color: #ddd;"></i>
+                            <p>Nenhum recado ainda. Seja o primeiro a compartilhar!</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                // Ordenar por data (mais recentes primeiro)
+                messages.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+                messageList.innerHTML = messages.map((message, index) => `
+                    <div class="message-card ${message.type === 'private' ? 'private' : ''}">
+                        <div class="message-header">
+                            <div class="message-user">
+                                <i class="fas fa-user"></i> ${message.userName}
+                            </div>
+                            <div class="message-meta">
+                                <span class="message-type ${message.type === 'private' ? 'private' : ''}">
+                                    ${message.type === 'private' ? '🔒 Privado' : '🌍 Público'}
+                                </span>
+                                <span class="message-time">
+                                    <i class="far fa-clock"></i> ${formatTime(message.timestamp)}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="message-content">
+                            ${message.content}
+                        </div>
+                        <div class="message-actions">
+                            <button class="delete-btn" onclick="deleteMessage(${index})" data-user="${message.userName}">
+                                <i class="fas fa-trash"></i> Excluir
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Formatar hora
+            function formatTime(timestamp) {
+                const date = new Date(timestamp);
+                return date.toLocaleString('pt-BR');
+            }
+
+            // Adicionar nova mensagem
+            messageForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const userName = document.getElementById('userName').value.trim();
+                const messageType = document.getElementById('messageType').value;
+                const messageContent = document.getElementById('messageContent').value.trim();
+
+                if (!userName || !messageContent) {
+                    alert('Por favor, preencha todos os campos!');
+                    return;
+                }
+
+                const newMessage = {
+                    userName: userName,
+                    type: messageType,
+                    content: messageContent,
+                    timestamp: new Date().toISOString()
+                };
+
+                // Salvar no localStorage
+                const messages = JSON.parse(localStorage.getItem('muralMessages')) || [];
+                messages.push(newMessage);
+                localStorage.setItem('muralMessages', JSON.stringify(messages));
+
+                // Limpar formulário
+                messageForm.reset();
+                
+                // Recarregar mensagens
+                loadMessages();
+
+                alert('Recado publicado com sucesso!');
+            });
+
+            // Função global para deletar mensagem
+            window.deleteMessage = function(index) {
+                const messages = JSON.parse(localStorage.getItem('muralMessages')) || [];
+                const message = messages[index];
+                
+                // Verificar se o usuário atual é o autor da mensagem
+                const currentUser = document.getElementById('userName').value.trim() || 'Anônimo';
+                
+                if (message.userName !== currentUser) {
+                    alert('Você só pode excluir suas próprias mensagens!');
+                    return;
+                }
+
+                if (confirm('Tem certeza que deseja excluir este recado?')) {
+                    messages.splice(index, 1);
+                    localStorage.setItem('muralMessages', JSON.stringify(messages));
+                    loadMessages();
+                }
+            };
+
+            // Sistema de Logout
+            logoutBtn.addEventListener('click', () => {
+                if (confirm('Deseja realmente sair do portal?')) {
+                    sessionStorage.removeItem('currentUser');
+                    window.location.href = 'index.html';
+                }
+            });
+
+            // Carregar mensagens ao iniciar
+            loadMessages();
+        });
+    </script>
+</body>
+</html>
