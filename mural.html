@@ -122,6 +122,7 @@
             max-width: 1000px;
             margin: 0 auto;
             padding: 2rem 1rem;
+            position: relative;
         }
         
         .page-title {
@@ -139,6 +140,8 @@
             padding: 2rem;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             margin-bottom: 2rem;
+            position: relative;
+            z-index: 2;
         }
         
         .form-group {
@@ -203,6 +206,8 @@
             border-radius: 8px;
             padding: 2rem;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 2;
         }
         
         .section-title {
@@ -302,6 +307,34 @@
             font-style: italic;
         }
         
+        /* Emojis de fundo */
+        .background-emojis {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        .emoji {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-10px) rotate(5deg);
+            }
+        }
+        
         /* Rodapé */
         footer {
             background-color: #222;
@@ -309,6 +342,8 @@
             text-align: center;
             padding: 1.5rem;
             margin-top: 3rem;
+            position: relative;
+            z-index: 2;
         }
         
         /* Responsividade */
@@ -356,6 +391,10 @@
             .message-meta {
                 align-self: flex-start;
             }
+            
+            .emoji {
+                font-size: 1.5rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -380,6 +419,10 @@
             .logout-btn {
                 padding: 0.4rem 0.8rem;
                 font-size: 0.8rem;
+            }
+            
+            .emoji {
+                font-size: 1.2rem;
             }
         }
     </style>
@@ -414,6 +457,9 @@
     </nav>
     
     <div class="container">
+        <!-- Emojis de fundo -->
+        <div class="background-emojis" id="backgroundEmojis"></div>
+        
         <h2 class="page-title">Mural de Recados</h2>
         
         <div class="message-form">
@@ -465,6 +511,36 @@
             const messageForm = document.getElementById('messageForm');
             const messageList = document.getElementById('messageList');
             const logoutBtn = document.getElementById('logoutBtn');
+            const backgroundEmojis = document.getElementById('backgroundEmojis');
+
+            // Criar emojis de fundo
+            function createBackgroundEmojis() {
+                const emojis = ['💬', '🗨️', '💭', '📱', '💻', '📞', '📠', '📟', '📲', '🖥️', '💬', '🗯️'];
+                const container = backgroundEmojis;
+                
+                for (let i = 0; i < 25; i++) {
+                    const emoji = document.createElement('div');
+                    emoji.className = 'emoji';
+                    emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                    
+                    // Posição aleatória
+                    const left = Math.random() * 100;
+                    const top = Math.random() * 100;
+                    
+                    // Rotação aleatória
+                    const rotation = Math.random() * 360;
+                    
+                    // Atraso de animação aleatório
+                    const delay = Math.random() * 5;
+                    
+                    emoji.style.left = `${left}%`;
+                    emoji.style.top = `${top}%`;
+                    emoji.style.transform = `rotate(${rotation}deg)`;
+                    emoji.style.animationDelay = `${delay}s`;
+                    
+                    container.appendChild(emoji);
+                }
+            }
 
             // Carregar mensagens do localStorage
             function loadMessages() {
@@ -582,7 +658,8 @@
                 }
             });
 
-            // Carregar mensagens ao iniciar
+            // Inicializar
+            createBackgroundEmojis();
             loadMessages();
         });
     </script>
