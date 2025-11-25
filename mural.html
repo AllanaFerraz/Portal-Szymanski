@@ -307,7 +307,7 @@
             font-style: italic;
         }
         
-        /* Emojis de fundo */
+        /* Emojis de fundo - MAIS VISÍVEIS */
         .background-emojis {
             position: absolute;
             top: 0;
@@ -321,17 +321,24 @@
         
         .emoji {
             position: absolute;
-            font-size: 2rem;
-            opacity: 0.1;
-            animation: float 6s ease-in-out infinite;
+            font-size: 3rem; /* AUMENTADO */
+            opacity: 0.25; /* MAIS VISÍVEL */
+            animation: float 8s ease-in-out infinite;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
         }
         
         @keyframes float {
             0%, 100% {
                 transform: translateY(0px) rotate(0deg);
             }
+            25% {
+                transform: translateY(-15px) rotate(5deg);
+            }
             50% {
-                transform: translateY(-10px) rotate(5deg);
+                transform: translateY(5px) rotate(-3deg);
+            }
+            75% {
+                transform: translateY(-10px) rotate(8deg);
             }
         }
         
@@ -393,7 +400,7 @@
             }
             
             .emoji {
-                font-size: 1.5rem;
+                font-size: 2.5rem; /* Ajustado para mobile */
             }
         }
 
@@ -422,7 +429,7 @@
             }
             
             .emoji {
-                font-size: 1.2rem;
+                font-size: 2rem; /* Ajustado para mobile pequeno */
             }
         }
     </style>
@@ -513,12 +520,20 @@
             const logoutBtn = document.getElementById('logoutBtn');
             const backgroundEmojis = document.getElementById('backgroundEmojis');
 
-            // Criar emojis de fundo
+            // Criar emojis de fundo - MAIS EMOJIS
             function createBackgroundEmojis() {
-                const emojis = ['💬', '🗨️', '💭', '📱', '💻', '📞', '📠', '📟', '📲', '🖥️', '💬', '🗯️'];
+                const emojis = [
+                    '💬', '🗨️', '💭', '🗯️', '📢', '📣', '📯', 
+                    '📱', '📲', '☎️', '📞', '📠', '🔊', '🔔',
+                    '💻', '🖥️', '⌨️', '🖱️', '🖨️', '📹', '📼',
+                    '🎤', '🎧', '📻', '📺', '📡', '🔍', '📝',
+                    '📨', '📩', '📤', '📥', '📦', '📫', '📮',
+                    '✉️', '📧', '📜', '📃', '📄', '📑', '🔖'
+                ];
                 const container = backgroundEmojis;
                 
-                for (let i = 0; i < 25; i++) {
+                // AUMENTEI PARA 40 EMOJIS
+                for (let i = 0; i < 40; i++) {
                     const emoji = document.createElement('div');
                     emoji.className = 'emoji';
                     emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
@@ -527,16 +542,20 @@
                     const left = Math.random() * 100;
                     const top = Math.random() * 100;
                     
-                    // Rotação aleatória
-                    const rotation = Math.random() * 360;
+                    // Rotação aleatória mais variada
+                    const rotation = (Math.random() * 60) - 30; // -30 a +30 graus
                     
                     // Atraso de animação aleatório
-                    const delay = Math.random() * 5;
+                    const delay = Math.random() * 8;
+                    
+                    // Tamanho aleatório
+                    const size = 2 + Math.random() * 1.5; // 2rem a 3.5rem
                     
                     emoji.style.left = `${left}%`;
                     emoji.style.top = `${top}%`;
                     emoji.style.transform = `rotate(${rotation}deg)`;
                     emoji.style.animationDelay = `${delay}s`;
+                    emoji.style.fontSize = `${size}rem`;
                     
                     container.appendChild(emoji);
                 }
