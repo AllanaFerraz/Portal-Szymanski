@@ -296,7 +296,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 2px dashed #ddd;
         }
         
         .gallery-item:hover {
@@ -315,6 +314,13 @@
             color: #999;
             text-align: center;
             padding: 2rem;
+            border: 2px dashed #ddd;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
         
         .image-placeholder i {
@@ -455,100 +461,113 @@
             <button class="filter-btn" onclick="filterNews('geral')">Geral</button>
         </div>
         
-        <!-- Notícia 1 -->
-        <div class="news-section" data-category="evento">
-            <h3 class="news-title">Feira de Ciências 2023 - Inscrições Abertas</h3>
-            <div class="news-meta">
-                <span><strong>Publicado em:</strong> 15 de Novembro, 2023</span>
-                <span class="news-category evento">Evento</span>
-            </div>
-            <div class="news-content">
-                <p>
-                    Estão abertas as inscrições para a Feira de Ciências 2023 do Colégio Professor Júlio Szymanski! 
-                    Alunos do 6º ano ao Ensino Médio podem participar com projetos inovadores nas áreas de ciências, 
-                    tecnologia, engenharia e matemática.
-                </p>
-                <p>
-                    As inscrições vão até o dia 30 de novembro e devem ser feitas na secretaria do colégio. 
-                    A feira acontecerá no dia 15 de dezembro, das 8h às 17h, no ginásio da escola.
-                </p>
-                
-                <div class="image-gallery">
-                    <div class="gallery-item">
-                        <div class="image-placeholder">
-                            <i class="fas fa-camera"></i>
-                            <span>Imagem da Feira de Ciências</span>
-                        </div>
-                    </div>
-                    <div class="gallery-item">
-                        <div class="image-placeholder">
-                            <i class="fas fa-camera"></i>
-                            <span>Projetos Científicos</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Notícia 2 -->
-        <div class="news-section" data-category="aviso">
-            <h3 class="news-title">Recesso de Final de Ano</h3>
-            <div class="news-meta">
-                <span><strong>Publicado em:</strong> 10 de Novembro, 2023</span>
-                <span class="news-category aviso">Aviso Importante</span>
-            </div>
-            <div class="news-content">
-                <p>
-                    Comunicamos que as aulas serão suspensas para o recesso de final de ano a partir do dia 18 de dezembro de 2023. 
-                    O retorno às atividades letivas está previsto para o dia 5 de fevereiro de 2024.
-                </p>
-                <p>
-                    Durante este período, a secretaria funcionará em horário reduzido, das 8h às 12h, 
-                    exceto nos feriados oficiais. Desejamos a todos os alunos, professores e funcionários 
-                    um excelente recesso e um feliz ano novo!
-                </p>
-                
-                <div class="image-gallery">
-                    <div class="gallery-item">
-                        <div class="image-placeholder">
-                            <i class="fas fa-camera"></i>
-                            <span>Calendário Escolar</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Notícia 3 -->
+        <!-- Galeria de Imagens -->
         <div class="news-section" data-category="geral">
-            <h3 class="news-title">Novo Laboratório de Informática</h3>
+            <h3 class="news-title">Galeria de Imagens</h3>
             <div class="news-meta">
-                <span><strong>Publicado em:</strong> 5 de Novembro, 2023</span>
+                <span><strong>Publicado em:</strong> 26 de Novembro, 2025</span>
                 <span class="news-category geral">Geral</span>
             </div>
             <div class="news-content">
                 <p>
-                    Temos o prazer de anunciar a modernização completa do nosso laboratório de informática! 
-                    Foram adquiridos 30 novos computadores com configurações de última geração, 
-                    além de projetores interativos e equipamentos de rede atualizados.
+                    <!-- ESPAÇO PARA DESCRIÇÃO FUTURA -->
                 </p>
+                
+                <div class="image-gallery">
+                    <!-- Imagem 1 -->
+                    <div class="gallery-item">
+                        <img src="WhatsApp Image 2025-11-26 at 10.00.17 (1).jpeg" 
+                             alt="Imagem 1 - Evento escolar" 
+                             class="gallery-image">
+                    </div>
+                    
+                    <!-- Imagem 2 -->
+                    <div class="gallery-item">
+                        <img src="WhatsApp Image 2025-11-26 at 10.00.17.jpeg" 
+                             alt="Imagem 2 - Atividade educacional" 
+                             class="gallery-image">
+                    </div>
+                    
+                    <!-- Imagem 3 -->
+                    <div class="gallery-item">
+                        <img src="WhatsApp Image 2025-11-26 at 10.00.53.jpeg" 
+                             alt="Imagem 3 - Projeto estudantil" 
+                             class="gallery-image">
+                    </div>
+                    
+                    <!-- Imagem 4 -->
+                    <div class="gallery-item">
+                        <img src="WhatsApp Image 2025-11-26 at 10.00.54.jpeg" 
+                             alt="Imagem 4 - Evento cultural" 
+                             class="gallery-image">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Notícia 1 - Espaço para Conteúdo Futuro -->
+        <div class="news-section" data-category="evento">
+            <h3 class="news-title">Título da Notícia 1</h3>
+            <div class="news-meta">
+                <span><strong>Publicado em:</strong> [Data]</span>
+                <span class="news-category evento">Evento</span>
+            </div>
+            <div class="news-content">
                 <p>
-                    O novo laboratório permitirá que nossos alunos tenham acesso às mais modernas 
-                    ferramentas tecnológicas para o aprendizado de programação, design gráfico, 
-                    e outras disciplinas relacionadas à tecnologia.
+                    <!-- ESPAÇO PARA CONTEÚDO FUTURO -->
                 </p>
                 
                 <div class="image-gallery">
                     <div class="gallery-item">
                         <div class="image-placeholder">
                             <i class="fas fa-camera"></i>
-                            <span>Novo Laboratório</span>
+                            <span>Imagem para notícia futura</span>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Notícia 2 - Espaço para Conteúdo Futuro -->
+        <div class="news-section" data-category="aviso">
+            <h3 class="news-title">Título da Notícia 2</h3>
+            <div class="news-meta">
+                <span><strong>Publicado em:</strong> [Data]</span>
+                <span class="news-category aviso">Aviso Importante</span>
+            </div>
+            <div class="news-content">
+                <p>
+                    <!-- ESPAÇO PARA CONTEÚDO FUTURO -->
+                </p>
+                
+                <div class="image-gallery">
                     <div class="gallery-item">
                         <div class="image-placeholder">
                             <i class="fas fa-camera"></i>
-                            <span>Equipamentos Novos</span>
+                            <span>Imagem para notícia futura</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Notícia 3 - Espaço para Conteúdo Futuro -->
+        <div class="news-section" data-category="geral">
+            <h3 class="news-title">Título da Notícia 3</h3>
+            <div class="news-meta">
+                <span><strong>Publicado em:</strong> [Data]</span>
+                <span class="news-category geral">Geral</span>
+            </div>
+            <div class="news-content">
+                <p>
+                    <!-- ESPAÇO PARA CONTEÚDO FUTURO -->
+                </p>
+                
+                <div class="image-gallery">
+                    <div class="gallery-item">
+                        <div class="image-placeholder">
+                            <i class="fas fa-camera"></i>
+                            <span>Imagem para notícia futura</span>
                         </div>
                     </div>
                 </div>
@@ -563,9 +582,7 @@
     <script>
         // Dados para pesquisa
         const searchData = [
-            { title: "Feira de Ciências 2023", category: "Notícias", keywords: ["feira", "ciências", "projetos", "inscrições"], link: "noticias.html" },
-            { title: "Recesso de Final de Ano", category: "Notícias", keywords: ["recesso", "férias", "final de ano", "aulas"], link: "noticias.html" },
-            { title: "Novo Laboratório", category: "Notícias", keywords: ["laboratório", "informática", "computadores", "tecnologia"], link: "noticias.html" },
+            { title: "Galeria de Imagens", category: "Notícias", keywords: ["galeria", "imagens", "fotos", "eventos"], link: "noticias.html" },
             { title: "Cursos Técnicos", category: "Cursos", keywords: ["cursos", "técnico", "formação", "ensino"], link: "cursos.html" },
             { title: "História do Colégio", category: "História", keywords: ["história", "fundação", "origem", "júlio szymanski"], link: "historia.html" },
             { title: "Feira de Profissões", category: "Eventos", keywords: ["feira", "profissões", "carreira", "orientação"], link: "feira.html" },
