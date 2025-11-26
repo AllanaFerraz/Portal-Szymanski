@@ -187,53 +187,30 @@
         
         .intro-text {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
             font-size: 1.1rem;
             max-width: 800px;
             margin-left: auto;
             margin-right: auto;
-        }
-        
-        /* Filtros de Notícias */
-        .news-filters {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-        
-        .filter-btn {
-            background-color: white;
-            border: 2px solid #1a2a6c;
-            color: #1a2a6c;
-            padding: 8px 16px;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 500;
-        }
-        
-        .filter-btn:hover, .filter-btn.active {
-            background-color: #1a2a6c;
-            color: white;
+            color: #555;
         }
         
         /* Seção de Notícias */
         .news-section {
             background-color: white;
-            border-radius: 8px;
-            padding: 2rem;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
             margin-bottom: 2rem;
         }
         
         .news-title {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
             color: #1a2a6c;
-            border-bottom: 2px solid #fdbb2d;
-            padding-bottom: 0.5rem;
+            text-align: center;
+            border-bottom: 3px solid #fdbb2d;
+            padding-bottom: 1rem;
         }
         
         .news-content {
@@ -242,91 +219,79 @@
         
         .news-content p {
             margin-bottom: 1rem;
+            text-align: center;
+            color: #666;
+            font-size: 1.1rem;
         }
         
         .news-meta {
             color: #666;
             font-size: 0.9rem;
-            margin-bottom: 1rem;
+            margin-bottom: 2rem;
             display: flex;
             gap: 15px;
             align-items: center;
+            justify-content: center;
         }
         
         .news-category {
             background-color: #1a2a6c;
             color: white;
-            padding: 4px 12px;
+            padding: 6px 16px;
             border-radius: 20px;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             font-weight: bold;
         }
         
-        .news-category.evento {
-            background-color: #b21f1f;
-        }
-        
-        .news-category.aviso {
-            background-color: #fdbb2d;
-            color: #333;
-        }
-        
-        .news-category.geral {
-            background-color: #2ecc71;
-        }
-        
-        /* Sistema de galeria de imagens */
+        /* Sistema de galeria de imagens MELHORADO */
         .image-gallery {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin: 1.5rem 0;
-            justify-content: center;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin: 2rem 0;
         }
         
         .gallery-item {
-            flex: 1 1 300px;
-            max-width: 100%;
-            border-radius: 8px;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-            background-color: #f9f9f9;
-            min-height: 200px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+            background-color: white;
+            position: relative;
         }
         
         .gallery-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
         }
         
         .gallery-image {
             width: 100%;
-            height: 200px;
+            height: 300px;
             object-fit: cover;
             display: block;
+            transition: transform 0.3s ease;
         }
         
-        .image-placeholder {
-            color: #999;
+        .gallery-item:hover .gallery-image {
+            transform: scale(1.05);
+        }
+        
+        .image-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            padding: 1.5rem 1rem 1rem;
             text-align: center;
-            padding: 2rem;
-            border: 2px dashed #ddd;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
         
-        .image-placeholder i {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-            display: block;
+        .gallery-item:hover .image-caption {
+            opacity: 1;
         }
         
         /* Rodapé */
@@ -334,11 +299,11 @@
             background-color: #222;
             color: white;
             text-align: center;
-            padding: 1.5rem;
-            margin-top: 3rem;
+            padding: 2rem;
+            margin-top: 4rem;
         }
         
-        /* Responsividade */
+        /* Responsividade MELHORADA */
         @media (max-width: 768px) {
             .header-container {
                 height: 150px;
@@ -382,19 +347,24 @@
             
             .news-section {
                 padding: 1.5rem;
+                margin: 1rem;
             }
             
-            .gallery-item {
-                flex: 1 1 100%;
+            .image-gallery {
+                grid-template-columns: 1fr;
+                gap: 20px;
             }
             
-            .news-filters {
-                flex-direction: column;
-                align-items: center;
+            .gallery-image {
+                height: 250px;
             }
             
-            .filter-btn {
-                width: 200px;
+            .page-title {
+                font-size: 2rem;
+            }
+            
+            .news-title {
+                font-size: 1.6rem;
             }
         }
 
@@ -411,6 +381,29 @@
             .header-slogan {
                 font-size: 1rem;
             }
+            
+            .news-section {
+                padding: 1rem;
+                margin: 0.5rem;
+            }
+            
+            .gallery-image {
+                height: 200px;
+            }
+            
+            .image-gallery {
+                gap: 15px;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .image-gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .gallery-image {
+                height: 350px;
+            }
         }
     </style>
 </head>
@@ -418,7 +411,6 @@
     <header>
         <div class="header-container">
             <div class="logo-container">
-                <!-- IMAGEM COMO LOGO PEQUENO -->
                 <img src="WhatsApp Image 2025-10-27 at 14.42.38.jpeg" 
                      alt="Colégio Estadual Professor Júlio Szymanski" class="portal-logo">
                 <p class="header-slogan">Educação de qualidade para construir um futuro melhor</p>
@@ -447,128 +439,64 @@
     </nav>
     
     <div class="container">
-        <h2 class="page-title">Notícias do Colégio</h2>
+        <h2 class="page-title">Galeria de Imagens</h2>
         
         <p class="intro-text">
-            Fique por dentro de todas as novidades, eventos e avisos importantes do Colégio Professor Júlio Szymanski
+            Confira os melhores momentos e eventos do Colégio Professor Júlio Szymanski
         </p>
         
-        <!-- Filtros de Notícias -->
-        <div class="news-filters">
-            <button class="filter-btn active" onclick="filterNews('all')">Todas as Notícias</button>
-            <button class="filter-btn" onclick="filterNews('evento')">Eventos</button>
-            <button class="filter-btn" onclick="filterNews('aviso')">Avisos</button>
-            <button class="filter-btn" onclick="filterNews('geral')">Geral</button>
-        </div>
-        
-        <!-- Galeria de Imagens -->
-        <div class="news-section" data-category="geral">
-            <h3 class="news-title">Galeria de Imagens</h3>
+        <!-- Galeria de Imagens PRINCIPAL -->
+        <div class="news-section">
+            <h3 class="news-title">Eventos e Atividades</h3>
             <div class="news-meta">
-                <span><strong>Publicado em:</strong> 26 de Novembro, 2025</span>
-                <span class="news-category geral">Geral</span>
+                <span><strong>Atualizado em:</strong> 26 de Novembro, 2025</span>
+                <span class="news-category">Galeria</span>
             </div>
+            
             <div class="news-content">
                 <p>
-                    <!-- ESPAÇO PARA DESCRIÇÃO FUTURA -->
+                    Registros dos principais eventos e atividades desenvolvidas em nosso colégio
                 </p>
-                
-                <div class="image-gallery">
-                    <!-- Imagem 1 -->
-                    <div class="gallery-item">
-                        <img src="WhatsApp Image 2025-11-26 at 10.00.17 (1).jpeg" 
-                             alt="Imagem 1 - Evento escolar" 
-                             class="gallery-image">
-                    </div>
-                    
-                    <!-- Imagem 2 -->
-                    <div class="gallery-item">
-                        <img src="WhatsApp Image 2025-11-26 at 10.00.17.jpeg" 
-                             alt="Imagem 2 - Atividade educacional" 
-                             class="gallery-image">
-                    </div>
-                    
-                    <!-- Imagem 3 -->
-                    <div class="gallery-item">
-                        <img src="WhatsApp Image 2025-11-26 at 10.00.53.jpeg" 
-                             alt="Imagem 3 - Projeto estudantil" 
-                             class="gallery-image">
-                    </div>
-                    
-                    <!-- Imagem 4 -->
-                    <div class="gallery-item">
-                        <img src="WhatsApp Image 2025-11-26 at 10.00.54.jpeg" 
-                             alt="Imagem 4 - Evento cultural" 
-                             class="gallery-image">
+            </div>
+            
+            <div class="image-gallery">
+                <!-- Imagem 1 -->
+                <div class="gallery-item">
+                    <img src="WhatsApp Image 2025-11-26 at 10.00.17 (1).jpeg" 
+                         alt="Evento escolar - Colégio Szymanski" 
+                         class="gallery-image">
+                    <div class="image-caption">
+                        <strong>Evento Escolar</strong>
                     </div>
                 </div>
-            </div>
-        </div>
-        
-        <!-- Notícia 1 - Espaço para Conteúdo Futuro -->
-        <div class="news-section" data-category="evento">
-            <h3 class="news-title">Título da Notícia 1</h3>
-            <div class="news-meta">
-                <span><strong>Publicado em:</strong> [Data]</span>
-                <span class="news-category evento">Evento</span>
-            </div>
-            <div class="news-content">
-                <p>
-                    <!-- ESPAÇO PARA CONTEÚDO FUTURO -->
-                </p>
                 
-                <div class="image-gallery">
-                    <div class="gallery-item">
-                        <div class="image-placeholder">
-                            <i class="fas fa-camera"></i>
-                            <span>Imagem para notícia futura</span>
-                        </div>
+                <!-- Imagem 2 -->
+                <div class="gallery-item">
+                    <img src="WhatsApp Image 2025-11-26 at 10.00.17.jpeg" 
+                         alt="Atividade educacional - Colégio Szymanski" 
+                         class="gallery-image">
+                    <div class="image-caption">
+                        <strong>Atividade Educacional</strong>
                     </div>
                 </div>
-            </div>
-        </div>
-        
-        <!-- Notícia 2 - Espaço para Conteúdo Futuro -->
-        <div class="news-section" data-category="aviso">
-            <h3 class="news-title">Título da Notícia 2</h3>
-            <div class="news-meta">
-                <span><strong>Publicado em:</strong> [Data]</span>
-                <span class="news-category aviso">Aviso Importante</span>
-            </div>
-            <div class="news-content">
-                <p>
-                    <!-- ESPAÇO PARA CONTEÚDO FUTURO -->
-                </p>
                 
-                <div class="image-gallery">
-                    <div class="gallery-item">
-                        <div class="image-placeholder">
-                            <i class="fas fa-camera"></i>
-                            <span>Imagem para notícia futura</span>
-                        </div>
+                <!-- Imagem 3 -->
+                <div class="gallery-item">
+                    <img src="WhatsApp Image 2025-11-26 at 10.00.53.jpeg" 
+                         alt="Projeto estudantil - Colégio Szymanski" 
+                         class="gallery-image">
+                    <div class="image-caption">
+                        <strong>Projeto Estudantil</strong>
                     </div>
                 </div>
-            </div>
-        </div>
-        
-        <!-- Notícia 3 - Espaço para Conteúdo Futuro -->
-        <div class="news-section" data-category="geral">
-            <h3 class="news-title">Título da Notícia 3</h3>
-            <div class="news-meta">
-                <span><strong>Publicado em:</strong> [Data]</span>
-                <span class="news-category geral">Geral</span>
-            </div>
-            <div class="news-content">
-                <p>
-                    <!-- ESPAÇO PARA CONTEÚDO FUTURO -->
-                </p>
                 
-                <div class="image-gallery">
-                    <div class="gallery-item">
-                        <div class="image-placeholder">
-                            <i class="fas fa-camera"></i>
-                            <span>Imagem para notícia futura</span>
-                        </div>
+                <!-- Imagem 4 -->
+                <div class="gallery-item">
+                    <img src="WhatsApp Image 2025-11-26 at 10.00.54.jpeg" 
+                         alt="Evento cultural - Colégio Szymanski" 
+                         class="gallery-image">
+                    <div class="image-caption">
+                        <strong>Evento Cultural</strong>
                     </div>
                 </div>
             </div>
@@ -582,7 +510,7 @@
     <script>
         // Dados para pesquisa
         const searchData = [
-            { title: "Galeria de Imagens", category: "Notícias", keywords: ["galeria", "imagens", "fotos", "eventos"], link: "noticias.html" },
+            { title: "Galeria de Imagens", category: "Notícias", keywords: ["galeria", "imagens", "fotos", "eventos", "atividades"], link: "noticias.html" },
             { title: "Cursos Técnicos", category: "Cursos", keywords: ["cursos", "técnico", "formação", "ensino"], link: "cursos.html" },
             { title: "História do Colégio", category: "História", keywords: ["história", "fundação", "origem", "júlio szymanski"], link: "historia.html" },
             { title: "Feira de Profissões", category: "Eventos", keywords: ["feira", "profissões", "carreira", "orientação"], link: "feira.html" },
@@ -662,40 +590,9 @@
             }
         });
 
-        // Sistema de Filtro de Notícias
-        function filterNews(category) {
-            const newsSections = document.querySelectorAll('.news-section');
-            const filterBtns = document.querySelectorAll('.filter-btn');
-            
-            // Atualizar botões ativos
-            filterBtns.forEach(btn => {
-                btn.classList.remove('active');
-                if (btn.textContent.toLowerCase().includes(category) || (category === 'all' && btn.textContent === 'Todas as Notícias')) {
-                    btn.classList.add('active');
-                }
-            });
-            
-            // Filtrar notícias
-            newsSections.forEach(section => {
-                if (category === 'all' || section.getAttribute('data-category') === category) {
-                    section.style.display = 'block';
-                } else {
-                    section.style.display = 'none';
-                }
-            });
-        }
-
         // Inicialização
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('Sistema de notícias carregado!');
-            
-            // Adicionar funcionalidade de placeholder de imagens
-            const placeholders = document.querySelectorAll('.image-placeholder');
-            placeholders.forEach(placeholder => {
-                placeholder.addEventListener('click', function() {
-                    alert('Espaço reservado para imagem. Você pode adicionar suas próprias imagens posteriormente.');
-                });
-            });
+            console.log('Galeria de imagens carregada!');
         });
     </script>
 </body>
